@@ -5,11 +5,12 @@ import androidx.cardview.widget.CardView;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private CardView eb,bb,bal,gm,pm;
 
@@ -17,6 +18,24 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        vardev();
+
+    }
+
+    void vardev()
+    {
+        eb = findViewById(R.id.cv_eb);
+        bb = findViewById(R.id.cv_bb);
+        bal = findViewById(R.id.cv_bal);
+        gm = findViewById(R.id.cv_gm);
+        pm = findViewById(R.id.cv_pm);
+
+        eb.setOnClickListener(this);
+        bb.setOnClickListener(this);
+        bal.setOnClickListener(this);
+        gm.setOnClickListener(this);
+        pm.setOnClickListener(this);
     }
 
     void execCommandLine(String command)
@@ -62,4 +81,33 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onClick(View v) {
+        int view = v.getId();
+        switch (view) {
+
+            case R.id.cv_eb:
+
+                break;
+            case R.id.cv_bb:
+
+                break;
+            case R.id.cv_bal:
+
+                break;
+            case R.id.cv_gm:
+
+                break;
+            case R.id.cv_pm:
+
+                break;
+
+        }
+    }
+
+    private void parseVal(String io, String cpu_gov, String gpu_gov, int max_cpufreq, int min_cpu_cpufreq){
+
+    }
+
 }
+
