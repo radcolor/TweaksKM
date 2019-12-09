@@ -3,6 +3,7 @@ package com.theradcolor.kernel;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -23,10 +24,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         vardev();
-        if(checkRoot.isDeviceRooted()){
-            if(System.getProperty("os.version").contains("rad-eas")){
+        if(checkRoot.isDeviceRooted() && System.getProperty("os.version").contains("rad")){
                 Log.d("MainActivity", "Kernel and Root Check Passed");
-            }
+                execCommandLine("su");
+                startActivity(new Intent(MainActivity.this, RadActivity.class));
+                finish();
+        }else
+        {
+           Log.d("MainActivity", "Kernel and Root Check failed");
+            finish();
+            System.exit(0);
         }
     }
 
@@ -94,7 +101,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (view) {
 
             case R.id.cv_eb:
-
+                execCommandLine("echo 40 > /proc/sys/vm/swappiness");
+                execCommandLine("echo " + "\"noop\"" + " > /sys/block/mmcblk0/queue/scheduler");
+                execCommandLine("echo 0 > /sys/class/kgsl/kgsl-3d0/devfreq/adrenoboost");
+                execCommandLine("echo 2048 > /sys/block/mmcblk0/queue/read_ahead_kb");
+                execCommandLine("echo 2048 > /sys/block/mmcblk0/queue/read_ahead_kb");
                 break;
             case R.id.cv_bb:
 
@@ -111,11 +122,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         }
     }
-
-    private void parseVal(String io, String cpu_gov, String gpu_gov, int max_cpufreq, int min_cpu_cpufreq){
-
-    }
-
 
 }
 

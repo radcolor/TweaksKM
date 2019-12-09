@@ -1,3 +1,22 @@
 <resources>
     <string name="app_name">Tweaks</string>
+    <string name="title_activity_rad">Tweaks</string>
+    <string name="title_home">Tweaks</string>
+    <string name="title_dashboard">Miscellaneous</string>
+    <string name="title_notifications">About</string>
+
+    <!--
+    CPU Governor
+    GPU Governor
+    I/O Scheduler
+    ReadHead Size
+    FSync
+    Swapiness
+    CRC
+    CPU Little MIN
+    CPU Little MAX
+    CPU Big MIN
+    CPU Big MAX
+    -->
+
 </resources>
