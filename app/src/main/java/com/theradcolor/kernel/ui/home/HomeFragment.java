@@ -84,7 +84,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
     public void onClick(View v) {
         int view = v.getId();
         switch (view) {
-
             case R.id.cv_eb:
                 mprogress = new ProgressDialog(getContext());
                 mprogress.setMessage("Applying Profile...");
@@ -107,7 +106,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
                         mprogress.dismiss();
                         Toast.makeText(getContext(),"Successful", Toast.LENGTH_SHORT).show();
                     }
-                },2000);
+                },1000);
                 break;
             case R.id.cv_bb:
                 mprogress = new ProgressDialog(getContext());
@@ -130,7 +129,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
                         mprogress.dismiss();
                         Toast.makeText(getContext(),"Successful", Toast.LENGTH_SHORT).show();
                     }
-                },2000);
+                },1000);
                 break;
             case R.id.cv_bal:
                 mprogress = new ProgressDialog(getContext());
@@ -151,7 +150,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
                         mprogress.dismiss();
                         Toast.makeText(getContext(),"Successful", Toast.LENGTH_SHORT).show();
                     }
-                },2000);
+                },1000);
                 break;
             case R.id.cv_gm:
                 mprogress = new ProgressDialog(getContext());
@@ -172,7 +171,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
                         mprogress.dismiss();
                         Toast.makeText(getContext(),"Successful", Toast.LENGTH_SHORT).show();
                     }
-                },2000);
+                },1000);
                 break;
             case R.id.cv_pm:
                 mprogress = new ProgressDialog(getContext());
@@ -193,7 +192,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
                         mprogress.dismiss();
                         Toast.makeText(getContext(),"Successful", Toast.LENGTH_SHORT).show();
                     }
-                },2000);
+                },1000);
                 break;
         }
     }

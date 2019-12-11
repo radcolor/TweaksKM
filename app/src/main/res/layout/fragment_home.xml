@@ -11,26 +11,29 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.google.android.material.appbar.AppBarLayout
+        <androidx.cardview.widget.CardView
             android:background="@android:color/background_light"
             android:layout_width="match_parent"
-            android:layout_height="200dp">
+            android:layout_height="180dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
                 <ImageView
-                    android:layout_marginTop="50dp"
+                    android:layout_marginTop="30dp"
                     android:id="@+id/radimg"
                     android:layout_centerHorizontal="true"
                     android:layout_toLeftOf="@+id/radtxt"
                     android:src="@drawable/brand"
-                    android:layout_width="90dp"
-                    android:layout_height="90dp"/>
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"/>
 
                 <TextView
-                    android:layout_marginTop="65dp"
+                    android:layout_marginTop="45dp"
                     android:layout_marginLeft="4dp"
                     android:id="@+id/radtxt"
                     android:layout_width="wrap_content"
@@ -52,14 +55,14 @@
 
             </RelativeLayout>
 
-        </com.google.android.material.appbar.AppBarLayout>
+        </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cv_eb"
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
             android:clickable="true"
             android:foreground="?android:attr/selectableItemBackground"
@@ -160,48 +163,12 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/cv_gm"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginTop="8dp"
-            android:clickable="true"
-            android:foreground="?android:attr/selectableItemBackground"
-            app:cardCornerRadius="4dp"
-            app:cardMaxElevation="2dp">
-
-            <LinearLayout
-                android:padding="16dp"
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Gaming Mode"
-                    android:textColor="@android:color/black"
-                    android:textStyle="bold"/>
-
-                <TextView
-                    android:layout_marginTop="6dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Special Mode for Better Gaming Purpose with needed enhancment."/>
-
-            </LinearLayout>
-
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
             android:id="@+id/cv_pm"
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginTop="8dp"
-            android:layout_marginBottom="72dp"
             android:clickable="true"
             android:foreground="?android:attr/selectableItemBackground"
             app:cardCornerRadius="4dp"
@@ -226,6 +193,40 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="This mode aimes to get most out of your system performance."/>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cv_gm"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="8dp"
+            app:cardCornerRadius="4dp"
+            android:layout_marginBottom="72dp"
+            app:cardMaxElevation="2dp">
+
+            <LinearLayout
+                android:padding="16dp"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Gaming Mode"
+                    android:textColor="@android:color/black"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:layout_marginTop="6dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Special Mode for Better Gaming Purpose with needed enhancment."/>
 
             </LinearLayout>
 
