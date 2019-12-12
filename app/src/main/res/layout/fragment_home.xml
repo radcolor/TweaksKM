@@ -199,9 +199,9 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/cv_gm"
+            android:id="@+id/gm"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginTop="8dp"
@@ -222,11 +222,37 @@
                     android:textColor="@android:color/black"
                     android:textStyle="bold"/>
 
-                <TextView
-                    android:layout_marginTop="6dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Special Mode for Better Gaming Purpose with needed enhancment."/>
+                <RelativeLayout
+                    android:layout_marginTop="8dp"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/head_srgb"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Enable/Disable Gaming Mode"
+                        android:textColor="@android:color/black"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:layout_toLeftOf="@+id/gmswitch"
+                        android:layout_below="@+id/head_srgb"
+                        android:layout_marginTop="6dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Special Mode for Better Gaming Purpose with needed enhancment."/>
+
+                    <Switch
+                        android:layout_marginRight="8dp"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentEnd="true"
+                        android:id="@+id/gmswitch"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                </RelativeLayout>
 
             </LinearLayout>
 

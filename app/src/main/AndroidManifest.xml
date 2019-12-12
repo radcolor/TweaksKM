@@ -12,8 +12,11 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
+            android:name=".FAQsActivity"
+            android:parentActivityName=".RadActivity" />
+        <activity
             android:name=".RadActivity"
-            android:label="@string/title_activity_rad"></activity>
+            android:label="@string/title_activity_rad" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,8 +26,7 @@
         </activity>
 
         <service android:name=".GamingService" />
-        <receiver android:name=".BrodcastReceiver"/>
-
+        <receiver android:name=".BrodcastReceiver" />
     </application>
 
 </manifest>

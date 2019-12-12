@@ -11,8 +11,6 @@ import java.io.OutputStreamWriter;
 
 public class BrodcastReceiver extends BroadcastReceiver {
 
-    Process process;
-    MediaPlayer mediaPlayer;
     Context mcontext;
 
     @Override
@@ -36,20 +34,7 @@ public class BrodcastReceiver extends BroadcastReceiver {
     }
 
     public void optimize(){
-        execCommandLine("adb shell"+ "\n"+
-                "am force-stop am force-stop com.android.chrome"+"\n"+
-                "am force-stop com.instagram.android"+"\n"+
-                "am force-stop org.telegram.messenger"+"\n"+
-                "am force-stop com.whatsapp"+"\n"+
-                "am force-stop com.google.android.gm"+"\n"+
-                "am force-stop com.UCMobile.intl"+"\n"+
-                "am force-stop com.twitter.android"+"\n"+
-                "am force-stop cn.xender"+"\n"+
-                "am force-stop com.snaptube.premium"+"\n"+
-                "am force-stop com.google.android.youtube"+"\n"+
-                "am force-stop com.android.vending"+"\n"+
-                "am force-stop com.google.android.app.photos"+"\n"+
-                "am force-stop com.google.android.googlequicksearchbox"+"\n");
+
     }
 
     public void  stop(){

@@ -30,7 +30,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
     private HomeViewModel homeViewModel;
     public TextView textView;
     private ProgressDialog mprogress;
-    private CardView eb,bb,bal,gm,pm;
+    private CardView eb,bb,bal,pm;
     final Handler handler = new Handler();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -43,13 +43,11 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         eb = root.findViewById(R.id.cv_eb);
         bb = root.findViewById(R.id.cv_bb);
         bal = root.findViewById(R.id.cv_bal);
-        gm = root.findViewById(R.id.cv_gm);
         pm = root.findViewById(R.id.cv_pm);
 
         eb.setOnClickListener(this);
         bb.setOnClickListener(this);
         bal.setOnClickListener(this);
-        gm.setOnClickListener(this);
         pm.setOnClickListener(this);
         //final TextView textView = root.findViewById(R.id.text_home);
         homeViewModel.getText().observe(this, new Observer<String>() {
@@ -99,14 +97,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
                 execCommandLine("echo 1401600 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq");
                 execCommandLine("echo 1401600 > /sys/devices/system/cpu/cpu4/cpufreq/scaling_max_freq");
 
-
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        mprogress.dismiss();
-                        Toast.makeText(getContext(),"Successful", Toast.LENGTH_SHORT).show();
-                    }
-                },1000);
+                mprogress.dismiss();
+                Toast.makeText(getContext(),"Successful", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.cv_bb:
                 mprogress = new ProgressDialog(getContext());
@@ -123,13 +115,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
                 execCommandLine("echo 1536000 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq");
                 execCommandLine("echo 1747200 > /sys/devices/system/cpu/cpu4/cpufreq/scaling_max_freq");
 
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        mprogress.dismiss();
-                        Toast.makeText(getContext(),"Successful", Toast.LENGTH_SHORT).show();
-                    }
-                },1000);
+                mprogress.dismiss();
+                Toast.makeText(getContext(),"Successful", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.cv_bal:
                 mprogress = new ProgressDialog(getContext());
@@ -144,34 +131,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
                 execCommandLine("echo 2048 > /sys/block/mmcblk0/queue/read_ahead_kb");
                 execCommandLine("echo msm-adreno-tz > /sys/class/kgsl/kgsl-3d0/devfreq/governor");
 
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        mprogress.dismiss();
-                        Toast.makeText(getContext(),"Successful", Toast.LENGTH_SHORT).show();
-                    }
-                },1000);
-                break;
-            case R.id.cv_gm:
-                mprogress = new ProgressDialog(getContext());
-                mprogress.setMessage("Applying Profile...");
-                mprogress.show();
-                mprogress.setCanceledOnTouchOutside(false);
-                mprogress.setCancelable(false);
-
-                execCommandLine("echo 40 > /proc/sys/vm/swappiness");
-                execCommandLine("echo " + "\"deadline\"" + " > /sys/block/mmcblk0/queue/scheduler");
-                execCommandLine("echo 3 > /sys/class/kgsl/kgsl-3d0/devfreq/adrenoboost");
-                execCommandLine("echo 2048 > /sys/block/mmcblk0/queue/read_ahead_kb");
-                execCommandLine("echo msm-adreno-tz > /sys/class/kgsl/kgsl-3d0/devfreq/governor");
-
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        mprogress.dismiss();
-                        Toast.makeText(getContext(),"Successful", Toast.LENGTH_SHORT).show();
-                    }
-                },1000);
+                mprogress.dismiss();
+                Toast.makeText(getContext(),"Successful", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.cv_pm:
                 mprogress = new ProgressDialog(getContext());
@@ -186,13 +147,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
                 execCommandLine("echo 2048 > /sys/block/mmcblk0/queue/read_ahead_kb");
                 execCommandLine("echo msm-adreno-tz > /sys/class/kgsl/kgsl-3d0/devfreq/governor");
 
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        mprogress.dismiss();
-                        Toast.makeText(getContext(),"Successful", Toast.LENGTH_SHORT).show();
-                    }
-                },1000);
+                mprogress.dismiss();
+                Toast.makeText(getContext(),"Successful", Toast.LENGTH_SHORT).show();
                 break;
         }
     }
