@@ -89,13 +89,13 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
                 mprogress.setCanceledOnTouchOutside(false);
                 mprogress.setCancelable(false);
 
-                execCommandLine("echo 40 > /proc/sys/vm/swappiness");
-                execCommandLine("echo " + "\"noop\"" + " > /sys/block/mmcblk0/queue/scheduler");
-                execCommandLine("echo 0 > /sys/class/kgsl/kgsl-3d0/devfreq/adrenoboost");
-                execCommandLine("echo 512 > /sys/block/mmcblk0/queue/read_ahead_kb");
-                execCommandLine("echo powersave > /sys/class/kgsl/kgsl-3d0/devfreq/governor");
-                execCommandLine("echo 1401600 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq");
-                execCommandLine("echo 1401600 > /sys/devices/system/cpu/cpu4/cpufreq/scaling_max_freq");
+                execCommandLine("echo 40 > /proc/sys/vm/swappiness\n" +
+                        "echo \" + \"\\\"noop\\\"\" + \" > /sys/block/mmcblk0/queue/scheduler\n" +
+                        "echo 0 > /sys/class/kgsl/kgsl-3d0/devfreq/adrenoboost\n" +
+                        "echo 512 > /sys/block/mmcblk0/queue/read_ahead_kb\n" +
+                        "echo powersave > /sys/class/kgsl/kgsl-3d0/devfreq/governor\n" +
+                        "echo 1401600 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq\n" +
+                        "echo 1401600 > /sys/devices/system/cpu/cpu4/cpufreq/scaling_max_freq");
 
                 mprogress.dismiss();
                 Toast.makeText(getContext(),"Successful", Toast.LENGTH_SHORT).show();
@@ -107,13 +107,13 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
                 mprogress.setCanceledOnTouchOutside(false);
                 mprogress.setCancelable(false);
 
-                execCommandLine("echo 40 > /proc/sys/vm/swappiness");
-                execCommandLine("echo " + "\"cfq\"" + " > /sys/block/mmcblk0/queue/scheduler");
-                execCommandLine("echo 0 > /sys/class/kgsl/kgsl-3d0/devfreq/adrenoboost");
-                execCommandLine("echo 512 > /sys/block/mmcblk0/queue/read_ahead_kb");
-                execCommandLine("echo powersave > /sys/class/kgsl/kgsl-3d0/devfreq/governor");
-                execCommandLine("echo 1536000 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq");
-                execCommandLine("echo 1747200 > /sys/devices/system/cpu/cpu4/cpufreq/scaling_max_freq");
+               execCommandLine("echo 40 > /proc/sys/vm/swappiness\n" +
+                       "echo \" + \"\\\"cfq\\\"\" + \" > /sys/block/mmcblk0/queue/scheduler\n" +
+                       "echo 0 > /sys/class/kgsl/kgsl-3d0/devfreq/adrenoboost\n" +
+                       "echo 512 > /sys/block/mmcblk0/queue/read_ahead_kb\n" +
+                       "echo powersave > /sys/class/kgsl/kgsl-3d0/devfreq/governor\n" +
+                       "echo 1536000 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq\n" +
+                       "echo 1747200 > /sys/devices/system/cpu/cpu4/cpufreq/scaling_max_freq");
 
                 mprogress.dismiss();
                 Toast.makeText(getContext(),"Successful", Toast.LENGTH_SHORT).show();
@@ -125,11 +125,13 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
                 mprogress.setCanceledOnTouchOutside(false);
                 mprogress.setCancelable(false);
 
-                execCommandLine("echo 40 > /proc/sys/vm/swappiness");
-                execCommandLine("echo " + "\"anxiety\"" + " > /sys/block/mmcblk0/queue/scheduler");
-                execCommandLine("echo 0 > /sys/class/kgsl/kgsl-3d0/devfreq/adrenoboost");
-                execCommandLine("echo 2048 > /sys/block/mmcblk0/queue/read_ahead_kb");
-                execCommandLine("echo msm-adreno-tz > /sys/class/kgsl/kgsl-3d0/devfreq/governor");
+                execCommandLine("echo 40 > /proc/sys/vm/swappiness\n" +
+                        "echo \" + \"\\\"anxiety\\\"\" + \" > /sys/block/mmcblk0/queue/scheduler\n" +
+                        "echo 0 > /sys/class/kgsl/kgsl-3d0/devfreq/adrenoboost\n" +
+                        "echo 2048 > /sys/block/mmcblk0/queue/read_ahead_kb\n" +
+                        "echo powersave > /sys/class/kgsl/kgsl-3d0/devfreq/governor\n" +
+                        "echo 1612800 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq\n" +
+                        "echo 1804800 > /sys/devices/system/cpu/cpu4/cpufreq/scaling_max_freq");
 
                 mprogress.dismiss();
                 Toast.makeText(getContext(),"Successful", Toast.LENGTH_SHORT).show();
@@ -141,11 +143,13 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
                 mprogress.setCanceledOnTouchOutside(false);
                 mprogress.setCancelable(false);
 
-                execCommandLine("echo 40 > /proc/sys/vm/swappiness");
-                execCommandLine("echo " + "\"bfq\"" + " > /sys/block/mmcblk0/queue/scheduler");
-                execCommandLine("echo 2 > /sys/class/kgsl/kgsl-3d0/devfreq/adrenoboost");
-                execCommandLine("echo 2048 > /sys/block/mmcblk0/queue/read_ahead_kb");
-                execCommandLine("echo msm-adreno-tz > /sys/class/kgsl/kgsl-3d0/devfreq/governor");
+                execCommandLine("echo 40 > /proc/sys/vm/swappiness\n" +
+                        "echo \" + \"\\\"anxiety\\\"\" + \" > /sys/block/mmcblk0/queue/scheduler\n" +
+                        "echo 2 > /sys/class/kgsl/kgsl-3d0/devfreq/adrenoboost\n" +
+                        "echo 2048 > /sys/block/mmcblk0/queue/read_ahead_kb\n" +
+                        "echo msm-adreno-tz > /sys/class/kgsl/kgsl-3d0/devfreq/governor\n" +
+                        "echo 1612800 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq\n" +
+                        "echo 1804800 > /sys/devices/system/cpu/cpu4/cpufreq/scaling_max_freq");
 
                 mprogress.dismiss();
                 Toast.makeText(getContext(),"Successful", Toast.LENGTH_SHORT).show();
