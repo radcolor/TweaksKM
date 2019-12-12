@@ -25,48 +25,20 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 
-public class DashboardFragment extends Fragment {
+public class DashboardFragment extends Fragment implements View.OnClickListener{
 
     private DashboardViewModel dashboardViewModel;
-    private Switch aSwitch;
+    private TextView srgbon,srgboff;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         dashboardViewModel =
                 ViewModelProviders.of(this).get(DashboardViewModel.class);
         View root = inflater.inflate(R.layout.fragment_dashboard, container, false);
-        aSwitch = root.findViewById(R.id.srgb);
-        if(getSRGB() == "1"){
-            aSwitch.setChecked(true);
-        }else if(getSRGB() == "0")
-        {
-            aSwitch.setChecked(false);
-        }
-        aSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked){
-                    execCommandLine("active=1\n" +
-                            "\n" +
-                            "echo $active > /sys/module/mdss_fb/parameters/srgb_enabled\n" +
-                            "\n" +
-                            "if [ $active = \"1\" ]\n" +
-                            "then echo \"2\" > /sys/class/graphics/fb0/msm_fb_srgb\n" +
-                            "else echo \"1\" > /sys/class/graphics/fb0/msm_fb_srgb\n" +
-                            "fi");
-                }else
-                {
-                    execCommandLine("active=0\n" +
-                            "\n" +
-                            "echo $active > /sys/module/mdss_fb/parameters/srgb_enabled\n" +
-                            "\n" +
-                            "if [ $active = \"1\" ]\n" +
-                            "then echo \"2\" > /sys/class/graphics/fb0/msm_fb_srgb\n" +
-                            "else echo \"1\" > /sys/class/graphics/fb0/msm_fb_srgb\n" +
-                            "fi");
-                }
-            }
-        });
+        srgbon = root.findViewById(R.id.srgbon);
+        srgboff = root.findViewById(R.id.srgboff);
+        srgbon.setOnClickListener(this);
+        srgboff.setOnClickListener(this);
         //final TextView textView = root.findViewById(R.id.text_dashboard);
         dashboardViewModel.getText().observe(this, new Observer<String>() {
             @Override
@@ -77,7 +49,7 @@ public class DashboardFragment extends Fragment {
         return root;
     }
 
-    void execCommandLine(String command)
+    private void execCommandLine(String command)
     {
         Runtime runtime = Runtime.getRuntime();
         Process proc = null;
@@ -120,23 +92,30 @@ public class DashboardFragment extends Fragment {
         }
     }
 
-    public static String getSRGB() {
-        try {
-            Process p = Runtime.getRuntime().exec("/sys/class/graphics/fb0/msm_fb_srgb");
-            InputStream is = null;
-            if (p.waitFor() == 0) {
-                is = p.getInputStream();
-            } else {
-                is = p.getErrorStream();
-            }
-            BufferedReader br = new BufferedReader(new InputStreamReader(is));
-            String line = br.readLine();
-            Log.i("Kernel Version", line);
-            br.close();
-            return line;
-        } catch (Exception ex) {
-            return "ERROR: " + ex.getMessage();
+    @Override
+    public void onClick(View v) {
+        int view = v.getId();
+        switch (view) {
+            case R.id.srgbon:
+                execCommandLine("active=1\n" +
+                        "\n" +
+                        "echo $active > /sys/module/mdss_fb/parameters/srgb_enabled\n" +
+                        "\n" +
+                        "if [ $active = \"1\" ]\n" +
+                        "then echo \"2\" > /sys/class/graphics/fb0/msm_fb_srgb\n" +
+                        "else echo \"1\" > /sys/class/graphics/fb0/msm_fb_srgb\n" +
+                        "fi");
+                break;
+            case R.id.srgboff:
+                execCommandLine("active=0\n" +
+                        "\n" +
+                        "echo $active > /sys/module/mdss_fb/parameters/srgb_enabled\n" +
+                        "\n" +
+                        "if [ $active = \"1\" ]\n" +
+                        "then echo \"2\" > /sys/class/graphics/fb0/msm_fb_srgb\n" +
+                        "else echo \"1\" > /sys/class/graphics/fb0/msm_fb_srgb\n" +
+                        "fi");
+                break;
         }
     }
-
 }
