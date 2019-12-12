@@ -12,6 +12,8 @@ import android.os.BatteryManager;
 import android.os.Handler;
 import android.os.IBinder;
 import android.util.Log;
+import android.widget.Toast;
+
 import androidx.core.app.NotificationCompat;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
@@ -28,6 +30,7 @@ public class GamingService extends Service{
         // background priority so CPU-intensive work doesn't disrupt our UI.
     }
 
+    int batt_start,batt_end;
     final Handler handler = new Handler();
     Handler handler1 = new Handler();
     Handler handler2 = new Handler();
@@ -47,12 +50,15 @@ public class GamingService extends Service{
         PendingIntent oPendingIntent = PendingIntent.getBroadcast(this,3, oIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         Notification notification = new NotificationCompat.Builder(this,CHANNEL_ID)
-                .setContentTitle("Optimizing PUBG")
-                .setContentText("Internet Optimization Service Started")
+                .setContentTitle("Gaming Mode")
+                .setContentText("Gaming Mode is Running")
                 .setPriority(Notification.PRIORITY_MAX)
                 .build();
 
         startForeground(1,notification);
+
+        batt_start = getBatteryPercentage(this);
+
         return START_NOT_STICKY;
     }
 
@@ -127,6 +133,8 @@ public class GamingService extends Service{
 
     @Override
     public void onDestroy() {
+        batt_end = getBatteryPercentage(this);
+        Toast.makeText(this,batt_start-batt_end+"% Used while gaming mode is on.",Toast.LENGTH_SHORT).show();
     }
 
     @Override
