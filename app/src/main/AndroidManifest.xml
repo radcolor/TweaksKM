@@ -19,6 +19,7 @@
         tools:ignore="GoogleAppIndexingWarning">
         <activity
             android:name=".FAQsActivity"
+            android:label="FAQs"
             android:parentActivityName=".RadActivity" />
         <activity
             android:name=".RadActivity"

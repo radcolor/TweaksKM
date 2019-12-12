@@ -69,8 +69,6 @@ public class DashboardFragment extends Fragment implements View.OnClickListener{
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                Toast.makeText(getContext(), "Seek bar progress is :" + progressChangedValue,
-                        Toast.LENGTH_SHORT).show();
                 v.cancel();
             }
         });
