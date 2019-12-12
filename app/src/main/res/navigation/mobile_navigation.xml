@@ -7,19 +7,19 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.theradcolor.kernel.ui.home.HomeFragment"
+        android:name="com.theradcolor.kernel.ui.Tweaks.TweaksFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_tweaks" />
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="com.theradcolor.kernel.ui.dashboard.DashboardFragment"
+        android:name="com.theradcolor.kernel.ui.Misc.MiscFragment"
         android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_misc" />
 
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="com.theradcolor.kernel.ui.notifications.NotificationsFragment"
+        android:name="com.theradcolor.kernel.ui.About.AboutFragment"
         android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_about" />
 </navigation>
