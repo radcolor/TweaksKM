@@ -1,12 +1,16 @@
 package com.theradcolor.kernel.ui.Tweaks;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,6 +21,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.theradcolor.kernel.GamingService;
 import com.theradcolor.kernel.R;
 
 import java.io.BufferedReader;
@@ -31,6 +36,7 @@ public class TweaksFragment extends Fragment implements View.OnClickListener{
     public TextView textView;
     private ProgressDialog mprogress;
     private CardView eb,bb,bal,pm;
+    private Switch gmsw;
     final Handler handler = new Handler();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -44,6 +50,22 @@ public class TweaksFragment extends Fragment implements View.OnClickListener{
         bb = root.findViewById(R.id.cv_bb);
         bal = root.findViewById(R.id.cv_bal);
         pm = root.findViewById(R.id.cv_pm);
+
+        gmsw = root.findViewById(R.id.gmsw);
+        gmsw.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    Intent intent = new Intent(getContext(), GamingService.class);
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                        getActivity().startService(intent);
+                    }
+                }else
+                {
+
+                }
+            }
+        });
 
         eb.setOnClickListener(this);
         bb.setOnClickListener(this);

@@ -2,13 +2,17 @@ package com.theradcolor.kernel;
 
 import android.app.ActivityManager;
 import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Color;
 import android.os.BatteryManager;
+import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
 import android.util.Log;
@@ -18,16 +22,15 @@ import androidx.core.app.NotificationCompat;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 
-import static com.theradcolor.kernel.AppNotification.CHANNEL_ID;
 
 public class GamingService extends Service{
 
     @Override
     public void onCreate() {
-        // Start up the thread running the service. Note that we create a
-        // separate thread because the service normally runs in the process's
-        // main thread, which we don't want to block. We also make it
-        // background priority so CPU-intensive work doesn't disrupt our UI.
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
+            startMyOwnForeground();
+        else
+            startForeground(1, new Notification());
     }
 
     int batt_start,batt_end;
@@ -49,17 +52,29 @@ public class GamingService extends Service{
         PendingIntent nPendingIntent = PendingIntent.getBroadcast(this,2, nIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         PendingIntent oPendingIntent = PendingIntent.getBroadcast(this,3, oIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
-        Notification notification = new NotificationCompat.Builder(this,CHANNEL_ID)
-                .setContentTitle("Gaming Mode")
-                .setContentText("Gaming Mode is Running")
-                .setPriority(Notification.PRIORITY_MAX)
-                .build();
-
-        startForeground(1,notification);
-
         batt_start = getBatteryPercentage(this);
 
         return START_NOT_STICKY;
+    }
+
+    private void startMyOwnForeground(){
+        final String CHANNEL_ID = "GamingService";
+        String channelName = "Gaming Mode";
+        NotificationChannel chan = new NotificationChannel(CHANNEL_ID, channelName, NotificationManager.IMPORTANCE_NONE);
+        chan.setLightColor(Color.BLUE);
+        chan.setLockscreenVisibility(Notification.VISIBILITY_PRIVATE);
+        NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        assert manager != null;
+        manager.createNotificationChannel(chan);
+
+        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, CHANNEL_ID);
+        Notification notification = notificationBuilder.setOngoing(true)
+                .setSmallIcon(R.drawable.linux)
+                .setContentTitle("App is running in background")
+                .setPriority(NotificationManager.IMPORTANCE_MAX)
+                .setCategory(Notification.CATEGORY_SERVICE)
+                .build();
+        startForeground(1, notification);
     }
 
     void execCommandLine(String command)

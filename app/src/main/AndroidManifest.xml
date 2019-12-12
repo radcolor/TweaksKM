@@ -32,7 +32,7 @@
             </intent-filter>
         </activity>
 
-        <service android:name=".GamingService" />
+        <service android:name="com.theradcolor.kernel.GamingService" />
         <receiver android:name=".BrodcastReceiver" />
     </application>
 
