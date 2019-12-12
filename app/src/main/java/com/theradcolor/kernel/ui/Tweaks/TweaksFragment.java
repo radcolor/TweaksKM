@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -36,10 +37,11 @@ public class TweaksFragment extends Fragment implements View.OnClickListener{
     public TextView textView;
     private ProgressDialog mprogress;
     private CardView eb,bb,bal,pm;
+    private CheckBox dozesw,killsw;
     private Switch gmsw;
     final Handler handler = new Handler();
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
+    public View onCreateView(@NonNull final LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         homeViewModel =
                 ViewModelProviders.of(this).get(TweaksViewModel.class);
@@ -51,18 +53,29 @@ public class TweaksFragment extends Fragment implements View.OnClickListener{
         bal = root.findViewById(R.id.cv_bal);
         pm = root.findViewById(R.id.cv_pm);
 
+        dozesw = root.findViewById(R.id.dozesw);
+        dozesw.setChecked(true);
+        killsw = root.findViewById(R.id.killsw);
+        killsw.setChecked(false);
+
         gmsw = root.findViewById(R.id.gmsw);
+        final Intent intent = new Intent(getContext(), GamingService.class);
+        if(dozesw.isChecked()){
+            intent.putExtra("doze","yes");
+        }
+        if (killsw.isChecked()){
+            intent.putExtra("kill","yes");
+        }
         gmsw.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
-                    Intent intent = new Intent(getContext(), GamingService.class);
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                         getActivity().startService(intent);
                     }
                 }else
                 {
-
+                    getActivity().stopService(intent);
                 }
             }
         });

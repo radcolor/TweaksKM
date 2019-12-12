@@ -99,7 +99,7 @@
                         android:layout_marginTop="6dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Special Mode for Better Gaming Purpose with needed enhancment."/>
+                        android:text="- Special Mode for Better Gaming Purpose with needed enhancment."/>
 
                     <Switch
                         android:layout_marginRight="12dp"
@@ -130,9 +130,9 @@
                         android:layout_marginTop="6dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Can Result to better network stability and non-intereption gaming."/>
+                        android:text="- Can Result to better network stability and non-intereption gaming."/>
 
-                    <Switch
+                    <CheckBox
                         android:layout_marginRight="12dp"
                         android:layout_centerVertical="true"
                         android:layout_alignParentEnd="true"
@@ -162,9 +162,9 @@
                         android:layout_marginTop="6dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Can improve performance a little"/>
+                        android:text="- Can improve performance a little"/>
 
-                    <Switch
+                    <CheckBox
                         android:layout_marginRight="12dp"
                         android:layout_centerVertical="true"
                         android:layout_alignParentEnd="true"

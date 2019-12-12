@@ -3,7 +3,6 @@ package com.theradcolor.kernel;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.media.MediaPlayer;
 import android.util.Log;
 
 import java.io.IOException;
@@ -22,23 +21,17 @@ public class BrodcastReceiver extends BroadcastReceiver {
         if(action.equals("now")){
             optimize();
         }
-        else if(action.equals("start")){
-            start();
-        }
         else if(action.equals("stop")){
-            stop();
+            context.stopService(new Intent(context,GamingService.class));
         }
         Intent i = new Intent(Intent.ACTION_CLOSE_SYSTEM_DIALOGS);
         context.sendBroadcast(i);
-
     }
 
     public void optimize(){
 
     }
 
-    public void  stop(){
-    }
 
     public void start(){
     }

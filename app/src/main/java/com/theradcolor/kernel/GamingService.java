@@ -38,22 +38,21 @@ public class GamingService extends Service{
     Handler handler1 = new Handler();
     Handler handler2 = new Handler();
     Handler handler3 = new Handler();
+    String doze,kill;
 
     @Override
     public int onStartCommand(final Intent intent, int flags, int startId) {
-
-        Intent mIntent = new Intent(this, BroadcastReceiver.class);
-        mIntent.putExtra("action","now");
-        Intent nIntent = new Intent(this,BroadcastReceiver.class);
-        nIntent.putExtra("action","start");
-        Intent oIntent = new Intent(this,BroadcastReceiver.class);
-        oIntent.putExtra("action","stop");
-        PendingIntent mPendingIntent = PendingIntent.getBroadcast(this,1, mIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-        PendingIntent nPendingIntent = PendingIntent.getBroadcast(this,2, nIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-        PendingIntent oPendingIntent = PendingIntent.getBroadcast(this,3, oIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-
+        doze = intent.getStringExtra("doze");
+        kill = intent.getStringExtra("kill");
+        if(doze=="yes")
+        {
+            doze();
+        }
+        if(kill=="yes")
+        {
+            kill();
+        }
         batt_start = getBatteryPercentage(this);
-
         return START_NOT_STICKY;
     }
 
@@ -67,12 +66,21 @@ public class GamingService extends Service{
         assert manager != null;
         manager.createNotificationChannel(chan);
 
+        Intent mIntent = new Intent(this, BroadcastReceiver.class);
+        mIntent.putExtra("action","now");
+        Intent oIntent = new Intent(this,BroadcastReceiver.class);
+        oIntent.putExtra("action","stop");
+        PendingIntent mPendingIntent = PendingIntent.getBroadcast(this,1, mIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent oPendingIntent = PendingIntent.getBroadcast(this,3, oIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, CHANNEL_ID);
         Notification notification = notificationBuilder.setOngoing(true)
-                .setSmallIcon(R.drawable.linux)
-                .setContentTitle("App is running in background")
+                .setSmallIcon(R.drawable.ic_adb_black_24dp)
+                .setContentTitle("Gaming Mode is running")
                 .setPriority(NotificationManager.IMPORTANCE_MAX)
                 .setCategory(Notification.CATEGORY_SERVICE)
+                //.addAction(R.drawable.ic_notifications_black_24dp,"opt",mPendingIntent)
+                .addAction(R.drawable.ic_notifications_black_24dp,"Stop",oPendingIntent)
                 .build();
         startForeground(1, notification);
     }
@@ -118,6 +126,24 @@ public class GamingService extends Service{
         }
     }
 
+    private void doze()
+    {
+
+    }
+
+    private void kill()
+    {
+        //Warning Its Experiment only as i have found this apps continuously uses connections
+        execCommandLine("adb shell"+ "\n"+
+                "am force-stop am force-stop com.android.chrome"+"\n"+
+                "am force-stop com.google.android.gm"+"\n"+
+                "am force-stop com.UCMobile.intl"+"\n"+
+                "am force-stop cn.xender"+"\n"+
+                "am force-stop com.snaptube.premium"+"\n"+
+                "am force-stop com.google.android.app.photos"+"\n"+
+                "am force-stop com.google.android.googlequicksearchbox"+"\n");
+    }
+
     private boolean isServiceRunning(Class<?> serviceClass) {
         ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
         for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
@@ -149,7 +175,7 @@ public class GamingService extends Service{
     @Override
     public void onDestroy() {
         batt_end = getBatteryPercentage(this);
-        Toast.makeText(this,batt_start-batt_end+"% Used while gaming mode is on.",Toast.LENGTH_SHORT).show();
+        Toast.makeText(this,batt_start-batt_end+"% Used while gaming mode is on.",Toast.LENGTH_LONG).show();
     }
 
     @Override
