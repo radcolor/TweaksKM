@@ -14,7 +14,7 @@
        <androidx.cardview.widget.CardView
             android:id="@+id/cv_eb"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
@@ -42,6 +42,7 @@
                         android:textStyle="bold"/>
 
                     <TextView
+                        android:id="@+id/pervib"
                         android:layout_marginLeft="8dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -51,7 +52,10 @@
                 </LinearLayout>
 
                 <SeekBar
-                    android:layout_marginTop="6dp"
+                    android:id="@+id/vibration"
+                    android:max="100"
+                    android:layout_marginBottom="6dp"
+                    android:layout_marginTop="12dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="This mode will improve the battery life by reducing the overall system performance."/>
@@ -61,9 +65,10 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
+            android:layout_marginBottom="64dp"
             android:id="@+id/cv_srgb"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
@@ -86,7 +91,8 @@
 
                 <TextView
                     android:layout_below="@+id/head_srgb"
-                    android:layout_marginTop="6dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="6dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Enable/Disable sRGB Colors."/>
@@ -100,15 +106,15 @@
                     android:layout_height="wrap_content">
 
                     <TextView
-                        android:clickable="true"
-                        android:foreground="?android:attr/selectableItemBackground"
-                        android:textStyle="bold"
-                        android:textColor="@android:color/holo_blue_light"
-                        android:textSize="18dp"
-                        android:text="Off"
                         android:id="@+id/srgboff"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="match_parent"
+                        android:clickable="true"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        android:text="Off"
+                        android:textColor="@android:color/holo_blue_light"
+                        android:textSize="18dp"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:clickable="true"
@@ -125,43 +131,6 @@
                 </LinearLayout>
 
             </RelativeLayout>
-
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cv_pm"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="72dp"
-            android:clickable="true"
-            android:foreground="?android:attr/selectableItemBackground"
-            app:cardCornerRadius="4dp"
-            app:cardMaxElevation="2dp"
-            android:focusable="true">
-
-            <LinearLayout
-                android:padding="16dp"
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Thermal Settings"
-                    android:textColor="@android:color/black"
-                    android:textStyle="bold"/>
-
-                <TextView
-                    android:layout_marginTop="6dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="This mode aimes to get most out of your system performance."/>
-
-            </LinearLayout>
 
         </androidx.cardview.widget.CardView>
 
