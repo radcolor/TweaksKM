@@ -44,7 +44,8 @@ public class MiscFragment extends Fragment implements View.OnClickListener{
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 progressChangedValue = progress;
-                vib.setText(progress + "%");Vibrator v = (Vibrator) getContext().getSystemService(Context.VIBRATOR_SERVICE);
+                vib.setText(progress + "%");
+                Vibrator v = (Vibrator) getContext().getSystemService(Context.VIBRATOR_SERVICE);
             }
 
             @Override
@@ -58,6 +59,7 @@ public class MiscFragment extends Fragment implements View.OnClickListener{
                     //deprecated in API 26
                     v.vibrate(500);
                 }
+                execCommandLine("echo "+progressChangedValue+" /sys/class/leds/vibrator/vmax_override");
             }
 
             @Override

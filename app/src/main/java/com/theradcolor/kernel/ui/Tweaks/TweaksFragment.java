@@ -1,10 +1,14 @@
 package com.theradcolor.kernel.ui.Tweaks;
 
+import android.app.NotificationManager;
 import android.app.ProgressDialog;
+import android.content.ContentResolver;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -53,6 +57,14 @@ public class TweaksFragment extends Fragment implements View.OnClickListener{
         bal = root.findViewById(R.id.cv_bal);
         pm = root.findViewById(R.id.cv_pm);
 
+        NotificationManager mNotificationManager = (NotificationManager) getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (!mNotificationManager.isNotificationPolicyAccessGranted()) {
+                Intent intent = new Intent(Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS);
+                startActivity(intent);
+            }
+        }
+
         dozesw = root.findViewById(R.id.dozesw);
         dozesw.setChecked(true);
         killsw = root.findViewById(R.id.killsw);
@@ -60,12 +72,32 @@ public class TweaksFragment extends Fragment implements View.OnClickListener{
 
         gmsw = root.findViewById(R.id.gmsw);
         final Intent intent = new Intent(getContext(), GamingService.class);
-        if(dozesw.isChecked()){
-            intent.putExtra("doze","yes");
-        }
-        if (killsw.isChecked()){
-            intent.putExtra("kill","yes");
-        }
+
+
+        dozesw.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    intent.putExtra("doze","yes");
+                }else{
+                    intent.putExtra("doze","no");
+                }
+            }
+        });
+        killsw.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked){
+                    intent.putExtra("kill","yes");
+                }else {
+                    intent.putExtra("kill","no");
+                }
+            }
+        });
+
+        intent.putExtra("doze","yes");
+        intent.putExtra("kill","no");
+
         gmsw.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -76,6 +108,7 @@ public class TweaksFragment extends Fragment implements View.OnClickListener{
                 }else
                 {
                     getActivity().stopService(intent);
+                    doze();
                 }
             }
         });
@@ -190,6 +223,13 @@ public class TweaksFragment extends Fragment implements View.OnClickListener{
                 Toast.makeText(getContext(),"Successful", Toast.LENGTH_SHORT).show();
                 break;
         }
+    }
+
+    public void doze()
+    {
+        ContentResolver.setMasterSyncAutomatically(true);
+        NotificationManager mNotificationManager = (NotificationManager) getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
+        mNotificationManager.setInterruptionFilter(NotificationManager.INTERRUPTION_FILTER_ALL);
     }
 
     void execCommandLine(String command)

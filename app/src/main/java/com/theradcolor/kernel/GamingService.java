@@ -7,6 +7,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.BroadcastReceiver;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -35,23 +36,32 @@ public class GamingService extends Service{
 
     int batt_start,batt_end;
     final Handler handler = new Handler();
-    Handler handler1 = new Handler();
-    Handler handler2 = new Handler();
-    Handler handler3 = new Handler();
     String doze,kill;
 
     @Override
     public int onStartCommand(final Intent intent, int flags, int startId) {
         doze = intent.getStringExtra("doze");
         kill = intent.getStringExtra("kill");
-        if(doze=="yes")
+        if(doze.equals("yes"))
         {
             doze();
+        }else{
+
         }
-        if(kill=="yes")
+        if(kill.equals("yes"))
         {
             kill();
+        }else
+        {
+
         }
+        execCommandLine("echo 40 > /proc/sys/vm/swappiness \n" +
+                "echo " + "\\\"deadline\\\"\" + \" > /sys/block/mmcblk0/queue/scheduler \n" +
+                "echo 2 > /sys/class/kgsl/kgsl-3d0/devfreq/adrenoboost \n" +
+                "echo 2048 > /sys/block/mmcblk0/queue/read_ahead_kb \n" +
+                "echo msm-adreno-tz > /sys/class/kgsl/kgsl-3d0/devfreq/governor \n" +
+                "echo 1612800 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq \n" +
+                "echo 1804800 > /sys/devices/system/cpu/cpu4/cpufreq/scaling_max_freq");
         batt_start = getBatteryPercentage(this);
         return START_NOT_STICKY;
     }
@@ -126,12 +136,14 @@ public class GamingService extends Service{
         }
     }
 
-    private void doze()
+    public void doze()
     {
-
+        ContentResolver.setMasterSyncAutomatically(false);
+        NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        mNotificationManager.setInterruptionFilter(NotificationManager.INTERRUPTION_FILTER_NONE);
     }
 
-    private void kill()
+    void kill()
     {
         //Warning Its Experiment only as i have found this apps continuously uses connections
         execCommandLine("adb shell"+ "\n"+
@@ -175,6 +187,13 @@ public class GamingService extends Service{
     @Override
     public void onDestroy() {
         batt_end = getBatteryPercentage(this);
+        execCommandLine("echo 40 > /proc/sys/vm/swappiness\n" +
+                "echo \" + \"\\\"deadline\\\"\" + \" > /sys/block/mmcblk0/queue/scheduler\n" +
+                "echo 0 > /sys/class/kgsl/kgsl-3d0/devfreq/adrenoboost\n" +
+                "echo 1024 > /sys/block/mmcblk0/queue/read_ahead_kb\n" +
+                "echo msm-adreno-tz > /sys/class/kgsl/kgsl-3d0/devfreq/governor\n" +
+                "echo 1612800 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq\n" +
+                "echo 1804800 > /sys/devices/system/cpu/cpu4/cpufreq/scaling_max_freq");
         Toast.makeText(this,batt_start-batt_end+"% Used while gaming mode is on.",Toast.LENGTH_LONG).show();
     }
 
