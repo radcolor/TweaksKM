@@ -131,6 +131,9 @@ public class TweaksFragment extends Fragment implements View.OnClickListener{
                         if(monsw.isChecked()){
                             monitor();
                         }
+                        if(killsw.isChecked()){
+                            kill();
+                        }
                     }
                 }else
                 {
@@ -287,6 +290,19 @@ public class TweaksFragment extends Fragment implements View.OnClickListener{
                 .notification(true,getActivity().getPackageName())
                 .build()
                 .install();
+    }
+
+    void kill()
+    {
+        //Warning Its Experiment only as i have found this apps continuously uses connections
+        execCommandLine("adb shell"+ "\n"+
+                "am force-stop com.android.chrome"+"\n"+
+                "am force-stop com.google.android.gm"+"\n"+
+                "am force-stop com.UCMobile.intl"+"\n"+
+                "am force-stop cn.xender"+"\n"+
+                "am force-stop com.snaptube.premium"+"\n"+
+                "am force-stop com.google.android.app.photos"+"\n"+
+                "am force-stop com.google.android.googlequicksearchbox");
     }
 
     void execCommandLine(String command)
