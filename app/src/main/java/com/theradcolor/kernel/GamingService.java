@@ -20,11 +20,15 @@ import android.util.Log;
 import android.widget.Toast;
 
 import androidx.core.app.NotificationCompat;
+
+
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 
 
 public class GamingService extends Service{
+
+    private Context context;
 
     @Override
     public void onCreate() {
@@ -36,12 +40,14 @@ public class GamingService extends Service{
 
     int batt_start,batt_end;
     final Handler handler = new Handler();
-    String doze,kill;
+    String doze,kill,mon;
 
     @Override
     public int onStartCommand(final Intent intent, int flags, int startId) {
+        context = getApplication();
         doze = intent.getStringExtra("doze");
         kill = intent.getStringExtra("kill");
+        mon = intent.getStringExtra("mon");
         if(doze.equals("yes"))
         {
             doze();
@@ -51,6 +57,12 @@ public class GamingService extends Service{
         if(kill.equals("yes"))
         {
             kill();
+        }else
+        {
+
+        }
+        if(mon.equals("yes"))
+        {
         }else
         {
 

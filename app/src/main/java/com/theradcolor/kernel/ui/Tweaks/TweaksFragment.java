@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -26,6 +27,11 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.ms_square.debugoverlay.DebugOverlay;
+import com.ms_square.debugoverlay.Position;
+import com.ms_square.debugoverlay.modules.CpuUsageModule;
+import com.ms_square.debugoverlay.modules.FpsModule;
+import com.ms_square.debugoverlay.modules.MemInfoModule;
 import com.theradcolor.kernel.GamingService;
 import com.theradcolor.kernel.R;
 
@@ -56,6 +62,8 @@ public class TweaksFragment extends Fragment implements View.OnClickListener{
         bb = root.findViewById(R.id.cv_bb);
         bal = root.findViewById(R.id.cv_bal);
         pm = root.findViewById(R.id.cv_pm);
+
+        monitor();
 
         NotificationManager mNotificationManager = (NotificationManager) getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -100,16 +108,15 @@ public class TweaksFragment extends Fragment implements View.OnClickListener{
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked){
-                    intent.putExtra("mon","yes");
+
                 }else {
-                    intent.putExtra("mon","no");
+                   
                 }
             }
         });
 
         intent.putExtra("doze","yes");
         intent.putExtra("kill","no");
-        intent.putExtra("mon","yes");
 
         gmsw.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -142,7 +149,7 @@ public class TweaksFragment extends Fragment implements View.OnClickListener{
 
     public static String getKernelVersion() {
         try {
-            Process p = Runtime.getRuntime().exec("uname -a");
+            Process p = Runtime.getRuntime().exec("getprop | grep ro.product.system.name");
             InputStream is = null;
             if (p.waitFor() == 0) {
                 is = p.getInputStream();
@@ -181,6 +188,7 @@ public class TweaksFragment extends Fragment implements View.OnClickListener{
                 mprogress.dismiss();
                 Toast.makeText(getContext(),"Successful", Toast.LENGTH_SHORT).show();
                 break;
+
             case R.id.cv_bb:
                 mprogress = new ProgressDialog(getContext());
                 mprogress.setMessage("Applying Profile...");
@@ -245,6 +253,22 @@ public class TweaksFragment extends Fragment implements View.OnClickListener{
         mNotificationManager.setInterruptionFilter(NotificationManager.INTERRUPTION_FILTER_ALL);
     }
 
+    void monitor(){
+        new DebugOverlay.Builder(getActivity().getApplication())
+                .modules(new CpuUsageModule(),
+                        new MemInfoModule(getContext()),
+                        new FpsModule())
+                .position(Position.TOP_END)
+                .bgColor(Color.parseColor("#60000000"))
+                .textColor(Color.WHITE)
+                .textSize(14f)
+                .textAlpha(.8f)
+                .allowSystemLayer(true)
+                .notification(true,getActivity().getPackageName())
+                .build()
+                .install();
+    }
+
     void execCommandLine(String command)
     {
         Runtime runtime = Runtime.getRuntime();
@@ -287,5 +311,4 @@ public class TweaksFragment extends Fragment implements View.OnClickListener{
             Log.e("execCommandLine()", "Command returned error: " + command + "\n  Exit code: " + proc.exitValue());
         }
     }
-
 }
