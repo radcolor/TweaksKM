@@ -44,7 +44,7 @@ import java.io.OutputStreamWriter;
 public class TweaksFragment extends Fragment implements View.OnClickListener{
 
     private TweaksViewModel homeViewModel;
-    public TextView textView;
+    public TextView textView,devicetxt,cputxt,androidtxt;
     private ProgressDialog mprogress;
     private CardView eb,bb,bal,pm;
     private CheckBox dozesw,killsw,monsw;
@@ -56,14 +56,18 @@ public class TweaksFragment extends Fragment implements View.OnClickListener{
         homeViewModel =
                 ViewModelProviders.of(this).get(TweaksViewModel.class);
         View root = inflater.inflate(R.layout.fragment_tweaks, container, false);
-        textView = root.findViewById(R.id.kernel_info);
+        textView = root.findViewById(R.id.kerinfo);
         textView.setText(" " + getKernelVersion());
         eb = root.findViewById(R.id.cv_eb);
         bb = root.findViewById(R.id.cv_bb);
         bal = root.findViewById(R.id.cv_bal);
         pm = root.findViewById(R.id.cv_pm);
 
-        monitor();
+        devicetxt = root.findViewById(R.id.dv_name);
+        androidtxt = root.findViewById(R.id.and_ver);
+        cputxt = root.findViewById(R.id.arch);
+
+        setData();
 
         NotificationManager mNotificationManager = (NotificationManager) getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -110,7 +114,7 @@ public class TweaksFragment extends Fragment implements View.OnClickListener{
                 if (isChecked){
 
                 }else {
-                   
+
                 }
             }
         });
@@ -124,6 +128,9 @@ public class TweaksFragment extends Fragment implements View.OnClickListener{
                 if(isChecked){
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                         getActivity().startService(intent);
+                        if(monsw.isChecked()){
+                            monitor();
+                        }
                     }
                 }else
                 {
@@ -149,7 +156,7 @@ public class TweaksFragment extends Fragment implements View.OnClickListener{
 
     public static String getKernelVersion() {
         try {
-            Process p = Runtime.getRuntime().exec("getprop | grep ro.product.system.name");
+            Process p = Runtime.getRuntime().exec("uname -a");
             InputStream is = null;
             if (p.waitFor() == 0) {
                 is = p.getInputStream();
@@ -164,6 +171,19 @@ public class TweaksFragment extends Fragment implements View.OnClickListener{
         } catch (Exception ex) {
             return "ERROR: " + ex.getMessage();
         }
+    }
+
+    private void setData(){
+
+        String devicename = Build.MODEL;
+        String androidversion = Build.VERSION.RELEASE;
+        float dpi = getResources().getDisplayMetrics().densityDpi;
+        String arch = System.getProperty("os.arch");
+
+        devicetxt.setText("Device - "+devicename);
+        androidtxt.setText("Android Version - "+androidversion);
+        cputxt.setText("CPU - "+arch);
+
     }
 
     @Override

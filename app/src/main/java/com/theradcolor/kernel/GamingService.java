@@ -47,7 +47,6 @@ public class GamingService extends Service{
         context = getApplication();
         doze = intent.getStringExtra("doze");
         kill = intent.getStringExtra("kill");
-        mon = intent.getStringExtra("mon");
         if(doze.equals("yes"))
         {
             doze();
@@ -57,12 +56,6 @@ public class GamingService extends Service{
         if(kill.equals("yes"))
         {
             kill();
-        }else
-        {
-
-        }
-        if(mon.equals("yes"))
-        {
         }else
         {
 
