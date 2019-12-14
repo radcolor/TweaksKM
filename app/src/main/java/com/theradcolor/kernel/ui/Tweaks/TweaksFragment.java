@@ -41,7 +41,7 @@ public class TweaksFragment extends Fragment implements View.OnClickListener{
     public TextView textView;
     private ProgressDialog mprogress;
     private CardView eb,bb,bal,pm;
-    private CheckBox dozesw,killsw;
+    private CheckBox dozesw,killsw,monsw;
     private Switch gmsw;
     final Handler handler = new Handler();
 
@@ -69,6 +69,8 @@ public class TweaksFragment extends Fragment implements View.OnClickListener{
         dozesw.setChecked(true);
         killsw = root.findViewById(R.id.killsw);
         killsw.setChecked(false);
+        monsw = root.findViewById(R.id.monsw);
+        monsw.setChecked(true);
 
         gmsw = root.findViewById(R.id.gmsw);
         final Intent intent = new Intent(getContext(), GamingService.class);
@@ -94,9 +96,20 @@ public class TweaksFragment extends Fragment implements View.OnClickListener{
                 }
             }
         });
+        monsw.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked){
+                    intent.putExtra("mon","yes");
+                }else {
+                    intent.putExtra("mon","no");
+                }
+            }
+        });
 
         intent.putExtra("doze","yes");
         intent.putExtra("kill","no");
+        intent.putExtra("mon","yes");
 
         gmsw.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override

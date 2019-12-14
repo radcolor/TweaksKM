@@ -152,6 +152,38 @@
                         android:id="@+id/killtxt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:text="Enable Real-Time FPS/CPU Monitoring"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:layout_alignParentStart="true"
+                        android:layout_toLeftOf="@+id/killsw"
+                        android:layout_below="@+id/killtxt"
+                        android:layout_marginTop="6dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="- Will display real time fps and cpu usage"/>
+
+                    <CheckBox
+                        android:layout_marginRight="12dp"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentEnd="true"
+                        android:id="@+id/monsw"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_marginTop="8dp"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/killtxt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:text="Kill unnecessary processes(Experimental)"
                         android:textStyle="bold"/>
 
