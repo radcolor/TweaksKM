@@ -35,8 +35,8 @@ public class MiscFragment extends Fragment implements View.OnClickListener{
         dashboardViewModel =
                 ViewModelProviders.of(this).get(MiscViewModel.class);
         View root = inflater.inflate(R.layout.fragment_misc, container, false);
-        srgbon = root.findViewById(R.id.srgbon);
-        srgboff = root.findViewById(R.id.srgboff);
+        //srgbon = root.findViewById(R.id.srgbon);
+        //srgboff = root.findViewById(R.id.srgboff);
         seekBar = root.findViewById(R.id.vibration);
         vib = root.findViewById(R.id.pervib);
         final Vibrator v = (Vibrator) getContext().getSystemService(Context.VIBRATOR_SERVICE);
@@ -67,8 +67,9 @@ public class MiscFragment extends Fragment implements View.OnClickListener{
                 v.cancel();
             }
         });
-        srgbon.setOnClickListener(this);
-        srgboff.setOnClickListener(this);
+        //srgbon.setOnClickListener(this);
+        //
+        // srgboff.setOnClickListener(this);
         //final TextView textView = root.findViewById(R.id.text_dashboard);
         dashboardViewModel.getText().observe(this, new Observer<String>() {
             @Override
@@ -126,7 +127,7 @@ public class MiscFragment extends Fragment implements View.OnClickListener{
     public void onClick(View v) {
         int view = v.getId();
         switch (view) {
-            case R.id.srgbon:
+            /*case R.id.srgbon:
                 execCommandLine("active=1\n" +
                         "\n" +
                         "echo $active > /sys/module/mdss_fb/parameters/srgb_enabled\n" +
@@ -145,7 +146,7 @@ public class MiscFragment extends Fragment implements View.OnClickListener{
                         "then echo \"2\" > /sys/class/graphics/fb0/msm_fb_srgb\n" +
                         "else echo \"1\" > /sys/class/graphics/fb0/msm_fb_srgb\n" +
                         "fi");
-                break;
+                break;*/
         }
     }
 }
