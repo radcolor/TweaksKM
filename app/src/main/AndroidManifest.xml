@@ -8,7 +8,7 @@
         android:name="android.permission.WRITE_SETTINGS"
         tools:ignore="ProtectedPermissions" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
-    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.WRITE_SYNC_SETTINGS" />
     <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
 
@@ -20,6 +20,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".FAQsActivity"
             android:label="FAQs"
@@ -28,16 +34,13 @@
             android:name=".RadActivity"
             android:label="@string/title_activity_rad" />
         <activity android:name=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
-        <service android:name="com.theradcolor.kernel.GamingService"
-            android:exported="true"/>
-        <receiver android:name="com.theradcolor.kernel.BrodcastReceiver" />
+        <service
+            android:name=".GamingService"
+            android:exported="true" />
+        <receiver android:name=".BrodcastReceiver" />
+
     </application>
 
 </manifest>
