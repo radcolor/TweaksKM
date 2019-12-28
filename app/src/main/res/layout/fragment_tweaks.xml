@@ -81,8 +81,6 @@
 
         <LinearLayout
             android:layout_marginTop="16dp"
-            android:layout_marginStart="12dp"
-            android:layout_marginEnd="12dp"
             android:scrollbars="vertical"
             android:orientation="vertical"
             android:layout_width="match_parent"
@@ -94,11 +92,16 @@
                 android:layout_height="wrap_content">
 
                 <TextView
+                    android:layout_marginLeft="12dp"
                     android:text="PROFILES"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 
                 <LinearLayout
+                    android:id="@+id/ebm"
+                    android:padding="10dp"
+                    android:clickable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
                     android:layout_marginTop="16dp"
                     android:weightSum="12"
                     android:layout_width="match_parent"
@@ -157,6 +160,10 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/bbm"
+                    android:padding="10dp"
+                    android:clickable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
                     android:layout_marginTop="12dp"
                     android:weightSum="12"
                     android:layout_width="match_parent"
@@ -215,6 +222,10 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/bm"
+                    android:padding="10dp"
+                    android:clickable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
                     android:layout_marginTop="12dp"
                     android:weightSum="12"
                     android:layout_width="match_parent"
@@ -273,6 +284,10 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/pm"
+                    android:padding="10dp"
+                    android:clickable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
                     android:layout_marginTop="12dp"
                     android:weightSum="12"
                     android:layout_width="match_parent"
@@ -343,8 +358,6 @@
         <LinearLayout
             android:layout_marginBottom="72dp"
             android:layout_marginTop="16dp"
-            android:layout_marginStart="12dp"
-            android:layout_marginEnd="12dp"
             android:scrollbars="vertical"
             android:orientation="vertical"
             android:layout_width="match_parent"
@@ -356,11 +369,15 @@
                 android:layout_height="wrap_content">
 
                 <TextView
+                    android:layout_marginLeft="12dp"
                     android:text="GAMING MODE"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 
                 <LinearLayout
+                    android:padding="10dp"
+                    android:clickable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
                     android:layout_marginTop="16dp"
                     android:weightSum="12"
                     android:layout_width="match_parent"
@@ -410,6 +427,7 @@
                         android:layout_height="match_parent">
 
                         <Switch
+                            android:id="@+id/gmsw"
                             android:layout_centerInParent="true"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
@@ -419,6 +437,9 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:padding="10dp"
+                    android:clickable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
                     android:layout_marginTop="12dp"
                     android:weightSum="12"
                     android:layout_width="match_parent"
@@ -476,6 +497,9 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:padding="10dp"
+                    android:clickable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
                     android:layout_marginTop="12dp"
                     android:weightSum="12"
                     android:layout_width="match_parent"
@@ -533,6 +557,9 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:padding="10dp"
+                    android:clickable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
                     android:layout_marginTop="12dp"
                     android:weightSum="12"
                     android:layout_width="match_parent"
