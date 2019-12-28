@@ -34,6 +34,7 @@
             android:parentActivityName=".RadActivity" />
         <activity
             android:name=".RadActivity"
+            android:theme="@style/rad"
             android:label="@string/title_activity_rad" />
         <activity android:name=".MainActivity">
         </activity>
