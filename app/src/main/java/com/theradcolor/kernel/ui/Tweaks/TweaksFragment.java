@@ -56,6 +56,28 @@ public class TweaksFragment extends Fragment{
         homeViewModel =
                 ViewModelProviders.of(this).get(TweaksViewModel.class);
         View root = inflater.inflate(R.layout.fragment_tweaks, container, false);
-        return null;
+        textView = root.findViewById(R.id.kernel_name);
+        textView.setText("Kernel: " + getKernelVersion());
+        return root;
     }
+
+    public static String getKernelVersion() {
+        try {
+            Process p = Runtime.getRuntime().exec("uname -a");
+            InputStream is = null;
+            if (p.waitFor() == 0) {
+                is = p.getInputStream();
+            } else {
+                is = p.getErrorStream();
+            }
+            BufferedReader br = new BufferedReader(new InputStreamReader(is));
+            String line = br.readLine();
+            Log.i("Kernel Version", line);
+            br.close();
+            return line;
+        } catch (Exception ex) {
+            return "ERROR: " + ex.getMessage();
+        }
+    }
+
 }
