@@ -31,7 +31,7 @@
                     android:layout_height="match_parent">
 
                     <ImageView
-                        android:layout_marginTop="2dp"
+                        android:layout_marginTop="4dp"
                         android:id="@+id/logo"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
@@ -53,12 +53,14 @@
                         android:layout_height="wrap_content"/>
 
                     <TextView
+                        android:textSize="13sp"
                         android:textColor="@android:color/secondary_text_dark"
                         android:text="Deep Sleep: 10H"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
 
                     <TextView
+                        android:textSize="13sp"
                         android:id="@+id/kernel_name"
                         android:textColor="@android:color/secondary_text_dark"
                         android:text="Kernel Version: "
@@ -72,10 +74,524 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="12dp"
             android:layout_width="match_parent"
             android:layout_height="0.1dp"
             android:background="@color/grey_light"/>
+
+        <LinearLayout
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="12dp"
+            android:scrollbars="vertical"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:text="PROFILES"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <LinearLayout
+                    android:layout_marginTop="16dp"
+                    android:weightSum="12"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <RelativeLayout
+                        android:layout_weight="5"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:layout_marginTop="2dp"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:layout_centerInParent="true"
+                            android:src="@drawable/ebm" />
+
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginRight="4dp"
+                        android:layout_weight="2"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:textStyle="bold"
+                            android:text="Extreme Battery Saver Mode"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+                        <TextView
+                            android:layout_marginTop="2dp"
+                            android:textSize="13sp"
+                            android:textColor="@android:color/secondary_text_dark"
+                            android:text="Improve the battery life by reducing the overall system performance."
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+                    </LinearLayout>
+
+                    <RelativeLayout
+                        android:layout_weight="5"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <Switch
+                            android:layout_centerInParent="true"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_marginTop="12dp"
+                    android:weightSum="12"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <RelativeLayout
+                        android:layout_weight="5"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:layout_marginTop="2dp"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:layout_centerInParent="true"
+                            android:src="@drawable/bbm" />
+
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginRight="4dp"
+                        android:layout_weight="2"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:textStyle="bold"
+                            android:text="Better Battery Mode"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+                        <TextView
+                            android:layout_marginTop="2dp"
+                            android:textSize="13sp"
+                            android:textColor="@android:color/secondary_text_dark"
+                            android:text="This mode aims for better battery by maintaining system performace as well."
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+                    </LinearLayout>
+
+                    <RelativeLayout
+                        android:layout_weight="5"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <Switch
+                            android:layout_centerInParent="true"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_marginTop="12dp"
+                    android:weightSum="12"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <RelativeLayout
+                        android:layout_weight="5"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:layout_marginTop="2dp"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:layout_centerInParent="true"
+                            android:src="@drawable/obm" />
+
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginRight="4dp"
+                        android:layout_weight="2"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:textStyle="bold"
+                            android:text="Overall Balance Mode"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+                        <TextView
+                            android:layout_marginTop="2dp"
+                            android:textSize="13sp"
+                            android:textColor="@android:color/secondary_text_dark"
+                            android:text="Aimes for overall better system performance by tuning the system(Default)."
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+                    </LinearLayout>
+
+                    <RelativeLayout
+                        android:layout_weight="5"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <Switch
+                            android:layout_centerInParent="true"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_marginTop="12dp"
+                    android:weightSum="12"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <RelativeLayout
+                        android:layout_weight="5"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:layout_marginTop="2dp"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:layout_centerInParent="true"
+                            android:src="@drawable/pm" />
+
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginRight="4dp"
+                        android:layout_weight="2"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:textStyle="bold"
+                            android:text="Performance Mode"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+                        <TextView
+                            android:layout_marginTop="2dp"
+                            android:textSize="13sp"
+                            android:textColor="@android:color/secondary_text_dark"
+                            android:text="This mode aimes to get most out of your system performance."
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+                    </LinearLayout>
+
+                    <RelativeLayout
+                        android:layout_weight="5"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <Switch
+                            android:layout_centerInParent="true"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="12dp"
+            android:layout_width="match_parent"
+            android:layout_height="0.1dp"
+            android:background="@color/grey_light"/>
+
+        <LinearLayout
+            android:layout_marginBottom="72dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="12dp"
+            android:scrollbars="vertical"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:text="GAMING MODE"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <LinearLayout
+                    android:layout_marginTop="16dp"
+                    android:weightSum="12"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <RelativeLayout
+                        android:layout_weight="5"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:layout_marginTop="2dp"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:layout_centerInParent="true"
+                            android:src="@drawable/game" />
+
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginRight="4dp"
+                        android:layout_weight="2"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:textStyle="bold"
+                            android:text="Enable/Disable Gaming Mode"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+                        <TextView
+                            android:layout_marginTop="2dp"
+                            android:textSize="13sp"
+                            android:textColor="@android:color/secondary_text_dark"
+                            android:text="- Special Mode for Better Gaming Purpose with needed enhancment."
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+                    </LinearLayout>
+
+                    <RelativeLayout
+                        android:layout_weight="5"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <Switch
+                            android:layout_centerInParent="true"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_marginTop="12dp"
+                    android:weightSum="12"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <RelativeLayout
+                        android:layout_weight="5"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:layout_marginTop="2dp"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:layout_centerInParent="true" />
+
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginRight="4dp"
+                        android:layout_weight="2"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:textStyle="bold"
+                            android:text="Disable Auto-Sync feature"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+                        <TextView
+                            android:layout_marginTop="2dp"
+                            android:textSize="13sp"
+                            android:textColor="@android:color/secondary_text_dark"
+                            android:text="- Can Result to better network stability and non-intereption gaming."
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+                    </LinearLayout>
+
+                    <RelativeLayout
+                        android:layout_weight="5"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <CheckBox
+                            android:layout_centerInParent="true"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_marginTop="12dp"
+                    android:weightSum="12"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <RelativeLayout
+                        android:layout_weight="5"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:layout_marginTop="2dp"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:layout_centerInParent="true" />
+
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginRight="4dp"
+                        android:layout_weight="2"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:textStyle="bold"
+                            android:text="Enable Real-Time FPS/CPU Monitoring"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+                        <TextView
+                            android:layout_marginTop="2dp"
+                            android:textSize="13sp"
+                            android:textColor="@android:color/secondary_text_dark"
+                            android:text="- Will display real time fps and cpu usage"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+                    </LinearLayout>
+
+                    <RelativeLayout
+                        android:layout_weight="5"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <CheckBox
+                            android:layout_centerInParent="true"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_marginTop="12dp"
+                    android:weightSum="12"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <RelativeLayout
+                        android:layout_weight="5"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:layout_marginTop="2dp"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:layout_centerInParent="true" />
+
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginRight="4dp"
+                        android:layout_weight="2"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:textStyle="bold"
+                            android:text="Kill unnecessary processes(Experimental)"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+                        <TextView
+                            android:layout_marginTop="2dp"
+                            android:textSize="13sp"
+                            android:textColor="@android:color/secondary_text_dark"
+                            android:text="- Can improve performance a little"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+                    </LinearLayout>
+
+                    <RelativeLayout
+                        android:layout_weight="5"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <CheckBox
+                            android:layout_centerInParent="true"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
 
     </LinearLayout>
 
