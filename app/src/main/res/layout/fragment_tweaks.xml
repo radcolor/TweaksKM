@@ -82,7 +82,7 @@
                         android:layout_marginTop="24dp"
                         android:text="Rad Kernel"
                         android:textColor="@android:color/black"
-                        android:textSize="16dp"
+                        android:textSize="15dp"
                         android:textStyle="bold" />
 
                 </LinearLayout>
