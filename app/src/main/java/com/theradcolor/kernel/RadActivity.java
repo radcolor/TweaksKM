@@ -39,6 +39,5 @@ public class RadActivity extends AppCompatActivity {
             decorView.setSystemUiVisibility(FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS |
                     SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR);
         }
-
     }
 }
