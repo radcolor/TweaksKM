@@ -19,8 +19,9 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:navigationBarColor">@color/green</item>
+        <item name="android:navigationBarColor">@color/green_dark</item>
         <item name="android:textColor">@android:color/white</item>
+        <item name="android:windowLightNavigationBar">false</item>
     </style>
 
 </resources>

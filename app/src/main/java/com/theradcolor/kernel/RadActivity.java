@@ -33,11 +33,5 @@ public class RadActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            View decorView = getWindow().getDecorView();
-            decorView.setSystemUiVisibility(FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS |
-                    SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR);
-        }
     }
 }

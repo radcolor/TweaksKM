@@ -415,7 +415,7 @@
                             android:layout_marginTop="2dp"
                             android:textSize="13sp"
                             android:textColor="@android:color/secondary_text_dark"
-                            android:text="- Special Mode for Better Gaming Purpose with needed enhancment."
+                            android:text="Special Mode for Better Gaming Purpose with needed enhancment."
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
 
