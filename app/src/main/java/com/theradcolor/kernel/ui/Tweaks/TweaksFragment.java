@@ -72,15 +72,49 @@ public class TweaksFragment extends Fragment implements View.OnClickListener{
             }
         }
 
-        //dozesw = root.findViewById(R.id.dozesw);
-        //dozesw.setChecked(true);
-        //killsw = root.findViewById(R.id.killsw);
-        //killsw.setChecked(false);
-        //monsw = root.findViewById(R.id.monsw);
-        //monsw.setChecked(true);
+        dozesw = root.findViewById(R.id.dozesw);
+        dozesw.setChecked(true);
+        killsw = root.findViewById(R.id.killsw);
+        killsw.setChecked(false);
+        monsw = root.findViewById(R.id.monsw);
+        monsw.setChecked(true);
 
         gmsw = root.findViewById(R.id.gmsw);
         final Intent intent = new Intent(getContext(), GamingService.class);
+
+        dozesw.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    intent.putExtra("doze","yes");
+                }else{
+                    intent.putExtra("doze","no");
+                }
+            }
+        });
+        killsw.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked){
+                    intent.putExtra("kill","yes");
+                }else {
+                    intent.putExtra("kill","no");
+                }
+            }
+        });
+        monsw.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked){
+
+                }else {
+
+                }
+            }
+        });
+
+        intent.putExtra("doze","yes");
+        intent.putExtra("kill","no");
 
         gmsw.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
