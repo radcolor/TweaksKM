@@ -151,6 +151,7 @@
                         android:layout_height="match_parent">
 
                         <Switch
+                            android:id="@+id/ebmsw"
                             android:layout_centerInParent="true"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
@@ -213,6 +214,7 @@
                         android:layout_height="match_parent">
 
                         <Switch
+                            android:id="@+id/bbmsw"
                             android:layout_centerInParent="true"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
@@ -275,6 +277,7 @@
                         android:layout_height="match_parent">
 
                         <Switch
+                            android:id="@+id/obmsw"
                             android:layout_centerInParent="true"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
@@ -337,6 +340,7 @@
                         android:layout_height="match_parent">
 
                         <Switch
+                            android:id="@+id/pmsw"
                             android:layout_centerInParent="true"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>

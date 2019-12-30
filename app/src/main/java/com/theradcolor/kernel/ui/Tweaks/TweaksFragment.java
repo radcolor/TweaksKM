@@ -49,7 +49,7 @@ public class TweaksFragment extends Fragment implements View.OnClickListener{
     private ProgressDialog mprogress;
     private LinearLayout eb,bb,bal,pm;
     private CheckBox dozesw,killsw,monsw;
-    private Switch gmsw;
+    private Switch ebmsw,bbmsw,obmsw,pmsw,gmsw;
     final Handler handler = new Handler();
 
     public View onCreateView(@NonNull final LayoutInflater inflater,
@@ -58,6 +58,15 @@ public class TweaksFragment extends Fragment implements View.OnClickListener{
         View root = inflater.inflate(R.layout.fragment_tweaks, container, false);
         textView = root.findViewById(R.id.kernel_name);
         textView.setText("Kernel: " + getKernelVersion());
+
+        ebmsw = root.findViewById(R.id.ebmsw);
+        ebmsw.setOnCheckedChangeListener(myCheckboxListener);
+        bbmsw = root.findViewById(R.id.bbmsw);
+        bbmsw.setOnCheckedChangeListener(myCheckboxListener);
+        obmsw = root.findViewById(R.id.obmsw);
+        obmsw.setOnCheckedChangeListener(myCheckboxListener);
+        pmsw = root.findViewById(R.id.pmsw);
+        pmsw.setOnCheckedChangeListener(myCheckboxListener);
 
         eb = root.findViewById(R.id.ebm);
         bb = root.findViewById(R.id.bbm);
@@ -151,6 +160,42 @@ public class TweaksFragment extends Fragment implements View.OnClickListener{
 
         return root;
     }
+
+    private CompoundButton.OnCheckedChangeListener myCheckboxListener = new CompoundButton.OnCheckedChangeListener() {
+        @Override
+        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            switch (buttonView.getId()){
+                case R.id.ebmsw:
+                    if(isChecked){
+                        bbmsw.setChecked(false);
+                        obmsw.setChecked(false);
+                        pmsw.setChecked(false);
+                    }
+                    break;
+                case R.id.bbmsw:
+                    if(isChecked){
+                        ebmsw.setChecked(false);
+                        obmsw.setChecked(false);
+                        pmsw.setChecked(false);
+                    }
+                    break;
+                case R.id.obmsw:
+                    if(isChecked){
+                        ebmsw.setChecked(false);
+                        bbmsw.setChecked(false);
+                        pmsw.setChecked(false);
+                    }
+                    break;
+                case R.id.pmsw:
+                    if(isChecked){
+                        ebmsw.setChecked(false);
+                        bbmsw.setChecked(false);
+                        obmsw.setChecked(false);
+                    }
+                    break;
+            }
+        }
+    };
 
     private static String getKernelVersion() {
         try {
