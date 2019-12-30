@@ -1,6 +1,7 @@
 package com.theradcolor.kernel.ui.Misc;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.VibrationEffect;
@@ -9,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,6 +21,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.theradcolor.kernel.KcalActivity;
 import com.theradcolor.kernel.R;
 
 import java.io.BufferedReader;
@@ -32,6 +35,7 @@ public class MiscFragment extends Fragment implements View.OnClickListener{
     private MiscViewModel dashboardViewModel;
     private TextView srgbon,srgboff,vib;
     private SeekBar seekBar;
+    private LinearLayout srgb,kcal,vibration;
     int progressChangedValue = 0;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -42,6 +46,14 @@ public class MiscFragment extends Fragment implements View.OnClickListener{
         //Toast.makeText(root.getContext(),"Vibration" + getVibration(), Toast.LENGTH_LONG).show();
         seekBar = root.findViewById(R.id.vibration);
         vib = root.findViewById(R.id.pervib);
+        srgb = root.findViewById(R.id.ll_srgb);
+        kcal = root.findViewById(R.id.ll_kcal);
+        vibration = root.findViewById(R.id.ll_vib);
+
+        srgb.setOnClickListener(this);
+        kcal.setOnClickListener(this);
+        vibration.setOnClickListener(this);
+
         final Vibrator v = (Vibrator) getContext().getSystemService(Context.VIBRATOR_SERVICE);
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -159,6 +171,15 @@ public class MiscFragment extends Fragment implements View.OnClickListener{
                         "else echo \"1\" > /sys/class/graphics/fb0/msm_fb_srgb\n" +
                         "fi");
                 break;*/
+            case R.id.ll_srgb:
+
+                break;
+            case R.id.ll_kcal:
+                startActivity(new Intent(getContext(), KcalActivity.class));
+                break;
+            case R.id.ll_vib:
+
+                break;
         }
     }
 }

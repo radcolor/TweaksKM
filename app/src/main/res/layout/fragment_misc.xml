@@ -152,7 +152,7 @@
             android:background="@color/grey_light"/>
 
         <LinearLayout
-            android:id="@+id/ll_kcal"
+            android:id="@+id/ll_vib"
             android:padding="10dp"
             android:clickable="true"
             android:foreground="?android:attr/selectableItemBackground"
