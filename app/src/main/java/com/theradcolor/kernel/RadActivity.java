@@ -38,11 +38,12 @@ public class RadActivity extends AppCompatActivity {
         if(checkRoot.isDeviceRooted() && System.getProperty("os.version").contains("rad")){
             Log.d("MainActivity", "Kernel and Root Check Passed");
             execCommandLine("su");
-        }else
+        }else if(checkRoot.isDeviceRooted())
         {
-            Log.d("MainActivity", "Kernel and Root Check failed");
-            finish();
-            System.exit(0);
+            Log.d("MainActivity", "Rooted and unsupported kernel");
+            execCommandLine("su");
+        }else{
+            Log.d("MainActivity", "Root access and kernel verification failed");
         }
     }
 
