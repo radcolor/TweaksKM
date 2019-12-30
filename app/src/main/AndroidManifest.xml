@@ -44,7 +44,6 @@
             android:name=".RadActivity"
             android:label="@string/title_activity_rad"
             android:theme="@style/rad" />
-        <activity android:name=".MainActivity"></activity>
 
         <service
             android:name=".GamingService"
