@@ -1,91 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/gray">
 
-    <RelativeLayout
-        android:layout_marginTop="24dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <ImageView
-            android:layout_centerInParent="true"
-            android:src="@drawable/linux"
-            android:layout_width="80dp"
-            android:layout_height="80dp"/>
-
-    </RelativeLayout>
-
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <TextView
-            android:layout_marginTop="24dp"
-            android:textSize="20dp"
-            android:textStyle="bold"
-            android:textAlignment="center"
-            android:text="Tweaks"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-        <TextView
-            android:layout_marginTop="4dp"
-            android:textStyle="bold"
-            android:textAlignment="center"
-            android:text="App Version - v1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
         <RelativeLayout
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="24dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_centerInParent="true"
+                android:src="@drawable/linux"
+                android:layout_width="80dp"
+                android:layout_height="80dp"/>
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/faqs"
+                android:layout_marginTop="24dp"
                 android:textSize="20dp"
                 android:textStyle="bold"
-                android:textColor="@android:color/holo_blue_light"
-                android:layout_centerInParent="true"
-                android:text="FAQs"
-                android:layout_width="wrap_content"
+                android:textAlignment="center"
+                android:text="Tweaks"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_marginTop="16dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            <TextView
+                android:layout_marginTop="4dp"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:text="App Version - v1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
 
             <RelativeLayout
-                android:layout_centerInParent="true"
-                android:layout_width="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <ImageView
-                    android:id="@+id/tg_link"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:src="@drawable/telegram" />
-
-                <ImageView
-                    android:id="@+id/gh_link"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_marginStart="20dp"
-                    android:layout_toEndOf="@+id/tg_link"
-                    android:src="@drawable/github" />
+                <TextView
+                    android:id="@+id/faqs"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    android:textColor="@android:color/holo_blue_light"
+                    android:layout_centerInParent="true"
+                    android:text="FAQs"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
 
             </RelativeLayout>
 
-        </RelativeLayout>
+            <RelativeLayout
+                android:layout_marginTop="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:layout_centerInParent="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/tg_link"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/telegram" />
+
+                    <ImageView
+                        android:id="@+id/gh_link"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginStart="20dp"
+                        android:layout_toEndOf="@+id/tg_link"
+                        android:src="@drawable/github" />
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+        </LinearLayout>
 
     </LinearLayout>
 
-</LinearLayout>
+    <TextView
+        android:layout_marginBottom="72dp"
+        android:id="@+id/br"
+        android:textColor="@android:color/secondary_text_dark"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+</RelativeLayout>
