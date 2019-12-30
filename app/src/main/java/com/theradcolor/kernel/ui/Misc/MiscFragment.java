@@ -45,6 +45,7 @@ public class MiscFragment extends Fragment implements View.OnClickListener{
         View root = inflater.inflate(R.layout.fragment_misc, container, false);
         //Toast.makeText(root.getContext(),"Vibration" + getVibration(), Toast.LENGTH_LONG).show();
         seekBar = root.findViewById(R.id.vibration);
+        seekBar.setPadding(16,16,16,16);
         vib = root.findViewById(R.id.pervib);
         srgb = root.findViewById(R.id.ll_srgb);
         kcal = root.findViewById(R.id.ll_kcal);
