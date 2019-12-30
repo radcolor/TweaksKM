@@ -316,7 +316,8 @@
                     </RelativeLayout>
 
                     <LinearLayout
-                        android:layout_marginEnd="4dp"
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginRight="4dp"
                         android:layout_weight="2"
                         android:orientation="vertical"
                         android:layout_width="match_parent"
@@ -330,7 +331,7 @@
 
                         <TextView
                             android:layout_marginTop="4dp"
-                            android:text="Custom RGB settings (KCAL)"
+                            android:text="KCAL settings"
                             android:textColor="@android:color/secondary_text_dark"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"/>

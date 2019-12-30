@@ -21,7 +21,7 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
-            android:theme="@style/rad"
+            android:theme="@style/AppTheme"
             android:name=".KcalActivity"
             android:label="Display Color Calibration"
             android:parentActivityName=".RadActivity" />

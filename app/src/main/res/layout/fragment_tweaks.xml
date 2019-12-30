@@ -53,9 +53,10 @@
                         android:layout_height="wrap_content"/>
 
                     <TextView
+                        android:id="@+id/up_dp"
                         android:textSize="13sp"
                         android:textColor="@android:color/secondary_text_dark"
-                        android:text="Deep Sleep: 10H"
+                        android:text="Uptime/Deep sleep: "
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
 
