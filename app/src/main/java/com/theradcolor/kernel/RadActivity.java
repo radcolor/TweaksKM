@@ -1,14 +1,17 @@
 package com.theradcolor.kernel;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -35,6 +38,7 @@ public class RadActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
+        String[] list = {"Don't show again"};
         if(checkRoot.isDeviceRooted() && System.getProperty("os.version").contains("rad")){
             Log.d("MainActivity", "Kernel and Root Check Passed");
             execCommandLine("su");
@@ -42,8 +46,23 @@ public class RadActivity extends AppCompatActivity {
         {
             Log.d("MainActivity", "Rooted and unsupported kernel");
             execCommandLine("su");
+            new AlertDialog.Builder(this)
+                    .setTitle("Unsupported kernel!")
+                    .setSingleChoiceItems(list, 1, null)
+                    .setPositiveButton("continue anyway", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int whichButton) {
+                            int selectedPosition = ((AlertDialog)dialog).getListView().getCheckedItemPosition();
+                            if(selectedPosition == 0){
+
+                            }else{
+
+                            }
+                        }
+                    })
+                    .show();
         }else{
             Log.d("MainActivity", "Root access and kernel verification failed");
+            finish();
         }
     }
 
