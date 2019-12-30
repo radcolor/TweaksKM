@@ -1,6 +1,7 @@
 package com.theradcolor.kernel.ui.Misc;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -17,6 +18,7 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
@@ -148,32 +150,46 @@ public class MiscFragment extends Fragment implements View.OnClickListener{
         }
     }
 
+    private void srgb()
+    {
+        new AlertDialog.Builder(getContext())
+                .setTitle("sRGB colors")
+                .setPositiveButton("On", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        execCommandLine("active=1\n" +
+                                "\n" +
+                                "echo $active > /sys/module/mdss_fb/parameters/srgb_enabled\n" +
+                                "\n" +
+                                "if [ $active = \"1\" ]\n" +
+                                "then echo \"2\" > /sys/class/graphics/fb0/msm_fb_srgb\n" +
+                                "else echo \"1\" > /sys/class/graphics/fb0/msm_fb_srgb\n" +
+                                "fi");
+                    }
+                })
+                .setNegativeButton("Off", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        execCommandLine("active=0\n" +
+                                "\n" +
+                                "echo $active > /sys/module/mdss_fb/parameters/srgb_enabled\n" +
+                                "\n" +
+                                "if [ $active = \"1\" ]\n" +
+                                "then echo \"2\" > /sys/class/graphics/fb0/msm_fb_srgb\n" +
+                                "else echo \"1\" > /sys/class/graphics/fb0/msm_fb_srgb\n" +
+                                "fi");
+                    }
+                })
+                .show();
+
+    }
+
     @Override
     public void onClick(View v) {
         int view = v.getId();
         switch (view) {
-            /*case R.id.srgbon:
-                execCommandLine("active=1\n" +
-                        "\n" +
-                        "echo $active > /sys/module/mdss_fb/parameters/srgb_enabled\n" +
-                        "\n" +
-                        "if [ $active = \"1\" ]\n" +
-                        "then echo \"2\" > /sys/class/graphics/fb0/msm_fb_srgb\n" +
-                        "else echo \"1\" > /sys/class/graphics/fb0/msm_fb_srgb\n" +
-                        "fi");
-                break;
-            case R.id.srgboff:
-                execCommandLine("active=0\n" +
-                        "\n" +
-                        "echo $active > /sys/module/mdss_fb/parameters/srgb_enabled\n" +
-                        "\n" +
-                        "if [ $active = \"1\" ]\n" +
-                        "then echo \"2\" > /sys/class/graphics/fb0/msm_fb_srgb\n" +
-                        "else echo \"1\" > /sys/class/graphics/fb0/msm_fb_srgb\n" +
-                        "fi");
-                break;*/
             case R.id.ll_srgb:
-
+                srgb();
                 break;
             case R.id.ll_kcal:
                 startActivity(new Intent(getContext(), KcalActivity.class));
