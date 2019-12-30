@@ -379,6 +379,7 @@
                     android:layout_height="wrap_content"/>
 
                 <LinearLayout
+                    android:id="@+id/ll_gm"
                     android:padding="10dp"
                     android:clickable="true"
                     android:foreground="?android:attr/selectableItemBackground"
@@ -441,6 +442,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/ll_as"
                     android:padding="10dp"
                     android:clickable="true"
                     android:foreground="?android:attr/selectableItemBackground"
@@ -502,6 +504,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/ll_mon"
                     android:padding="10dp"
                     android:clickable="true"
                     android:foreground="?android:attr/selectableItemBackground"
@@ -563,6 +566,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/ll_kill"
                     android:padding="10dp"
                     android:clickable="true"
                     android:foreground="?android:attr/selectableItemBackground"
@@ -653,6 +657,7 @@
                     android:layout_height="wrap_content"/>
 
                 <LinearLayout
+                    android:id="@+id/ll_ad"
                     android:padding="10dp"
                     android:clickable="true"
                     android:foreground="?android:attr/selectableItemBackground"

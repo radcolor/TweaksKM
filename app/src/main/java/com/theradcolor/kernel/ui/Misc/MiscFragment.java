@@ -35,7 +35,7 @@ import java.io.OutputStreamWriter;
 public class MiscFragment extends Fragment implements View.OnClickListener{
 
     private MiscViewModel dashboardViewModel;
-    private TextView srgbon,srgboff,vib;
+    private TextView vib;
     private SeekBar seekBar;
     private LinearLayout srgb,kcal,vibration;
     int progressChangedValue = 0;
