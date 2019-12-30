@@ -20,7 +20,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".KcalActivity"></activity>
+        <activity
+            android:theme="@style/rad"
+            android:name=".KcalActivity"
+            android:label="Display Color Calibration"
+            android:parentActivityName=".RadActivity" />
         <activity
             android:name=".SplashActivity"
             android:screenOrientation="portrait"

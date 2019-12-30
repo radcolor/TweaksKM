@@ -1,7 +1,9 @@
 package com.theradcolor.kernel;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -13,8 +15,8 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-import static android.view.View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR;
-import static android.view.WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
 
 public class RadActivity extends AppCompatActivity {
 
@@ -33,5 +35,58 @@ public class RadActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
+        if(checkRoot.isDeviceRooted() && System.getProperty("os.version").contains("rad")){
+            Log.d("MainActivity", "Kernel and Root Check Passed");
+            execCommandLine("su");
+        }else
+        {
+            Log.d("MainActivity", "Kernel and Root Check failed");
+            finish();
+            System.exit(0);
+        }
     }
+
+    void execCommandLine(String command)
+    {
+        Runtime runtime = Runtime.getRuntime();
+        Process proc = null;
+        OutputStreamWriter osw = null;
+
+        try
+        {
+            proc = runtime.exec("su");
+            osw = new OutputStreamWriter(proc.getOutputStream());
+            osw.write(command);
+            osw.flush();
+            osw.close();
+        }
+        catch (IOException ex)
+        {
+            Log.e("execCommandLine()", "Command resulted in an IO Exception: " + command);
+            return;
+        }
+        finally
+        {
+            if (osw != null)
+            {
+                try
+                {
+                    osw.close();
+                }
+                catch (IOException e){}
+            }
+        }
+
+        try
+        {
+            proc.waitFor();
+        }
+        catch (InterruptedException e){}
+
+        if (proc.exitValue() != 0)
+        {
+            Log.e("execCommandLine()", "Command returned error: " + command + "\n  Exit code: " + proc.exitValue());
+        }
+    }
+
 }
