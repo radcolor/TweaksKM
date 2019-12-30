@@ -79,8 +79,8 @@
 
                 <LinearLayout
                     android:id="@+id/ll_vib"
+                    android:layout_marginTop="6dp"
                     android:padding="10dp"
-                    android:clickable="true"
                     android:foreground="?android:attr/selectableItemBackground"
                     android:weightSum="12"
                     android:layout_width="match_parent"
@@ -158,8 +158,8 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="6dp"
             android:layout_marginStart="12dp"
             android:layout_marginEnd="12dp"
             android:layout_width="match_parent"
@@ -181,7 +181,7 @@
                     android:layout_marginStart="10dp"
                     android:clickable="true"
                     android:foreground="?android:attr/selectableItemBackground"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="6dp"
                     android:weightSum="12"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
@@ -231,6 +231,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:layout_marginTop="6dp"
                     android:id="@+id/ll_srgb"
                     android:padding="10dp"
                     android:clickable="true"
@@ -358,8 +359,8 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="6dp"
             android:layout_marginStart="12dp"
             android:layout_marginEnd="12dp"
             android:layout_width="match_parent"
@@ -381,7 +382,7 @@
                     android:layout_marginStart="10dp"
                     android:clickable="true"
                     android:foreground="?android:attr/selectableItemBackground"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="6dp"
                     android:weightSum="12"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
@@ -431,7 +432,8 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/ll_srgb"
+                    android:layout_marginTop="6dp"
+                    android:id="@+id/ll_ther"
                     android:padding="10dp"
                     android:clickable="true"
                     android:foreground="?android:attr/selectableItemBackground"
@@ -483,7 +485,7 @@
                         android:layout_height="match_parent">
 
                         <Switch
-                            android:id="@+id/srgbsw"
+                            android:id="@+id/thersw"
                             android:layout_centerInParent="true"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
@@ -497,8 +499,8 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="6dp"
             android:layout_marginStart="12dp"
             android:layout_marginEnd="12dp"
             android:layout_width="match_parent"
