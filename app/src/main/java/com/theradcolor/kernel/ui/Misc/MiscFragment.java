@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
@@ -20,7 +21,10 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.theradcolor.kernel.R;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 
 public class MiscFragment extends Fragment implements View.OnClickListener{
@@ -35,6 +39,37 @@ public class MiscFragment extends Fragment implements View.OnClickListener{
         dashboardViewModel =
                 ViewModelProviders.of(this).get(MiscViewModel.class);
         View root = inflater.inflate(R.layout.fragment_misc, container, false);
+        //Toast.makeText(root.getContext(),"Vibration" + getVibration(), Toast.LENGTH_LONG).show();
+        seekBar = root.findViewById(R.id.vibration);
+        vib = root.findViewById(R.id.pervib);
+        final Vibrator v = (Vibrator) getContext().getSystemService(Context.VIBRATOR_SERVICE);
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                progressChangedValue = progress;
+                vib.setText(progress + "%");
+                Vibrator v = (Vibrator) getContext().getSystemService(Context.VIBRATOR_SERVICE);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+                // Vibrate for 500 milliseconds
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    long[] pattern = {1, 1000, 0};
+                    v.vibrate(VibrationEffect.createWaveform(pattern,1));
+                } else {
+                    //deprecated in API 26
+                    v.vibrate(500);
+                }
+                //execCommandLine("");
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                v.cancel();
+            }
+        });
         return root;
     }
 
@@ -78,6 +113,25 @@ public class MiscFragment extends Fragment implements View.OnClickListener{
         if (proc.exitValue() != 0)
         {
             Log.e("execCommandLine()", "Command returned error: " + command + "\n  Exit code: " + proc.exitValue());
+        }
+    }
+
+    private static String getVibration() {
+        try {
+            Process p = Runtime.getRuntime().exec("su");
+            InputStream is = null;
+            if (p.waitFor() == 0) {
+                is = p.getInputStream();
+            } else {
+                is = p.getErrorStream();
+            }
+            BufferedReader br = new BufferedReader(new InputStreamReader(is));
+            String line = br.readLine();
+            Log.i("Kernel Version", line);
+            br.close();
+            return line;
+        } catch (Exception ex) {
+            return "ERROR: " + ex.getMessage();
         }
     }
 

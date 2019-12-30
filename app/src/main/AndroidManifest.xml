@@ -20,31 +20,33 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".SplashActivity"
+        <activity android:name=".KcalActivity"></activity>
+        <activity
+            android:name=".SplashActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".FAQsActivity"
             android:label="FAQs"
-            android:theme="@style/faqs"
-            android:parentActivityName=".RadActivity" />
+            android:parentActivityName=".RadActivity"
+            android:theme="@style/faqs" />
         <activity
             android:name=".RadActivity"
-            android:theme="@style/rad"
-            android:label="@string/title_activity_rad" />
-        <activity android:name=".MainActivity">
-        </activity>
+            android:label="@string/title_activity_rad"
+            android:theme="@style/rad" />
+        <activity android:name=".MainActivity"></activity>
 
         <service
             android:name=".GamingService"
             android:exported="true" />
-        <receiver android:name=".BrodcastReceiver" />
 
+        <receiver android:name=".BrodcastReceiver" />
     </application>
 
 </manifest>
