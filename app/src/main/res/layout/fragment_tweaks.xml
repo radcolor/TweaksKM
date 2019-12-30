@@ -666,7 +666,7 @@
                             android:layout_width="25dp"
                             android:layout_height="25dp"
                             android:layout_centerInParent="true"
-                            android:src="@drawable/game" />
+                            android:src="@drawable/ad" />
 
                     </RelativeLayout>
 
