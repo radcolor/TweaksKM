@@ -47,9 +47,9 @@ public class TweaksFragment extends Fragment implements View.OnClickListener{
     private TweaksViewModel homeViewModel;
     public TextView textView;
     private ProgressDialog mprogress;
-    private LinearLayout eb,bb,bal,pm;
+    private LinearLayout eb,bb,bal,pm,gm,as,mon,kill,ads;
     private CheckBox dozesw,killsw,monsw;
-    private Switch ebmsw,bbmsw,obmsw,pmsw,gmsw;
+    private Switch ebmsw,bbmsw,obmsw,pmsw,gmsw,adsw;
     final Handler handler = new Handler();
 
     public View onCreateView(@NonNull final LayoutInflater inflater,
@@ -67,11 +67,24 @@ public class TweaksFragment extends Fragment implements View.OnClickListener{
         obmsw.setOnCheckedChangeListener(myCheckboxListener);
         pmsw = root.findViewById(R.id.pmsw);
         pmsw.setOnCheckedChangeListener(myCheckboxListener);
+        adsw = root.findViewById(R.id.adsw);
+        adsw.setOnClickListener(this);
 
         eb = root.findViewById(R.id.ebm);
         bb = root.findViewById(R.id.bbm);
         bal = root.findViewById(R.id.bm);
         pm = root.findViewById(R.id.pm);
+
+        gm = root.findViewById(R.id.ll_gm);
+        gm.setOnClickListener(this);
+        as = root.findViewById(R.id.ll_as);
+        as.setOnClickListener(this);
+        mon = root.findViewById(R.id.ll_mon);
+        mon.setOnClickListener(this);
+        kill = root.findViewById(R.id.ll_kill);
+        kill.setOnClickListener(this);
+        ads = root.findViewById(R.id.ll_ad);
+        ads.setOnClickListener(this);
 
         NotificationManager mNotificationManager = (NotificationManager) getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -293,6 +306,41 @@ public class TweaksFragment extends Fragment implements View.OnClickListener{
                 mprogress.dismiss();
                 Toast.makeText(getContext(),"Successful", Toast.LENGTH_SHORT).show();
                 break;
+            case R.id.ll_gm:
+                if(!gmsw.isChecked()){
+                    gmsw.setChecked(true);
+                }else{
+                    gmsw.setChecked(false);
+                }
+                break;
+            case R.id.ll_as:
+                if(!dozesw.isChecked()){
+                    dozesw.setChecked(true);
+                }else{
+                    dozesw.setChecked(false);
+                }
+                break;
+            case R.id.ll_mon:
+                if(!monsw.isChecked()){
+                    monsw.setChecked(true);
+                }else{
+                    monsw.setChecked(false);
+                }
+                break;
+            case R.id.ll_kill:
+                if(!killsw.isChecked()){
+                    killsw.setChecked(true);
+                }else{
+                    killsw.setChecked(false);
+                }
+                break;
+            case R.id.ll_ad:
+                if(!adsw.isChecked()){
+                    adsw.setChecked(true);
+                }else{
+                    adsw.setChecked(false);
+                }
+                break;
         }
     }
 
@@ -374,7 +422,4 @@ public class TweaksFragment extends Fragment implements View.OnClickListener{
             Log.e("execCommandLine()", "Command returned error: " + command + "\n  Exit code: " + proc.exitValue());
         }
     }
-
-
-
 }
