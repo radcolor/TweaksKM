@@ -55,7 +55,7 @@ public class AboutFragment extends Fragment implements View.OnClickListener{
     }
 
     public void openGH() {
-        Uri uri = Uri.parse("http://github.com/theradcolor");
+        Uri uri = Uri.parse("http://theradcolor.github.io/radkernel");
         Intent intent = new Intent(Intent.ACTION_VIEW, uri);
         startActivity(intent);
     }
