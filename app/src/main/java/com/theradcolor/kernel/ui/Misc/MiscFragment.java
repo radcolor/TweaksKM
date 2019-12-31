@@ -3,6 +3,7 @@ package com.theradcolor.kernel.ui.Misc;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.VibrationEffect;
@@ -27,6 +28,7 @@ import com.theradcolor.kernel.KcalActivity;
 import com.theradcolor.kernel.R;
 
 import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -42,19 +44,24 @@ public class MiscFragment extends Fragment implements View.OnClickListener{
     public static final int MIN_VIBRATION = 116;
     public static final int MAX_VIBRATION = 3596;
     int  vibrationValue;
+    SharedPreferences.Editor editor;
+    SharedPreferences preferences;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         dashboardViewModel =
                 ViewModelProviders.of(this).get(MiscViewModel.class);
         View root = inflater.inflate(R.layout.fragment_misc, container, false);
-        //Toast.makeText(root.getContext(),"Vibration" + getVibration(), Toast.LENGTH_LONG).show();
         seekBar = root.findViewById(R.id.vibration);
         seekBar.setPadding(16,16,16,16);
         vib = root.findViewById(R.id.pervib);
         srgb = root.findViewById(R.id.ll_srgb);
         kcal = root.findViewById(R.id.ll_kcal);
         vibration = root.findViewById(R.id.ll_vib);
+
+        preferences = getActivity().getPreferences(Context.MODE_PRIVATE);
+        vib.setText(""+preferences.getInt("vibration",1));
+        seekBar.setProgress(preferences.getInt("vibration",1));
 
         srgb.setOnClickListener(this);
         kcal.setOnClickListener(this);
@@ -90,6 +97,9 @@ public class MiscFragment extends Fragment implements View.OnClickListener{
                 }
                 v.cancel();
                 execCommandLine("echo " +vibrationValue+ " > /sys/devices/virtual/timed_output/vibrator/vtg_level");
+                editor = preferences.edit();
+                editor.putInt("vibration",progressChangedValue);
+                editor.apply();
             }
         });
         return root;
