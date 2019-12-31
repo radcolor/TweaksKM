@@ -11,7 +11,7 @@
     <ImageView
         android:id="@+id/kcal_img"
         android:layout_width="match_parent"
-        android:layout_height="225dp"
+        android:layout_height="200dp"
         android:scaleType="fitXY"
         android:src="@drawable/kcal" />
 
@@ -52,6 +52,7 @@
                         android:layout_height="match_parent">
 
                         <TextView
+                            android:id="@+id/txt_red"
                             android:hint="255"
                             android:textColor="@android:color/white"
                             android:layout_marginTop="2dp"
@@ -101,6 +102,7 @@
                         android:layout_height="match_parent">
 
                         <TextView
+                            android:id="@+id/txt_green"
                             android:hint="255"
                             android:textColor="@android:color/white"
                             android:layout_marginTop="2dp"
@@ -150,6 +152,7 @@
                         android:layout_height="match_parent">
 
                         <TextView
+                            android:id="@+id/txt_blue"
                             android:hint="255"
                             android:textColor="@android:color/white"
                             android:layout_marginTop="2dp"
@@ -208,6 +211,7 @@
                         android:layout_height="match_parent">
 
                         <TextView
+                            android:id="@+id/txt_sat"
                             android:hint="255"
                             android:textColor="@android:color/white"
                             android:layout_marginTop="2dp"
@@ -257,6 +261,7 @@
                         android:layout_height="match_parent">
 
                         <TextView
+                            android:id="@+id/txt_val"
                             android:hint="255"
                             android:textColor="@android:color/white"
                             android:layout_marginTop="2dp"
@@ -306,6 +311,7 @@
                         android:layout_height="match_parent">
 
                         <TextView
+                            android:id="@+id/txt_con"
                             android:hint="255"
                             android:textColor="@android:color/white"
                             android:layout_marginTop="2dp"
@@ -355,6 +361,7 @@
                         android:layout_height="match_parent">
 
                         <TextView
+                            android:id="@+id/txt_hue"
                             android:hint="255"
                             android:textColor="@android:color/white"
                             android:layout_marginTop="2dp"
