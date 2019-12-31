@@ -248,7 +248,12 @@ public class TweaksFragment extends Fragment implements View.OnClickListener{
                         "echo 1401600 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq \n" +
                         "echo 1401600 > /sys/devices/system/cpu/cpu4/cpufreq/scaling_max_freq");
 
-                mprogress.dismiss();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        mprogress.dismiss();
+                    }
+                },1000);
                 Toast.makeText(getContext(),"Successful", Toast.LENGTH_SHORT).show();
                 break;
 
@@ -267,7 +272,12 @@ public class TweaksFragment extends Fragment implements View.OnClickListener{
                         "echo 1536000 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq \n" +
                         "echo 1747200 > /sys/devices/system/cpu/cpu4/cpufreq/scaling_max_freq");
 
-                mprogress.dismiss();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        mprogress.dismiss();
+                    }
+                },1000);
                 Toast.makeText(getContext(),"Successful", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.bm:
@@ -285,7 +295,12 @@ public class TweaksFragment extends Fragment implements View.OnClickListener{
                         "echo 1612800 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq \n" +
                         "echo 1804800 > /sys/devices/system/cpu/cpu4/cpufreq/scaling_max_freq");
 
-                mprogress.dismiss();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        mprogress.dismiss();
+                    }
+                },1000);
                 Toast.makeText(getContext(),"Successful", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.pm:
@@ -303,7 +318,12 @@ public class TweaksFragment extends Fragment implements View.OnClickListener{
                         "echo 1612800 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq \n" +
                         "echo 1804800 > /sys/devices/system/cpu/cpu4/cpufreq/scaling_max_freq");
 
-                mprogress.dismiss();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        mprogress.dismiss();
+                    }
+                },1000);
                 Toast.makeText(getContext(),"Successful", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.ll_gm:
