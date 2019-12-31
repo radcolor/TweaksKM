@@ -13,7 +13,6 @@
     <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
 
     <application
-        android:allowBackup="true"
         android:icon="@drawable/linux"
         android:label="@string/app_name"
         android:roundIcon="@drawable/linux"
@@ -48,8 +47,8 @@
         <service
             android:name=".GamingService"
             android:exported="true" />
-
         <receiver android:name=".BrodcastReceiver" />
+
     </application>
 
 </manifest>
