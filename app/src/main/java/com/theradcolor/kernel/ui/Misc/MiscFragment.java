@@ -140,7 +140,7 @@ public class MiscFragment extends Fragment implements View.OnClickListener{
 
     private static String getVibration() {
         try {
-            Process p = Runtime.getRuntime().exec("su");
+            Process p = Runtime.getRuntime().exec("cat /sys/devices/virtual/timed_output/vibrator/vtg_level");
             InputStream is = null;
             if (p.waitFor() == 0) {
                 is = p.getInputStream();
