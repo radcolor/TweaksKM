@@ -39,6 +39,9 @@ public class MiscFragment extends Fragment implements View.OnClickListener{
     private SeekBar seekBar;
     private LinearLayout srgb,kcal,vibration;
     int progressChangedValue = 0;
+    public static final int MIN_VIBRATION = 116;
+    public static final int MAX_VIBRATION = 3596;
+    int  vibrationValue;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -64,25 +67,29 @@ public class MiscFragment extends Fragment implements View.OnClickListener{
                 progressChangedValue = progress;
                 vib.setText(progress + "%");
                 Vibrator v = (Vibrator) getContext().getSystemService(Context.VIBRATOR_SERVICE);
+                vibrationValue = (int) ( progress / 100.0 * (MAX_VIBRATION - MIN_VIBRATION) + MIN_VIBRATION);
             }
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
 
-                // Vibrate for 500 milliseconds
+                /*// Vibrate for 500 milliseconds
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                     long[] pattern = {1, 1000, 0};
                     v.vibrate(VibrationEffect.createWaveform(pattern,1));
                 } else {
                     //deprecated in API 26
                     v.vibrate(500);
-                }
-                //execCommandLine("");
-            }
+                }*/
 
+            }
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    v.vibrate(VibrationEffect.createOneShot(100, VibrationEffect.DEFAULT_AMPLITUDE));
+                }
                 v.cancel();
+                execCommandLine("echo " +vibrationValue+ " > /sys/devices/virtual/timed_output/vibrator/vtg_level");
             }
         });
         return root;

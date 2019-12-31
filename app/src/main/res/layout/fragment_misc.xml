@@ -131,6 +131,7 @@
                         </LinearLayout>
 
                         <SeekBar
+                            android:max="100"
                             android:id="@+id/vibration"
                             android:layout_marginTop="6dp"
                             android:layout_width="match_parent"
