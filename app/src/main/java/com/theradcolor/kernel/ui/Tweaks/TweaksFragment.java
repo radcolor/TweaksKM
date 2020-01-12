@@ -183,6 +183,7 @@ public class TweaksFragment extends Fragment implements View.OnClickListener{
                         bbmsw.setChecked(false);
                         obmsw.setChecked(false);
                         pmsw.setChecked(false);
+                        Toast.makeText(getContext(),"extreme battery saver will be set on boot",Toast.LENGTH_SHORT).show();
                     }
                     break;
                 case R.id.bbmsw:
@@ -190,6 +191,7 @@ public class TweaksFragment extends Fragment implements View.OnClickListener{
                         ebmsw.setChecked(false);
                         obmsw.setChecked(false);
                         pmsw.setChecked(false);
+                        Toast.makeText(getContext(),"better battery mode will be set on boot",Toast.LENGTH_SHORT).show();
                     }
                     break;
                 case R.id.obmsw:
@@ -204,6 +206,7 @@ public class TweaksFragment extends Fragment implements View.OnClickListener{
                         ebmsw.setChecked(false);
                         bbmsw.setChecked(false);
                         obmsw.setChecked(false);
+                        Toast.makeText(getContext(),"performance mode will be set on boot",Toast.LENGTH_SHORT).show();
                     }
                     break;
             }

@@ -12,8 +12,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,11 +42,12 @@ public class MiscFragment extends Fragment implements View.OnClickListener{
     private TextView vib;
     private SeekBar seekBar;
     private LinearLayout srgb,kcal,vibration;
-    int progressChangedValue = 0;
+    int progressChangedValue = 1;
     public static final int MIN_VIBRATION = 116;
     public static final int MAX_VIBRATION = 3596;
     int  vibrationValue;
     SharedPreferences.Editor editor;
+    private Switch vibsw,srgbsw,kcalsw;
     SharedPreferences preferences;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -58,6 +61,12 @@ public class MiscFragment extends Fragment implements View.OnClickListener{
         srgb = root.findViewById(R.id.ll_srgb);
         kcal = root.findViewById(R.id.ll_kcal);
         vibration = root.findViewById(R.id.ll_vib);
+        vibsw = root.findViewById(R.id.vibsw);
+        vibsw.setOnCheckedChangeListener(myCheckboxListener);
+        srgbsw = root.findViewById(R.id.srgbsw);
+        srgbsw.setOnCheckedChangeListener(myCheckboxListener);
+        kcalsw = root.findViewById(R.id.kcalsw);
+        kcalsw.setOnCheckedChangeListener(myCheckboxListener);
 
         preferences = getActivity().getPreferences(Context.MODE_PRIVATE);
         vib.setText(""+preferences.getInt("vibration",1));
@@ -74,7 +83,7 @@ public class MiscFragment extends Fragment implements View.OnClickListener{
                 progressChangedValue = progress;
                 vib.setText(progress + "%");
                 Vibrator v = (Vibrator) getContext().getSystemService(Context.VIBRATOR_SERVICE);
-                vibrationValue = (int) ( progress / 100.0 * (MAX_VIBRATION - MIN_VIBRATION) + MIN_VIBRATION);
+                vibrationValue = (int) (progress / 100.0 * (MAX_VIBRATION - MIN_VIBRATION) + MIN_VIBRATION);
             }
 
             @Override
@@ -95,8 +104,8 @@ public class MiscFragment extends Fragment implements View.OnClickListener{
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                     v.vibrate(VibrationEffect.createOneShot(100, VibrationEffect.DEFAULT_AMPLITUDE));
                 }
-                v.cancel();
                 execCommandLine("echo " +vibrationValue+ " > /sys/devices/virtual/timed_output/vibrator/vtg_level");
+                v.cancel();
                 editor = preferences.edit();
                 editor.putInt("vibration",progressChangedValue);
                 editor.apply();
@@ -104,6 +113,23 @@ public class MiscFragment extends Fragment implements View.OnClickListener{
         });
         return root;
     }
+
+    private CompoundButton.OnCheckedChangeListener myCheckboxListener = new CompoundButton.OnCheckedChangeListener() {
+        @Override
+        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            switch (buttonView.getId()){
+                case R.id.vibsw:
+                    Toast.makeText(getContext(),"vibration: set on boot true",Toast.LENGTH_SHORT).show();
+                    break;
+                case R.id.srgbsw:
+                    Toast.makeText(getContext(),"srgb: set on boot true",Toast.LENGTH_SHORT).show();
+                    break;
+                case R.id.kcalsw:
+                    Toast.makeText(getContext(),"kcal: set on boot true",Toast.LENGTH_SHORT).show();
+                    break;
+            }
+        }
+    };
 
     private void execCommandLine(String command)
     {
