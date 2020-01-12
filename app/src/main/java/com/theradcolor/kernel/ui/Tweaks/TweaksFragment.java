@@ -63,8 +63,8 @@ public class TweaksFragment extends Fragment implements View.OnClickListener{
         ebmsw.setOnCheckedChangeListener(myCheckboxListener);
         bbmsw = root.findViewById(R.id.bbmsw);
         bbmsw.setOnCheckedChangeListener(myCheckboxListener);
-        obmsw = root.findViewById(R.id.obmsw);
-        obmsw.setOnCheckedChangeListener(myCheckboxListener);
+        //obmsw = root.findViewById(R.id.obmsw);
+        //obmsw.setOnCheckedChangeListener(myCheckboxListener);
         pmsw = root.findViewById(R.id.pmsw);
         pmsw.setOnCheckedChangeListener(myCheckboxListener);
         adsw = root.findViewById(R.id.adsw);
@@ -181,7 +181,7 @@ public class TweaksFragment extends Fragment implements View.OnClickListener{
                 case R.id.ebmsw:
                     if(isChecked){
                         bbmsw.setChecked(false);
-                        obmsw.setChecked(false);
+                        //obmsw.setChecked(false);
                         pmsw.setChecked(false);
                         Toast.makeText(getContext(),"extreme battery saver will be set on boot",Toast.LENGTH_SHORT).show();
                     }
@@ -189,23 +189,23 @@ public class TweaksFragment extends Fragment implements View.OnClickListener{
                 case R.id.bbmsw:
                     if(isChecked){
                         ebmsw.setChecked(false);
-                        obmsw.setChecked(false);
+                        //obmsw.setChecked(false);
                         pmsw.setChecked(false);
                         Toast.makeText(getContext(),"better battery mode will be set on boot",Toast.LENGTH_SHORT).show();
                     }
                     break;
-                case R.id.obmsw:
+                /*case R.id.obmsw:
                     if(isChecked){
                         ebmsw.setChecked(false);
                         bbmsw.setChecked(false);
                         pmsw.setChecked(false);
                     }
-                    break;
+                    break;*/
                 case R.id.pmsw:
                     if(isChecked){
                         ebmsw.setChecked(false);
                         bbmsw.setChecked(false);
-                        obmsw.setChecked(false);
+                        //obmsw.setChecked(false);
                         Toast.makeText(getContext(),"performance mode will be set on boot",Toast.LENGTH_SHORT).show();
                     }
                     break;
