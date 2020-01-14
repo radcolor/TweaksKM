@@ -120,9 +120,15 @@ public class MiscFragment extends Fragment implements View.OnClickListener{
             switch (buttonView.getId()){
                 case R.id.vibsw:
                     Toast.makeText(getContext(),"vibration: set on boot true",Toast.LENGTH_SHORT).show();
+                    editor = preferences.edit();
+                    editor.putBoolean("vibsw",true);
+                    editor.apply();
                     break;
                 case R.id.srgbsw:
                     Toast.makeText(getContext(),"srgb: set on boot true",Toast.LENGTH_SHORT).show();
+                    editor = preferences.edit();
+                    editor.putBoolean("srgbsw",true);
+                    editor.apply();
                     break;
                 /*case R.id.kcalsw:
                     Toast.makeText(getContext(),"kcal: set on boot true",Toast.LENGTH_SHORT).show();
@@ -224,7 +230,6 @@ public class MiscFragment extends Fragment implements View.OnClickListener{
                     }
                 })
                 .show();
-
     }
 
     @Override

@@ -35,7 +35,6 @@ import com.ms_square.debugoverlay.modules.FpsModule;
 import com.ms_square.debugoverlay.modules.MemInfoModule;
 import com.theradcolor.kernel.GamingService;
 import com.theradcolor.kernel.R;
-import com.theradcolor.kernel.RootUtils;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -90,6 +89,8 @@ public class TweaksFragment extends Fragment implements View.OnClickListener{
         kill.setOnClickListener(this);
         ads = root.findViewById(R.id.ll_ad);
         ads.setOnClickListener(this);
+
+        setsw();
 
         NotificationManager mNotificationManager = (NotificationManager) getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -178,6 +179,24 @@ public class TweaksFragment extends Fragment implements View.OnClickListener{
         return root;
     }
 
+    private void setsw(){
+        if(preferences.getBoolean("ebmsw",false)){
+            ebmsw.setChecked(true);
+            bbmsw.setChecked(false);
+            pmsw.setChecked(false);
+        }
+        if(preferences.getBoolean("bbmsw",false)){
+            ebmsw.setChecked(false);
+            bbmsw.setChecked(true);
+            pmsw.setChecked(false);
+        }
+        if(preferences.getBoolean("pmsw",false)){
+            ebmsw.setChecked(false);
+            bbmsw.setChecked(false);
+            pmsw.setChecked(true);
+        }
+    }
+
     private CompoundButton.OnCheckedChangeListener myCheckboxListener = new CompoundButton.OnCheckedChangeListener() {
         @Override
         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -192,6 +211,11 @@ public class TweaksFragment extends Fragment implements View.OnClickListener{
                         editor.putBoolean("ebmsw",true);
                         editor.apply();
                     }
+                    else{
+                        editor = preferences.edit();
+                        editor.putBoolean("ebmsw",false);
+                        editor.apply();
+                    }
                     break;
                 case R.id.bbmsw:
                     if(isChecked){
@@ -201,6 +225,11 @@ public class TweaksFragment extends Fragment implements View.OnClickListener{
                         Toast.makeText(getContext(),"better battery mode will be set on boot",Toast.LENGTH_SHORT).show();
                         editor = preferences.edit();
                         editor.putBoolean("bbmsw",true);
+                        editor.apply();
+                    }
+                    else{
+                        editor = preferences.edit();
+                        editor.putBoolean("bbmsw",false);
                         editor.apply();
                     }
                     break;
@@ -219,6 +248,11 @@ public class TweaksFragment extends Fragment implements View.OnClickListener{
                         Toast.makeText(getContext(),"performance mode will be set on boot",Toast.LENGTH_SHORT).show();
                         editor = preferences.edit();
                         editor.putBoolean("pmsw",true);
+                        editor.apply();
+                    }
+                    else{
+                        editor = preferences.edit();
+                        editor.putBoolean("pmsw",false);
                         editor.apply();
                     }
                     break;
