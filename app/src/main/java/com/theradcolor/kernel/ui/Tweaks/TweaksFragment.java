@@ -242,7 +242,7 @@ public class TweaksFragment extends Fragment implements View.OnClickListener{
                 mprogress.setCanceledOnTouchOutside(false);
                 mprogress.setCancelable(false);
 
-                execCommandLine("echo 40 > /proc/sys/vm/swappiness \n" +
+                execCommandLine("echo 30 > /proc/sys/vm/swappiness \n" +
                         "echo \" + \"\\\"noop\\\"\" + \" > /sys/block/mmcblk0/queue/scheduler \n" +
                         "echo 0 > /sys/class/kgsl/kgsl-3d0/devfreq/adrenoboost \n" +
                         "echo 128 > /sys/block/mmcblk0/queue/read_ahead_kb \n" +
@@ -266,11 +266,11 @@ public class TweaksFragment extends Fragment implements View.OnClickListener{
                 mprogress.setCanceledOnTouchOutside(false);
                 mprogress.setCancelable(false);
 
-                execCommandLine("echo 40 > /proc/sys/vm/swappiness \n" +
+                execCommandLine("echo 30 > /proc/sys/vm/swappiness \n" +
                         "echo \" + \"\\\"cfq\\\"\" + \" > /sys/block/mmcblk0/queue/scheduler \n" +
                         "echo 0 > /sys/class/kgsl/kgsl-3d0/devfreq/adrenoboost \n" +
                         "echo 128 > /sys/block/mmcblk0/queue/read_ahead_kb \n" +
-                        "echo powersave > /sys/class/kgsl/kgsl-3d0/devfreq/governor \n" +
+                        "echo msm-adreno-tz > /sys/class/kgsl/kgsl-3d0/devfreq/governor \n" +
                         "echo 1536000 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq \n" +
                         "echo 1747200 > /sys/devices/system/cpu/cpu4/cpufreq/scaling_max_freq");
 
@@ -289,11 +289,11 @@ public class TweaksFragment extends Fragment implements View.OnClickListener{
                 mprogress.setCanceledOnTouchOutside(false);
                 mprogress.setCancelable(false);
 
-                execCommandLine("echo 40 > /proc/sys/vm/swappiness \n" +
+                execCommandLine("echo 30 > /proc/sys/vm/swappiness \n" +
                         "echo \" + \"\\\"anxiety\\\"\" + \" > /sys/block/mmcblk0/queue/scheduler \n" +
                         "echo 0 > /sys/class/kgsl/kgsl-3d0/devfreq/adrenoboost \n" +
                         "echo 128 > /sys/block/mmcblk0/queue/read_ahead_kb \n" +
-                        "echo powersave > /sys/class/kgsl/kgsl-3d0/devfreq/governor \n" +
+                        "echo msm-adreno-tz > /sys/class/kgsl/kgsl-3d0/devfreq/governor \n" +
                         "echo 1612800 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq \n" +
                         "echo 1804800 > /sys/devices/system/cpu/cpu4/cpufreq/scaling_max_freq");
 
@@ -312,7 +312,7 @@ public class TweaksFragment extends Fragment implements View.OnClickListener{
                 mprogress.setCanceledOnTouchOutside(false);
                 mprogress.setCancelable(false);
 
-                execCommandLine("echo 20 > /proc/sys/vm/swappiness \n" +
+                execCommandLine("echo 30 > /proc/sys/vm/swappiness \n" +
                         "echo \" + \"\\\"anxiety\\\"\" + \" > /sys/block/mmcblk0/queue/scheduler \n" +
                         "echo 2 > /sys/class/kgsl/kgsl-3d0/devfreq/adrenoboost \n" +
                         "echo 128 > /sys/block/mmcblk0/queue/read_ahead_kb \n" +

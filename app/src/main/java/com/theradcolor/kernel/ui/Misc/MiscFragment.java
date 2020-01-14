@@ -59,21 +59,21 @@ public class MiscFragment extends Fragment implements View.OnClickListener{
         seekBar.setPadding(16,16,16,16);
         vib = root.findViewById(R.id.pervib);
         srgb = root.findViewById(R.id.ll_srgb);
-        kcal = root.findViewById(R.id.ll_kcal);
+        //kcal = root.findViewById(R.id.ll_kcal);
         vibration = root.findViewById(R.id.ll_vib);
         vibsw = root.findViewById(R.id.vibsw);
         vibsw.setOnCheckedChangeListener(myCheckboxListener);
         srgbsw = root.findViewById(R.id.srgbsw);
         srgbsw.setOnCheckedChangeListener(myCheckboxListener);
-        kcalsw = root.findViewById(R.id.kcalsw);
-        kcalsw.setOnCheckedChangeListener(myCheckboxListener);
+        //kcalsw = root.findViewById(R.id.kcalsw);
+        //kcalsw.setOnCheckedChangeListener(myCheckboxListener);
 
         preferences = getActivity().getPreferences(Context.MODE_PRIVATE);
         vib.setText(""+preferences.getInt("vibration",1));
         seekBar.setProgress(preferences.getInt("vibration",1));
 
         srgb.setOnClickListener(this);
-        kcal.setOnClickListener(this);
+        //kcal.setOnClickListener(this);
         vibration.setOnClickListener(this);
 
         final Vibrator v = (Vibrator) getContext().getSystemService(Context.VIBRATOR_SERVICE);
@@ -124,9 +124,9 @@ public class MiscFragment extends Fragment implements View.OnClickListener{
                 case R.id.srgbsw:
                     Toast.makeText(getContext(),"srgb: set on boot true",Toast.LENGTH_SHORT).show();
                     break;
-                case R.id.kcalsw:
+                /*case R.id.kcalsw:
                     Toast.makeText(getContext(),"kcal: set on boot true",Toast.LENGTH_SHORT).show();
-                    break;
+                    break;*/
             }
         }
     };
@@ -234,9 +234,9 @@ public class MiscFragment extends Fragment implements View.OnClickListener{
             case R.id.ll_srgb:
                 srgb();
                 break;
-            case R.id.ll_kcal:
+            /*case R.id.ll_kcal:
                 startActivity(new Intent(getContext(), KcalActivity.class));
-                break;
+                break;*/
             case R.id.ll_vib:
 
                 break;
