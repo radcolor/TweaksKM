@@ -28,6 +28,7 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.theradcolor.kernel.KcalActivity;
 import com.theradcolor.kernel.R;
+import com.theradcolor.kernel.RootUtils;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -112,7 +113,15 @@ public class MiscFragment extends Fragment implements View.OnClickListener{
             }
         });
         setsw();
+        setvib();
         return root;
+    }
+
+    private void setvib(){
+        String vib = RootUtils.runCommand("cat /sys/devices/virtual/timed_output/vibrator/vtg_level");
+        int hapticval = Integer.parseInt(vib);
+        int vibval = (int) (hapticval / 100.0 * (MAX_VIBRATION - MIN_VIBRATION) + MIN_VIBRATION);
+        Toast.makeText(getContext(),""+vibval,Toast.LENGTH_SHORT).show();
     }
 
     private void setsw(){
@@ -130,7 +139,6 @@ public class MiscFragment extends Fragment implements View.OnClickListener{
             switch (buttonView.getId()){
                 case R.id.vibsw:
                     if(vibsw.isChecked()){
-                        Toast.makeText(getContext(),"vibration: set on boot true",Toast.LENGTH_SHORT).show();
                         editor = preferences.edit();
                         editor.putBoolean("vibsw",true);
                         editor.apply();
@@ -142,7 +150,6 @@ public class MiscFragment extends Fragment implements View.OnClickListener{
                     break;
                 case R.id.srgbsw:
                     if(srgbsw.isChecked()){
-                        Toast.makeText(getContext(),"srgb: set on boot true",Toast.LENGTH_SHORT).show();
                         editor = preferences.edit();
                         editor.putBoolean("srgbsw",true);
                         editor.apply();

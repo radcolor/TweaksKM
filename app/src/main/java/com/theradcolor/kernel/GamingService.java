@@ -144,8 +144,8 @@ public class GamingService extends Service{
     public void doze()
     {
         ContentResolver.setMasterSyncAutomatically(false);
-        NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        mNotificationManager.setInterruptionFilter(NotificationManager.INTERRUPTION_FILTER_NONE);
+        /*NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        mNotificationManager.setInterruptionFilter(NotificationManager.INTERRUPTION_FILTER_NONE);*/
     }
 
     void kill()
