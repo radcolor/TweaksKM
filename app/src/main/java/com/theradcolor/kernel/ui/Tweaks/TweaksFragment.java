@@ -174,7 +174,6 @@ public class TweaksFragment extends Fragment implements View.OnClickListener{
                 //textView.setText(s);
             }
         });
-
         return root;
     }
 
