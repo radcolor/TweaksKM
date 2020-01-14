@@ -35,6 +35,7 @@ import com.ms_square.debugoverlay.modules.FpsModule;
 import com.ms_square.debugoverlay.modules.MemInfoModule;
 import com.theradcolor.kernel.GamingService;
 import com.theradcolor.kernel.R;
+import com.theradcolor.kernel.RootUtils;
 
 import java.io.BufferedReader;
 import java.io.IOException;
