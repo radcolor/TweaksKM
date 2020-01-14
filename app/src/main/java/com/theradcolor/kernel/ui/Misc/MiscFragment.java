@@ -113,15 +113,15 @@ public class MiscFragment extends Fragment implements View.OnClickListener{
             }
         });
         setsw();
-        setvib();
+        seekBar.setProgress(setvib());
         return root;
     }
 
-    private void setvib(){
+    private int setvib(){
         String vib = RootUtils.runCommand("cat /sys/devices/virtual/timed_output/vibrator/vtg_level");
         int hapticval = Integer.parseInt(vib);
-        int vibval = (int) (hapticval / 100.0 * (MAX_VIBRATION - MIN_VIBRATION) + MIN_VIBRATION);
-        Toast.makeText(getContext(),""+vibval,Toast.LENGTH_SHORT).show();
+        int x = (int) ((hapticval * 100.0 - 100.0 * MIN_VIBRATION) /  (MAX_VIBRATION - MIN_VIBRATION));
+        return x;
     }
 
     private void setsw(){
