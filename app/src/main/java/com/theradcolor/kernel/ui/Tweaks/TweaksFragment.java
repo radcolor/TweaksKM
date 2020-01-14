@@ -206,7 +206,6 @@ public class TweaksFragment extends Fragment implements View.OnClickListener{
                         bbmsw.setChecked(false);
                         //obmsw.setChecked(false);
                         pmsw.setChecked(false);
-                        Toast.makeText(getContext(),"extreme battery saver will be set on boot",Toast.LENGTH_SHORT).show();
                         editor = preferences.edit();
                         editor.putBoolean("ebmsw",true);
                         editor.apply();
@@ -222,7 +221,6 @@ public class TweaksFragment extends Fragment implements View.OnClickListener{
                         ebmsw.setChecked(false);
                         //obmsw.setChecked(false);
                         pmsw.setChecked(false);
-                        Toast.makeText(getContext(),"better battery mode will be set on boot",Toast.LENGTH_SHORT).show();
                         editor = preferences.edit();
                         editor.putBoolean("bbmsw",true);
                         editor.apply();
@@ -245,7 +243,6 @@ public class TweaksFragment extends Fragment implements View.OnClickListener{
                         ebmsw.setChecked(false);
                         bbmsw.setChecked(false);
                         //obmsw.setChecked(false);
-                        Toast.makeText(getContext(),"performance mode will be set on boot",Toast.LENGTH_SHORT).show();
                         editor = preferences.edit();
                         editor.putBoolean("pmsw",true);
                         editor.apply();

@@ -111,7 +111,17 @@ public class MiscFragment extends Fragment implements View.OnClickListener{
                 editor.apply();
             }
         });
+        setsw();
         return root;
+    }
+
+    private void setsw(){
+        if(preferences.getBoolean("vibsw",false)){
+            vibsw.setChecked(true);
+        }
+        if(preferences.getBoolean("srgbsw",false)){
+            srgbsw.setChecked(true);
+        }
     }
 
     private CompoundButton.OnCheckedChangeListener myCheckboxListener = new CompoundButton.OnCheckedChangeListener() {
@@ -119,16 +129,28 @@ public class MiscFragment extends Fragment implements View.OnClickListener{
         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
             switch (buttonView.getId()){
                 case R.id.vibsw:
-                    Toast.makeText(getContext(),"vibration: set on boot true",Toast.LENGTH_SHORT).show();
-                    editor = preferences.edit();
-                    editor.putBoolean("vibsw",true);
-                    editor.apply();
+                    if(vibsw.isChecked()){
+                        Toast.makeText(getContext(),"vibration: set on boot true",Toast.LENGTH_SHORT).show();
+                        editor = preferences.edit();
+                        editor.putBoolean("vibsw",true);
+                        editor.apply();
+                    }else{
+                        editor = preferences.edit();
+                        editor.putBoolean("vibsw",false);
+                        editor.apply();
+                    }
                     break;
                 case R.id.srgbsw:
-                    Toast.makeText(getContext(),"srgb: set on boot true",Toast.LENGTH_SHORT).show();
-                    editor = preferences.edit();
-                    editor.putBoolean("srgbsw",true);
-                    editor.apply();
+                    if(srgbsw.isChecked()){
+                        Toast.makeText(getContext(),"srgb: set on boot true",Toast.LENGTH_SHORT).show();
+                        editor = preferences.edit();
+                        editor.putBoolean("srgbsw",true);
+                        editor.apply();
+                    }else{
+                        editor = preferences.edit();
+                        editor.putBoolean("srgbsw",false);
+                        editor.apply();
+                    }
                     break;
                 /*case R.id.kcalsw:
                     Toast.makeText(getContext(),"kcal: set on boot true",Toast.LENGTH_SHORT).show();
