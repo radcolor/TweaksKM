@@ -141,6 +141,7 @@ public class MiscFragment extends Fragment implements View.OnClickListener{
                     if(vibsw.isChecked()){
                         editor = preferences.edit();
                         editor.putBoolean("vibsw",true);
+                        editor.putInt("vibval",getVibration());
                         editor.apply();
                     }else{
                         editor = preferences.edit();
@@ -209,23 +210,10 @@ public class MiscFragment extends Fragment implements View.OnClickListener{
         }
     }
 
-    private static String getVibration() {
-        try {
-            Process p = Runtime.getRuntime().exec("cat /sys/devices/virtual/timed_output/vibrator/vtg_level");
-            InputStream is = null;
-            if (p.waitFor() == 0) {
-                is = p.getInputStream();
-            } else {
-                is = p.getErrorStream();
-            }
-            BufferedReader br = new BufferedReader(new InputStreamReader(is));
-            String line = br.readLine();
-            Log.i("Kernel Version", line);
-            br.close();
-            return line;
-        } catch (Exception ex) {
-            return "ERROR: " + ex.getMessage();
-        }
+    private int getVibration() {
+      String vib = RootUtils.runCommand("cat /sys/devices/virtual/timed_output/vibrator/vtg_level");
+      int vibval = Integer.parseInt(vib);
+      return vibval;
     }
 
     private void srgb()

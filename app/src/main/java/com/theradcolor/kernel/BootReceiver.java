@@ -50,6 +50,10 @@ public class BootReceiver extends BroadcastReceiver {
                         "echo msm-adreno-tz > /sys/class/kgsl/kgsl-3d0/devfreq/governor \n" +
                         "echo 1612800 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq \n" +
                         "echo 1804800 > /sys/devices/system/cpu/cpu4/cpufreq/scaling_max_freq");
+            }
+            if(preferences.getBoolean("vibsw",false)){
+                int vibval = preferences.getInt("vibval",1500);
+                RootUtils.runCommand("echo " +vibval+ " > /sys/devices/virtual/timed_output/vibrator/vtg_level");
                 Toast.makeText(context,"Tweaks: applying settings", Toast.LENGTH_SHORT).show();
             }
         }
