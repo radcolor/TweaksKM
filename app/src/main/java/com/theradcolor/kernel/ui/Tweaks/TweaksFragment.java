@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -50,6 +51,8 @@ public class TweaksFragment extends Fragment implements View.OnClickListener{
     private CheckBox dozesw,killsw,monsw;
     private Switch ebmsw,bbmsw,obmsw,pmsw,gmsw,adsw;
     final Handler handler = new Handler();
+    SharedPreferences.Editor editor;
+    SharedPreferences preferences;
 
     public View onCreateView(@NonNull final LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -57,6 +60,8 @@ public class TweaksFragment extends Fragment implements View.OnClickListener{
         View root = inflater.inflate(R.layout.fragment_tweaks, container, false);
         textView = root.findViewById(R.id.kernel_name);
         textView.setText("Kernel: " + getKernelVersion());
+
+        preferences = getActivity().getPreferences(Context.MODE_PRIVATE);
 
         ebmsw = root.findViewById(R.id.ebmsw);
         ebmsw.setOnCheckedChangeListener(myCheckboxListener);
@@ -183,6 +188,9 @@ public class TweaksFragment extends Fragment implements View.OnClickListener{
                         //obmsw.setChecked(false);
                         pmsw.setChecked(false);
                         Toast.makeText(getContext(),"extreme battery saver will be set on boot",Toast.LENGTH_SHORT).show();
+                        editor = preferences.edit();
+                        editor.putBoolean("ebmsw",true);
+                        editor.apply();
                     }
                     break;
                 case R.id.bbmsw:
@@ -191,6 +199,9 @@ public class TweaksFragment extends Fragment implements View.OnClickListener{
                         //obmsw.setChecked(false);
                         pmsw.setChecked(false);
                         Toast.makeText(getContext(),"better battery mode will be set on boot",Toast.LENGTH_SHORT).show();
+                        editor = preferences.edit();
+                        editor.putBoolean("bbmsw",true);
+                        editor.apply();
                     }
                     break;
                 /*case R.id.obmsw:
@@ -206,6 +217,9 @@ public class TweaksFragment extends Fragment implements View.OnClickListener{
                         bbmsw.setChecked(false);
                         //obmsw.setChecked(false);
                         Toast.makeText(getContext(),"performance mode will be set on boot",Toast.LENGTH_SHORT).show();
+                        editor = preferences.edit();
+                        editor.putBoolean("pmsw",true);
+                        editor.apply();
                     }
                     break;
             }
