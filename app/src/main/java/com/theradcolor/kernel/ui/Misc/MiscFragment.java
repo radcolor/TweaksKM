@@ -274,12 +274,13 @@ public class MiscFragment extends Fragment implements View.OnClickListener{
                 builder.setTitle("Select Color Preference");
 
                 String[] animals = {"Deep Natural Display",
-                        "Trilominus Display",
+                        "Triluminos Display",
                         "Cool Amoled Display",
                         "Extreme Amoled Display",
                         "Hybrid Mamba Display",
                         "Warm Amoled Display",
-                        "Deep Black & White Display"};
+                        "Deep Black & White Display",
+                        "Reset to Default"};
                 builder.setItems(animals, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -339,6 +340,14 @@ public class MiscFragment extends Fragment implements View.OnClickListener{
                                 RootUtils.runCommand("echo 35 > /sys/devices/platform/kcal_ctrl.0/kcal_min");
                                 RootUtils.runCommand("echo 279 > /sys/devices/platform/kcal_ctrl.0/kcal_sat");
                                 RootUtils.runCommand("echo 261 > /sys/devices/platform/kcal_ctrl.0/kcal_val");
+                                break;
+                            case 7:
+                                RootUtils.runCommand("echo 256 256 256 > /sys/devices/platform/kcal_ctrl.0/kcal");
+                                RootUtils.runCommand("echo 255 > /sys/devices/platform/kcal_ctrl.0/kcal_cont");
+                                RootUtils.runCommand("echo 0 > /sys/devices/platform/kcal_ctrl.0/kcal_hue");
+                                RootUtils.runCommand("echo 35 > /sys/devices/platform/kcal_ctrl.0/kcal_min");
+                                RootUtils.runCommand("echo 255 > /sys/devices/platform/kcal_ctrl.0/kcal_sat");
+                                RootUtils.runCommand("echo 255 > /sys/devices/platform/kcal_ctrl.0/kcal_val");
                                 break;
                         }
                     }
