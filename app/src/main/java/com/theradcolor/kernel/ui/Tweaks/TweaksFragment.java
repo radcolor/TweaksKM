@@ -6,9 +6,11 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.AssetManager;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.provider.Settings;
 import android.util.Log;
@@ -28,6 +30,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.chrisplus.rootmanager.RootManager;
 import com.ms_square.debugoverlay.DebugOverlay;
 import com.ms_square.debugoverlay.Position;
 import com.ms_square.debugoverlay.modules.CpuUsageModule;
@@ -35,17 +38,26 @@ import com.ms_square.debugoverlay.modules.FpsModule;
 import com.ms_square.debugoverlay.modules.MemInfoModule;
 import com.theradcolor.kernel.GamingService;
 import com.theradcolor.kernel.R;
+import com.theradcolor.kernel.RootUtils;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.io.Reader;
+import java.io.StringWriter;
+import java.io.UnsupportedEncodingException;
+import java.io.Writer;
+import java.nio.charset.StandardCharsets;
 
 public class TweaksFragment extends Fragment implements View.OnClickListener{
 
     private TweaksViewModel homeViewModel;
-    public TextView textView;
+    public TextView textView,adtxt;
     private ProgressDialog mprogress;
     private LinearLayout eb,bb,bal,pm,gm,as,mon,kill,ads;
     private CheckBox dozesw,killsw,monsw;
@@ -73,6 +85,7 @@ public class TweaksFragment extends Fragment implements View.OnClickListener{
         pmsw.setOnCheckedChangeListener(myCheckboxListener);
         adsw = root.findViewById(R.id.adsw);
         adsw.setOnClickListener(this);
+        adtxt = root.findViewById(R.id.txt_ad);
 
         eb = root.findViewById(R.id.ebm);
         bb = root.findViewById(R.id.bbm);
@@ -89,6 +102,9 @@ public class TweaksFragment extends Fragment implements View.OnClickListener{
         kill.setOnClickListener(this);
         ads = root.findViewById(R.id.ll_ad);
         ads.setOnClickListener(this);
+
+        ads.setVisibility(View.GONE);
+        adtxt.setVisibility(View.GONE);
 
         setsw();
 
@@ -411,6 +427,42 @@ public class TweaksFragment extends Fragment implements View.OnClickListener{
         }
     }
 
+    private void copyAssets() {
+        AssetManager assetManager = getContext().getAssets();
+        String[] files = null;
+        try {
+            files = assetManager.list("");
+        } catch (IOException e) {
+            Log.e("tag", "Failed to get asset file list.", e);
+        }
+        for(String filename : files) {
+            InputStream in = null;
+            OutputStream out = null;
+            try {
+                in = assetManager.open(filename);
+
+                String outDir = Environment.getExternalStorageDirectory().getAbsolutePath() + "/tweaks/" ;
+                File outFile = new File(outDir, filename);
+
+                out = new FileOutputStream(outFile);
+                copyFile(in, out);
+                in.close();
+                in = null;
+                out.flush();
+                out.close();
+                out = null;
+            } catch(IOException e) {
+                Log.e("tag", "Failed to copy asset file: " + filename, e);
+            }
+        }
+    }
+    private void copyFile(InputStream in, OutputStream out) throws IOException {
+        byte[] buffer = new byte[1024];
+        int read;
+        while((read = in.read(buffer)) != -1){
+            out.write(buffer, 0, read);
+        }
+    }
     public void doze()
     {
         ContentResolver.setMasterSyncAutomatically(true);

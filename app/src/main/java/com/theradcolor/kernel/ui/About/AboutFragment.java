@@ -39,6 +39,7 @@ public class AboutFragment extends Fragment implements View.OnClickListener{
         ghimg.setOnClickListener(this);
         textView = root.findViewById(R.id.faqs);
         textView.setOnClickListener(this);
+        textView.setVisibility(View.GONE);
 
         //final TextView textView = root.findViewById(R.id.text_notifications);
         notificationsViewModel.getText().observe(this, new Observer<String>() {
