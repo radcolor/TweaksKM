@@ -69,7 +69,7 @@ public class MiscFragment extends Fragment implements View.OnClickListener{
         //kcalsw = root.findViewById(R.id.kcalsw);
         //kcalsw.setOnCheckedChangeListener(myCheckboxListener);
 
-        preferences = getActivity().getPreferences(Context.MODE_PRIVATE);
+        preferences = getActivity().getSharedPreferences("preferences",Context.MODE_PRIVATE);
         vib.setText(""+preferences.getInt("vibration",1));
         seekBar.setProgress(preferences.getInt("vibration",1));
 

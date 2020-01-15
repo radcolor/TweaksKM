@@ -10,10 +10,10 @@ public class BootReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        SharedPreferences preferences = context.getSharedPreferences("myPrefs",
+        SharedPreferences preferences = context.getSharedPreferences("preferences",
                 Context.MODE_PRIVATE);
         if (Intent.ACTION_BOOT_COMPLETED.equals(intent.getAction())) {
-
+            RootUtils.getSU();
             if(preferences.getBoolean("srgbsw",false)){
                 RootUtils.runCommand("active=1\n" +
                         "\n" +
@@ -23,6 +23,7 @@ public class BootReceiver extends BroadcastReceiver {
                         "then echo \"2\" > /sys/class/graphics/fb0/msm_fb_srgb\n" +
                         "else echo \"1\" > /sys/class/graphics/fb0/msm_fb_srgb\n" +
                         "fi");
+                Toast.makeText(context,"Tweaks: applying sRGB", Toast.LENGTH_SHORT).show();
             }
             if(preferences.getBoolean("ebmsw",false)){
                 RootUtils.runCommand("echo 30 > /proc/sys/vm/swappiness \n" +
