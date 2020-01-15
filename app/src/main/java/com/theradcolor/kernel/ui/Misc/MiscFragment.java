@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
@@ -28,6 +29,7 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.theradcolor.kernel.KcalActivity;
 import com.theradcolor.kernel.R;
+import com.theradcolor.kernel.RadActivity;
 import com.theradcolor.kernel.RootUtils;
 
 import java.io.BufferedReader;
@@ -36,13 +38,14 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.util.Objects;
 
 public class MiscFragment extends Fragment implements View.OnClickListener{
 
     private MiscViewModel dashboardViewModel;
     private TextView vib;
     private SeekBar seekBar;
-    private LinearLayout srgb,kcal,vibration;
+    private LinearLayout srgb,kcal,vibration,cuscolor;
     int progressChangedValue = 1;
     public static final int MIN_VIBRATION = 116;
     public static final int MAX_VIBRATION = 3596;
@@ -63,11 +66,15 @@ public class MiscFragment extends Fragment implements View.OnClickListener{
         //kcal = root.findViewById(R.id.ll_kcal);
         vibration = root.findViewById(R.id.ll_vib);
         vibsw = root.findViewById(R.id.vibsw);
+        cuscolor = root.findViewById(R.id.ll_color);
+        cuscolor.setOnClickListener(this);
         vibsw.setOnCheckedChangeListener(myCheckboxListener);
         srgbsw = root.findViewById(R.id.srgbsw);
         srgbsw.setOnCheckedChangeListener(myCheckboxListener);
         //kcalsw = root.findViewById(R.id.kcalsw);
         //kcalsw.setOnCheckedChangeListener(myCheckboxListener);
+
+        RootUtils.getSU();
 
         preferences = getActivity().getSharedPreferences("preferences",Context.MODE_PRIVATE);
         vib.setText(""+preferences.getInt("vibration",1));
@@ -261,6 +268,83 @@ public class MiscFragment extends Fragment implements View.OnClickListener{
                 break;*/
             case R.id.ll_vib:
 
+                break;
+            case R.id.ll_color:
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                builder.setTitle("Select Color Preference");
+
+                String[] animals = {"Deep Natural Display",
+                        "Trilominus Display",
+                        "Cool Amoled Display",
+                        "Extreme Amoled Display",
+                        "Hybrid Mamba Display",
+                        "Warm Amoled Display",
+                        "Deep Black & White Display"};
+                builder.setItems(animals, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        switch (which) {
+                            case 0:
+                                RootUtils.runCommand("echo 256 250 251 > /sys/devices/platform/kcal_ctrl.0/kcal");
+                                RootUtils.runCommand("echo 264 > /sys/devices/platform/kcal_ctrl.0/kcal_cont");
+                                RootUtils.runCommand("echo 0 > /sys/devices/platform/kcal_ctrl.0/kcal_hue");
+                                RootUtils.runCommand("echo 35 > /sys/devices/platform/kcal_ctrl.0/kcal_min");
+                                RootUtils.runCommand("echo 285 > /sys/devices/platform/kcal_ctrl.0/kcal_sat");
+                                RootUtils.runCommand("echo 245 > /sys/devices/platform/kcal_ctrl.0/kcal_val");
+                                break;
+                            case 1:
+                                RootUtils.runCommand("echo 256 250 251 > /sys/devices/platform/kcal_ctrl.0/kcal");
+                                RootUtils.runCommand("echo 260 > /sys/devices/platform/kcal_ctrl.0/kcal_cont");
+                                RootUtils.runCommand("echo 1526 > /sys/devices/platform/kcal_ctrl.0/kcal_hue");
+                                RootUtils.runCommand("echo 35 > /sys/devices/platform/kcal_ctrl.0/kcal_min");
+                                RootUtils.runCommand("echo 291 > /sys/devices/platform/kcal_ctrl.0/kcal_sat");
+                                RootUtils.runCommand("echo 264 > /sys/devices/platform/kcal_ctrl.0/kcal_val");
+                                break;
+                            case 2:
+                                RootUtils.runCommand("echo 236 248 256 > /sys/devices/platform/kcal_ctrl.0/kcal");
+                                RootUtils.runCommand("echo 264 > /sys/devices/platform/kcal_ctrl.0/kcal_cont");
+                                RootUtils.runCommand("echo 0 > /sys/devices/platform/kcal_ctrl.0/kcal_hue");
+                                RootUtils.runCommand("echo 35 > /sys/devices/platform/kcal_ctrl.0/kcal_min");
+                                RootUtils.runCommand("echo 275 > /sys/devices/platform/kcal_ctrl.0/kcal_sat");
+                                RootUtils.runCommand("echo 242 > /sys/devices/platform/kcal_ctrl.0/kcal_val");
+                                break;
+                            case 3:
+                                RootUtils.runCommand("echo 256 256 256 > /sys/devices/platform/kcal_ctrl.0/kcal");
+                                RootUtils.runCommand("echo 255 > /sys/devices/platform/kcal_ctrl.0/kcal_cont");
+                                RootUtils.runCommand("echo 0 > /sys/devices/platform/kcal_ctrl.0/kcal_hue");
+                                RootUtils.runCommand("echo 35 > /sys/devices/platform/kcal_ctrl.0/kcal_min");
+                                RootUtils.runCommand("echo 290 > /sys/devices/platform/kcal_ctrl.0/kcal_sat");
+                                RootUtils.runCommand("echo 255 > /sys/devices/platform/kcal_ctrl.0/kcal_val");
+                                break;
+                            case 4:
+                                RootUtils.runCommand("echo 226 215 256 > /sys/devices/platform/kcal_ctrl.0/kcal");
+                                RootUtils.runCommand("echo 260 > /sys/devices/platform/kcal_ctrl.0/kcal_cont");
+                                RootUtils.runCommand("echo 10 > /sys/devices/platform/kcal_ctrl.0/kcal_hue");
+                                RootUtils.runCommand("echo 35 > /sys/devices/platform/kcal_ctrl.0/kcal_min");
+                                RootUtils.runCommand("echo 265 > /sys/devices/platform/kcal_ctrl.0/kcal_sat");
+                                RootUtils.runCommand("echo 247 > /sys/devices/platform/kcal_ctrl.0/kcal_val");
+                                break;
+                            case 5:
+                                RootUtils.runCommand("echo 253 246 243 > /sys/devices/platform/kcal_ctrl.0/kcal");
+                                RootUtils.runCommand("echo 258 > /sys/devices/platform/kcal_ctrl.0/kcal_cont");
+                                RootUtils.runCommand("echo 0 > /sys/devices/platform/kcal_ctrl.0/kcal_hue");
+                                RootUtils.runCommand("echo 35 > /sys/devices/platform/kcal_ctrl.0/kcal_min");
+                                RootUtils.runCommand("echo 275 > /sys/devices/platform/kcal_ctrl.0/kcal_sat");
+                                RootUtils.runCommand("echo 251 > /sys/devices/platform/kcal_ctrl.0/kcal_val");
+                                break;
+                            case 6:
+                                RootUtils.runCommand("echo 250 250 256 > /sys/devices/platform/kcal_ctrl.0/kcal");
+                                RootUtils.runCommand("echo 266 > /sys/devices/platform/kcal_ctrl.0/kcal_cont");
+                                RootUtils.runCommand("echo 1526 > /sys/devices/platform/kcal_ctrl.0/kcal_hue");
+                                RootUtils.runCommand("echo 35 > /sys/devices/platform/kcal_ctrl.0/kcal_min");
+                                RootUtils.runCommand("echo 279 > /sys/devices/platform/kcal_ctrl.0/kcal_sat");
+                                RootUtils.runCommand("echo 261 > /sys/devices/platform/kcal_ctrl.0/kcal_val");
+                                break;
+                        }
+                    }
+                });
+                AlertDialog dialog = builder.create();
+                dialog.show();
                 break;
         }
     }
