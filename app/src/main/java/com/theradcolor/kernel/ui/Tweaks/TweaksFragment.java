@@ -108,14 +108,6 @@ public class TweaksFragment extends Fragment implements View.OnClickListener{
 
         setsw();
 
-        NotificationManager mNotificationManager = (NotificationManager) getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (!mNotificationManager.isNotificationPolicyAccessGranted()) {
-                Intent intent = new Intent(Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS);
-                startActivity(intent);
-            }
-        }
-
         dozesw = root.findViewById(R.id.dozesw);
         dozesw.setChecked(true);
         killsw = root.findViewById(R.id.killsw);

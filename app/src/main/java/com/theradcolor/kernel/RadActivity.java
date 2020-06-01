@@ -67,8 +67,9 @@ public class RadActivity extends AppCompatActivity {
     {
         new AlertDialog.Builder(this)
                 .setTitle("Unsupported kernel!")
-                .setSingleChoiceItems(list, 1, null)
-                .setPositiveButton("continue anyway", new DialogInterface.OnClickListener() {
+                .setCancelable(false)
+                //.setSingleChoiceItems(list, 1, null)
+                .setPositiveButton("exit", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         int selectedPosition = ((AlertDialog)dialog).getListView().getCheckedItemPosition();
                         if(selectedPosition == 0){
@@ -81,6 +82,7 @@ public class RadActivity extends AppCompatActivity {
                             state = true;
                         }
                         editor.apply();
+                        finish();
                     }
                 })
                 .show();
