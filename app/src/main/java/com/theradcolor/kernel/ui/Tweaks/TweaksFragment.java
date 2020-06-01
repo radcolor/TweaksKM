@@ -12,7 +12,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
-import android.provider.Settings;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,7 +29,6 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
-import com.chrisplus.rootmanager.RootManager;
 import com.ms_square.debugoverlay.DebugOverlay;
 import com.ms_square.debugoverlay.Position;
 import com.ms_square.debugoverlay.modules.CpuUsageModule;
@@ -38,7 +36,6 @@ import com.ms_square.debugoverlay.modules.FpsModule;
 import com.ms_square.debugoverlay.modules.MemInfoModule;
 import com.theradcolor.kernel.GamingService;
 import com.theradcolor.kernel.R;
-import com.theradcolor.kernel.RootUtils;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -48,11 +45,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
-import java.io.Reader;
-import java.io.StringWriter;
-import java.io.UnsupportedEncodingException;
-import java.io.Writer;
-import java.nio.charset.StandardCharsets;
 
 public class TweaksFragment extends Fragment implements View.OnClickListener{
 

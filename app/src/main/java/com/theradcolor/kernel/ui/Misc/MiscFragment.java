@@ -2,7 +2,6 @@ package com.theradcolor.kernel.ui.Misc;
 
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
@@ -12,33 +11,22 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
-import com.theradcolor.kernel.KcalActivity;
+import com.grarak.kerneladiutor.utils.root.RootUtils;
 import com.theradcolor.kernel.R;
-import com.theradcolor.kernel.RadActivity;
-import com.theradcolor.kernel.RootUtils;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.util.Objects;
 
 public class MiscFragment extends Fragment implements View.OnClickListener{
 
@@ -73,8 +61,6 @@ public class MiscFragment extends Fragment implements View.OnClickListener{
         srgbsw.setOnCheckedChangeListener(myCheckboxListener);
         //kcalsw = root.findViewById(R.id.kcalsw);
         //kcalsw.setOnCheckedChangeListener(myCheckboxListener);
-
-        RootUtils.getSU();
 
         preferences = getActivity().getSharedPreferences("preferences",Context.MODE_PRIVATE);
         vib.setText(""+preferences.getInt("vibration",1));

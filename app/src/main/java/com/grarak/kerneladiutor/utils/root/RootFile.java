@@ -17,7 +17,9 @@
  * along with Kernel Adiutor.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package com.theradcolor.kernel;
+package com.grarak.kerneladiutor.utils.root;
+
+import com.grarak.kerneladiutor.utils.Utils;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -79,8 +81,36 @@ public class RootFile {
         mSU.runCommand("rm -r '" + mFile + "'");
     }
 
+    public List<String> list() {
+        List<String> list = new ArrayList<>();
+        String files = mSU.runCommand("ls '" + mFile + "/'");
+        if (files != null) {
+            // Make sure the files exists
+            for (String file : files.split("\\r?\\n")) {
+                if (file != null && !file.isEmpty() && Utils.existFile(mFile + "/" + file)) {
+                    list.add(file);
+                }
+            }
+        }
+        return list;
+    }
+
+    public List<RootFile> listFiles() {
+        List<RootFile> list = new ArrayList<>();
+        String files = mSU.runCommand("ls '" + mFile + "/'");
+        if (files != null) {
+            // Make sure the files exists
+            for (String file : files.split("\\r?\\n")) {
+                if (file != null && !file.isEmpty() && Utils.existFile(mFile + "/" + file)) {
+                    list.add(new RootFile(mFile.equals("/") ? mFile + file : mFile + "/" + file, mSU));
+                }
+            }
+        }
+        return list;
+    }
+
     public boolean isDirectory() {
-        return "true".equals(mSU.runCommand("[ -d " + mFile + " ] && echo true"));
+        return "true".equals(mSU.runCommand("[ -d '" + mFile + "' ] && echo true"));
     }
 
     public RootFile getParentFile() {
@@ -88,7 +118,7 @@ public class RootFile {
     }
 
     public RootFile getRealPath() {
-        return new RootFile(mSU.runCommand("realpath \"" + mFile + "\""), mSU);
+        return new RootFile(mSU.runCommand("realpath '" + mFile + "'"), mSU);
     }
 
     public boolean isEmpty() {
@@ -96,7 +126,7 @@ public class RootFile {
     }
 
     public boolean exists() {
-        String output = mSU.runCommand("[ -e " + mFile + " ] && echo true");
+        String output = mSU.runCommand("[ -e '" + mFile + "' ] && echo true");
         return output != null && output.equals("true");
     }
 

@@ -27,7 +27,6 @@ public class RadActivity extends AppCompatActivity {
 
     SharedPreferences.Editor editor;
     SharedPreferences preferences;
-    String[] list = {"Don't show again"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,7 +65,7 @@ public class RadActivity extends AppCompatActivity {
     private boolean dialog()
     {
         new AlertDialog.Builder(this)
-                .setTitle("Unsupported kernel!")
+                .setTitle("Unsupported kernel/device!")
                 .setCancelable(false)
                 //.setSingleChoiceItems(list, 1, null)
                 .setPositiveButton("exit", new DialogInterface.OnClickListener() {

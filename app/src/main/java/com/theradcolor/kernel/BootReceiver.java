@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.widget.Toast;
 
+import com.grarak.kerneladiutor.utils.root.RootUtils;
+
 public class BootReceiver extends BroadcastReceiver {
 
     @Override
