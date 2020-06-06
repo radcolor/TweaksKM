@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#201F1F</color>
-    <color name="colorPrimaryDark">#111010</color>
+    <color name="colorPrimary">#161515</color>
+    <color name="colorPrimaryDark">#0D0C0C</color>
     <color name="colorAccent">#618D61</color>
     <color name="green">#465E46</color>
     <color name="green_dark">#3C523C</color>
     <color name="green_light">#469146</color>
     <color name="gray">#0F0F0F</color>
     <color name="grey_light">#333030</color>
+    <color name="text_sec">#BEBEBE</color>
+    <color name="seek_bar_background">@color/grey_light</color>
+    <color name="seek_bar_progress">@color/colorAccent</color>
+    <color name="seek_bar_secondary_progress">#3399CC</color>
 </resources>

@@ -14,20 +14,20 @@
         <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
 
-    <style name="rad" parent="Theme.AppCompat">
+    <style name="rad" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:navigationBarColor">@color/green_dark</item>
+        <item name="android:navigationBarColor">@color/green</item>
         <item name="android:textColor">@android:color/white</item>
         <item name="android:windowLightNavigationBar">false</item>
     </style>
 
-    <style name="kcal" parent="Theme.AppCompat.DayNight.DarkActionBar">
+    <style name="kcal" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimary">@color/gray</item>
+        <item name="colorPrimaryDark">@color/gray</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:textColor">@android:color/white</item>
     </style>
@@ -38,4 +38,11 @@
         <item name="colorPrimaryDark">@android:color/black</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+
+    <style name="SelectionSwitch" parent="Theme.AppCompat.Light">
+        <item name="colorControlActivated">@color/colorAccent</item>
+        <item name="colorSwitchThumbNormal">@color/colorAccent</item>
+        <item name="android:colorForeground">@color/colorAccent</item>
+    </style>
+
 </resources>

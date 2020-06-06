@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:scrollbars="none"
     android:background="@color/gray">
 
     <LinearLayout
@@ -87,6 +88,8 @@
                 <TextView
                     android:layout_marginLeft="12dp"
                     android:text="PROFILES"
+                    android:textColor="@color/green_light"
+                    android:textStyle="bold"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 
@@ -94,11 +97,12 @@
                     android:id="@+id/ebm"
                     android:padding="10dp"
                     android:clickable="true"
-                    android:foreground="?android:attr/selectableItemBackground"
+                    android:background="@drawable/ripple"
                     android:layout_marginTop="16dp"
                     android:weightSum="12"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:focusable="true">
 
                     <RelativeLayout
                         android:layout_weight="5"
@@ -131,7 +135,7 @@
                         <TextView
                             android:layout_marginTop="2dp"
                             android:textSize="13sp"
-                            android:textColor="@android:color/secondary_text_dark"
+                            android:textColor="@color/text_sec"
                             android:text="Improve the battery life by reducing the overall system performance."
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
@@ -145,6 +149,7 @@
 
                         <Switch
                             android:id="@+id/ebmsw"
+                            android:theme="@style/SelectionSwitch"
                             android:layout_centerInParent="true"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
@@ -157,7 +162,8 @@
                     android:id="@+id/bbm"
                     android:padding="10dp"
                     android:clickable="true"
-                    android:foreground="?android:attr/selectableItemBackground"
+                    android:focusable="true"
+                    android:background="@drawable/ripple"
                     android:layout_marginTop="12dp"
                     android:weightSum="12"
                     android:layout_width="match_parent"
@@ -194,7 +200,7 @@
                         <TextView
                             android:layout_marginTop="2dp"
                             android:textSize="13sp"
-                            android:textColor="@android:color/secondary_text_dark"
+                            android:textColor="@color/text_sec"
                             android:text="This mode aims for better battery by maintaining system performace as well."
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
@@ -208,6 +214,7 @@
 
                         <Switch
                             android:id="@+id/bbmsw"
+                            android:theme="@style/SelectionSwitch"
                             android:layout_centerInParent="true"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
@@ -220,7 +227,8 @@
                     android:id="@+id/bm"
                     android:padding="10dp"
                     android:clickable="true"
-                    android:foreground="?android:attr/selectableItemBackground"
+                    android:focusable="true"
+                    android:background="@drawable/ripple"
                     android:layout_marginTop="12dp"
                     android:weightSum="12"
                     android:layout_width="match_parent"
@@ -257,7 +265,7 @@
                         <TextView
                             android:layout_marginTop="2dp"
                             android:textSize="13sp"
-                            android:textColor="@android:color/secondary_text_dark"
+                            android:textColor="@color/text_sec"
                             android:text="Aimes for overall better system performance by tuning the system(Default)."
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
@@ -270,7 +278,8 @@
                     android:id="@+id/pm"
                     android:padding="10dp"
                     android:clickable="true"
-                    android:foreground="?android:attr/selectableItemBackground"
+                    android:focusable="true"
+                    android:background="@drawable/ripple"
                     android:layout_marginTop="12dp"
                     android:weightSum="12"
                     android:layout_width="match_parent"
@@ -307,7 +316,7 @@
                         <TextView
                             android:layout_marginTop="2dp"
                             android:textSize="13sp"
-                            android:textColor="@android:color/secondary_text_dark"
+                            android:textColor="@color/text_sec"
                             android:text="This mode aimes to get most out of your system performance."
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
@@ -321,6 +330,7 @@
 
                         <Switch
                             android:id="@+id/pmsw"
+                            android:theme="@style/SelectionSwitch"
                             android:layout_centerInParent="true"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
@@ -341,6 +351,7 @@
 
         <LinearLayout
             android:layout_marginTop="16dp"
+            android:layout_marginBottom="72dp"
             android:scrollbars="vertical"
             android:orientation="vertical"
             android:layout_width="match_parent"
@@ -354,6 +365,8 @@
                 <TextView
                     android:layout_marginLeft="12dp"
                     android:text="GAMING MODE"
+                    android:textColor="@color/green_light"
+                    android:textStyle="bold"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 
@@ -361,7 +374,8 @@
                     android:id="@+id/ll_gm"
                     android:padding="10dp"
                     android:clickable="true"
-                    android:foreground="?android:attr/selectableItemBackground"
+                    android:focusable="true"
+                    android:background="@drawable/ripple"
                     android:layout_marginTop="16dp"
                     android:weightSum="12"
                     android:layout_width="match_parent"
@@ -398,7 +412,7 @@
                         <TextView
                             android:layout_marginTop="2dp"
                             android:textSize="13sp"
-                            android:textColor="@android:color/secondary_text_dark"
+                            android:textColor="@color/text_sec"
                             android:text="Special Mode for Better Gaming Purpose with needed enhancment."
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
@@ -412,6 +426,7 @@
 
                         <Switch
                             android:id="@+id/gmsw"
+                            android:theme="@style/SelectionSwitch"
                             android:layout_centerInParent="true"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
@@ -424,7 +439,8 @@
                     android:id="@+id/ll_as"
                     android:padding="10dp"
                     android:clickable="true"
-                    android:foreground="?android:attr/selectableItemBackground"
+                    android:focusable="true"
+                    android:background="@drawable/ripple"
                     android:layout_marginTop="12dp"
                     android:weightSum="12"
                     android:layout_width="match_parent"
@@ -460,8 +476,8 @@
                         <TextView
                             android:layout_marginTop="2dp"
                             android:textSize="13sp"
-                            android:textColor="@android:color/secondary_text_dark"
-                            android:text="- Can Result to better network stability and non-intereption gaming."
+                            android:textColor="@color/text_sec"
+                            android:text="Can Result to better network stability and non-intereption gaming."
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
 
@@ -486,7 +502,8 @@
                     android:id="@+id/ll_mon"
                     android:padding="10dp"
                     android:clickable="true"
-                    android:foreground="?android:attr/selectableItemBackground"
+                    android:focusable="true"
+                    android:background="@drawable/ripple"
                     android:layout_marginTop="12dp"
                     android:weightSum="12"
                     android:layout_width="match_parent"
@@ -522,8 +539,8 @@
                         <TextView
                             android:layout_marginTop="2dp"
                             android:textSize="13sp"
-                            android:textColor="@android:color/secondary_text_dark"
-                            android:text="- Will display real time fps and cpu usage"
+                            android:textColor="@color/text_sec"
+                            android:text="Will display real time fps and cpu usage"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
 
@@ -548,7 +565,8 @@
                     android:id="@+id/ll_kill"
                     android:padding="10dp"
                     android:clickable="true"
-                    android:foreground="?android:attr/selectableItemBackground"
+                    android:focusable="true"
+                    android:background="@drawable/ripple"
                     android:layout_marginTop="12dp"
                     android:weightSum="12"
                     android:layout_width="match_parent"
@@ -584,8 +602,8 @@
                         <TextView
                             android:layout_marginTop="2dp"
                             android:textSize="13sp"
-                            android:textColor="@android:color/secondary_text_dark"
-                            android:text="- Can improve performance a little"
+                            android:textColor="@color/text_sec"
+                            android:text="Can improve your gaming experience"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
 
@@ -616,92 +634,6 @@
             android:layout_height="0.1dp"
             android:background="@color/grey_light"/>
 
-        <LinearLayout
-            android:layout_marginBottom="72dp"
-            android:layout_marginTop="16dp"
-            android:scrollbars="vertical"
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:id="@+id/txt_ad"
-                    android:layout_marginLeft="12dp"
-                    android:text="AD BLOCK"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-
-                <LinearLayout
-                    android:id="@+id/ll_ad"
-                    android:padding="10dp"
-                    android:clickable="true"
-                    android:foreground="?android:attr/selectableItemBackground"
-                    android:layout_marginTop="16dp"
-                    android:weightSum="12"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <RelativeLayout
-                        android:layout_weight="5"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                        <ImageView
-                            android:layout_marginTop="2dp"
-                            android:layout_width="25dp"
-                            android:layout_height="25dp"
-                            android:layout_centerInParent="true"
-                            android:src="@drawable/ad" />
-
-                    </RelativeLayout>
-
-                    <LinearLayout
-                        android:layout_marginLeft="4dp"
-                        android:layout_marginRight="4dp"
-                        android:layout_weight="2"
-                        android:orientation="vertical"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                        <TextView
-                            android:textStyle="bold"
-                            android:text="Enable/Disable adblock"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"/>
-
-                        <TextView
-                            android:layout_marginTop="2dp"
-                            android:textSize="13sp"
-                            android:textColor="@android:color/secondary_text_dark"
-                            android:text="Enables the system wide AD block mode"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"/>
-
-                    </LinearLayout>
-
-                    <RelativeLayout
-                        android:layout_weight="5"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                        <Switch
-                            android:id="@+id/adsw"
-                            android:layout_centerInParent="true"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"/>
-
-                    </RelativeLayout>
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-        </LinearLayout>
 
     </LinearLayout>
 

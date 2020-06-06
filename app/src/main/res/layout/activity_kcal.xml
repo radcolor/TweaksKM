@@ -8,12 +8,43 @@
     android:background="@color/gray"
     android:orientation="vertical">
 
-    <ImageView
-        android:id="@+id/kcal_img"
+    <TextView
+        android:id="@+id/kcal_head"
+        android:textSize="20sp"
+        android:layout_marginTop="6dp"
+        android:padding="6dp"
+        android:textColor="@color/green_light"
+        android:text="COLOR CALIBRATION"
+        android:textAlignment="center"
+        android:textStyle="bold"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/kcal" />
+        android:layout_height="wrap_content"/>
+
+    <FrameLayout
+        android:id="@+id/kcal_img"
+        android:layout_below="@+id/kcal_head"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.cardview.widget.CardView
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="8dp"
+            app:cardCornerRadius="8dp"
+            app:cardBackgroundColor="@color/gray"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/kcal" />
+
+        </androidx.cardview.widget.CardView>
+
+    </FrameLayout>
 
     <ScrollView
         android:layout_below="@+id/kcal_img"
@@ -34,158 +65,111 @@
                 android:layout_height="wrap_content">
 
                 <TextView
-                    android:layout_marginLeft="12dp"
+                    android:layout_marginLeft="16dp"
                     android:text="RGB ADJUSTMENTS"
+                    android:textStyle="bold"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 
                 <LinearLayout
-                    android:padding="10dp"
-                    android:layout_marginTop="16dp"
-                    android:weightSum="6"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:weightSum="12"
+                    android:padding="10dp"
+                    android:layout_marginTop="16dp">
 
-                    <RelativeLayout
-                        android:layout_weight="5"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                        <TextView
-                            android:id="@+id/txt_red"
-                            android:hint="255"
-                            android:textColor="@android:color/white"
-                            android:layout_marginTop="2dp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerInParent="true" />
-
-                    </RelativeLayout>
-
-                    <LinearLayout
-                        android:layout_marginLeft="4dp"
-                        android:layout_marginRight="4dp"
+                    <TextView
+                        android:text="R"
+                        android:textAlignment="center"
+                        android:textColor="@android:color/holo_red_light"
+                        android:textStyle="bold"
                         android:layout_weight="1"
-                        android:orientation="vertical"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
 
-                        <TextView
-                            android:textStyle="bold"
-                            android:text="Red"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"/>
+                    <SeekBar
+                        android:id="@+id/kcal_r"
+                        android:layout_weight="10"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:progressDrawable="@drawable/seek_bar"
+                        android:thumb="@drawable/seek_thumb"/>
 
-                        <SeekBar
-                            android:id="@+id/kcal_r"
-                            android:layout_marginTop="6dp"
-                            android:textSize="13sp"
-                            android:textColor="@android:color/secondary_text_dark"
-                            android:text="This mode aims for better battery by maintaining system performace as well."
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"/>
-
-                    </LinearLayout>
+                    <TextView
+                        android:text="256"
+                        android:textStyle="bold"
+                        android:textAlignment="center"
+                        android:layout_weight="1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
 
                 </LinearLayout>
 
                 <LinearLayout
-                    android:padding="10dp"
-                    android:layout_marginTop="10dp"
-                    android:weightSum="6"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:weightSum="12"
+                    android:padding="10dp"
+                    android:layout_marginTop="16dp">
 
-                    <RelativeLayout
-                        android:layout_weight="5"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                        <TextView
-                            android:id="@+id/txt_green"
-                            android:hint="255"
-                            android:textColor="@android:color/white"
-                            android:layout_marginTop="2dp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerInParent="true" />
-
-                    </RelativeLayout>
-
-                    <LinearLayout
-                        android:layout_marginLeft="4dp"
-                        android:layout_marginRight="4dp"
+                    <TextView
+                        android:text="G"
+                        android:textAlignment="center"
+                        android:textColor="@color/green_light"
+                        android:textStyle="bold"
                         android:layout_weight="1"
-                        android:orientation="vertical"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
 
-                        <TextView
-                            android:textStyle="bold"
-                            android:text="Green"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"/>
+                    <SeekBar
+                        android:id="@+id/kcal_g"
+                        android:layout_weight="10"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:progressDrawable="@drawable/seek_bar"
+                        android:thumb="@drawable/seek_thumb"/>
 
-                        <SeekBar
-                            android:id="@+id/kcal_g"
-                            android:layout_marginTop="6dp"
-                            android:textSize="13sp"
-                            android:textColor="@android:color/secondary_text_dark"
-                            android:text="This mode aims for better battery by maintaining system performace as well."
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"/>
-
-                    </LinearLayout>
+                    <TextView
+                        android:text="256"
+                        android:textStyle="bold"
+                        android:textAlignment="center"
+                        android:layout_weight="1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
 
                 </LinearLayout>
 
                 <LinearLayout
-                    android:padding="10dp"
-                    android:layout_marginTop="10dp"
-                    android:weightSum="6"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:weightSum="12"
+                    android:padding="10dp"
+                    android:layout_marginTop="16dp">
 
-                    <RelativeLayout
-                        android:layout_weight="5"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                        <TextView
-                            android:id="@+id/txt_blue"
-                            android:hint="255"
-                            android:textColor="@android:color/white"
-                            android:layout_marginTop="2dp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerInParent="true" />
-
-                    </RelativeLayout>
-
-                    <LinearLayout
-                        android:layout_marginLeft="4dp"
-                        android:layout_marginRight="4dp"
+                    <TextView
+                        android:text="B"
+                        android:textAlignment="center"
+                        android:textColor="@android:color/holo_blue_light"
+                        android:textStyle="bold"
                         android:layout_weight="1"
-                        android:orientation="vertical"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
 
-                        <TextView
-                            android:textStyle="bold"
-                            android:text="Blue"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"/>
+                    <SeekBar
+                        android:id="@+id/kcal_b"
+                        android:layout_weight="10"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:progressDrawable="@drawable/seek_bar"
+                        android:thumb="@drawable/seek_thumb"/>
 
-                        <SeekBar
-                            android:id="@+id/kcal_b"
-                            android:layout_marginTop="6dp"
-                            android:textSize="13sp"
-                            android:textColor="@android:color/secondary_text_dark"
-                            android:text="This mode aims for better battery by maintaining system performace as well."
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"/>
-
-                    </LinearLayout>
+                    <TextView
+                        android:text="256"
+                        android:textStyle="bold"
+                        android:textAlignment="center"
+                        android:layout_weight="1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
 
                 </LinearLayout>
 
@@ -199,98 +183,92 @@
                     android:background="@color/grey_light"/>
 
                 <LinearLayout
-                    android:padding="10dp"
-                    android:layout_marginTop="10dp"
-                    android:weightSum="6"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <RelativeLayout
-                        android:layout_weight="5"
+                        android:padding="10dp"
+                        android:weightSum="9"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:orientation="horizontal"
+                        android:layout_height="wrap_content">
 
-                        <TextView
-                            android:id="@+id/txt_sat"
-                            android:hint="255"
-                            android:textColor="@android:color/white"
-                            android:layout_marginTop="2dp"
+                        <RelativeLayout
+                            android:layout_weight="1"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerInParent="true" />
+                            android:layout_height="match_parent">
 
-                    </RelativeLayout>
+                            <TextView
+                                android:text="255"
+                                android:layout_centerInParent="true"
+                                android:textAlignment="center"
+                                android:textStyle="bold"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"/>
 
-                    <LinearLayout
-                        android:layout_marginLeft="4dp"
-                        android:layout_marginRight="4dp"
-                        android:layout_weight="1"
-                        android:orientation="vertical"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        </RelativeLayout>
 
-                        <TextView
-                            android:textStyle="bold"
-                            android:text="Saturation"
+                        <LinearLayout
+                            android:layout_weight="8"
+                            android:orientation="vertical"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"/>
+                            android:layout_height="wrap_content">
 
-                        <SeekBar
-                            android:id="@+id/kcal_sat"
-                            android:layout_marginTop="6dp"
-                            android:textSize="13sp"
-                            android:textColor="@android:color/secondary_text_dark"
-                            android:text="This mode aims for better battery by maintaining system performace as well."
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"/>
+                            <TextView
+                                android:textStyle="bold"
+                                android:layout_marginLeft="8dp"
+                                android:text="Saturation"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"/>
+
+                            <SeekBar
+                                android:id="@+id/kcal_sat"
+                                android:layout_marginTop="8dp"
+                                android:progressDrawable="@drawable/seek_bar"
+                                android:thumb="@drawable/seek_thumb"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"/>
+
+                        </LinearLayout>
 
                     </LinearLayout>
 
-                </LinearLayout>
-
                 <LinearLayout
                     android:padding="10dp"
-                    android:layout_marginTop="10dp"
-                    android:weightSum="6"
+                    android:weightSum="9"
                     android:layout_width="match_parent"
+                    android:orientation="horizontal"
                     android:layout_height="wrap_content">
 
                     <RelativeLayout
-                        android:layout_weight="5"
-                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:layout_width="wrap_content"
                         android:layout_height="match_parent">
 
                         <TextView
-                            android:id="@+id/txt_val"
-                            android:hint="255"
-                            android:textColor="@android:color/white"
-                            android:layout_marginTop="2dp"
+                            android:text="255"
+                            android:layout_centerInParent="true"
+                            android:textAlignment="center"
+                            android:textStyle="bold"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerInParent="true" />
+                            android:layout_height="wrap_content"/>
 
                     </RelativeLayout>
 
                     <LinearLayout
-                        android:layout_marginLeft="4dp"
-                        android:layout_marginRight="4dp"
-                        android:layout_weight="1"
+                        android:layout_weight="8"
                         android:orientation="vertical"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
 
                         <TextView
                             android:textStyle="bold"
+                            android:layout_marginLeft="8dp"
                             android:text="Value"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
 
                         <SeekBar
                             android:id="@+id/kcal_val"
-                            android:layout_marginTop="6dp"
-                            android:textSize="13sp"
-                            android:textColor="@android:color/secondary_text_dark"
-                            android:text="This mode aims for better battery by maintaining system performace as well."
+                            android:layout_marginTop="8dp"
+                            android:progressDrawable="@drawable/seek_bar"
+                            android:thumb="@drawable/seek_thumb"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"/>
 
@@ -300,47 +278,44 @@
 
                 <LinearLayout
                     android:padding="10dp"
-                    android:layout_marginTop="10dp"
-                    android:weightSum="6"
+                    android:weightSum="9"
                     android:layout_width="match_parent"
+                    android:orientation="horizontal"
                     android:layout_height="wrap_content">
 
                     <RelativeLayout
-                        android:layout_weight="5"
-                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:layout_width="wrap_content"
                         android:layout_height="match_parent">
 
                         <TextView
-                            android:id="@+id/txt_con"
-                            android:hint="255"
-                            android:textColor="@android:color/white"
-                            android:layout_marginTop="2dp"
+                            android:text="255"
+                            android:layout_centerInParent="true"
+                            android:textAlignment="center"
+                            android:textStyle="bold"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerInParent="true" />
+                            android:layout_height="wrap_content"/>
 
                     </RelativeLayout>
 
                     <LinearLayout
-                        android:layout_marginLeft="4dp"
-                        android:layout_marginRight="4dp"
-                        android:layout_weight="1"
+                        android:layout_weight="8"
                         android:orientation="vertical"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
 
                         <TextView
                             android:textStyle="bold"
+                            android:layout_marginLeft="8dp"
                             android:text="Contrast"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
 
                         <SeekBar
-                            android:id="@+id/kcal_con"
-                            android:layout_marginTop="6dp"
-                            android:textSize="13sp"
-                            android:textColor="@android:color/secondary_text_dark"
-                            android:text="This mode aims for better battery by maintaining system performace as well."
+                            android:id="@+id/kcal_cont"
+                            android:layout_marginTop="8dp"
+                            android:progressDrawable="@drawable/seek_bar"
+                            android:thumb="@drawable/seek_thumb"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"/>
 
@@ -350,47 +325,44 @@
 
                 <LinearLayout
                     android:padding="10dp"
-                    android:layout_marginTop="10dp"
-                    android:weightSum="6"
+                    android:weightSum="9"
                     android:layout_width="match_parent"
+                    android:orientation="horizontal"
                     android:layout_height="wrap_content">
 
                     <RelativeLayout
-                        android:layout_weight="5"
-                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:layout_width="wrap_content"
                         android:layout_height="match_parent">
 
                         <TextView
-                            android:id="@+id/txt_hue"
-                            android:hint="255"
-                            android:textColor="@android:color/white"
-                            android:layout_marginTop="2dp"
+                            android:text="000"
+                            android:layout_centerInParent="true"
+                            android:textAlignment="center"
+                            android:textStyle="bold"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerInParent="true" />
+                            android:layout_height="wrap_content"/>
 
                     </RelativeLayout>
 
                     <LinearLayout
-                        android:layout_marginLeft="4dp"
-                        android:layout_marginRight="4dp"
-                        android:layout_weight="1"
+                        android:layout_weight="8"
                         android:orientation="vertical"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
 
                         <TextView
                             android:textStyle="bold"
+                            android:layout_marginLeft="8dp"
                             android:text="Hue"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
 
                         <SeekBar
                             android:id="@+id/kcal_hue"
-                            android:layout_marginTop="6dp"
-                            android:textSize="13sp"
-                            android:textColor="@android:color/secondary_text_dark"
-                            android:text="This mode aims for better battery by maintaining system performace as well."
+                            android:layout_marginTop="8dp"
+                            android:progressDrawable="@drawable/seek_bar"
+                            android:thumb="@drawable/seek_thumb"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"/>
 
@@ -398,16 +370,138 @@
 
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_marginTop="6dp"
-                    android:layout_marginBottom="36dp"
-                    android:layout_marginStart="12dp"
-                    android:layout_marginEnd="12dp"
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="6dp"
+                android:layout_marginBottom="6dp"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:background="@color/grey_light"/>
+
+            <LinearLayout
+                android:layout_marginTop="6dp"
+                android:layout_marginBottom="6dp"
+                android:id="@+id/ll_color"
+                android:padding="10dp"
+                android:clickable="true"
+                android:background="@drawable/ripple"
+                android:weightSum="12"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:focusable="true">
+
+                <RelativeLayout
+                    android:layout_weight="10"
                     android:layout_width="match_parent"
-                    android:layout_height="0.1dp"
-                    android:background="@color/grey_light"/>
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:layout_marginTop="12dp"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_centerVertical="true"
+                        android:layout_centerHorizontal="true"
+                        android:src="@drawable/ic_color_lens_black_24dp" />
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginRight="4dp"
+                    android:layout_weight="2"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:textStyle="bold"
+                        android:text="Pre Set Colors"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                    <TextView
+                        android:layout_marginTop="4dp"
+                        android:text="Some Cool Colors for ya!"
+                        android:textColor="@color/text_sec"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                </LinearLayout>
 
             </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="6dp"
+                android:layout_marginBottom="6dp"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:background="@color/grey_light"/>
+
+            <LinearLayout
+                android:layout_marginTop="6dp"
+                android:layout_marginBottom="6dp"
+                android:id="@+id/ll_color_reset"
+                android:padding="10dp"
+                android:clickable="true"
+                android:background="@drawable/ripple"
+                android:weightSum="12"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:focusable="true">
+
+                <RelativeLayout
+                    android:layout_weight="10"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:layout_marginTop="12dp"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_centerVertical="true"
+                        android:layout_centerHorizontal="true"
+                        android:src="@drawable/ic_color_lens_black_24dp" />
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginRight="4dp"
+                    android:layout_weight="2"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:textStyle="bold"
+                        android:text="Reset colors"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                    <TextView
+                        android:layout_marginTop="4dp"
+                        android:text="Reset back to default settings"
+                        android:textColor="@color/text_sec"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="6dp"
+                android:layout_marginBottom="36dp"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:background="@color/grey_light"/>
 
         </LinearLayout>
 

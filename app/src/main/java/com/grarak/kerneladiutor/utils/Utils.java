@@ -61,6 +61,7 @@ import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.RoundingMode;
+import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Locale;
@@ -123,7 +124,7 @@ public class Utils {
     public static long computeSHAHash(String password) throws Exception {
         long begin = System.nanoTime();
         MessageDigest messageDigest = MessageDigest.getInstance("SHA-1");
-        messageDigest.update(password.getBytes("ASCII"));
+        messageDigest.update(password.getBytes(StandardCharsets.US_ASCII));
         byte[] data = messageDigest.digest();
         Base64.encodeToString(data, 0, data.length, 0);
         return System.nanoTime() - begin;
@@ -183,21 +184,11 @@ public class Utils {
     }
 
     public static String decodeString(String text) {
-        try {
-            return new String(Base64.decode(text, Base64.DEFAULT), "UTF-8");
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-            return null;
-        }
+        return new String(Base64.decode(text, Base64.DEFAULT), StandardCharsets.UTF_8);
     }
 
     public static String encodeString(String text) {
-        try {
-            return Base64.encodeToString(text.getBytes("UTF-8"), Base64.DEFAULT);
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-            return null;
-        }
+        return Base64.encodeToString(text.getBytes(StandardCharsets.UTF_8), Base64.DEFAULT);
     }
 
     public static CharSequence htmlFrom(String text) {

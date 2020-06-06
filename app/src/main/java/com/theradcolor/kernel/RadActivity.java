@@ -2,15 +2,12 @@ package com.theradcolor.kernel;
 
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.grarak.kerneladiutor.utils.root.RootUtils;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
@@ -19,9 +16,6 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-
-import java.io.IOException;
-import java.io.OutputStreamWriter;
 
 public class RadActivity extends AppCompatActivity {
 
@@ -44,17 +38,17 @@ public class RadActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
-        if(checkRoot.isDeviceRooted() && System.getProperty("os.version").contains("rad")){
+
+        if (checkRoot.isDeviceRooted() && System.getProperty("os.version").contains("rad")) {
             Log.d("MainActivity", "Kernel and Root Check Passed");
-            execCommandLine("su");
-        }else if(checkRoot.isDeviceRooted())
-        {
+            RootUtils.getSU();
+        } else if (checkRoot.isDeviceRooted()) {
             Log.d("MainActivity", "Rooted and unsupported kernel");
-            execCommandLine("su");
-            if(preferences.getBoolean("Show dialog",true)){
-               dialog();
+            RootUtils.getSU();
+            if (preferences.getBoolean("Show dialog", true)) {
+                dialog();
             }
-        }else{
+        } else {
             Log.d("MainActivity", "Root access and kernel verification failed");
             finish();
         }
@@ -62,22 +56,21 @@ public class RadActivity extends AppCompatActivity {
 
     Boolean state = true;
 
-    private boolean dialog()
-    {
+    private boolean dialog() {
         new AlertDialog.Builder(this)
                 .setTitle("Unsupported kernel/device!")
                 .setCancelable(false)
                 //.setSingleChoiceItems(list, 1, null)
                 .setPositiveButton("exit", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
-                        int selectedPosition = ((AlertDialog)dialog).getListView().getCheckedItemPosition();
-                        if(selectedPosition == 0){
+                        int selectedPosition = ((AlertDialog) dialog).getListView().getCheckedItemPosition();
+                        if (selectedPosition == 0) {
                             editor = preferences.edit();
-                            editor.putBoolean("Show dialog",false);
+                            editor.putBoolean("Show dialog", false);
                             state = false;
-                        }else{
+                        } else {
                             editor = preferences.edit();
-                            editor.putBoolean("Show dialog",true);
+                            editor.putBoolean("Show dialog", true);
                             state = true;
                         }
                         editor.apply();
@@ -87,47 +80,10 @@ public class RadActivity extends AppCompatActivity {
                 .show();
         return state;
     }
-    void execCommandLine(String command)
-    {
-        Runtime runtime = Runtime.getRuntime();
-        Process proc = null;
-        OutputStreamWriter osw = null;
 
-        try
-        {
-            proc = runtime.exec("su");
-            osw = new OutputStreamWriter(proc.getOutputStream());
-            osw.write(command);
-            osw.flush();
-            osw.close();
-        }
-        catch (IOException ex)
-        {
-            Log.e("execCommandLine()", "Command resulted in an IO Exception: " + command);
-            return;
-        }
-        finally
-        {
-            if (osw != null)
-            {
-                try
-                {
-                    osw.close();
-                }
-                catch (IOException e){}
-            }
-        }
-
-        try
-        {
-            proc.waitFor();
-        }
-        catch (InterruptedException e){}
-
-        if (proc.exitValue() != 0)
-        {
-            Log.e("execCommandLine()", "Command returned error: " + command + "\n  Exit code: " + proc.exitValue());
-        }
+    @Override
+    protected void onDestroy() {
+        RootUtils.closeSU();
+        super.onDestroy();
     }
-
 }

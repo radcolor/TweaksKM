@@ -17,6 +17,7 @@
         android:textColor="@android:color/secondary_text_dark"
         android:layout_marginBottom="16dp"
         android:id="@+id/sp_br"
+        android:textStyle="bold"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
         android:layout_width="wrap_content"

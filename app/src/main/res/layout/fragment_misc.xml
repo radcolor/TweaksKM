@@ -81,10 +81,11 @@
                     android:id="@+id/ll_vib"
                     android:layout_marginTop="6dp"
                     android:padding="10dp"
-                    android:foreground="?android:attr/selectableItemBackground"
+                    android:clickable="true"
                     android:weightSum="12"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:focusable="true">
 
                     <RelativeLayout
                         android:layout_weight="5"
@@ -121,8 +122,8 @@
 
                             <TextView
                                 android:id="@+id/pervib"
-                                android:textColor="@android:color/secondary_text_dark"
-                                android:textSize="12sp"
+                                android:textColor="@color/text_sec"
+                                android:textStyle="bold"
                                 android:layout_marginStart="8dp"
                                 android:text="x%"
                                 android:layout_width="wrap_content"
@@ -131,9 +132,11 @@
                         </LinearLayout>
 
                         <SeekBar
-                            android:min="1"
+                            android:min="0"
                             android:max="100"
                             android:id="@+id/vibration"
+                            android:progressDrawable="@drawable/seek_bar"
+                            android:thumb="@drawable/seek_thumb"
                             android:layout_marginTop="6dp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"/>
@@ -147,6 +150,7 @@
 
                         <Switch
                             android:id="@+id/vibsw"
+                            android:theme="@style/SelectionSwitch"
                             android:layout_centerInParent="true"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
@@ -233,14 +237,15 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:background="@drawable/ripple"
                     android:layout_marginTop="6dp"
                     android:id="@+id/ll_srgb"
                     android:padding="10dp"
                     android:clickable="true"
-                    android:foreground="?android:attr/selectableItemBackground"
                     android:weightSum="12"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:focusable="true">
 
                     <RelativeLayout
                         android:layout_weight="5"
@@ -274,7 +279,7 @@
                         <TextView
                             android:layout_marginTop="4dp"
                             android:text="Enable/Disable sRGB colors"
-                            android:textColor="@android:color/secondary_text_dark"
+                            android:textColor="@color/text_sec"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"/>
 
@@ -287,6 +292,7 @@
 
                         <Switch
                             android:id="@+id/srgbsw"
+                            android:theme="@style/SelectionSwitch"
                             android:layout_centerInParent="true"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
@@ -296,15 +302,16 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:background="@drawable/ripple"
                     android:layout_marginTop="6dp"
                     android:layout_marginBottom="6dp"
-                    android:id="@+id/ll_color"
+                    android:id="@+id/ll_kcal"
                     android:padding="10dp"
                     android:clickable="true"
-                    android:foreground="?android:attr/selectableItemBackground"
                     android:weightSum="12"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:focusable="true">
 
                     <RelativeLayout
                         android:layout_weight="10"
@@ -331,18 +338,227 @@
 
                         <TextView
                             android:textStyle="bold"
-                            android:text="Pre Set Colors"
+                            android:text="Color Calibration (KCAL)"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
 
                         <TextView
                             android:layout_marginTop="4dp"
-                            android:text="Enable/Disable sRGB colors"
-                            android:textColor="@android:color/secondary_text_dark"
+                            android:text="Tune RGB and others from here"
+                            android:textColor="@color/text_sec"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"/>
 
                     </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="6dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="12dp"
+            android:layout_width="match_parent"
+            android:layout_height="0.1dp"
+            android:background="@color/grey_light"/>
+
+        <LinearLayout
+            android:scrollbars="vertical"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_marginStart="10dp"
+                    android:clickable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:layout_marginTop="6dp"
+                    android:weightSum="12"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <RelativeLayout
+                        android:layout_weight="5"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <View
+                            android:layout_marginTop="12dp"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:layout_centerVertical="true"
+                            android:layout_centerHorizontal="true" />
+
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:layout_marginRight="4dp"
+                        android:layout_weight="2"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:textColor="@color/green_light"
+                            android:textStyle="bold"
+                            android:text="Sound Control"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+                    </LinearLayout>
+
+                    <RelativeLayout
+                        android:layout_weight="5"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <View
+                            android:layout_centerInParent="true"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:background="@drawable/ripple"
+                    android:layout_marginTop="6dp"
+                    android:id="@+id/ll_hpg"
+                    android:padding="10dp"
+                    android:clickable="true"
+                    android:weightSum="12"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:focusable="true">
+
+                    <RelativeLayout
+                        android:layout_weight="5"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:layout_marginTop="12dp"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:layout_centerVertical="true"
+                            android:layout_centerHorizontal="true"
+                            android:tint="@android:color/white"
+                            android:src="@drawable/ic_baseline_headset_24" />
+
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginRight="4dp"
+                        android:layout_weight="2"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:textStyle="bold"
+                            android:text="Headphone Gain"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+                        <TextView
+                            android:layout_marginTop="4dp"
+                            android:text="Tune headphone digital gain"
+                            android:textColor="@color/text_sec"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"/>
+
+                    </LinearLayout>
+
+                    <RelativeLayout
+                        android:layout_weight="5"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <Switch
+                            android:id="@+id/hgsw"
+                            android:theme="@style/SelectionSwitch"
+                            android:layout_centerInParent="true"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:background="@drawable/ripple"
+                    android:layout_marginTop="6dp"
+                    android:id="@+id/ll_mcg"
+                    android:padding="10dp"
+                    android:clickable="true"
+                    android:weightSum="12"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:focusable="true">
+
+                    <RelativeLayout
+                        android:layout_weight="5"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:layout_marginTop="12dp"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:layout_centerVertical="true"
+                            android:layout_centerHorizontal="true"
+                            android:tint="@android:color/white"
+                            android:src="@drawable/ic_baseline_mic_24" />
+
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginRight="4dp"
+                        android:layout_weight="2"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:textStyle="bold"
+                            android:text="Microphone Gain"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+                        <TextView
+                            android:layout_marginTop="4dp"
+                            android:text="Tune device microphone gain"
+                            android:textColor="@color/text_sec"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"/>
+
+                    </LinearLayout>
+
+                    <RelativeLayout
+                        android:layout_weight="5"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <Switch
+                            android:id="@+id/mgsw"
+                            android:theme="@style/SelectionSwitch"
+                            android:layout_centerInParent="true"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+                    </RelativeLayout>
 
                 </LinearLayout>
 

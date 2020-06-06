@@ -1,13 +1,14 @@
 package com.theradcolor.kernel.ui.Misc;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,30 +17,32 @@ import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.grarak.kerneladiutor.utils.root.RootUtils;
+import com.theradcolor.kernel.KcalActivity;
 import com.theradcolor.kernel.R;
 
-import java.io.IOException;
-import java.io.OutputStreamWriter;
+import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 
 public class MiscFragment extends Fragment implements View.OnClickListener{
 
     private MiscViewModel dashboardViewModel;
     private TextView vib;
     private SeekBar seekBar;
-    private LinearLayout srgb,kcal,vibration,cuscolor;
+    private LinearLayout srgb,kcal,vibration,hpg,mcg;
     int progressChangedValue = 1;
     public static final int MIN_VIBRATION = 116;
     public static final int MAX_VIBRATION = 3596;
     int  vibrationValue;
     SharedPreferences.Editor editor;
-    private Switch vibsw,srgbsw,kcalsw;
+    private Switch vibsw,srgbsw;
     SharedPreferences preferences;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -51,23 +54,24 @@ public class MiscFragment extends Fragment implements View.OnClickListener{
         seekBar.setPadding(16,16,16,16);
         vib = root.findViewById(R.id.pervib);
         srgb = root.findViewById(R.id.ll_srgb);
-        //kcal = root.findViewById(R.id.ll_kcal);
+        kcal = root.findViewById(R.id.ll_kcal);
         vibration = root.findViewById(R.id.ll_vib);
         vibsw = root.findViewById(R.id.vibsw);
-        cuscolor = root.findViewById(R.id.ll_color);
-        cuscolor.setOnClickListener(this);
         vibsw.setOnCheckedChangeListener(myCheckboxListener);
         srgbsw = root.findViewById(R.id.srgbsw);
         srgbsw.setOnCheckedChangeListener(myCheckboxListener);
-        //kcalsw = root.findViewById(R.id.kcalsw);
-        //kcalsw.setOnCheckedChangeListener(myCheckboxListener);
+
+        hpg = root.findViewById(R.id.ll_hpg);
+        hpg.setOnClickListener(this);
+        mcg = root.findViewById(R.id.ll_mcg);
+        mcg.setOnClickListener(this);
 
         preferences = getActivity().getSharedPreferences("preferences",Context.MODE_PRIVATE);
-        vib.setText(""+preferences.getInt("vibration",1));
+        vib.setText(preferences.getInt("vibration",1)+"%");
         seekBar.setProgress(preferences.getInt("vibration",1));
 
         srgb.setOnClickListener(this);
-        //kcal.setOnClickListener(this);
+        kcal.setOnClickListener(this);
         vibration.setOnClickListener(this);
 
         final Vibrator v = (Vibrator) getContext().getSystemService(Context.VIBRATOR_SERVICE);
@@ -83,26 +87,18 @@ public class MiscFragment extends Fragment implements View.OnClickListener{
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
 
-                /*// Vibrate for 500 milliseconds
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    long[] pattern = {1, 1000, 0};
-                    v.vibrate(VibrationEffect.createWaveform(pattern,1));
-                } else {
-                    //deprecated in API 26
-                    v.vibrate(500);
-                }*/
-
             }
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                     v.vibrate(VibrationEffect.createOneShot(100, VibrationEffect.DEFAULT_AMPLITUDE));
                 }
-                execCommandLine("echo " +vibrationValue+ " > /sys/devices/virtual/timed_output/vibrator/vtg_level");
+                RootUtils.runCommand("echo " +vibrationValue+ " > /sys/devices/virtual/timed_output/vibrator/vtg_level");
                 v.cancel();
                 editor = preferences.edit();
                 editor.putInt("vibration",progressChangedValue);
                 editor.apply();
+                v.vibrate(50);
             }
         });
         setsw();
@@ -162,55 +158,9 @@ public class MiscFragment extends Fragment implements View.OnClickListener{
                         editor.apply();
                     }
                     break;
-                /*case R.id.kcalsw:
-                    Toast.makeText(getContext(),"kcal: set on boot true",Toast.LENGTH_SHORT).show();
-                    break;*/
             }
         }
     };
-
-    private void execCommandLine(String command)
-    {
-        Runtime runtime = Runtime.getRuntime();
-        Process proc = null;
-        OutputStreamWriter osw = null;
-
-        try
-        {
-            proc = runtime.exec("su");
-            osw = new OutputStreamWriter(proc.getOutputStream());
-            osw.write(command);
-            osw.flush();
-            osw.close();
-        }
-        catch (IOException ex)
-        {
-            Log.e("execCommandLine()", "Command resulted in an IO Exception: " + command);
-            return;
-        }
-        finally
-        {
-            if (osw != null)
-            {
-                try
-                {
-                    osw.close();
-                }
-                catch (IOException e){}
-            }
-        }
-
-        try
-        {
-            proc.waitFor();
-        }
-        catch (InterruptedException e){}
-
-        if (proc.exitValue() != 0)
-        {
-            Log.e("execCommandLine()", "Command returned error: " + command + "\n  Exit code: " + proc.exitValue());
-        }
-    }
 
     private int getVibration() {
       String vib = RootUtils.runCommand("cat /sys/devices/virtual/timed_output/vibrator/vtg_level");
@@ -220,12 +170,12 @@ public class MiscFragment extends Fragment implements View.OnClickListener{
 
     private void srgb()
     {
-        new AlertDialog.Builder(getContext())
+        AlertDialog.Builder alertDialog =  new AlertDialog.Builder(new ContextThemeWrapper(getContext(), R.style.Theme_AppCompat_DayNight_Dialog_Alert))
                 .setTitle("sRGB colors")
                 .setPositiveButton("On", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        execCommandLine("active=1\n" +
+                        RootUtils.runCommand("active=1\n" +
                                 "\n" +
                                 "echo $active > /sys/module/mdss_fb/parameters/srgb_enabled\n" +
                                 "\n" +
@@ -238,7 +188,7 @@ public class MiscFragment extends Fragment implements View.OnClickListener{
                 .setNegativeButton("Off", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        execCommandLine("active=0\n" +
+                        RootUtils.runCommand("active=0\n" +
                                 "\n" +
                                 "echo $active > /sys/module/mdss_fb/parameters/srgb_enabled\n" +
                                 "\n" +
@@ -247,8 +197,8 @@ public class MiscFragment extends Fragment implements View.OnClickListener{
                                 "else echo \"1\" > /sys/class/graphics/fb0/msm_fb_srgb\n" +
                                 "fi");
                     }
-                })
-                .show();
+                });
+        alertDialog.show();
     }
 
     @Override
@@ -258,98 +208,48 @@ public class MiscFragment extends Fragment implements View.OnClickListener{
             case R.id.ll_srgb:
                 srgb();
                 break;
-            /*case R.id.ll_kcal:
+            case R.id.ll_kcal:
                 startActivity(new Intent(getContext(), KcalActivity.class));
-                break;*/
-            case R.id.ll_vib:
-
                 break;
-            case R.id.ll_color:
-                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                builder.setTitle("Select Color Preference");
-
-                String[] animals = {"Deep Natural Display",
-                        "Triluminos Display",
-                        "Cool Amoled Display",
-                        "Extreme Amoled Display",
-                        "Hybrid Mamba Display",
-                        "Warm Amoled Display",
-                        "Deep Black & White Display",
-                        "Reset to Default"};
-                builder.setItems(animals, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        switch (which) {
-                            case 0:
-                                RootUtils.runCommand("echo 256 250 251 > /sys/devices/platform/kcal_ctrl.0/kcal");
-                                RootUtils.runCommand("echo 264 > /sys/devices/platform/kcal_ctrl.0/kcal_cont");
-                                RootUtils.runCommand("echo 0 > /sys/devices/platform/kcal_ctrl.0/kcal_hue");
-                                RootUtils.runCommand("echo 35 > /sys/devices/platform/kcal_ctrl.0/kcal_min");
-                                RootUtils.runCommand("echo 285 > /sys/devices/platform/kcal_ctrl.0/kcal_sat");
-                                RootUtils.runCommand("echo 245 > /sys/devices/platform/kcal_ctrl.0/kcal_val");
-                                break;
-                            case 1:
-                                RootUtils.runCommand("echo 256 250 251 > /sys/devices/platform/kcal_ctrl.0/kcal");
-                                RootUtils.runCommand("echo 260 > /sys/devices/platform/kcal_ctrl.0/kcal_cont");
-                                RootUtils.runCommand("echo 1526 > /sys/devices/platform/kcal_ctrl.0/kcal_hue");
-                                RootUtils.runCommand("echo 35 > /sys/devices/platform/kcal_ctrl.0/kcal_min");
-                                RootUtils.runCommand("echo 291 > /sys/devices/platform/kcal_ctrl.0/kcal_sat");
-                                RootUtils.runCommand("echo 264 > /sys/devices/platform/kcal_ctrl.0/kcal_val");
-                                break;
-                            case 2:
-                                RootUtils.runCommand("echo 236 248 256 > /sys/devices/platform/kcal_ctrl.0/kcal");
-                                RootUtils.runCommand("echo 264 > /sys/devices/platform/kcal_ctrl.0/kcal_cont");
-                                RootUtils.runCommand("echo 0 > /sys/devices/platform/kcal_ctrl.0/kcal_hue");
-                                RootUtils.runCommand("echo 35 > /sys/devices/platform/kcal_ctrl.0/kcal_min");
-                                RootUtils.runCommand("echo 275 > /sys/devices/platform/kcal_ctrl.0/kcal_sat");
-                                RootUtils.runCommand("echo 242 > /sys/devices/platform/kcal_ctrl.0/kcal_val");
-                                break;
-                            case 3:
-                                RootUtils.runCommand("echo 256 256 256 > /sys/devices/platform/kcal_ctrl.0/kcal");
-                                RootUtils.runCommand("echo 255 > /sys/devices/platform/kcal_ctrl.0/kcal_cont");
-                                RootUtils.runCommand("echo 0 > /sys/devices/platform/kcal_ctrl.0/kcal_hue");
-                                RootUtils.runCommand("echo 35 > /sys/devices/platform/kcal_ctrl.0/kcal_min");
-                                RootUtils.runCommand("echo 290 > /sys/devices/platform/kcal_ctrl.0/kcal_sat");
-                                RootUtils.runCommand("echo 255 > /sys/devices/platform/kcal_ctrl.0/kcal_val");
-                                break;
-                            case 4:
-                                RootUtils.runCommand("echo 226 215 256 > /sys/devices/platform/kcal_ctrl.0/kcal");
-                                RootUtils.runCommand("echo 260 > /sys/devices/platform/kcal_ctrl.0/kcal_cont");
-                                RootUtils.runCommand("echo 10 > /sys/devices/platform/kcal_ctrl.0/kcal_hue");
-                                RootUtils.runCommand("echo 35 > /sys/devices/platform/kcal_ctrl.0/kcal_min");
-                                RootUtils.runCommand("echo 265 > /sys/devices/platform/kcal_ctrl.0/kcal_sat");
-                                RootUtils.runCommand("echo 247 > /sys/devices/platform/kcal_ctrl.0/kcal_val");
-                                break;
-                            case 5:
-                                RootUtils.runCommand("echo 253 246 243 > /sys/devices/platform/kcal_ctrl.0/kcal");
-                                RootUtils.runCommand("echo 258 > /sys/devices/platform/kcal_ctrl.0/kcal_cont");
-                                RootUtils.runCommand("echo 0 > /sys/devices/platform/kcal_ctrl.0/kcal_hue");
-                                RootUtils.runCommand("echo 35 > /sys/devices/platform/kcal_ctrl.0/kcal_min");
-                                RootUtils.runCommand("echo 275 > /sys/devices/platform/kcal_ctrl.0/kcal_sat");
-                                RootUtils.runCommand("echo 251 > /sys/devices/platform/kcal_ctrl.0/kcal_val");
-                                break;
-                            case 6:
-                                RootUtils.runCommand("echo 250 250 256 > /sys/devices/platform/kcal_ctrl.0/kcal");
-                                RootUtils.runCommand("echo 266 > /sys/devices/platform/kcal_ctrl.0/kcal_cont");
-                                RootUtils.runCommand("echo 1526 > /sys/devices/platform/kcal_ctrl.0/kcal_hue");
-                                RootUtils.runCommand("echo 35 > /sys/devices/platform/kcal_ctrl.0/kcal_min");
-                                RootUtils.runCommand("echo 279 > /sys/devices/platform/kcal_ctrl.0/kcal_sat");
-                                RootUtils.runCommand("echo 261 > /sys/devices/platform/kcal_ctrl.0/kcal_val");
-                                break;
-                            case 7:
-                                RootUtils.runCommand("echo 256 256 256 > /sys/devices/platform/kcal_ctrl.0/kcal");
-                                RootUtils.runCommand("echo 255 > /sys/devices/platform/kcal_ctrl.0/kcal_cont");
-                                RootUtils.runCommand("echo 0 > /sys/devices/platform/kcal_ctrl.0/kcal_hue");
-                                RootUtils.runCommand("echo 35 > /sys/devices/platform/kcal_ctrl.0/kcal_min");
-                                RootUtils.runCommand("echo 255 > /sys/devices/platform/kcal_ctrl.0/kcal_sat");
-                                RootUtils.runCommand("echo 255 > /sys/devices/platform/kcal_ctrl.0/kcal_val");
-                                break;
-                        }
-                    }
-                });
-                AlertDialog dialog = builder.create();
-                dialog.show();
+            case R.id.ll_vib:
+                break;
+            case R.id.ll_hpg:
+                hpgDialog(getView());
+                break;
+            case R.id.ll_mcg:
+                mcgDialog(getView());
                 break;
         }
     }
+
+    public void hpgDialog(View view) {        // create an alert builder
+        AlertDialog.Builder builder =  new AlertDialog.Builder(new ContextThemeWrapper(getContext(), R.style.Theme_AppCompat_DayNight_Dialog_Alert));
+        builder.setTitle("Headphone Gain");        // set the custom layout
+        final View customLayout = getLayoutInflater().inflate(R.layout.headgain_dialog, null);
+        builder.setView(customLayout);        // add a button
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // send data from the AlertDialog to the Activity
+            }
+        });        // create and show the alert dialog
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    public void mcgDialog(View view) {        // create an alert builder
+        AlertDialog.Builder builder =  new AlertDialog.Builder(new ContextThemeWrapper(getContext(), R.style.Theme_AppCompat_DayNight_Dialog_Alert));
+        builder.setTitle("Microphone Gain");        // set the custom layout
+        final View customLayout = getLayoutInflater().inflate(R.layout.micgain_dialog, null);
+        builder.setView(customLayout);        // add a button
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // send data from the AlertDialog to the Activity
+            }
+        });        // create and show the alert dialog
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
 }

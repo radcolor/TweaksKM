@@ -28,8 +28,7 @@ public class checkRoot {
         try {
             process = Runtime.getRuntime().exec(new String[] { "/system/xbin/which", "su" });
             BufferedReader in = new BufferedReader(new InputStreamReader(process.getInputStream()));
-            if (in.readLine() != null) return true;
-            return false;
+            return in.readLine() != null;
         } catch (Throwable t) {
             return false;
         } finally {
