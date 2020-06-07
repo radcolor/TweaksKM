@@ -216,7 +216,7 @@
                         <TextView
                             android:textColor="@color/green_light"
                             android:textStyle="bold"
-                            android:text="Display"
+                            android:text="Display Control"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
 
