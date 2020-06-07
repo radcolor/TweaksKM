@@ -490,6 +490,7 @@
 
                         <CheckBox
                             android:id="@+id/dozesw"
+                            android:theme="@style/checkStyle"
                             android:layout_centerInParent="true"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
@@ -553,6 +554,7 @@
 
                         <CheckBox
                             android:id="@+id/monsw"
+                            android:theme="@style/checkStyle"
                             android:layout_centerInParent="true"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
@@ -616,6 +618,7 @@
 
                         <CheckBox
                             android:id="@+id/killsw"
+                            android:theme="@style/checkStyle"
                             android:layout_centerInParent="true"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
