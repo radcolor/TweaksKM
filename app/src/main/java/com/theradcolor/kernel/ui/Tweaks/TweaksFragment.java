@@ -2,13 +2,11 @@ package com.theradcolor.kernel.ui.Tweaks;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -26,7 +24,7 @@ public class TweaksFragment extends Fragment implements View.OnClickListener{
     private TweaksViewModel homeViewModel;
     CPU cpu;
     public TextView textView;
-    private TextView cpu0,cpu1,cpu2,cpu3,cpu4,cpu5,cpu6,cpu7;
+    private TextView cpu0,cpu1,cpu2,cpu3,cpu4,cpu5,cpu6,cpu7, little_max, big_max, cpu_temp;
     SharedPreferences preferences;
 
     public View onCreateView(@NonNull final LayoutInflater inflater,
@@ -37,6 +35,14 @@ public class TweaksFragment extends Fragment implements View.OnClickListener{
         textView.setText("Kernel: " + RootUtils.runCommand("uname -a"));
 
         cpu = new CPU();
+
+        little_max = root.findViewById(R.id.little_max);
+        little_max.setText("Little max: "+cpu.getMaxFreq(0)/1000 + "Mhz");
+        big_max = root.findViewById(R.id.big_max);
+        big_max.setText("Big Max: "+cpu.getMaxFreq(4)/1000 + "MHz");
+
+        cpu_temp = root.findViewById(R.id.cpu_temp);
+
         cpu0 = root.findViewById(R.id.cpu0);
         cpu1 = root.findViewById(R.id.cpu1);
         cpu2 = root.findViewById(R.id.cpu2);

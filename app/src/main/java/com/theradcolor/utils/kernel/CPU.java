@@ -20,4 +20,20 @@ public class CPU {
         }
         return 0;
     }
+
+    public int getMaxFreq(int cpu) {
+        String value = Utils.readFile(Utils.strFormat(CPU_MAX_FREQ, cpu));
+        if (value != null) {
+            return Utils.strToInt(value);
+        }
+        return 0;
+    }
+
+    public int getMinFreq(int cpu) {
+        String value = Utils.readFile(Utils.strFormat(CPU_MIN_FREQ, cpu));
+        if (value != null) {
+            return Utils.strToInt(value);
+        }
+        return 0;
+    }
 }
