@@ -12,7 +12,6 @@ public class CPU {
     private static final String CPU_SCALING_GOVERNOR = "/sys/devices/system/cpu/cpu%d/cpufreq/scaling_governor";
     private static final String CPU_AVAILABLE_GOVERNORS = "/sys/devices/system/cpu/cpu%d/cpufreq/scaling_available_governors";
 
-
     public int getCurFreq(int cpu) {
         String value = Utils.readFile(Utils.strFormat(CUR_FREQ, cpu));
         if (value != null) {
