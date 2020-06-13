@@ -70,14 +70,16 @@ public class TweaksFragment extends Fragment implements View.OnClickListener{
         t.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-                cpu0.setText(cpu.getCurFreq(0)/1000+"MHz");
-                cpu1.setText(cpu.getCurFreq(1)/1000+"MHz");
-                cpu2.setText(cpu.getCurFreq(2)/1000+"MHz");
-                cpu3.setText(cpu.getCurFreq(3)/1000+"MHz");
-                cpu4.setText(cpu.getCurFreq(4)/1000+"MHz");
-                cpu5.setText(cpu.getCurFreq(5)/1000+"MHz");
-                cpu6.setText(cpu.getCurFreq(6)/1000+"MHz");
-                cpu7.setText(cpu.getCurFreq(7)/1000+"MHz");
+                String littleFreq = cpu.getCurFreq(0)/1000 + "MHz";
+                String bigFreq = cpu.getCurFreq(4)/1000 + "MHz";
+                cpu0.setText(littleFreq);
+                cpu1.setText(littleFreq);
+                cpu2.setText(littleFreq);
+                cpu3.setText(littleFreq);
+                cpu4.setText(bigFreq);
+                cpu5.setText(bigFreq);
+                cpu6.setText(bigFreq);
+                cpu7.setText(bigFreq);
             }
             }, 0, 1000);
     }
