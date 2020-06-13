@@ -81,7 +81,7 @@ public class TweaksFragment extends Fragment implements View.OnClickListener{
                 cpu6.setText(bigFreq);
                 cpu7.setText(bigFreq);
             }
-            }, 0, 1000);
+            }, 0, 500);
     }
 
 }
