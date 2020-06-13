@@ -36,4 +36,12 @@ public class CPU {
         }
         return 0;
     }
+
+    public String getGovernor(int cpu) {
+        String value = "";
+        if (Utils.existFile(Utils.strFormat(CPU_SCALING_GOVERNOR, cpu))) {
+            value = Utils.readFile(Utils.strFormat(CPU_SCALING_GOVERNOR, cpu));
+        }
+        return value;
+    }
 }
