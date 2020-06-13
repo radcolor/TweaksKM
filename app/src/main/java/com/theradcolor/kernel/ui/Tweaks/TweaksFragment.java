@@ -25,7 +25,7 @@ public class TweaksFragment extends Fragment implements View.OnClickListener{
     private TweaksViewModel homeViewModel;
     CPU cpu;
     public TextView textView;
-    private TextView cpu0,cpu1,cpu2,cpu3,cpu4,cpu5,cpu6,cpu7, little_max, big_max, board, cpu_gov;
+    private TextView cpu0,cpu1,cpu2,cpu3,cpu4,cpu5,cpu6,cpu7, little_max, big_max, board, cpu_gov, oem_name;
     SharedPreferences preferences;
 
     public View onCreateView(@NonNull final LayoutInflater inflater,
@@ -37,10 +37,13 @@ public class TweaksFragment extends Fragment implements View.OnClickListener{
 
         cpu = new CPU();
 
+        oem_name = root.findViewById(R.id.oem_name);
+        oem_name.setText(Device.getVendor() + " " + Device.getModel());
+
         little_max = root.findViewById(R.id.little_max);
         little_max.setText("Little max: "+cpu.getMaxFreq(0)/1000 + "Mhz");
         big_max = root.findViewById(R.id.big_max);
-        big_max.setText("Big Max: "+cpu.getMaxFreq(4)/1000 + "MHz");
+        big_max.setText("Big max: "+cpu.getMaxFreq(4)/1000 + "MHz");
 
         cpu_gov = root.findViewById(R.id.cpu_gov);
         cpu_gov.setText("CPU governer: "+cpu.getGovernor(0));

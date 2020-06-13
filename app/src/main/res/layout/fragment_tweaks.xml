@@ -49,16 +49,16 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/oem_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Xiaomi Redmi Note 5 Pro"
                         android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/kernel_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Kernel Version: "
+                        android:text="Kernel version: "
                         android:textColor="@color/text_sec"
                         android:textSize="13sp" />
 
