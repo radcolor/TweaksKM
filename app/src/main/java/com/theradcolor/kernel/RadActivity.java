@@ -12,6 +12,7 @@ import com.grarak.kerneladiutor.utils.root.RootUtils;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -57,19 +58,18 @@ public class RadActivity extends AppCompatActivity {
     Boolean state = true;
 
     private boolean dialog() {
-        new AlertDialog.Builder(this)
+        new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.Theme_AppCompat_DayNight_Dialog_Alert))
                 .setTitle("Unsupported kernel/device!")
                 .setCancelable(false)
                 //.setSingleChoiceItems(list, 1, null)
                 .setPositiveButton("exit", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         int selectedPosition = ((AlertDialog) dialog).getListView().getCheckedItemPosition();
+                        editor = preferences.edit();
                         if (selectedPosition == 0) {
-                            editor = preferences.edit();
                             editor.putBoolean("Show dialog", false);
                             state = false;
                         } else {
-                            editor = preferences.edit();
                             editor.putBoolean("Show dialog", true);
                             state = true;
                         }
