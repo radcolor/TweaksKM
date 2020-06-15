@@ -22,7 +22,7 @@ public class AboutFragment extends Fragment implements View.OnClickListener{
 
     private AboutViewModel notificationsViewModel;
     private ImageView imageView,ghimg;
-    private TextView textView,textView_br;
+    private TextView textView_br;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -37,9 +37,6 @@ public class AboutFragment extends Fragment implements View.OnClickListener{
         imageView.setOnClickListener(this);
         ghimg = root.findViewById(R.id.gh_link);
         ghimg.setOnClickListener(this);
-        textView = root.findViewById(R.id.faqs);
-        textView.setOnClickListener(this);
-        textView.setVisibility(View.GONE);
 
         //final TextView textView = root.findViewById(R.id.text_notifications);
         notificationsViewModel.getText().observe(this, new Observer<String>() {
@@ -73,9 +70,6 @@ public class AboutFragment extends Fragment implements View.OnClickListener{
                 break;
             case R.id.gh_link:
                 openGH();
-                break;
-            case R.id.faqs:
-                startActivity(new Intent(getContext(), FAQsActivity.class));
                 break;
         }
     }
