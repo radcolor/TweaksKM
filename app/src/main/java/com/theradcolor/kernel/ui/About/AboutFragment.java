@@ -52,14 +52,14 @@ public class AboutFragment extends Fragment implements View.OnClickListener{
     }
 
     public void openTG() {
-        Uri uri = Uri.parse("http://t.me/radkernel");
+        Uri uri = Uri.parse("http://t.me/tweaksKM");
         Intent intent = new Intent(Intent.ACTION_VIEW, uri);
         //intent.setPackage("org.thunderdog.challegram");
         startActivity(intent);
     }
 
     public void openGH() {
-        Uri uri = Uri.parse("http://theradcolor.github.io/kernel");
+        Uri uri = Uri.parse("http://github.com/theradcolor/tweaks");
         Intent intent = new Intent(Intent.ACTION_VIEW, uri);
         startActivity(intent);
     }
