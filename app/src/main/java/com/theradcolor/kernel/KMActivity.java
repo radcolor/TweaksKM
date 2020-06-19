@@ -10,8 +10,8 @@ import android.view.MenuItem;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.grarak.kerneladiutor.utils.root.RootUtils;
 import com.theradcolor.kernel.fragments.AboutFragment;
-import com.theradcolor.kernel.fragments.MiscFragment;
-import com.theradcolor.kernel.fragments.TweaksFragment;
+import com.theradcolor.kernel.fragments.KernelFragment;
+import com.theradcolor.kernel.fragments.MonitorFragment;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -26,8 +26,8 @@ public class KMActivity extends AppCompatActivity {
     SharedPreferences.Editor editor;
     SharedPreferences preferences;
 
-    final Fragment fragment1 = new TweaksFragment();
-    final Fragment fragment2 = new MiscFragment();
+    final Fragment fragment1 = new MonitorFragment();
+    final Fragment fragment2 = new KernelFragment();
     final Fragment fragment3 = new AboutFragment();
     final FragmentManager fm = getSupportFragmentManager();
     Fragment active = fragment1;

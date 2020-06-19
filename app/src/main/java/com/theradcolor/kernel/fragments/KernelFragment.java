@@ -27,7 +27,7 @@ import com.theradcolor.kernel.KcalActivity;
 import com.theradcolor.kernel.R;
 
 
-public class MiscFragment extends Fragment implements View.OnClickListener{
+public class KernelFragment extends Fragment implements View.OnClickListener{
 
     private TextView vib;
     private SeekBar seekBar;
@@ -43,7 +43,7 @@ public class MiscFragment extends Fragment implements View.OnClickListener{
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
-        View root = inflater.inflate(R.layout.fragment_misc, container, false);
+        View root = inflater.inflate(R.layout.fragment_kernel, container, false);
         seekBar = root.findViewById(R.id.vibration);
         seekBar.setPadding(16,16,16,16);
         vib = root.findViewById(R.id.pervib);

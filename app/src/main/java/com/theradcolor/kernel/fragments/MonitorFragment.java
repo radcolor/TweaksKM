@@ -19,7 +19,7 @@ import com.theradcolor.utils.kernel.CPU;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class TweaksFragment extends Fragment implements View.OnClickListener{
+public class MonitorFragment extends Fragment implements View.OnClickListener{
 
     CPU cpu;
     public TextView textView;
@@ -29,7 +29,7 @@ public class TweaksFragment extends Fragment implements View.OnClickListener{
     public View onCreateView(@NonNull final LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
-        View root = inflater.inflate(R.layout.fragment_tweaks, container, false);
+        View root = inflater.inflate(R.layout.fragment_monitor, container, false);
         textView = root.findViewById(R.id.kernel_name);
         textView.setText("Kernel: " + RootUtils.runCommand("uname -a"));
 
