@@ -1,4 +1,4 @@
-package com.theradcolor.kernel.ui.About;
+package com.theradcolor.kernel.fragments;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -8,26 +8,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
-
-import com.theradcolor.kernel.FAQsActivity;
 import com.theradcolor.kernel.R;
 
 public class AboutFragment extends Fragment implements View.OnClickListener{
 
-    private AboutViewModel notificationsViewModel;
     private ImageView imageView,ghimg;
     private TextView textView_br;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        notificationsViewModel =
-                ViewModelProviders.of(this).get(AboutViewModel.class);
         View root = inflater.inflate(R.layout.fragment_about, container, false);
 
         textView_br = root.findViewById(R.id.br);
@@ -38,13 +29,6 @@ public class AboutFragment extends Fragment implements View.OnClickListener{
         ghimg = root.findViewById(R.id.gh_link);
         ghimg.setOnClickListener(this);
 
-        //final TextView textView = root.findViewById(R.id.text_notifications);
-        notificationsViewModel.getText().observe(this, new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                //textView.setText(s);
-            }
-        });
         return root;
     }
 

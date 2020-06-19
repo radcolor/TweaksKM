@@ -5,40 +5,72 @@ import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.grarak.kerneladiutor.utils.root.RootUtils;
+import com.theradcolor.kernel.fragments.AboutFragment;
+import com.theradcolor.kernel.fragments.MiscFragment;
+import com.theradcolor.kernel.fragments.TweaksFragment;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.ContextThemeWrapper;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
-public class RadActivity extends AppCompatActivity {
+public class KMActivity extends AppCompatActivity {
 
     SharedPreferences.Editor editor;
     SharedPreferences preferences;
 
+    final Fragment fragment1 = new TweaksFragment();
+    final Fragment fragment2 = new MiscFragment();
+    final Fragment fragment3 = new AboutFragment();
+    final FragmentManager fm = getSupportFragmentManager();
+    Fragment active = fragment1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_rad);
-        BottomNavigationView navView = findViewById(R.id.nav_view);
+        setContentView(R.layout.activity_km);
+
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(R.layout.actionbar);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         preferences = this.getPreferences(Context.MODE_PRIVATE);
-        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications)
-                .build();
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-        NavigationUI.setupWithNavController(navView, navController);
+
+        BottomNavigationView navigation = findViewById(R.id.nav_view);
+
+        fm.beginTransaction().add(R.id.main_container, fragment3, "3").hide(fragment3).commit();
+        fm.beginTransaction().add(R.id.main_container, fragment2, "2").hide(fragment2).commit();
+        fm.beginTransaction().add(R.id.main_container, fragment1, "1").commit();
+
+        navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.navigation_home:
+                        fm.beginTransaction().hide(active).show(fragment1).commit();
+                        active = fragment1;
+                        return true;
+
+                    case R.id.navigation_dashboard:
+                        fm.beginTransaction().hide(active).show(fragment2).commit();
+                        active = fragment2;
+                        return true;
+
+                    case R.id.navigation_notifications:
+                        fm.beginTransaction().hide(active).show(fragment3).commit();
+                        active = fragment3;
+                        return true;
+                }
+                return false;
+            }
+        });
 
         if (checkRoot.isDeviceRooted() && System.getProperty("os.version").contains("rad")) {
             Log.d("MainActivity", "Kernel and Root Check Passed");
@@ -86,4 +118,5 @@ public class RadActivity extends AppCompatActivity {
         RootUtils.closeSU();
         super.onDestroy();
     }
+
 }

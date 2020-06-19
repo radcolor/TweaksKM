@@ -22,7 +22,7 @@
             android:theme="@style/kcal"
             android:name=".KcalActivity"
             android:label="Display Color Calibration"
-            android:parentActivityName=".RadActivity" />
+            android:parentActivityName=".KMActivity" />
         <activity
             android:name=".SplashActivity"
             android:screenOrientation="portrait"
@@ -36,10 +36,10 @@
         <activity
             android:name=".FAQsActivity"
             android:label="FAQs"
-            android:parentActivityName=".RadActivity"
+            android:parentActivityName=".KMActivity"
             android:theme="@style/faqs" />
         <activity
-            android:name=".RadActivity"
+            android:name=".KMActivity"
             android:label="@string/title_activity_rad"
             android:theme="@style/rad" />
 

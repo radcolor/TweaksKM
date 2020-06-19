@@ -1,4 +1,4 @@
-package com.theradcolor.kernel.ui.Tweaks;
+package com.theradcolor.kernel.fragments;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProviders;
 
 import com.grarak.kerneladiutor.utils.Device;
 import com.grarak.kerneladiutor.utils.root.RootUtils;
@@ -22,7 +21,6 @@ import java.util.TimerTask;
 
 public class TweaksFragment extends Fragment implements View.OnClickListener{
 
-    private TweaksViewModel homeViewModel;
     CPU cpu;
     public TextView textView;
     private TextView cpu0,cpu1,cpu2,cpu3,cpu4,cpu5,cpu6,cpu7, little_max, big_max, board, cpu_gov, oem_name;
@@ -30,7 +28,7 @@ public class TweaksFragment extends Fragment implements View.OnClickListener{
 
     public View onCreateView(@NonNull final LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        homeViewModel = ViewModelProviders.of(this).get(TweaksViewModel.class);
+
         View root = inflater.inflate(R.layout.fragment_tweaks, container, false);
         textView = root.findViewById(R.id.kernel_name);
         textView.setText("Kernel: " + RootUtils.runCommand("uname -a"));

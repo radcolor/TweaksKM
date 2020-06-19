@@ -1,6 +1,5 @@
-package com.theradcolor.kernel.ui.Misc;
+package com.theradcolor.kernel.fragments;
 
-import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -17,23 +16,19 @@ import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProviders;
 
 import com.grarak.kerneladiutor.utils.root.RootUtils;
 import com.theradcolor.kernel.KcalActivity;
 import com.theradcolor.kernel.R;
 
-import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 
 public class MiscFragment extends Fragment implements View.OnClickListener{
 
-    private MiscViewModel dashboardViewModel;
     private TextView vib;
     private SeekBar seekBar;
     private LinearLayout srgb,kcal,vibration,hpg,mcg;
@@ -47,8 +42,7 @@ public class MiscFragment extends Fragment implements View.OnClickListener{
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        dashboardViewModel =
-                ViewModelProviders.of(this).get(MiscViewModel.class);
+
         View root = inflater.inflate(R.layout.fragment_misc, container, false);
         seekBar = root.findViewById(R.id.vibration);
         seekBar.setPadding(16,16,16,16);
