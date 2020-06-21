@@ -34,7 +34,7 @@
                 android:textSize="18sp"
                 android:textStyle="bold"
                 android:textAlignment="center"
-                android:text="Tweaks"
+                android:text="@string/app_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
@@ -43,12 +43,13 @@
                 android:textSize="18sp"
                 android:textStyle="bold"
                 android:textAlignment="center"
-                android:text="Kernel Manager"
+                android:text="@string/txt_km"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
             <TextView
                 android:layout_marginTop="4dp"
+                android:text="@string/love"
                 android:id="@+id/br"
                 android:textSize="12sp"
                 android:textAlignment="center"
@@ -132,7 +133,7 @@
 
                         <TextView
                             android:textStyle="bold"
-                            android:text="FAQs"
+                            android:text="@string/txt_faqs"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"/>
 
@@ -140,7 +141,7 @@
                             android:layout_marginTop="2dp"
                             android:textSize="13sp"
                             android:textColor="@color/text_sec"
-                            android:text="All about app and related queries"
+                            android:text="@string/faqs_desc"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
 
@@ -190,7 +191,7 @@
 
                         <TextView
                             android:textStyle="bold"
-                            android:text="Open source licenses"
+                            android:text="@string/opn_src_txt"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"/>
 
@@ -198,7 +199,7 @@
                             android:layout_marginTop="2dp"
                             android:textSize="13sp"
                             android:textColor="@color/text_sec"
-                            android:text="Open source libraries and their license"
+                            android:text="@string/opn_src_desc"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
 

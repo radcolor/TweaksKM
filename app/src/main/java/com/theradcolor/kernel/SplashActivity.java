@@ -10,16 +10,11 @@ import android.widget.TextView;
 
 public class SplashActivity extends AppCompatActivity {
 
-    private TextView textView;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
         setContentView(R.layout.activity_splash);
-
-        textView = findViewById(R.id.sp_br);
-        textView.setText("</> with ❤️ by rad");
 
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -27,7 +22,7 @@ public class SplashActivity extends AppCompatActivity {
                 startActivity(new Intent(SplashActivity.this, KMActivity.class));
                 finish();
             }
-        },100);
+        },500);
 
     }
 }

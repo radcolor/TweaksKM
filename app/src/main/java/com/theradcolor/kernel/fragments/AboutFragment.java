@@ -14,15 +14,11 @@ import com.theradcolor.kernel.R;
 
 public class AboutFragment extends Fragment implements View.OnClickListener{
 
-    private ImageView imageView,ghimg;
-    private TextView textView_br;
+    private ImageView imageView, ghimg;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_about, container, false);
-
-        textView_br = root.findViewById(R.id.br);
-        textView_br.setText("</> with ❤️ by rad");
 
         imageView =root. findViewById(R.id.tg_link);
         imageView.setOnClickListener(this);

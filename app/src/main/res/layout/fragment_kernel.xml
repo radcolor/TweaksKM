@@ -57,7 +57,7 @@
                         <TextView
                             android:textColor="@color/green_light"
                             android:textStyle="bold"
-                            android:text="Haptic Feedback"
+                            android:text="@string/title_vib"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
 
@@ -116,7 +116,7 @@
 
                             <TextView
                                 android:textStyle="bold"
-                                android:text="Strength"
+                                android:text="@string/txt_strength"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"/>
 
@@ -216,7 +216,7 @@
                         <TextView
                             android:textColor="@color/green_light"
                             android:textStyle="bold"
-                            android:text="Display Control"
+                            android:text="@string/title_dis_cont"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
 
@@ -272,13 +272,13 @@
 
                         <TextView
                             android:textStyle="bold"
-                            android:text="sRGB Colors"
+                            android:text="@string/txt_srgb"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
 
                         <TextView
                             android:layout_marginTop="4dp"
-                            android:text="Enable/Disable sRGB colors"
+                            android:text="@string/srgb_desc"
                             android:textColor="@color/text_sec"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"/>
@@ -338,13 +338,13 @@
 
                         <TextView
                             android:textStyle="bold"
-                            android:text="Color Calibration (KCAL)"
+                            android:text="@string/txt_kcal"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
 
                         <TextView
                             android:layout_marginTop="4dp"
-                            android:text="Tune RGB and others from here"
+                            android:text="@string/kcal_desc"
                             android:textColor="@color/text_sec"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"/>
@@ -410,7 +410,7 @@
                         <TextView
                             android:textColor="@color/green_light"
                             android:textStyle="bold"
-                            android:text="Sound Control"
+                            android:text="@string/title_sound_cont"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
 
@@ -467,13 +467,13 @@
 
                         <TextView
                             android:textStyle="bold"
-                            android:text="Headphone Gain"
+                            android:text="@string/title_hp_gain"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
 
                         <TextView
                             android:layout_marginTop="4dp"
-                            android:text="Tune headphone digital gain"
+                            android:text="@string/hp_gain_desc"
                             android:textColor="@color/text_sec"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"/>
@@ -533,13 +533,13 @@
 
                         <TextView
                             android:textStyle="bold"
-                            android:text="Microphone Gain"
+                            android:text="@string/title_mp_gain"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
 
                         <TextView
                             android:layout_marginTop="4dp"
-                            android:text="Tune device microphone gain"
+                            android:text="@string/mc_gain_desc"
                             android:textColor="@color/text_sec"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"/>
@@ -590,7 +590,7 @@
 
                 <TextView
                     android:layout_marginLeft="12dp"
-                    android:text="SPECTRUM"
+                    android:text="@string/title_spec"
                     android:textColor="@color/green_light"
                     android:textStyle="bold"
                     android:layout_width="match_parent"
@@ -631,7 +631,7 @@
 
                         <TextView
                             android:textStyle="bold"
-                            android:text="Better Battery Mode"
+                            android:text="@string/txt_bbm"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
 
@@ -639,7 +639,7 @@
                             android:layout_marginTop="2dp"
                             android:textSize="13sp"
                             android:textColor="@color/text_sec"
-                            android:text="Aims for better battery life"
+                            android:text="@string/bbm_desc"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
 
@@ -696,7 +696,7 @@
 
                         <TextView
                             android:textStyle="bold"
-                            android:text="Overall Balance Mode"
+                            android:text="@string/txt_obm"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
 
@@ -704,7 +704,7 @@
                             android:layout_marginTop="2dp"
                             android:textSize="13sp"
                             android:textColor="@color/text_sec"
-                            android:text="Default kernel profile for overall balance"
+                            android:text="@string/obm_desc"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
 
@@ -747,7 +747,7 @@
 
                         <TextView
                             android:textStyle="bold"
-                            android:text="Performance Mode"
+                            android:text="@string/txt_pm"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
 
@@ -755,7 +755,7 @@
                             android:layout_marginTop="2dp"
                             android:textSize="13sp"
                             android:textColor="@color/text_sec"
-                            android:text="Tuned for top tier performance"
+                            android:text="@string/pm_desc"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
 
@@ -802,7 +802,7 @@
 
                 <TextView
                     android:layout_marginLeft="12dp"
-                    android:text="SPECTRUM(GAMING)"
+                    android:text="@string/title_spec_game"
                     android:textColor="@color/green_light"
                     android:textStyle="bold"
                     android:layout_width="match_parent"
@@ -843,7 +843,7 @@
 
                         <TextView
                             android:textStyle="bold"
-                            android:text="Enable/Disable Gaming Mode"
+                            android:text="@string/txt_gm"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
 
@@ -851,7 +851,7 @@
                             android:layout_marginTop="2dp"
                             android:textSize="13sp"
                             android:textColor="@color/text_sec"
-                            android:text="Aims for Better Gaming performance"
+                            android:text="@string/gm_desc"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
 
@@ -907,7 +907,7 @@
 
                         <TextView
                             android:textStyle="bold"
-                            android:text="Disable Auto-Sync feature"
+                            android:text="@string/txt_auto_sync"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
 
@@ -915,7 +915,7 @@
                             android:layout_marginTop="2dp"
                             android:textSize="13sp"
                             android:textColor="@color/text_sec"
-                            android:text="Can improve network traffic"
+                            android:text="@string/auto_sync_desc"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
 
@@ -971,7 +971,7 @@
 
                         <TextView
                             android:textStyle="bold"
-                            android:text="Real-Time FPS/CPU Monitoring"
+                            android:text="@string/txt_rt_mon"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
 
@@ -979,7 +979,7 @@
                             android:layout_marginTop="2dp"
                             android:textSize="13sp"
                             android:textColor="@color/text_sec"
-                            android:text="Will display real time fps and cpu usage"
+                            android:text="@string/rt_mon_desc"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
 

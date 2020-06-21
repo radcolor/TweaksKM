@@ -40,7 +40,7 @@
             android:theme="@style/faqs" />
         <activity
             android:name=".KMActivity"
-            android:label="@string/title_activity_rad"
+            android:label="@string/app_name"
             android:theme="@style/rad" />
 
         <service

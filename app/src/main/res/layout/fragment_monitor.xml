@@ -58,7 +58,6 @@
                         android:id="@+id/kernel_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Kernel version: "
                         android:textColor="@color/text_sec"
                         android:textSize="13sp" />
 
@@ -92,7 +91,7 @@
                 <TextView
                     android:layout_marginTop="4dp"
                     android:layout_marginLeft="12dp"
-                    android:text="CPU"
+                    android:text="@string/title_cpu"
                     android:textColor="@color/green_light"
                     android:textStyle="bold"
                     android:layout_width="match_parent"
@@ -110,7 +109,6 @@
                         android:id="@+id/little_max"
                         android:layout_weight="1"
                         android:layout_marginLeft="8dp"
-                        android:text="Little max: 0MHz"
                         android:textStyle="bold"
                         android:layout_marginRight="8dp"
                         android:layout_width="match_parent"
@@ -120,7 +118,6 @@
                         android:id="@+id/big_max"
                         android:layout_weight="1"
                         android:layout_marginRight="4dp"
-                        android:text="Big max: 0MHz"
                         android:textStyle="bold"
                         android:textAlignment="viewEnd"
                         android:layout_marginLeft="8dp"
@@ -260,7 +257,7 @@
                         android:id="@+id/cpu_arch"
                         android:layout_weight="1"
                         android:layout_marginLeft="8dp"
-                        android:text="Board: "
+
                         android:textStyle="bold"
                         android:layout_marginRight="8dp"
                         android:layout_width="match_parent"
@@ -270,7 +267,6 @@
                         android:id="@+id/cpu_gov"
                         android:layout_weight="1"
                         android:layout_marginRight="4dp"
-                        android:text="CPU governer: x"
                         android:textStyle="bold"
                         android:textAlignment="viewEnd"
                         android:layout_marginLeft="8dp"
@@ -308,7 +304,7 @@
                 <TextView
                     android:layout_marginTop="4dp"
                     android:layout_marginLeft="12dp"
-                    android:text="GPU"
+                    android:text="@string/title_gpu"
                     android:textColor="@color/green_light"
                     android:textStyle="bold"
                     android:layout_width="match_parent"
@@ -326,7 +322,7 @@
                        android:layout_height="wrap_content">
 
                        <TextView
-                           android:text="GPU Usage: "
+                           android:text="@string/txt_gpu_usage"
                            android:textStyle="bold"
                            android:layout_width="wrap_content"
                            android:layout_height="wrap_content"/>
@@ -334,6 +330,7 @@
                        <TextView
                            android:id="@+id/gpu_usage"
                            android:text="25%"
+                           android:layout_marginLeft="8dp"
                            android:textColor="@color/text_sec"
                            android:layout_width="wrap_content"
                            android:layout_height="wrap_content"/>
@@ -347,7 +344,7 @@
                        android:layout_height="wrap_content">
 
                        <TextView
-                           android:text="GPU cuurent freq: "
+                           android:text="@string/gpu_cuurent_freq"
                            android:textStyle="bold"
                            android:layout_width="wrap_content"
                            android:layout_height="wrap_content"/>
@@ -355,6 +352,7 @@
                        <TextView
                            android:id="@+id/gpu_curr_freq"
                            android:text="266MHz"
+                           android:layout_marginLeft="8dp"
                            android:textColor="@color/text_sec"
                            android:layout_width="wrap_content"
                            android:layout_height="wrap_content"/>
@@ -368,7 +366,7 @@
                        android:layout_height="wrap_content">
 
                        <TextView
-                           android:text="GPU max freq: "
+                           android:text="@string/gpu_max_freq"
                            android:textStyle="bold"
                            android:layout_width="wrap_content"
                            android:layout_height="wrap_content"/>
@@ -376,6 +374,7 @@
                        <TextView
                            android:id="@+id/gpu_max_freq"
                            android:text="460Mhz"
+                           android:layout_marginLeft="8dp"
                            android:textColor="@color/text_sec"
                            android:layout_width="wrap_content"
                            android:layout_height="wrap_content"/>
@@ -389,7 +388,7 @@
                        android:layout_height="wrap_content">
 
                        <TextView
-                           android:text="GPU model: "
+                           android:text="@string/txt_gpu_model"
                            android:textStyle="bold"
                            android:layout_width="wrap_content"
                            android:layout_height="wrap_content"/>
@@ -397,6 +396,7 @@
                        <TextView
                            android:id="@+id/gpu_model"
                            android:text="Qualcomm Adreno 512"
+                           android:layout_marginLeft="8dp"
                            android:textColor="@color/text_sec"
                            android:layout_width="wrap_content"
                            android:layout_height="wrap_content"/>

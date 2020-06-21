@@ -16,7 +16,7 @@
             android:textColor="@android:color/white"
             android:textStyle="bold"
             android:layout_marginLeft="8dp"
-            android:text="Headphone left channel gain"
+            android:text="@string/diag_hp_left_gain"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
@@ -25,7 +25,7 @@
             android:progressDrawable="@drawable/seek_bar"
             android:thumb="@drawable/seek_thumb"
             android:layout_marginLeft="8dp"
-            android:id="@+id/your_dialog_seekbar"
+            android:id="@+id/hp_lft"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content">
         </SeekBar>
@@ -35,7 +35,7 @@
             android:textColor="@android:color/white"
             android:textStyle="bold"
             android:layout_marginLeft="8dp"
-            android:text="Headphone right channel gain"
+            android:text="@string/diag_hp_right_gain"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
@@ -44,7 +44,7 @@
             android:layout_marginLeft="8dp"
             android:progressDrawable="@drawable/seek_bar"
             android:thumb="@drawable/seek_thumb"
-            android:id="@+id/your_dialog_seekbar"
+            android:id="@+id/hp_rgt"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content">
         </SeekBar>

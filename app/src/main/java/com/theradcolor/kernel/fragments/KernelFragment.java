@@ -61,7 +61,7 @@ public class KernelFragment extends Fragment implements View.OnClickListener{
         mcg.setOnClickListener(this);
 
         preferences = getActivity().getSharedPreferences("preferences",Context.MODE_PRIVATE);
-        vib.setText(preferences.getInt("vibration",1)+"%");
+        vib.setText(preferences.getInt("vibration",1)+getString(R.string.percent));
         seekBar.setProgress(preferences.getInt("vibration",1));
 
         srgb.setOnClickListener(this);
@@ -73,7 +73,7 @@ public class KernelFragment extends Fragment implements View.OnClickListener{
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 progressChangedValue = progress;
-                vib.setText(progress + "%");
+                vib.setText(progress + getString(R.string.percent));
                 Vibrator v = (Vibrator) getContext().getSystemService(Context.VIBRATOR_SERVICE);
                 vibrationValue = (int) (progress / 100.0 * (MAX_VIBRATION - MIN_VIBRATION) + MIN_VIBRATION);
             }
@@ -218,7 +218,7 @@ public class KernelFragment extends Fragment implements View.OnClickListener{
 
     public void hpgDialog(View view) {        // create an alert builder
         AlertDialog.Builder builder =  new AlertDialog.Builder(new ContextThemeWrapper(getContext(), R.style.Theme_AppCompat_DayNight_Dialog_Alert));
-        builder.setTitle("Headphone Gain");        // set the custom layout
+        builder.setTitle(R.string.title_hp_gain);        // set the custom layout
         final View customLayout = getLayoutInflater().inflate(R.layout.headgain_dialog, null);
         builder.setView(customLayout);        // add a button
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -233,7 +233,7 @@ public class KernelFragment extends Fragment implements View.OnClickListener{
 
     public void mcgDialog(View view) {        // create an alert builder
         AlertDialog.Builder builder =  new AlertDialog.Builder(new ContextThemeWrapper(getContext(), R.style.Theme_AppCompat_DayNight_Dialog_Alert));
-        builder.setTitle("Microphone Gain");        // set the custom layout
+        builder.setTitle(R.string.title_mp_gain);        // set the custom layout
         final View customLayout = getLayoutInflater().inflate(R.layout.micgain_dialog, null);
         builder.setView(customLayout);        // add a button
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {

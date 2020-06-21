@@ -31,7 +31,7 @@ public class MonitorFragment extends Fragment implements View.OnClickListener{
 
         View root = inflater.inflate(R.layout.fragment_monitor, container, false);
         textView = root.findViewById(R.id.kernel_name);
-        textView.setText("Kernel: " + RootUtils.runCommand("uname -a"));
+        textView.setText(getString(R.string.kernel_prefix)+ " " + RootUtils.runCommand("uname -a"));
 
         cpu = new CPU();
 
@@ -39,14 +39,14 @@ public class MonitorFragment extends Fragment implements View.OnClickListener{
         oem_name.setText(Device.getVendor() + " " + Device.getModel());
 
         little_max = root.findViewById(R.id.little_max);
-        little_max.setText("Little max: "+cpu.getMaxFreq(0)/1000 + "Mhz");
+        little_max.setText(getString(R.string.title_little_max)+ " "+cpu.getMaxFreq(0)/1000 + "Mhz");
         big_max = root.findViewById(R.id.big_max);
-        big_max.setText("Big max: "+cpu.getMaxFreq(4)/1000 + "MHz");
+        big_max.setText(getString(R.string.title_big_max)+ " "+cpu.getMaxFreq(4)/1000 + "MHz");
 
         cpu_gov = root.findViewById(R.id.cpu_gov);
-        cpu_gov.setText("CPU governer: "+cpu.getGovernor(0));
+        cpu_gov.setText(getString(R.string.cpu_gov)+ " "+cpu.getGovernor(0));
         board = root.findViewById(R.id.cpu_arch);
-        board.setText("Board: " + Device.getHardware() + " " + Device.getBoard());
+        board.setText(getString(R.string.dev_board) + " " + Device.getHardware() + " " + Device.getBoard());
 
         cpu0 = root.findViewById(R.id.cpu0);
         cpu1 = root.findViewById(R.id.cpu1);
