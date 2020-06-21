@@ -149,7 +149,6 @@
                             android:textAlignment="viewEnd"
                             android:text="0MHz"
                             android:textColor="@color/text_sec"
-                            android:textStyle="bold"
                             android:layout_marginRight="8dp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"/>
@@ -159,7 +158,6 @@
                             android:layout_weight="1"
                             android:text="0MHz"
                             android:textColor="@color/text_sec"
-                            android:textStyle="bold"
                             android:layout_marginLeft="8dp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"/>
@@ -178,7 +176,6 @@
                             android:textAlignment="viewEnd"
                             android:text="0MHz"
                             android:textColor="@color/text_sec"
-                            android:textStyle="bold"
                             android:layout_marginRight="8dp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"/>
@@ -188,7 +185,6 @@
                             android:layout_weight="1"
                             android:text="0MHz"
                             android:textColor="@color/text_sec"
-                            android:textStyle="bold"
                             android:layout_marginLeft="8dp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"/>
@@ -207,7 +203,6 @@
                             android:textAlignment="viewEnd"
                             android:text="0MHz"
                             android:textColor="@color/text_sec"
-                            android:textStyle="bold"
                             android:layout_marginRight="8dp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"/>
@@ -217,7 +212,6 @@
                             android:layout_weight="1"
                             android:text="0MHz"
                             android:textColor="@color/text_sec"
-                            android:textStyle="bold"
                             android:layout_marginLeft="8dp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"/>
@@ -236,7 +230,6 @@
                             android:textAlignment="viewEnd"
                             android:text="0MHz"
                             android:textColor="@color/text_sec"
-                            android:textStyle="bold"
                             android:layout_marginRight="8dp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"/>
@@ -245,7 +238,6 @@
                             android:id="@+id/cpu7"
                             android:layout_weight="1"
                             android:text="0MHz"
-                            android:textStyle="bold"
                             android:textColor="@color/text_sec"
                             android:layout_marginLeft="8dp"
                             android:layout_width="match_parent"
