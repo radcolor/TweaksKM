@@ -14,7 +14,7 @@ import androidx.fragment.app.Fragment;
 import com.grarak.kerneladiutor.utils.Device;
 import com.grarak.kerneladiutor.utils.root.RootUtils;
 import com.theradcolor.kernel.R;
-import com.theradcolor.utils.kernel.CPU;
+import com.theradcolor.kernel.utils.kernel.CPU;
 
 import java.util.Timer;
 import java.util.TimerTask;

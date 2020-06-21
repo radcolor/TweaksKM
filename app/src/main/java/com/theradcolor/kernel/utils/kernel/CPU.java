@@ -1,4 +1,4 @@
-package com.theradcolor.utils.kernel;
+package com.theradcolor.kernel.utils.kernel;
 
 import com.grarak.kerneladiutor.utils.Utils;
 

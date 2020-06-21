@@ -617,7 +617,7 @@
                             android:layout_width="25dp"
                             android:layout_height="25dp"
                             android:layout_centerInParent="true"
-                            android:src="@drawable/bbm" />
+                            android:src="@drawable/ic_baseline_eco_24" />
 
                     </RelativeLayout>
 
@@ -682,7 +682,7 @@
                             android:layout_width="25dp"
                             android:layout_height="25dp"
                             android:layout_centerInParent="true"
-                            android:src="@drawable/obm" />
+                            android:src="@drawable/ic_baseline_balance_24" />
 
                     </RelativeLayout>
 
@@ -733,7 +733,7 @@
                             android:layout_width="25dp"
                             android:layout_height="25dp"
                             android:layout_centerInParent="true"
-                            android:src="@drawable/pm" />
+                            android:src="@drawable/ic_baseline_power_24" />
 
                     </RelativeLayout>
 
@@ -829,7 +829,7 @@
                             android:layout_width="25dp"
                             android:layout_height="25dp"
                             android:layout_centerInParent="true"
-                            android:src="@drawable/game" />
+                            android:src="@drawable/ic_baseline_gamepad_24" />
 
                     </RelativeLayout>
 

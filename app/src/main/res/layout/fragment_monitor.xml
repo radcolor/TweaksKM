@@ -297,6 +297,126 @@
             android:layout_height="0.1dp"
             android:background="@color/grey_light"/>
 
+        <LinearLayout
+            android:clickable="true"
+            android:focusable="true"
+            android:background="@drawable/ripple"
+            android:layout_marginTop="16dp"
+            android:scrollbars="vertical"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_marginBottom="4dp"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_marginTop="4dp"
+                    android:layout_marginLeft="12dp"
+                    android:text="GPU"
+                    android:textColor="@color/green_light"
+                    android:textStyle="bold"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+               <LinearLayout
+                   android:padding="12dp"
+                   android:orientation="vertical"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content">
+
+                   <LinearLayout
+                       android:orientation="horizontal"
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content">
+
+                       <TextView
+                           android:text="GPU Usage: "
+                           android:textStyle="bold"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"/>
+
+                       <TextView
+                           android:id="@+id/gpu_usage"
+                           android:text="25%"
+                           android:textColor="@color/text_sec"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"/>
+
+                   </LinearLayout>
+
+                   <LinearLayout
+                       android:layout_marginTop="8dp"
+                       android:orientation="horizontal"
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content">
+
+                       <TextView
+                           android:text="GPU cuurent freq: "
+                           android:textStyle="bold"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"/>
+
+                       <TextView
+                           android:id="@+id/gpu_curr_freq"
+                           android:text="266MHz"
+                           android:textColor="@color/text_sec"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"/>
+
+                   </LinearLayout>
+
+                   <LinearLayout
+                       android:layout_marginTop="8dp"
+                       android:orientation="horizontal"
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content">
+
+                       <TextView
+                           android:text="GPU max freq: "
+                           android:textStyle="bold"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"/>
+
+                       <TextView
+                           android:id="@+id/gpu_max_freq"
+                           android:text="460Mhz"
+                           android:textColor="@color/text_sec"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"/>
+
+                   </LinearLayout>
+
+                   <LinearLayout
+                       android:layout_marginTop="8dp"
+                       android:orientation="horizontal"
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content">
+
+                       <TextView
+                           android:text="GPU model: "
+                           android:textStyle="bold"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"/>
+
+                       <TextView
+                           android:id="@+id/gpu_model"
+                           android:text="Qualcomm Adreno 512"
+                           android:textColor="@color/text_sec"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"/>
+
+                   </LinearLayout>
+
+               </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
 
     </LinearLayout>
 
