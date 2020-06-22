@@ -2,6 +2,7 @@ package com.theradcolor.kernel.fragments;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,9 +14,14 @@ import androidx.fragment.app.Fragment;
 
 import com.grarak.kerneladiutor.utils.Device;
 import com.grarak.kerneladiutor.utils.root.RootUtils;
+import com.intrusoft.scatter.ChartData;
+import com.intrusoft.scatter.PieChart;
+import com.intrusoft.scatter.SimpleChart;
 import com.theradcolor.kernel.R;
 import com.theradcolor.kernel.utils.kernel.CPU;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -56,6 +62,17 @@ public class MonitorFragment extends Fragment implements View.OnClickListener{
         cpu5 = root.findViewById(R.id.cpu5);
         cpu6 = root.findViewById(R.id.cpu6);
         cpu7 = root.findViewById(R.id.cpu7);
+
+        //Sample pie chart data
+        PieChart memchart = root.findViewById(R.id.memchart);
+        PieChart battchart = root.findViewById(R.id.battchart);
+        memchart.setCenterCircleColor(R.color.colorAccent);
+        battchart.setCenterCircleColor(R.color.colorAccent);
+        List<ChartData> data = new ArrayList<>();
+        data.add(new ChartData("", 66));     //ARGS-> (display text, percentage)
+        data.add(new ChartData("", 34));
+        memchart.setChartData(data);
+        battchart.setChartData(data);
 
         preferences = getActivity().getPreferences(Context.MODE_PRIVATE);
         refreshfreq();

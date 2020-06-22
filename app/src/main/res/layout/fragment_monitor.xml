@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:scatter="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:scrollbars="none"
     android:background="@color/gray">
@@ -409,6 +410,262 @@
 
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_marginTop="12dp"
+            android:layout_width="match_parent"
+            android:layout_height="0.1dp"
+            android:background="@color/grey_light"/>
+
+        <LinearLayout
+            android:clickable="true"
+            android:focusable="true"
+            android:background="@drawable/ripple"
+            android:layout_marginTop="16dp"
+            android:scrollbars="vertical"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_marginBottom="4dp"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_marginTop="4dp"
+                    android:layout_marginLeft="12dp"
+                    android:text="@string/title_mem"
+                    android:textColor="@color/green_light"
+                    android:textStyle="bold"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <LinearLayout
+                    android:padding="12dp"
+                    android:weightSum="3"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.intrusoft.scatter.PieChart
+                        android:id="@+id/memchart"
+                        app:chartColor="@color/green_light"
+                        android:layout_weight="2"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"/>
+
+                   <LinearLayout
+                       android:padding="8dp"
+                       android:orientation="vertical"
+                       android:layout_weight="1"
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content">
+
+                       <LinearLayout
+                           android:orientation="horizontal"
+                           android:layout_width="match_parent"
+                           android:layout_height="wrap_content">
+
+                           <TextView
+                               android:text="@string/txt_used_mem"
+                               android:textStyle="bold"
+                               android:layout_width="wrap_content"
+                               android:layout_height="wrap_content"/>
+
+                           <TextView
+                               android:id="@+id/mem_used"
+                               android:text="2078MB (50%)"
+                               android:layout_marginLeft="8dp"
+                               android:textColor="@color/text_sec"
+                               android:layout_width="wrap_content"
+                               android:layout_height="wrap_content"/>
+
+                       </LinearLayout>
+
+                       <LinearLayout
+                           android:layout_marginTop="8dp"
+                           android:orientation="horizontal"
+                           android:layout_width="match_parent"
+                           android:layout_height="wrap_content">
+
+                           <TextView
+                               android:text="@string/txt_tot_mem"
+                               android:textStyle="bold"
+                               android:layout_width="wrap_content"
+                               android:layout_height="wrap_content"/>
+
+                           <TextView
+                               android:id="@+id/tot_mem"
+                               android:text="4098MB"
+                               android:layout_marginLeft="8dp"
+                               android:textColor="@color/text_sec"
+                               android:layout_width="wrap_content"
+                               android:layout_height="wrap_content"/>
+
+                       </LinearLayout>
+
+                       <LinearLayout
+                           android:layout_marginTop="8dp"
+                           android:orientation="horizontal"
+                           android:layout_width="match_parent"
+                           android:layout_height="wrap_content">
+
+                           <TextView
+                               android:text="@string/txt_free_mem"
+                               android:textStyle="bold"
+                               android:layout_width="wrap_content"
+                               android:layout_height="wrap_content"/>
+
+                           <TextView
+                               android:id="@+id/free_mem"
+                               android:text="2048MB (50%)"
+                               android:layout_marginLeft="8dp"
+                               android:textColor="@color/text_sec"
+                               android:layout_width="wrap_content"
+                               android:layout_height="wrap_content"/>
+
+                       </LinearLayout>
+
+                   </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="12dp"
+            android:layout_width="match_parent"
+            android:layout_height="0.1dp"
+            android:background="@color/grey_light"/>
+
+        <LinearLayout
+            android:clickable="true"
+            android:focusable="true"
+            android:background="@drawable/ripple"
+            android:layout_marginTop="16dp"
+            android:scrollbars="vertical"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_marginBottom="4dp"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_marginTop="4dp"
+                    android:layout_marginLeft="12dp"
+                    android:text="@string/title_batt"
+                    android:textColor="@color/green_light"
+                    android:textStyle="bold"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <LinearLayout
+                    android:padding="12dp"
+                    android:weightSum="3"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.intrusoft.scatter.PieChart
+                        android:id="@+id/battchart"
+                        app:chartColor="@color/green_light"
+                        android:layout_weight="2"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"/>
+
+                    <LinearLayout
+                        android:padding="8dp"
+                        android:orientation="vertical"
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <LinearLayout
+                            android:layout_marginTop="8dp"
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:text="@string/txt_batt_stats"
+                                android:textStyle="bold"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"/>
+
+                            <TextView
+                                android:id="@+id/batt_stats"
+                                android:text="Discharging 300mAH"
+                                android:layout_marginLeft="8dp"
+                                android:textColor="@color/text_sec"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_marginTop="8dp"
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:text="@string/txt_batt_temp"
+                                android:textStyle="bold"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"/>
+
+                            <TextView
+                                android:id="@+id/batt_temp"
+                                android:text="35C"
+                                android:layout_marginLeft="8dp"
+                                android:textColor="@color/text_sec"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_marginTop="8dp"
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:text="@string/txt_batt_dur"
+                                android:textStyle="bold"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"/>
+
+                            <TextView
+                                android:id="@+id/batt_dur"
+                                android:text="10H remaining"
+                                android:layout_marginLeft="8dp"
+                                android:textColor="@color/text_sec"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"/>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="12dp"
+            android:layout_width="match_parent"
+            android:layout_height="0.1dp"
+            android:background="@color/grey_light"/>
 
     </LinearLayout>
 

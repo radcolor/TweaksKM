@@ -55,13 +55,22 @@
     <string name="auto_sync_desc">Can improve network traffic</string>
     <string name="txt_rt_mon">Real-Time FPS/CPU Monitoring</string>
     <string name="rt_mon_desc">Will display real time fps and cpu usage</string>
+    <string name="diag_hp_left_gain">Headphone left channel gain</string>
+    <string name="diag_hp_right_gain">Headphone right channel gain</string>
+
     <string name="title_cpu">CPU</string>
     <string name="title_gpu">GPU</string>
     <string name="txt_gpu_usage">GPU Usage:</string>
     <string name="gpu_cuurent_freq">GPU cuurent freq:</string>
     <string name="gpu_max_freq">GPU max freq:</string>
     <string name="txt_gpu_model">GPU model:</string>
-    <string name="diag_hp_left_gain">Headphone left channel gain</string>
-    <string name="diag_hp_right_gain">Headphone right channel gain</string>
+    <string name="title_mem">MEMORY</string>
+    <string name="title_batt">BATTERY</string>
+    <string name="txt_free_mem">Free memory:</string>
+    <string name="txt_tot_mem">Total memory:</string>
+    <string name="txt_used_mem">Used memory:</string>
+    <string name="txt_batt_stats">Status:</string>
+    <string name="txt_batt_temp">Temperature:</string>
+    <string name="txt_batt_dur">Duration:</string>
 
 </resources>
