@@ -28,7 +28,7 @@ import java.util.TimerTask;
 public class MonitorFragment extends Fragment implements View.OnClickListener{
 
     CPU cpu;
-    public TextView textView;
+    public TextView kernel_name, kernek_name_full;
     private TextView cpu0,cpu1,cpu2,cpu3,cpu4,cpu5,cpu6,cpu7, little_max, big_max, board, cpu_gov, oem_name;
     SharedPreferences preferences;
 
@@ -36,8 +36,10 @@ public class MonitorFragment extends Fragment implements View.OnClickListener{
                              ViewGroup container, Bundle savedInstanceState) {
 
         View root = inflater.inflate(R.layout.fragment_monitor, container, false);
-        textView = root.findViewById(R.id.kernel_name);
-        textView.setText(getString(R.string.kernel_prefix)+ " " + RootUtils.runCommand("uname -a"));
+        kernel_name = root.findViewById(R.id.kernel_name);
+        kernek_name_full = root.findViewById(R.id.kernel_name_full);
+        kernel_name.setText(RootUtils.runCommand("uname -a"));
+        kernek_name_full.setText(Device.getKernelVersion(true));
 
         cpu = new CPU();
 

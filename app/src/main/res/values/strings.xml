@@ -72,5 +72,11 @@
     <string name="txt_batt_stats">Status:</string>
     <string name="txt_batt_temp">Temperature:</string>
     <string name="txt_batt_dur">Duration:</string>
+    <string name="title_sys">SYSTEM</string>
+    <string name="txt_up_tm">Uptime:</string>
+    <string name="txt_dp_slp">Deep sleep:</string>
+    <string name="txt_ld_avg">Loadavg:</string>
+    <string name="txt_ent">Entropy</string>
+    <string name="txt_wg_ver">WireGuard version:</string>
 
 </resources>
