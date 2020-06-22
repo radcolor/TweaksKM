@@ -2,7 +2,6 @@ package com.theradcolor.kernel.fragments;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,20 +15,24 @@ import com.grarak.kerneladiutor.utils.Device;
 import com.grarak.kerneladiutor.utils.root.RootUtils;
 import com.intrusoft.scatter.ChartData;
 import com.intrusoft.scatter.PieChart;
-import com.intrusoft.scatter.SimpleChart;
 import com.theradcolor.kernel.R;
 import com.theradcolor.kernel.utils.kernel.CPU;
+import com.theradcolor.kernel.utils.kernel.GPU;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class MonitorFragment extends Fragment implements View.OnClickListener{
+public class MonitorFragment extends Fragment{
 
     CPU cpu;
-    public TextView kernel_name, kernek_name_full;
-    private TextView cpu0,cpu1,cpu2,cpu3,cpu4,cpu5,cpu6,cpu7, little_max, big_max, board, cpu_gov, oem_name;
+    GPU gpu;
+    int clk, max_clk;
+    String littleFreq, bigFreq;
+    TextView kernel_name, kernel_name_full;
+    TextView cpu0,cpu1,cpu2,cpu3,cpu4,cpu5,cpu6,cpu7, little_max, big_max, board, cpu_gov, oem_name;
+    TextView gpu_usage, gpu_crr_freq, gpu_max_freq;
     SharedPreferences preferences;
 
     public View onCreateView(@NonNull final LayoutInflater inflater,
@@ -37,11 +40,12 @@ public class MonitorFragment extends Fragment implements View.OnClickListener{
 
         View root = inflater.inflate(R.layout.fragment_monitor, container, false);
         kernel_name = root.findViewById(R.id.kernel_name);
-        kernek_name_full = root.findViewById(R.id.kernel_name_full);
+        kernel_name_full = root.findViewById(R.id.kernel_name_full);
         kernel_name.setText(RootUtils.runCommand("uname -a"));
-        kernek_name_full.setText(Device.getKernelVersion(true));
+        kernel_name_full.setText(Device.getKernelVersion(true));
 
         cpu = new CPU();
+        gpu = new GPU();
 
         oem_name = root.findViewById(R.id.oem_name);
         oem_name.setText(Device.getVendor() + " " + Device.getModel());
@@ -65,6 +69,9 @@ public class MonitorFragment extends Fragment implements View.OnClickListener{
         cpu6 = root.findViewById(R.id.cpu6);
         cpu7 = root.findViewById(R.id.cpu7);
 
+        gpu_crr_freq = root.findViewById(R.id.gpu_curr_freq);
+        gpu_max_freq = root.findViewById(R.id.gpu_max_freq);
+
         //Sample pie chart data
         PieChart memchart = root.findViewById(R.id.memchart);
         PieChart battchart = root.findViewById(R.id.battchart);
@@ -77,25 +84,46 @@ public class MonitorFragment extends Fragment implements View.OnClickListener{
         battchart.setChartData(data);
 
         preferences = getActivity().getPreferences(Context.MODE_PRIVATE);
-        refreshfreq();
+        thread.start();
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                refreshUI();
+            }
+        });
         return root;
     }
 
-    @Override
-    public void onClick(View v) {
-        int view = v.getId();
-        switch (view) {
-        }
-    }
+    Thread thread = new Thread(){
+        @Override
+        public void run() {
+            try {
+                synchronized (this) {
+                    wait(100);
+                    //Declare the timer
+                    Timer t = new Timer();
+                    t.scheduleAtFixedRate(new TimerTask() {
+                        @Override
+                        public void run() {
+                            littleFreq = cpu.getCurFreq(0)/1000 + "MHz";
+                            bigFreq = cpu.getCurFreq(4)/1000 + "MHz";
+                            clk = gpu.getCurFreq()/1000;
+                            max_clk = gpu.getMaxFreq()/1000;
+                        }
+                    }, 0, 500);
+                }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        };
+    };
 
-    public void refreshfreq(){
+    public void refreshUI(){
         //Declare the timer
-        Timer t = new Timer();
-        t.scheduleAtFixedRate(new TimerTask() {
+        Timer ui = new Timer();
+        ui.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-                String littleFreq = cpu.getCurFreq(0)/1000 + "MHz";
-                String bigFreq = cpu.getCurFreq(4)/1000 + "MHz";
                 cpu0.setText(littleFreq);
                 cpu1.setText(littleFreq);
                 cpu2.setText(littleFreq);
@@ -105,7 +133,7 @@ public class MonitorFragment extends Fragment implements View.OnClickListener{
                 cpu6.setText(bigFreq);
                 cpu7.setText(bigFreq);
             }
-            }, 0, 500);
+        }, 0, 500);
     }
 
 }

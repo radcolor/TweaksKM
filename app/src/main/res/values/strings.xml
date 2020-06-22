@@ -78,5 +78,6 @@
     <string name="txt_ld_avg">Loadavg:</string>
     <string name="txt_ent">Entropy</string>
     <string name="txt_wg_ver">WireGuard version:</string>
+    <string name="mhz">MHz</string>
 
 </resources>
