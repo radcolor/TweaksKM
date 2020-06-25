@@ -3,6 +3,7 @@ package com.theradcolor.kernel.fragments;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,8 +42,9 @@ public class MonitorFragment extends Fragment{
         View root = inflater.inflate(R.layout.fragment_monitor, container, false);
         kernel_name = root.findViewById(R.id.kernel_name);
         kernel_name_full = root.findViewById(R.id.kernel_name_full);
+        String sourceString = "<font color=#FFFFFF> <b> Kernel: </b> </font>" + Device.getKernelVersion(true);
         kernel_name.setText(RootUtils.runCommand("uname -a"));
-        kernel_name_full.setText(Device.getKernelVersion(true));
+        kernel_name_full.setText(Html.fromHtml(sourceString));
 
         cpu = new CPU();
         gpu = new GPU();
