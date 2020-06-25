@@ -1,9 +1,12 @@
 package com.theradcolor.kernel.fragments;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Html;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,20 +25,18 @@ import com.theradcolor.kernel.utils.kernel.GPU;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class MonitorFragment extends Fragment{
 
+    private static final String TAG = "MonitorFragment";
     CPU cpu;
     GPU gpu;
-    int clk, max_clk;
-    String littleFreq, bigFreq;
     TextView kernel_name, kernel_name_full;
     TextView cpu0,cpu1,cpu2,cpu3,cpu4,cpu5,cpu6,cpu7, little_max, big_max, board, cpu_gov, oem_name;
-    TextView gpu_usage, gpu_crr_freq, gpu_max_freq;
+    TextView gpu_usage_per, gpu_crr_freq, gpu_max_freq, gpu_model;
     SharedPreferences preferences;
 
+    @SuppressLint("SetTextI18n")
     public View onCreateView(@NonNull final LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
@@ -73,6 +74,8 @@ public class MonitorFragment extends Fragment{
 
         gpu_crr_freq = root.findViewById(R.id.gpu_curr_freq);
         gpu_max_freq = root.findViewById(R.id.gpu_max_freq);
+        gpu_usage_per = root.findViewById(R.id.gpu_usage);
+        gpu_model = root.findViewById(R.id.gpu_model);
 
         //Sample pie chart data
         PieChart memchart = root.findViewById(R.id.memchart);
@@ -86,56 +89,69 @@ public class MonitorFragment extends Fragment{
         battchart.setChartData(data);
 
         preferences = getActivity().getPreferences(Context.MODE_PRIVATE);
-        thread.start();
-        getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                refreshUI();
-            }
-        });
+
+        monitorTask myTask = new monitorTask();
+        myTask.execute();
+        Log.d(TAG,""+Thread.currentThread().getName());
         return root;
     }
 
-    Thread thread = new Thread(){
-        @Override
-        public void run() {
-            try {
-                synchronized (this) {
-                    wait(100);
-                    //Declare the timer
-                    Timer t = new Timer();
-                    t.scheduleAtFixedRate(new TimerTask() {
-                        @Override
-                        public void run() {
-                            littleFreq = cpu.getCurFreq(0)/1000 + "MHz";
-                            bigFreq = cpu.getCurFreq(4)/1000 + "MHz";
-                            clk = gpu.getCurFreq()/1000;
-                            max_clk = gpu.getMaxFreq()/1000;
-                        }
-                    }, 0, 500);
-                }
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        };
-    };
+    @SuppressLint("StaticFieldLeak")
+    class monitorTask extends AsyncTask<String,Integer,String>{
 
-    public void refreshUI(){
-        //Declare the timer
-        Timer ui = new Timer();
-        ui.scheduleAtFixedRate(new TimerTask() {
-            @Override
-            public void run() {
-                cpu0.setText(littleFreq);
-                cpu1.setText(littleFreq);
-                cpu2.setText(littleFreq);
-                cpu3.setText(littleFreq);
-                cpu4.setText(bigFreq);
-                cpu5.setText(bigFreq);
-                cpu6.setText(bigFreq);
-                cpu7.setText(bigFreq);
+        int freq_little = 0, freq_big = 0;
+        CPU cpu;
+        GPU gpu;
+        String gpu_usage_str;
+        int gpu_usage, gpu_clk, gpu_max_clk;
+
+        @Override
+        protected void onPreExecute() {
+            cpu = new CPU();
+            gpu = new GPU();
+        }
+
+        @Override
+        protected String doInBackground(String... strings) {
+            Log.d(TAG, "AsyncTask start");
+            while (!Thread.currentThread().isInterrupted()){
+                try {
+                    Thread.sleep(600);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                freq_big = cpu.getCurFreq(4)/1000;
+                freq_little = cpu.getCurFreq(0)/1000;
+                gpu_clk = gpu.getCurFreq()/1000000;
+                gpu_max_clk = gpu.getMaxFreq()/1000000;
+                gpu_usage_str = gpu.getGpuBusy();
+                gpu_usage_str = gpu_usage_str.replaceAll("[^0-9]","");
+                gpu_usage = Integer.parseInt(gpu_usage_str);
+
+                publishProgress(freq_little,freq_big,gpu_usage,gpu_clk,gpu_max_clk);
             }
-        }, 0, 500);
+            return null;
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... values) {
+           updateUI(values);
+        }
+
+        @SuppressLint("SetTextI18n")
+        private void updateUI(Integer... i) {
+            cpu0.setText(i[0]+getString(R.string.mhz));
+            cpu1.setText(i[0]+getString(R.string.mhz));
+            cpu2.setText(i[0]+getString(R.string.mhz));
+            cpu3.setText(i[0]+getString(R.string.mhz));
+            cpu4.setText(i[1]+getString(R.string.mhz));
+            cpu5.setText(i[1]+getString(R.string.mhz));
+            cpu6.setText(i[1]+getString(R.string.mhz));
+            cpu7.setText(i[1]+getString(R.string.mhz));
+            gpu_usage_per.setText(i[2]+getString(R.string.percent));
+            gpu_crr_freq.setText(i[3]+getString(R.string.mhz));
+            gpu_max_freq.setText(i[4]+getString(R.string.mhz));
+        }
     }
 
 }

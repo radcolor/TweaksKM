@@ -4,7 +4,7 @@ import com.grarak.kerneladiutor.utils.Utils;
 
 public class GPU {
 
-    private static final String KGSL3D0_DEVFREQ_GPUBUSY = "/sys/class/kgsl/kgsl-3d0/gpubusy";
+    private static final String KGSL3D0_DEVFREQ_GPUBUSY = "/sys/class/kgsl/kgsl-3d0/gpu_busy_percentage";
     private static final String CUR_KGSL3D0_DEVFREQ_FREQ = "/sys/class/kgsl/kgsl-3d0/gpuclk";
     private static final String MAX_KGSL3D0_DEVFREQ_FREQ = "/sys/class/kgsl/kgsl-3d0/max_gpuclk";
     private static final String MIN_KGSL3D0_DEVFREQ_FREQ = "/sys/class/kgsl/kgsl-3d0/devfreq/min_freq";
@@ -18,6 +18,10 @@ public class GPU {
 
     public int getMaxFreq() {
         return Utils.strToInt(Utils.readFile(MAX_KGSL3D0_DEVFREQ_FREQ));
+    }
+
+    public String getGpuBusy() {
+        return Utils.readFile(KGSL3D0_DEVFREQ_GPUBUSY);
     }
 
 }
