@@ -23,6 +23,7 @@ import com.theradcolor.kernel.R;
 import com.theradcolor.kernel.utils.kernel.CPU;
 import com.theradcolor.kernel.utils.kernel.Entropy;
 import com.theradcolor.kernel.utils.kernel.GPU;
+import com.theradcolor.kernel.utils.kernel.WireGuard;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,10 +34,11 @@ public class MonitorFragment extends Fragment{
     CPU cpu;
     GPU gpu;
     Entropy entropy;
+    WireGuard wireGuard;
     TextView kernel_name, kernel_name_full;
     TextView cpu0,cpu1,cpu2,cpu3,cpu4,cpu5,cpu6,cpu7, little_max, big_max, board, cpu_gov, oem_name;
     TextView gpu_usage_per, gpu_crr_freq, gpu_max_freq, gpu_model;
-    TextView ent_lvl;
+    TextView ent_lvl, wireguard_ver;
     SharedPreferences preferences;
 
     @SuppressLint("SetTextI18n")
@@ -53,6 +55,7 @@ public class MonitorFragment extends Fragment{
         cpu = new CPU();
         gpu = new GPU();
         entropy = new Entropy();
+        wireGuard = new WireGuard();
 
         oem_name = root.findViewById(R.id.oem_name);
         oem_name.setText(Device.getVendor() + " " + Device.getModel());
@@ -82,6 +85,8 @@ public class MonitorFragment extends Fragment{
         gpu_model = root.findViewById(R.id.gpu_model);
 
         ent_lvl = root.findViewById(R.id.ent_lvl);
+        wireguard_ver = root.findViewById(R.id.wg_ver);
+        wireguard_ver.setText("v"+wireGuard.getWireguard());
 
         //Sample pie chart data
         PieChart memchart = root.findViewById(R.id.memchart);
