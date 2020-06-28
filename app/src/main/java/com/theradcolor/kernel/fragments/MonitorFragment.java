@@ -21,6 +21,7 @@ import com.intrusoft.scatter.ChartData;
 import com.intrusoft.scatter.PieChart;
 import com.theradcolor.kernel.R;
 import com.theradcolor.kernel.utils.kernel.CPU;
+import com.theradcolor.kernel.utils.kernel.Entropy;
 import com.theradcolor.kernel.utils.kernel.GPU;
 
 import java.util.ArrayList;
@@ -31,9 +32,11 @@ public class MonitorFragment extends Fragment{
     private static final String TAG = "MonitorFragment";
     CPU cpu;
     GPU gpu;
+    Entropy entropy;
     TextView kernel_name, kernel_name_full;
     TextView cpu0,cpu1,cpu2,cpu3,cpu4,cpu5,cpu6,cpu7, little_max, big_max, board, cpu_gov, oem_name;
     TextView gpu_usage_per, gpu_crr_freq, gpu_max_freq, gpu_model;
+    TextView ent_lvl;
     SharedPreferences preferences;
 
     @SuppressLint("SetTextI18n")
@@ -43,12 +46,13 @@ public class MonitorFragment extends Fragment{
         View root = inflater.inflate(R.layout.fragment_monitor, container, false);
         kernel_name = root.findViewById(R.id.kernel_name);
         kernel_name_full = root.findViewById(R.id.kernel_name_full);
-        String sourceString = "<font color=#FFFFFF> <b> Kernel: </b> </font>" + Device.getKernelVersion(true);
+        String kernelString = "<font color=#FFFFFF> <b> Kernel: </b> </font>" + Device.getKernelVersion(true);
         kernel_name.setText(RootUtils.runCommand("uname -a"));
-        kernel_name_full.setText(Html.fromHtml(sourceString));
+        kernel_name_full.setText(Html.fromHtml(kernelString));
 
         cpu = new CPU();
         gpu = new GPU();
+        entropy = new Entropy();
 
         oem_name = root.findViewById(R.id.oem_name);
         oem_name.setText(Device.getVendor() + " " + Device.getModel());
@@ -77,6 +81,8 @@ public class MonitorFragment extends Fragment{
         gpu_usage_per = root.findViewById(R.id.gpu_usage);
         gpu_model = root.findViewById(R.id.gpu_model);
 
+        ent_lvl = root.findViewById(R.id.ent_lvl);
+
         //Sample pie chart data
         PieChart memchart = root.findViewById(R.id.memchart);
         PieChart battchart = root.findViewById(R.id.battchart);
@@ -92,7 +98,7 @@ public class MonitorFragment extends Fragment{
 
         monitorTask myTask = new monitorTask();
         myTask.execute();
-        Log.d(TAG,""+Thread.currentThread().getName());
+        Log.d(TAG," "+Thread.currentThread().getName());
         return root;
     }
 
@@ -102,6 +108,8 @@ public class MonitorFragment extends Fragment{
         int freq_little = 0, freq_big = 0;
         CPU cpu;
         GPU gpu;
+        Entropy entropy;
+        int ent_avl, ent_tot;
         String gpu_usage_str;
         int gpu_usage, gpu_clk, gpu_max_clk;
 
@@ -109,6 +117,7 @@ public class MonitorFragment extends Fragment{
         protected void onPreExecute() {
             cpu = new CPU();
             gpu = new GPU();
+            entropy = new Entropy();
         }
 
         @Override
@@ -127,8 +136,10 @@ public class MonitorFragment extends Fragment{
                 gpu_usage_str = gpu.getGpuBusy();
                 gpu_usage_str = gpu_usage_str.replaceAll("[^0-9]","");
                 gpu_usage = Integer.parseInt(gpu_usage_str);
+                ent_avl = entropy.getAvailable();
+                ent_tot = entropy.getPoolSize();
 
-                publishProgress(freq_little,freq_big,gpu_usage,gpu_clk,gpu_max_clk);
+                publishProgress(freq_little,freq_big,gpu_usage,gpu_clk,gpu_max_clk,ent_avl,ent_tot);
             }
             return null;
         }
@@ -151,6 +162,8 @@ public class MonitorFragment extends Fragment{
             gpu_usage_per.setText(i[2]+getString(R.string.percent));
             gpu_crr_freq.setText(i[3]+getString(R.string.mhz));
             gpu_max_freq.setText(i[4]+getString(R.string.mhz));
+            String entropyString = "<font color=#FFFFFF> <b> Entropy: </b> </font>" + String.valueOf(i[5]) + "/" + String.valueOf(i[6]);
+            ent_lvl.setText(Html.fromHtml(entropyString));
         }
     }
 
