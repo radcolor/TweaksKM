@@ -31,10 +31,12 @@ import java.util.List;
 public class MonitorFragment extends Fragment{
 
     private static final String TAG = "MonitorFragment";
+    View root;
     CPU cpu;
     GPU gpu;
     Entropy entropy;
     WireGuard wireGuard;
+    PieChart memchart, battchart;
     TextView kernel_name, kernel_name_full;
     TextView cpu0,cpu1,cpu2,cpu3,cpu4,cpu5,cpu6,cpu7, little_max, big_max, board, cpu_gov, oem_name;
     TextView gpu_usage_per, gpu_crr_freq, gpu_max_freq, gpu_model;
@@ -45,30 +47,36 @@ public class MonitorFragment extends Fragment{
     public View onCreateView(@NonNull final LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
-        View root = inflater.inflate(R.layout.fragment_monitor, container, false);
-        kernel_name = root.findViewById(R.id.kernel_name);
-        kernel_name_full = root.findViewById(R.id.kernel_name_full);
-        String kernelString = "<font color=#FFFFFF> <b> Kernel: </b> </font>" + Device.getKernelVersion(true);
-        kernel_name.setText(RootUtils.runCommand("uname -a"));
-        kernel_name_full.setText(Html.fromHtml(kernelString));
+        root = inflater.inflate(R.layout.fragment_monitor, container, false);
+
+        preferences = getActivity().getPreferences(Context.MODE_PRIVATE);
+
+        InitView();
+        InitUI();
+
+        monitorTask myTask = new monitorTask();
+        myTask.execute();
+        Log.d(TAG," "+Thread.currentThread().getName());
+
+        return root;
+    }
+
+    private void InitView(){
 
         cpu = new CPU();
         gpu = new GPU();
         entropy = new Entropy();
         wireGuard = new WireGuard();
 
+        kernel_name = root.findViewById(R.id.kernel_name);
+        kernel_name_full = root.findViewById(R.id.kernel_name_full);
+
         oem_name = root.findViewById(R.id.oem_name);
-        oem_name.setText(Device.getVendor() + " " + Device.getModel());
 
         little_max = root.findViewById(R.id.little_max);
-        little_max.setText(getString(R.string.title_little_max)+ " "+cpu.getMaxFreq(0)/1000 + "Mhz");
         big_max = root.findViewById(R.id.big_max);
-        big_max.setText(getString(R.string.title_big_max)+ " "+cpu.getMaxFreq(4)/1000 + "MHz");
-
         cpu_gov = root.findViewById(R.id.cpu_gov);
-        cpu_gov.setText(getString(R.string.cpu_gov)+ " "+cpu.getGovernor(0));
         board = root.findViewById(R.id.cpu_arch);
-        board.setText(getString(R.string.dev_board) + " " + Device.getHardware() + " " + Device.getBoard());
 
         cpu0 = root.findViewById(R.id.cpu0);
         cpu1 = root.findViewById(R.id.cpu1);
@@ -86,25 +94,31 @@ public class MonitorFragment extends Fragment{
 
         ent_lvl = root.findViewById(R.id.ent_lvl);
         wireguard_ver = root.findViewById(R.id.wg_ver);
-        wireguard_ver.setText("v"+wireGuard.getWireguard());
 
+        memchart = root.findViewById(R.id.memchart);
+        battchart = root.findViewById(R.id.battchart);
+
+    }
+
+    @SuppressLint("SetTextI18n")
+    private void InitUI(){
+        String kernelString = "<font color=#FFFFFF> <b> Kernel: </b> </font>" + Device.getKernelVersion(true);
+        kernel_name.setText(RootUtils.runCommand("uname -a"));
+        kernel_name_full.setText(Html.fromHtml(kernelString));
+        oem_name.setText(Device.getVendor() + " " + Device.getModel());
+        little_max.setText(getString(R.string.title_little_max)+ " "+cpu.getMaxFreq(0)/1000 + "Mhz");
+        big_max.setText(getString(R.string.title_big_max)+ " "+cpu.getMaxFreq(4)/1000 + "MHz");
+        cpu_gov.setText(getString(R.string.cpu_gov)+ " "+cpu.getGovernor(0));
+        board.setText(getString(R.string.dev_board) + " " + Device.getHardware() + " " + Device.getBoard());
+        wireguard_ver.setText("v"+wireGuard.getWireguard());
         //Sample pie chart data
-        PieChart memchart = root.findViewById(R.id.memchart);
-        PieChart battchart = root.findViewById(R.id.battchart);
         memchart.setCenterCircleColor(R.color.colorAccent);
         battchart.setCenterCircleColor(R.color.colorAccent);
         List<ChartData> data = new ArrayList<>();
-        data.add(new ChartData("", 66));     //ARGS-> (display text, percentage)
+        data.add(new ChartData("", 66));
         data.add(new ChartData("", 34));
         memchart.setChartData(data);
         battchart.setChartData(data);
-
-        preferences = getActivity().getPreferences(Context.MODE_PRIVATE);
-
-        monitorTask myTask = new monitorTask();
-        myTask.execute();
-        Log.d(TAG," "+Thread.currentThread().getName());
-        return root;
     }
 
     @SuppressLint("StaticFieldLeak")
