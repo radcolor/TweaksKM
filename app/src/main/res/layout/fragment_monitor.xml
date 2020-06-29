@@ -444,7 +444,7 @@
 
                 <LinearLayout
                     android:padding="12dp"
-                    android:weightSum="3"
+                    android:weightSum="4"
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
@@ -452,12 +452,13 @@
                     <com.intrusoft.scatter.PieChart
                         android:id="@+id/memchart"
                         app:chartColor="@color/green_light"
-                        android:layout_weight="2"
+                        android:layout_weight="3"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"/>
 
                    <LinearLayout
                        android:padding="8dp"
+                       android:layout_marginStart="8dp"
                        android:orientation="vertical"
                        android:layout_weight="1"
                        android:layout_width="match_parent"
@@ -476,7 +477,6 @@
 
                            <TextView
                                android:id="@+id/mem_used"
-                               android:text="2078MB (50%)"
                                android:layout_marginLeft="8dp"
                                android:textColor="@color/text_sec"
                                android:layout_width="wrap_content"
@@ -497,8 +497,7 @@
                                android:layout_height="wrap_content"/>
 
                            <TextView
-                               android:id="@+id/tot_mem"
-                               android:text="4098MB"
+                               android:id="@+id/mem_tot"
                                android:layout_marginLeft="8dp"
                                android:textColor="@color/text_sec"
                                android:layout_width="wrap_content"
@@ -519,8 +518,7 @@
                                android:layout_height="wrap_content"/>
 
                            <TextView
-                               android:id="@+id/free_mem"
-                               android:text="2048MB (50%)"
+                               android:id="@+id/mem_free"
                                android:layout_marginLeft="8dp"
                                android:textColor="@color/text_sec"
                                android:layout_width="wrap_content"
@@ -569,7 +567,7 @@
 
                 <LinearLayout
                     android:padding="12dp"
-                    android:weightSum="3"
+                    android:weightSum="4"
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
@@ -577,12 +575,13 @@
                     <com.intrusoft.scatter.PieChart
                         android:id="@+id/battchart"
                         app:chartColor="@color/green_light"
-                        android:layout_weight="2"
+                        android:layout_weight="3"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"/>
 
                     <LinearLayout
                         android:padding="8dp"
+                        android:layout_marginStart="8dp"
                         android:orientation="vertical"
                         android:layout_weight="1"
                         android:layout_width="match_parent"

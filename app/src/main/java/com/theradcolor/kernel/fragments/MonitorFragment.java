@@ -1,9 +1,11 @@
 package com.theradcolor.kernel.fragments;
 
 import android.annotation.SuppressLint;
+import android.app.ActivityManager;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.text.Html;
@@ -14,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
 import com.grarak.kerneladiutor.utils.Device;
@@ -42,6 +45,7 @@ public class MonitorFragment extends Fragment{
     TextView kernel_name, kernel_name_full;
     TextView cpu0,cpu1,cpu2,cpu3,cpu4,cpu5,cpu6,cpu7, little_max, big_max, board, cpu_gov, oem_name;
     TextView gpu_usage_per, gpu_crr_freq, gpu_max_freq, gpu_model;
+    TextView used_mem, avl_mem, tot_mem;
     TextView ent_lvl, wireguard_ver, uptime, deepsleeptime;
     SharedPreferences preferences;
 
@@ -94,6 +98,10 @@ public class MonitorFragment extends Fragment{
         gpu_usage_per = root.findViewById(R.id.gpu_usage);
         gpu_model = root.findViewById(R.id.gpu_model);
 
+        used_mem = root.findViewById(R.id.mem_used);
+        avl_mem = root.findViewById(R.id.mem_free);
+        tot_mem = root.findViewById(R.id.mem_tot);
+
         ent_lvl = root.findViewById(R.id.ent_lvl);
         wireguard_ver = root.findViewById(R.id.wg_ver);
         uptime = root.findViewById(R.id.up_time);
@@ -116,7 +124,6 @@ public class MonitorFragment extends Fragment{
         board.setText(getString(R.string.dev_board) + " " + Device.getHardware() + " " + Device.getBoard());
         String gpuString = "<font color=#FFFFFF> <b> GPU model: </b> </font>" + RootUtils.runAndGetError("dumpsys SurfaceFlinger | grep GLES");
         gpu_model.setText(Html.fromHtml(gpuString));
-        wireguard_ver.setText("v"+wireGuard.getWireguard());
         //Sample pie chart data
         memchart.setCenterCircleColor(R.color.colorAccent);
         battchart.setCenterCircleColor(R.color.colorAccent);
@@ -125,6 +132,7 @@ public class MonitorFragment extends Fragment{
         data.add(new ChartData("", 34));
         memchart.setChartData(data);
         battchart.setChartData(data);
+        wireguard_ver.setText("v"+wireGuard.getWireguard());
         long systemTime = SystemClock.elapsedRealtime();
         long awakeTime = SystemClock.uptimeMillis();
         long deepSleepTime = systemTime-awakeTime;
@@ -136,6 +144,9 @@ public class MonitorFragment extends Fragment{
     class monitorTask extends AsyncTask<String,Integer,String>{
 
         int freq_little = 0, freq_big = 0;
+        ActivityManager activityManager;
+        ActivityManager.MemoryInfo mi;
+        int total_memory, used_memory, free_memory, percentAvail;
         CPU cpu;
         GPU gpu;
         Entropy entropy;
@@ -147,6 +158,8 @@ public class MonitorFragment extends Fragment{
         protected void onPreExecute() {
             cpu = new CPU();
             gpu = new GPU();
+            mi = new ActivityManager.MemoryInfo();
+            activityManager = (ActivityManager) getActivity().getSystemService(Context.ACTIVITY_SERVICE);
             entropy = new Entropy();
         }
 
@@ -166,10 +179,15 @@ public class MonitorFragment extends Fragment{
                 gpu_usage_str = gpu.getGpuBusy();
                 gpu_usage_str = gpu_usage_str.replaceAll("[^0-9]","");
                 gpu_usage = Integer.parseInt(gpu_usage_str);
+                activityManager.getMemoryInfo(mi);
+                total_memory = (int) (mi.totalMem / 0x100000L);
+                free_memory  = (int) (mi.availMem / 0x100000L);
+                used_memory = total_memory-free_memory;
+                percentAvail = (int) (mi.availMem / (double) mi.totalMem * 100.0);
                 ent_avl = entropy.getAvailable();
                 ent_tot = entropy.getPoolSize();
 
-                publishProgress(freq_little,freq_big,gpu_usage,gpu_clk,gpu_max_clk,ent_avl,ent_tot);
+                publishProgress(freq_little,freq_big,gpu_usage,gpu_clk,gpu_max_clk,total_memory,used_memory,free_memory,percentAvail,ent_avl,ent_tot);
             }
             return null;
         }
@@ -192,7 +210,10 @@ public class MonitorFragment extends Fragment{
             gpu_usage_per.setText(i[2]+getString(R.string.percent));
             gpu_crr_freq.setText(i[3]+getString(R.string.mhz));
             gpu_max_freq.setText(i[4]+getString(R.string.mhz));
-            String entropyString = "<font color=#FFFFFF> <b> Entropy: </b> </font>" + String.valueOf(i[5]) + "/" + String.valueOf(i[6]);
+            tot_mem.setText(i[5] + " MB");
+            used_mem.setText(i[6] + " MB");
+            avl_mem.setText(i[7] + " MB " +i[8]+ "% approx");
+            String entropyString = "<font color=#FFFFFF> <b> Entropy: </b> </font>" + String.valueOf(i[9]) + "/" + String.valueOf(i[10]);
             ent_lvl.setText(Html.fromHtml(entropyString));
         }
     }
