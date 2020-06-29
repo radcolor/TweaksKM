@@ -67,6 +67,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Locale;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by willi on 14.04.16.
@@ -522,6 +523,31 @@ public class Utils {
             return s.substring(0, s.length() - suffix.length());
         }
         return s;
+    }
+
+    public static String getDurationBreakdown(long millis) {
+        if(millis < 0) {
+            throw new IllegalArgumentException("Duration must be greater than zero!");
+        }
+
+        long days = TimeUnit.MILLISECONDS.toDays(millis);
+        millis -= TimeUnit.DAYS.toMillis(days);
+        long hours = TimeUnit.MILLISECONDS.toHours(millis);
+        millis -= TimeUnit.HOURS.toMillis(hours);
+        long minutes = TimeUnit.MILLISECONDS.toMinutes(millis);
+        millis -= TimeUnit.MINUTES.toMillis(minutes);
+        long seconds = TimeUnit.MILLISECONDS.toSeconds(millis);
+
+        StringBuilder sb = new StringBuilder(64);
+        sb.append(days);
+        sb.append("M ");
+        sb.append(hours);
+        sb.append("H ");
+        sb.append(minutes);
+        sb.append("M ");
+        sb.append(seconds);
+        sb.append("S ");
+        return(sb.toString());
     }
 
 }
