@@ -186,4 +186,9 @@ public class MonitorFragment extends Fragment{
         }
     }
 
+    @Override
+    public void onResume() {
+        InitView();
+        super.onResume();
+    }
 }
