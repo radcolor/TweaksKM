@@ -9,6 +9,10 @@ Designed beautifully with Material design.
 
 App needs the Android's root permission to attain [privileged control](https://en.wikipedia.org/wiki/Privilege_escalation) (known as [root access](https://en.wikipedia.org/wiki/Superuser)) over various Android subsystems. As Android uses the Linux kernel, rooting an Android device gives similar access to administrative (superuser) permissions as on Linux or any other Unix-like operating system.
 
+## ScreenShots
+
+![ScreenShot 1](/assets/app_ss.png)
+
 ## Credits
 
 RootUtils/Tools from Kernel Adiutor by [Wille Ye](https://github.com/Grarak)
