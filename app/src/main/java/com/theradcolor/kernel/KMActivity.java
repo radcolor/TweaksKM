@@ -119,4 +119,9 @@ public class KMActivity extends AppCompatActivity {
         super.onDestroy();
     }
 
+    @Override
+    public void finish() {
+        RootUtils.closeSU();
+        super.finish();
+    }
 }
