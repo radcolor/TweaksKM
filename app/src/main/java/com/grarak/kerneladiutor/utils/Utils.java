@@ -539,14 +539,22 @@ public class Utils {
         long seconds = TimeUnit.MILLISECONDS.toSeconds(millis);
 
         StringBuilder sb = new StringBuilder(64);
-        sb.append(days);
-        sb.append("D ");
-        sb.append(hours);
-        sb.append("H ");
-        sb.append(minutes);
-        sb.append("M ");
-        sb.append(seconds);
-        sb.append("S ");
+        if(!(days ==0)){
+            sb.append("D ");
+            sb.append(days);
+        }
+        if(!(hours ==0)){
+            sb.append(hours);
+            sb.append("H ");
+        }
+        if(!(minutes ==0)){
+            sb.append(minutes);
+            sb.append("M ");
+        }
+        if(!(seconds ==0)){
+            sb.append(seconds);
+            sb.append("S ");
+        }
         return(sb.toString());
     }
 
