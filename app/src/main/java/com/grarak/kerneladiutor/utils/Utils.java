@@ -540,7 +540,7 @@ public class Utils {
 
         StringBuilder sb = new StringBuilder(64);
         sb.append(days);
-        sb.append("M ");
+        sb.append("D ");
         sb.append(hours);
         sb.append("H ");
         sb.append(minutes);

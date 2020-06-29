@@ -711,7 +711,6 @@
 
                         <TextView
                             android:id="@+id/up_time"
-                            android:text="1D 12H 20M"
                             android:layout_marginLeft="8dp"
                             android:textColor="@color/text_sec"
                             android:layout_width="wrap_content"
@@ -733,7 +732,6 @@
 
                         <TextView
                             android:id="@+id/deep_slp"
-                            android:text="1D 10H (99%)"
                             android:layout_marginLeft="8dp"
                             android:textColor="@color/text_sec"
                             android:layout_width="wrap_content"

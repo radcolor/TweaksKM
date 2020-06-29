@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,6 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.grarak.kerneladiutor.utils.Device;
+import com.grarak.kerneladiutor.utils.Utils;
 import com.grarak.kerneladiutor.utils.root.RootUtils;
 import com.intrusoft.scatter.ChartData;
 import com.intrusoft.scatter.PieChart;
@@ -40,7 +42,7 @@ public class MonitorFragment extends Fragment{
     TextView kernel_name, kernel_name_full;
     TextView cpu0,cpu1,cpu2,cpu3,cpu4,cpu5,cpu6,cpu7, little_max, big_max, board, cpu_gov, oem_name;
     TextView gpu_usage_per, gpu_crr_freq, gpu_max_freq, gpu_model;
-    TextView ent_lvl, wireguard_ver;
+    TextView ent_lvl, wireguard_ver, uptime, deepsleeptime;
     SharedPreferences preferences;
 
     @SuppressLint("SetTextI18n")
@@ -94,6 +96,8 @@ public class MonitorFragment extends Fragment{
 
         ent_lvl = root.findViewById(R.id.ent_lvl);
         wireguard_ver = root.findViewById(R.id.wg_ver);
+        uptime = root.findViewById(R.id.up_time);
+        deepsleeptime = root.findViewById(R.id.deep_slp);
 
         memchart = root.findViewById(R.id.memchart);
         battchart = root.findViewById(R.id.battchart);
@@ -121,6 +125,11 @@ public class MonitorFragment extends Fragment{
         data.add(new ChartData("", 34));
         memchart.setChartData(data);
         battchart.setChartData(data);
+        long systemTime = SystemClock.elapsedRealtime();
+        long awakeTime = SystemClock.uptimeMillis();
+        long deepSleepTime = systemTime-awakeTime;
+        uptime.setText(Utils.getDurationBreakdown(systemTime));
+        deepsleeptime.setText(Utils.getDurationBreakdown(deepSleepTime));
     }
 
     @SuppressLint("StaticFieldLeak")
