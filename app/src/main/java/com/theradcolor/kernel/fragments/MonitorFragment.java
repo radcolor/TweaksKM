@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -110,6 +111,8 @@ public class MonitorFragment extends Fragment{
         big_max.setText(getString(R.string.title_big_max)+ " "+cpu.getMaxFreq(4)/1000 + "MHz");
         cpu_gov.setText(getString(R.string.cpu_gov)+ " "+cpu.getGovernor(0));
         board.setText(getString(R.string.dev_board) + " " + Device.getHardware() + " " + Device.getBoard());
+        String gpuString = "<font color=#FFFFFF> <b> GPU model: </b> </font>" + RootUtils.runAndGetError("dumpsys SurfaceFlinger | grep GLES");
+        gpu_model.setText(Html.fromHtml(gpuString));
         wireguard_ver.setText("v"+wireGuard.getWireguard());
         //Sample pie chart data
         memchart.setCenterCircleColor(R.color.colorAccent);

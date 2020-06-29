@@ -19,14 +19,20 @@
  */
 package com.grarak.kerneladiutor.utils.root;
 
+import androidx.annotation.NonNull;
+
 import com.grarak.kerneladiutor.utils.Log;
 import com.grarak.kerneladiutor.utils.Utils;
+import com.topjohnwu.superuser.Shell;
+import com.topjohnwu.superuser.ShellUtils;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
@@ -229,6 +235,25 @@ public class RootUtils {
             }
         }
 
+    }
+
+    @NonNull
+    public static String runAndGetError(String command) {
+        StringBuilder sb = new StringBuilder();
+        List<String> outputs = new ArrayList<>();
+        List<String> stderr = new ArrayList<>();
+        try {
+            Shell.su(command).to(outputs, stderr).exec();
+            outputs.addAll(stderr);
+            if (ShellUtils.isValidOutput(outputs)) {
+                for (String output : outputs) {
+                    sb.append(output).append("\n");
+                }
+            }
+            return Utils.removeSuffix(sb.toString(), "\n").trim();
+        } catch (Exception e) {
+            return "";
+        }
     }
 
 }

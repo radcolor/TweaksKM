@@ -41,6 +41,7 @@ import android.view.Display;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.core.view.ViewCompat;
 
@@ -514,6 +515,13 @@ public class Utils {
 
     public static boolean existFile(String file, RootUtils.SU su) {
         return su == null ? new File(file).exists() : new RootFile(file, su).exists();
+    }
+
+    public static String removeSuffix(@Nullable String s, @Nullable String suffix) {
+        if (s != null && suffix != null && s.endsWith(suffix)) {
+            return s.substring(0, s.length() - suffix.length());
+        }
+        return s;
     }
 
 }
