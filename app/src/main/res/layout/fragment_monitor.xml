@@ -451,6 +451,7 @@
 
                     <com.intrusoft.scatter.PieChart
                         android:id="@+id/memchart"
+                        android:layout_marginStart="8dp"
                         app:chartColor="@color/green_light"
                         android:layout_weight="3"
                         android:layout_width="match_parent"
@@ -574,6 +575,7 @@
 
                     <com.intrusoft.scatter.PieChart
                         android:id="@+id/battchart"
+                        android:layout_marginStart="8dp"
                         app:chartColor="@color/green_light"
                         android:layout_weight="3"
                         android:layout_width="match_parent"
@@ -593,14 +595,14 @@
                             android:layout_height="wrap_content">
 
                             <TextView
-                                android:text="@string/txt_batt_stats"
+                                android:text="@string/txt_batt_lvl"
                                 android:textStyle="bold"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"/>
 
                             <TextView
-                                android:id="@+id/batt_stats"
-                                android:text="Discharging 300mAH"
+                                android:id="@+id/batt_lvl"
+                                android:text="10H remaining"
                                 android:layout_marginLeft="8dp"
                                 android:textColor="@color/text_sec"
                                 android:layout_width="wrap_content"
@@ -637,14 +639,14 @@
                             android:layout_height="wrap_content">
 
                             <TextView
-                                android:text="@string/txt_batt_dur"
+                                android:text="@string/txt_batt_stats"
                                 android:textStyle="bold"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"/>
 
                             <TextView
-                                android:id="@+id/batt_dur"
-                                android:text="10H remaining"
+                                android:id="@+id/batt_stats"
+                                android:text="Discharging 300mAH"
                                 android:layout_marginLeft="8dp"
                                 android:textColor="@color/text_sec"
                                 android:layout_width="wrap_content"

@@ -69,7 +69,7 @@
     <string name="txt_free_mem">Free memory:</string>
     <string name="txt_tot_mem">Total memory:</string>
     <string name="txt_used_mem">Used memory:</string>
-    <string name="txt_batt_stats">Status:</string>
+    <string name="txt_batt_stats">Charge status:</string>
     <string name="txt_batt_temp">Temperature:</string>
     <string name="txt_batt_dur">Duration:</string>
     <string name="title_sys">SYSTEM</string>
@@ -79,5 +79,6 @@
     <string name="txt_ent">Entropy</string>
     <string name="txt_wg_ver">WireGuard version:</string>
     <string name="mhz">MHz</string>
+    <string name="txt_batt_lvl">Charge level:</string>
 
 </resources>

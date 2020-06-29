@@ -2,10 +2,13 @@ package com.theradcolor.kernel.fragments;
 
 import android.annotation.SuppressLint;
 import android.app.ActivityManager;
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
-import android.os.Build;
+import android.os.BatteryManager;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.text.Html;
@@ -16,7 +19,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
 import com.grarak.kerneladiutor.utils.Device;
@@ -25,6 +27,7 @@ import com.grarak.kerneladiutor.utils.root.RootUtils;
 import com.intrusoft.scatter.ChartData;
 import com.intrusoft.scatter.PieChart;
 import com.theradcolor.kernel.R;
+import com.theradcolor.kernel.utils.kernel.Battery;
 import com.theradcolor.kernel.utils.kernel.CPU;
 import com.theradcolor.kernel.utils.kernel.Entropy;
 import com.theradcolor.kernel.utils.kernel.GPU;
@@ -37,15 +40,13 @@ public class MonitorFragment extends Fragment{
 
     private static final String TAG = "MonitorFragment";
     View root;
-    CPU cpu;
-    GPU gpu;
-    Entropy entropy;
-    WireGuard wireGuard;
+    int mBatteryTemp, mBatteryLvl;
+    CPU cpu; GPU gpu; Entropy entropy; WireGuard wireGuard;
     PieChart memchart, battchart;
     TextView kernel_name, kernel_name_full;
     TextView cpu0,cpu1,cpu2,cpu3,cpu4,cpu5,cpu6,cpu7, little_max, big_max, board, cpu_gov, oem_name;
     TextView gpu_usage_per, gpu_crr_freq, gpu_max_freq, gpu_model;
-    TextView used_mem, avl_mem, tot_mem;
+    TextView used_mem, avl_mem, tot_mem, bat_status, bat_temp, bat_lvl;
     TextView ent_lvl, wireguard_ver, uptime, deepsleeptime;
     SharedPreferences preferences;
 
@@ -102,6 +103,10 @@ public class MonitorFragment extends Fragment{
         avl_mem = root.findViewById(R.id.mem_free);
         tot_mem = root.findViewById(R.id.mem_tot);
 
+        bat_status = root.findViewById(R.id.batt_stats);
+        bat_temp = root.findViewById(R.id.batt_temp);
+        bat_lvl = root.findViewById(R.id.batt_lvl);
+
         ent_lvl = root.findViewById(R.id.ent_lvl);
         wireguard_ver = root.findViewById(R.id.wg_ver);
         uptime = root.findViewById(R.id.up_time);
@@ -147,6 +152,7 @@ public class MonitorFragment extends Fragment{
         ActivityManager activityManager;
         ActivityManager.MemoryInfo mi;
         int total_memory, used_memory, free_memory, percentAvail;
+        int battery_status, battery_charge;
         CPU cpu;
         GPU gpu;
         Entropy entropy;
@@ -184,10 +190,20 @@ public class MonitorFragment extends Fragment{
                 free_memory  = (int) (mi.availMem / 0x100000L);
                 used_memory = total_memory-free_memory;
                 percentAvail = (int) (mi.availMem / (double) mi.totalMem * 100.0);
+                if(Battery.ChargingStatus().equals("Charging")){
+                    battery_status=1;
+                }else{
+                    battery_status=0;
+                }
+                battery_charge = Integer.parseInt(Battery.getChargingStatus());
                 ent_avl = entropy.getAvailable();
                 ent_tot = entropy.getPoolSize();
 
-                publishProgress(freq_little,freq_big,gpu_usage,gpu_clk,gpu_max_clk,total_memory,used_memory,free_memory,percentAvail,ent_avl,ent_tot);
+                publishProgress(freq_little,freq_big,
+                        gpu_usage,gpu_clk,gpu_max_clk,
+                        total_memory,used_memory,free_memory,percentAvail,
+                        battery_status,battery_charge,
+                        ent_avl,ent_tot);
             }
             return null;
         }
@@ -213,15 +229,39 @@ public class MonitorFragment extends Fragment{
             tot_mem.setText(i[5] + " MB");
             used_mem.setText(i[6] + " MB");
             avl_mem.setText(i[7] + " MB " +i[8]+ "% approx");
-            String entropyString = "<font color=#FFFFFF> <b> Entropy: </b> </font>" + String.valueOf(i[9]) + "/" + String.valueOf(i[10]);
+            if(i[9] == 1){
+                bat_status.setText("Charging " + i[10] + " mA");
+            }else{
+                bat_status.setText("Discharging " + i[10] + " mA");
+            }
+            String entropyString = "<font color=#FFFFFF> <b> Entropy: </b> </font>" + String.valueOf(i[11]) + "/" + String.valueOf(i[12]);
             ent_lvl.setText(Html.fromHtml(entropyString));
+            bat_temp.setText(mBatteryTemp +"°C");
+            bat_lvl.setText(+mBatteryLvl+"%");
         }
     }
 
+    private BroadcastReceiver mBatteryReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            mBatteryLvl = intent.getIntExtra(BatteryManager.EXTRA_LEVEL,0);
+            mBatteryTemp = intent.getIntExtra(BatteryManager.EXTRA_TEMPERATURE, 0) / 10;
+        }
+    };
+
     @Override
     public void onResume() {
-        InitView();
         super.onResume();
+        requireActivity().registerReceiver(mBatteryReceiver, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+        InitView();
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        try {
+            requireActivity().unregisterReceiver(mBatteryReceiver);
+        } catch (IllegalArgumentException ignored) {
+        }
+    }
 }
