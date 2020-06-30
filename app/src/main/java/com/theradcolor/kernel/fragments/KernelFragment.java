@@ -25,13 +25,14 @@ import androidx.fragment.app.Fragment;
 import com.grarak.kerneladiutor.utils.root.RootUtils;
 import com.theradcolor.kernel.KcalActivity;
 import com.theradcolor.kernel.R;
+import com.theradcolor.kernel.SpectrumActivity;
 
 
 public class KernelFragment extends Fragment implements View.OnClickListener{
 
     private TextView vib;
     private SeekBar seekBar;
-    private LinearLayout srgb,kcal,vibration,hpg,mcg;
+    private LinearLayout srgb,kcal,spectrum,vibration,hpg,mcg;
     int progressChangedValue = 1;
     public static final int MIN_VIBRATION = 116;
     public static final int MAX_VIBRATION = 3596;
@@ -49,6 +50,8 @@ public class KernelFragment extends Fragment implements View.OnClickListener{
         vib = root.findViewById(R.id.pervib);
         srgb = root.findViewById(R.id.ll_srgb);
         kcal = root.findViewById(R.id.ll_kcal);
+        spectrum = root.findViewById(R.id.ll_spec);
+        spectrum.setOnClickListener(this);
         vibration = root.findViewById(R.id.ll_vib);
         vibsw = root.findViewById(R.id.vibsw);
         vibsw.setOnCheckedChangeListener(myCheckboxListener);
@@ -204,6 +207,9 @@ public class KernelFragment extends Fragment implements View.OnClickListener{
                 break;
             case R.id.ll_kcal:
                 startActivity(new Intent(getContext(), KcalActivity.class));
+                break;
+            case R.id.ll_spec:
+                startActivity(new Intent(getContext(), SpectrumActivity.class));
                 break;
             case R.id.ll_vib:
                 break;

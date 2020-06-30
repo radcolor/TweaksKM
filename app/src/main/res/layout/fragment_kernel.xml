@@ -575,9 +575,7 @@
             android:layout_height="0.1dp"
             android:background="@color/grey_light"/>
 
-
         <LinearLayout
-            android:layout_marginTop="16dp"
             android:scrollbars="vertical"
             android:orientation="vertical"
             android:layout_width="match_parent"
@@ -588,21 +586,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <TextView
-                    android:layout_marginLeft="12dp"
-                    android:text="@string/title_spec"
-                    android:textColor="@color/green_light"
-                    android:textStyle="bold"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-
                 <LinearLayout
-                    android:id="@+id/bbm"
-                    android:padding="10dp"
+                    android:layout_marginStart="10dp"
                     android:clickable="true"
-                    android:focusable="true"
-                    android:background="@drawable/ripple"
-                    android:layout_marginTop="16dp"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:layout_marginTop="6dp"
                     android:weightSum="12"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
@@ -612,34 +600,26 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
 
-                        <ImageView
-                            android:layout_marginTop="2dp"
+                        <View
+                            android:layout_marginTop="12dp"
                             android:layout_width="25dp"
                             android:layout_height="25dp"
-                            android:layout_centerInParent="true"
-                            android:src="@drawable/ic_baseline_eco_24" />
+                            android:layout_centerVertical="true"
+                            android:layout_centerHorizontal="true" />
 
                     </RelativeLayout>
 
                     <LinearLayout
-                        android:layout_marginLeft="4dp"
                         android:layout_marginRight="4dp"
                         android:layout_weight="2"
                         android:orientation="vertical"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_height="wrap_content">
 
                         <TextView
+                            android:textColor="@color/green_light"
                             android:textStyle="bold"
-                            android:text="@string/txt_bbm"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"/>
-
-                        <TextView
-                            android:layout_marginTop="2dp"
-                            android:textSize="13sp"
-                            android:textColor="@color/text_sec"
-                            android:text="@string/bbm_desc"
+                            android:text="@string/txt_spec"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
 
@@ -650,9 +630,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
 
-                        <Switch
-                            android:id="@+id/bbmsw"
-                            android:theme="@style/SelectionSwitch"
+                        <View
                             android:layout_centerInParent="true"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
@@ -662,15 +640,16 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/bm"
+                    android:background="@drawable/ripple"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginBottom="6dp"
+                    android:id="@+id/ll_spec"
                     android:padding="10dp"
                     android:clickable="true"
-                    android:focusable="true"
-                    android:background="@drawable/ripple"
-                    android:layout_marginTop="12dp"
                     android:weightSum="12"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:focusable="true">
 
                     <RelativeLayout
                         android:layout_weight="10"
@@ -678,66 +657,16 @@
                         android:layout_height="match_parent">
 
                         <ImageView
-                            android:layout_marginTop="2dp"
+                            android:layout_marginTop="12dp"
                             android:layout_width="25dp"
                             android:layout_height="25dp"
-                            android:layout_centerInParent="true"
+                            android:layout_centerVertical="true"
+                            android:layout_centerHorizontal="true"
                             android:src="@drawable/ic_baseline_balance_24" />
 
                     </RelativeLayout>
 
                     <LinearLayout
-                        android:layout_marginLeft="8dp"
-                        android:layout_marginRight="4dp"
-                        android:layout_weight="2"
-                        android:orientation="vertical"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                        <TextView
-                            android:textStyle="bold"
-                            android:text="@string/txt_obm"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"/>
-
-                        <TextView
-                            android:layout_marginTop="2dp"
-                            android:textSize="13sp"
-                            android:textColor="@color/text_sec"
-                            android:text="@string/obm_desc"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"/>
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/pm"
-                    android:padding="10dp"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:background="@drawable/ripple"
-                    android:layout_marginTop="12dp"
-                    android:weightSum="12"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <RelativeLayout
-                        android:layout_weight="5"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                        <ImageView
-                            android:layout_marginTop="2dp"
-                            android:layout_width="25dp"
-                            android:layout_height="25dp"
-                            android:layout_centerInParent="true"
-                            android:src="@drawable/ic_baseline_power_24" />
-
-                    </RelativeLayout>
-
-                    <LinearLayout
                         android:layout_marginLeft="4dp"
                         android:layout_marginRight="4dp"
                         android:layout_weight="2"
@@ -747,269 +676,24 @@
 
                         <TextView
                             android:textStyle="bold"
-                            android:text="@string/txt_pm"
+                            android:text="@string/head_spec"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
 
                         <TextView
-                            android:layout_marginTop="2dp"
-                            android:textSize="13sp"
+                            android:layout_marginTop="4dp"
+                            android:text="@string/desc_spec"
                             android:textColor="@color/text_sec"
-                            android:text="@string/pm_desc"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"/>
 
                     </LinearLayout>
-
-                    <RelativeLayout
-                        android:layout_weight="5"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                        <Switch
-                            android:id="@+id/pmsw"
-                            android:theme="@style/SelectionSwitch"
-                            android:layout_centerInParent="true"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"/>
-
-                    </RelativeLayout>
 
                 </LinearLayout>
 
             </LinearLayout>
 
         </LinearLayout>
-
-        <LinearLayout
-            android:layout_marginTop="12dp"
-            android:layout_width="match_parent"
-            android:layout_height="0.1dp"
-            android:background="@color/grey_light"/>
-
-        <LinearLayout
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
-            android:scrollbars="vertical"
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:layout_marginLeft="12dp"
-                    android:text="@string/title_spec_game"
-                    android:textColor="@color/green_light"
-                    android:textStyle="bold"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-
-                <LinearLayout
-                    android:id="@+id/ll_gm"
-                    android:padding="10dp"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:background="@drawable/ripple"
-                    android:layout_marginTop="16dp"
-                    android:weightSum="12"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <RelativeLayout
-                        android:layout_weight="5"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                        <ImageView
-                            android:layout_marginTop="2dp"
-                            android:layout_width="25dp"
-                            android:layout_height="25dp"
-                            android:layout_centerInParent="true"
-                            android:src="@drawable/ic_baseline_gamepad_24" />
-
-                    </RelativeLayout>
-
-                    <LinearLayout
-                        android:layout_marginLeft="4dp"
-                        android:layout_marginRight="4dp"
-                        android:layout_weight="2"
-                        android:orientation="vertical"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                        <TextView
-                            android:textStyle="bold"
-                            android:text="@string/txt_gm"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"/>
-
-                        <TextView
-                            android:layout_marginTop="2dp"
-                            android:textSize="13sp"
-                            android:textColor="@color/text_sec"
-                            android:text="@string/gm_desc"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"/>
-
-                    </LinearLayout>
-
-                    <RelativeLayout
-                        android:layout_weight="5"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                        <Switch
-                            android:id="@+id/gmsw"
-                            android:theme="@style/SelectionSwitch"
-                            android:layout_centerInParent="true"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"/>
-
-                    </RelativeLayout>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/ll_as"
-                    android:padding="10dp"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:background="@drawable/ripple"
-                    android:layout_marginTop="12dp"
-                    android:weightSum="12"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <RelativeLayout
-                        android:layout_weight="5"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                        <ImageView
-                            android:layout_marginTop="2dp"
-                            android:layout_width="25dp"
-                            android:layout_height="25dp"
-                            android:layout_centerInParent="true" />
-
-                    </RelativeLayout>
-
-                    <LinearLayout
-                        android:layout_marginLeft="4dp"
-                        android:layout_marginRight="4dp"
-                        android:layout_weight="2"
-                        android:orientation="vertical"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                        <TextView
-                            android:textStyle="bold"
-                            android:text="@string/txt_auto_sync"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"/>
-
-                        <TextView
-                            android:layout_marginTop="2dp"
-                            android:textSize="13sp"
-                            android:textColor="@color/text_sec"
-                            android:text="@string/auto_sync_desc"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"/>
-
-                    </LinearLayout>
-
-                    <RelativeLayout
-                        android:layout_weight="5"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                        <CheckBox
-                            android:id="@+id/dozesw"
-                            android:theme="@style/checkStyle"
-                            android:layout_centerInParent="true"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"/>
-
-                    </RelativeLayout>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/ll_mon"
-                    android:padding="10dp"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:background="@drawable/ripple"
-                    android:layout_marginTop="12dp"
-                    android:weightSum="12"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <RelativeLayout
-                        android:layout_weight="5"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                        <ImageView
-                            android:layout_marginTop="2dp"
-                            android:layout_width="25dp"
-                            android:layout_height="25dp"
-                            android:layout_centerInParent="true" />
-
-                    </RelativeLayout>
-
-                    <LinearLayout
-                        android:layout_marginLeft="4dp"
-                        android:layout_marginRight="4dp"
-                        android:layout_weight="2"
-                        android:orientation="vertical"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                        <TextView
-                            android:textStyle="bold"
-                            android:text="@string/txt_rt_mon"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"/>
-
-                        <TextView
-                            android:layout_marginTop="2dp"
-                            android:textSize="13sp"
-                            android:textColor="@color/text_sec"
-                            android:text="@string/rt_mon_desc"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"/>
-
-                    </LinearLayout>
-
-                    <RelativeLayout
-                        android:layout_weight="5"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                        <CheckBox
-                            android:id="@+id/monsw"
-                            android:theme="@style/checkStyle"
-                            android:layout_centerInParent="true"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"/>
-
-                    </RelativeLayout>
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_marginTop="12dp"
-            android:layout_width="match_parent"
-            android:layout_height="0.1dp"
-            android:background="@color/grey_light"/>
 
     </LinearLayout>
 

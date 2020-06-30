@@ -48,7 +48,7 @@
     <string name="obm_desc">Default kernel profile for overall balance</string>
     <string name="txt_pm">Performance Mode</string>
     <string name="pm_desc">Tuned for top tier performance</string>
-    <string name="title_spec_game">SPECTRUM(GAMING)</string>
+    <string name="title_spec_game">GAMING</string>
     <string name="txt_gm">Enable/Disable Gaming Mode</string>
     <string name="gm_desc">Aims for Better Gaming performance</string>
     <string name="txt_auto_sync">Disable Auto-Sync feature</string>
@@ -80,5 +80,10 @@
     <string name="txt_wg_ver">WireGuard version:</string>
     <string name="mhz">MHz</string>
     <string name="txt_batt_lvl">Charge level:</string>
+    <string name="tit_spectrum">SPECTRUM</string>
+    <string name="txt_prof">PROFILES</string>
+    <string name="txt_spec">Spectrum</string>
+    <string name="head_spec">Spectrum Profiles</string>
+    <string name="desc_spec">Profile based kernel management</string>
 
 </resources>
