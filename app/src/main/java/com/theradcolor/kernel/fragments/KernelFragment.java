@@ -26,11 +26,13 @@ import com.grarak.kerneladiutor.utils.root.RootUtils;
 import com.theradcolor.kernel.KcalActivity;
 import com.theradcolor.kernel.R;
 import com.theradcolor.kernel.SpectrumActivity;
+import com.theradcolor.kernel.utils.kernel.Battery;
 
 
 public class KernelFragment extends Fragment implements View.OnClickListener{
 
-    private TextView vib;
+    Battery mBattery;
+    private TextView vib,ffc;
     private SeekBar seekBar;
     private LinearLayout srgb,kcal,spectrum,vibration,hpg,mcg;
     int progressChangedValue = 1;
@@ -48,6 +50,7 @@ public class KernelFragment extends Fragment implements View.OnClickListener{
         seekBar = root.findViewById(R.id.vibration);
         seekBar.setPadding(16,16,16,16);
         vib = root.findViewById(R.id.pervib);
+        ffc = root.findViewById(R.id.txt_ffc);
         srgb = root.findViewById(R.id.ll_srgb);
         kcal = root.findViewById(R.id.ll_kcal);
         spectrum = root.findViewById(R.id.ll_spec);
@@ -57,6 +60,8 @@ public class KernelFragment extends Fragment implements View.OnClickListener{
         vibsw.setOnCheckedChangeListener(myCheckboxListener);
         srgbsw = root.findViewById(R.id.srgbsw);
         srgbsw.setOnCheckedChangeListener(myCheckboxListener);
+
+        mBattery = new Battery();
 
         hpg = root.findViewById(R.id.ll_hpg);
         hpg.setOnClickListener(this);
@@ -70,6 +75,8 @@ public class KernelFragment extends Fragment implements View.OnClickListener{
         srgb.setOnClickListener(this);
         kcal.setOnClickListener(this);
         vibration.setOnClickListener(this);
+
+        ffc.setText(mBattery.FastChargeStatus());
 
         final Vibrator v = (Vibrator) getContext().getSystemService(Context.VIBRATOR_SERVICE);
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
