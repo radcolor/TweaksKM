@@ -36,6 +36,7 @@ dependencies {
     implementation "com.github.topjohnwu.libsu:core:2.5.1"
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
     implementation 'com.github.IntruderShanky:scatter-piechart:1.0.0'
+    implementation 'com.github.lecho:hellocharts-library:1.5.8@aar'
     testImplementation 'junit:junit:4.13'
 
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
