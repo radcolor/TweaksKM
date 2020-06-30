@@ -7,7 +7,7 @@ import com.grarak.kerneladiutor.utils.Utils;
 
 public class Battery {
 
-    private static final String FAST_CHARGE = "/sys/kernel/fast_charge";
+    private static final String FAST_CHARGE = "/sys/kernel/fast_charge/force_fast_charge";
 
     private static final String POWER_SUPPLY = "/sys/class/power_supply";
     private static final String CHARGING_CURRENT = POWER_SUPPLY + "/battery/current_now";
@@ -33,6 +33,13 @@ public class Battery {
         } else {
             return String.valueOf(chargingrate);
         }
+    }
+
+    public String FastChargeStatus() {
+        int ffc = Utils.strToInt(Utils.readFile(FAST_CHARGE));
+        if(ffc==0){ return "Disabled"; }
+        else if(ffc==1){ return "Enabled"; }
+        return null;
     }
 
     public static String ChargingStatus() {
