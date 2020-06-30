@@ -32,56 +32,26 @@ import com.theradcolor.kernel.utils.kernel.Network;
 
 public class KernelFragment extends Fragment implements View.OnClickListener{
 
-    Network mNetwork;
-    Battery mBattery;
-    private TextView vib,ffc,tcp;
-    private SeekBar seekBar;
-    private LinearLayout srgb,kcal,spectrum,vibration,hpg,mcg;
+    Network mNetwork; Battery mBattery;
+    View root;
+    TextView vib,ffc,tcp;
+    SeekBar seekBar;
+    LinearLayout sRGB, kCAL, spectrum, vibration, hpg, mcg;
     int progressChangedValue = 1;
     public static final int MIN_VIBRATION = 116;
     public static final int MAX_VIBRATION = 3596;
     int  vibrationValue;
     SharedPreferences.Editor editor;
-    private Switch vibsw,srgbsw;
+    Switch vibSW, srgbSW;
     SharedPreferences preferences;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
-        View root = inflater.inflate(R.layout.fragment_kernel, container, false);
-        seekBar = root.findViewById(R.id.vibration);
-        seekBar.setPadding(16,16,16,16);
-        vib = root.findViewById(R.id.pervib);
-        ffc = root.findViewById(R.id.txt_ffc);
-        tcp = root.findViewById(R.id.txt_tcp);
-        srgb = root.findViewById(R.id.ll_srgb);
-        kcal = root.findViewById(R.id.ll_kcal);
-        spectrum = root.findViewById(R.id.ll_spec);
-        spectrum.setOnClickListener(this);
-        vibration = root.findViewById(R.id.ll_vib);
-        vibsw = root.findViewById(R.id.vibsw);
-        vibsw.setOnCheckedChangeListener(myCheckboxListener);
-        srgbsw = root.findViewById(R.id.srgbsw);
-        srgbsw.setOnCheckedChangeListener(myCheckboxListener);
+        root = inflater.inflate(R.layout.fragment_kernel, container, false);
 
-        mBattery = new Battery();
-        mNetwork = new Network();
-
-        hpg = root.findViewById(R.id.ll_hpg);
-        hpg.setOnClickListener(this);
-        mcg = root.findViewById(R.id.ll_mcg);
-        mcg.setOnClickListener(this);
-
-        preferences = getActivity().getSharedPreferences("preferences",Context.MODE_PRIVATE);
-        vib.setText(preferences.getInt("vibration",1)+getString(R.string.percent));
-        seekBar.setProgress(preferences.getInt("vibration",1));
-
-        srgb.setOnClickListener(this);
-        kcal.setOnClickListener(this);
-        vibration.setOnClickListener(this);
-
-        ffc.setText(mBattery.FastChargeStatus());
-        tcp.setText(mNetwork.getTcpCongestion());
+        InitView();
+        InitUI();
 
         final Vibrator v = (Vibrator) getContext().getSystemService(Context.VIBRATOR_SERVICE);
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -114,11 +84,60 @@ public class KernelFragment extends Fragment implements View.OnClickListener{
         if(setvib()==-1){
             seekBar.setEnabled(false);
             vib.setText(" ");
-            vibsw.setEnabled(false);
+            vibSW.setEnabled(false);
         }else{
             seekBar.setProgress(setvib());
         }
         return root;
+    }
+
+    public void InitView(){
+        seekBar = root.findViewById(R.id.vibration);
+        vib = root.findViewById(R.id.pervib);
+        ffc = root.findViewById(R.id.txt_ffc);
+        tcp = root.findViewById(R.id.txt_tcp);
+        sRGB = root.findViewById(R.id.ll_srgb);
+        kCAL = root.findViewById(R.id.ll_kcal);
+        spectrum = root.findViewById(R.id.ll_spec);
+        vibration = root.findViewById(R.id.ll_vib);
+        vibSW = root.findViewById(R.id.vibsw);
+        srgbSW = root.findViewById(R.id.srgbsw);
+
+        mBattery = new Battery();
+        mNetwork = new Network();
+
+        hpg = root.findViewById(R.id.ll_hpg);
+        mcg = root.findViewById(R.id.ll_mcg);
+        hpg.setOnClickListener(this);
+        mcg.setOnClickListener(this);
+    }
+
+    public void InitUI(){
+        seekBar.setPadding(16,16,16,16);
+        spectrum.setOnClickListener(this);
+        vibSW.setOnCheckedChangeListener(myCheckboxListener);
+        srgbSW.setOnCheckedChangeListener(myCheckboxListener);
+        preferences = getActivity().getSharedPreferences("preferences",Context.MODE_PRIVATE);
+        vib.setText(preferences.getInt("vibration",1)+getString(R.string.percent));
+        seekBar.setProgress(preferences.getInt("vibration",1));
+        sRGB.setOnClickListener(this);
+        kCAL.setOnClickListener(this);
+        vibration.setOnClickListener(this);
+        ffc.setText(mBattery.FastChargeStatus());
+        tcp.setText(mNetwork.getTcpCongestion());
+    }
+
+    public void refreshUI(){
+        vib.setText(preferences.getInt("vibration",1)+getString(R.string.percent));
+        seekBar.setProgress(preferences.getInt("vibration",1));
+        ffc.setText(mBattery.FastChargeStatus());
+        tcp.setText(mNetwork.getTcpCongestion());
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        refreshUI();
     }
 
     private int setvib(){
@@ -133,10 +152,10 @@ public class KernelFragment extends Fragment implements View.OnClickListener{
 
     private void setsw(){
         if(preferences.getBoolean("vibsw",false)){
-            vibsw.setChecked(true);
+            vibSW.setChecked(true);
         }
         if(preferences.getBoolean("srgbsw",false)){
-            srgbsw.setChecked(true);
+            srgbSW.setChecked(true);
         }
     }
 
@@ -145,7 +164,7 @@ public class KernelFragment extends Fragment implements View.OnClickListener{
         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
             switch (buttonView.getId()){
                 case R.id.vibsw:
-                    if(vibsw.isChecked()){
+                    if(vibSW.isChecked()){
                         editor = preferences.edit();
                         editor.putBoolean("vibsw",true);
                         editor.putInt("vibval",getVibration());
@@ -157,7 +176,7 @@ public class KernelFragment extends Fragment implements View.OnClickListener{
                     }
                     break;
                 case R.id.srgbsw:
-                    if(srgbsw.isChecked()){
+                    if(srgbSW.isChecked()){
                         editor = preferences.edit();
                         editor.putBoolean("srgbsw",true);
                         editor.apply();
