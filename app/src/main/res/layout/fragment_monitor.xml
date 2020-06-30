@@ -449,10 +449,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                    <com.intrusoft.scatter.PieChart
+                    <lecho.lib.hellocharts.view.PieChartView
                         android:id="@+id/memchart"
-                        android:layout_marginStart="8dp"
-                        app:chartColor="@color/green_light"
                         android:layout_weight="3"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"/>
@@ -573,10 +571,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                    <com.intrusoft.scatter.PieChart
-                        android:id="@+id/battchart"
-                        android:layout_marginStart="8dp"
-                        app:chartColor="@color/green_light"
+                    <lecho.lib.hellocharts.view.PieChartView
+                        android:id="@+id/batChart"
                         android:layout_weight="3"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"/>

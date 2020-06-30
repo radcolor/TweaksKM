@@ -17,6 +17,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -24,8 +25,6 @@ import androidx.fragment.app.Fragment;
 import com.grarak.kerneladiutor.utils.Device;
 import com.grarak.kerneladiutor.utils.Utils;
 import com.grarak.kerneladiutor.utils.root.RootUtils;
-import com.intrusoft.scatter.ChartData;
-import com.intrusoft.scatter.PieChart;
 import com.theradcolor.kernel.R;
 import com.theradcolor.kernel.utils.kernel.Battery;
 import com.theradcolor.kernel.utils.kernel.CPU;
@@ -36,13 +35,17 @@ import com.theradcolor.kernel.utils.kernel.WireGuard;
 import java.util.ArrayList;
 import java.util.List;
 
+import lecho.lib.hellocharts.listener.PieChartOnValueSelectListener;
+import lecho.lib.hellocharts.model.PieChartData;
+import lecho.lib.hellocharts.model.SliceValue;
+import lecho.lib.hellocharts.view.PieChartView;
+
 public class MonitorFragment extends Fragment{
 
     private static final String TAG = "MonitorFragment";
     View root;
     int mBatteryTemp, mBatteryLvl;
     CPU cpu; GPU gpu; Entropy entropy; WireGuard wireGuard;
-    PieChart memchart, battchart;
     TextView kernel_name, kernel_name_full;
     TextView cpu0,cpu1,cpu2,cpu3,cpu4,cpu5,cpu6,cpu7, little_max, big_max, board, cpu_gov, oem_name;
     TextView gpu_usage_per, gpu_crr_freq, gpu_max_freq, gpu_model;
@@ -112,9 +115,6 @@ public class MonitorFragment extends Fragment{
         uptime = root.findViewById(R.id.up_time);
         deepsleeptime = root.findViewById(R.id.deep_slp);
 
-        memchart = root.findViewById(R.id.memchart);
-        battchart = root.findViewById(R.id.battchart);
-
     }
 
     @SuppressLint("SetTextI18n")
@@ -129,14 +129,6 @@ public class MonitorFragment extends Fragment{
         board.setText(getString(R.string.dev_board) + " " + Device.getHardware() + " " + Device.getBoard());
         String gpuString = "<font color=#FFFFFF> <b> GPU model: </b> </font>" + RootUtils.runAndGetError("dumpsys SurfaceFlinger | grep GLES");
         gpu_model.setText(Html.fromHtml(gpuString));
-        //Sample pie chart data
-        memchart.setCenterCircleColor(R.color.colorAccent);
-        battchart.setCenterCircleColor(R.color.colorAccent);
-        List<ChartData> data = new ArrayList<>();
-        data.add(new ChartData("", 66));
-        data.add(new ChartData("", 34));
-        memchart.setChartData(data);
-        battchart.setChartData(data);
         wireguard_ver.setText("v"+wireGuard.getWireguard());
         long systemTime = SystemClock.elapsedRealtime();
         long awakeTime = SystemClock.uptimeMillis();
@@ -151,6 +143,10 @@ public class MonitorFragment extends Fragment{
         int freq_little = 0, freq_big = 0;
         ActivityManager activityManager;
         ActivityManager.MemoryInfo mi;
+        private PieChartView memChart, batChart;
+        private PieChartData data;
+        List<SliceValue> values;
+        SliceValue sliceValue;
         int total_memory, used_memory, free_memory, percentAvail;
         int battery_status, battery_charge;
         CPU cpu;
@@ -166,6 +162,10 @@ public class MonitorFragment extends Fragment{
             gpu = new GPU();
             mi = new ActivityManager.MemoryInfo();
             activityManager = (ActivityManager) getActivity().getSystemService(Context.ACTIVITY_SERVICE);
+            memChart = root.findViewById(R.id.memchart);
+            batChart = root.findViewById(R.id.batChart);
+            batChart.setValueSelectionEnabled(true);
+            memChart.setValueSelectionEnabled(true);
             entropy = new Entropy();
         }
 
@@ -238,7 +238,66 @@ public class MonitorFragment extends Fragment{
             ent_lvl.setText(Html.fromHtml(entropyString));
             bat_temp.setText(mBatteryTemp +"°C");
             bat_lvl.setText(+mBatteryLvl+"%");
+            generateMemData(memChart, data, i[7], i[6]);
+            generateBatData(batChart, data, mBatteryLvl, 100-mBatteryLvl);
         }
+    }
+
+    private void generateBatData(PieChartView chart, PieChartData mData, int lvl, int used_lvl) {
+        List<SliceValue> values = new ArrayList<SliceValue>();
+        SliceValue free = new SliceValue(used_lvl, getResources().getColor(R.color.green));
+        values.add(free);
+        SliceValue used = new SliceValue(lvl, getResources().getColor(R.color.green_light));
+        values.add(used);
+        mData = new PieChartData(values);
+        //mData.setHasCenterCircle(true);
+        //mData.setCenterCircleScale(.5f);
+        chart.setPieChartData(mData);
+        //prepareDataAnimation(mData);
+        chart.setValueSelectionEnabled(true);
+        chart.setValueTouchEnabled(true);
+        //chart.startDataAnimation();
+    }
+
+    private void generateMemData(PieChartView chart, PieChartData mData, int free_mem, int used_mem) {
+        List<SliceValue> values = new ArrayList<SliceValue>();
+        SliceValue free = new SliceValue(free_mem, getResources().getColor(R.color.green));
+        values.add(free);
+        SliceValue used = new SliceValue(used_mem, getResources().getColor(R.color.green_light));
+        values.add(used);
+        mData = new PieChartData(values);
+        //mData.setHasCenterCircle(true);
+        //mData.setCenterCircleScale(.5f);
+        chart.setPieChartData(mData);
+        //prepareDataAnimation(mData);
+        chart.setValueSelectionEnabled(true);
+        chart.setValueTouchEnabled(true);
+        //chart.startDataAnimation();
+        chart.setOnValueTouchListener(new ValueTouchListener());
+    }
+
+    private void prepareDataAnimation(PieChartData data) {
+        for (SliceValue value : data.getValues()) {
+            //value.setTarget((float) Math.random() * 30 + 15);
+        }
+    }
+
+    private class ValueTouchListener implements PieChartOnValueSelectListener {
+
+        @Override
+        public void onValueSelected(int arcIndex, SliceValue value) {
+            if(arcIndex==0){
+                Toast.makeText(getActivity(), "Free Memory", Toast.LENGTH_SHORT).show();
+            }else if(arcIndex==1){
+                Toast.makeText(getActivity(), "Used Memory", Toast.LENGTH_SHORT).show();
+            }
+        }
+
+        @Override
+        public void onValueDeselected() {
+            // TODO Auto-generated method stub
+        }
+
     }
 
     private BroadcastReceiver mBatteryReceiver = new BroadcastReceiver() {
