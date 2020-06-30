@@ -28,6 +28,7 @@ import com.theradcolor.kernel.R;
 import com.theradcolor.kernel.SpectrumActivity;
 import com.theradcolor.kernel.utils.kernel.Battery;
 import com.theradcolor.kernel.utils.kernel.Network;
+import com.theradcolor.kernel.utils.kernel.sRGB;
 
 
 public class KernelFragment extends Fragment implements View.OnClickListener{
@@ -198,32 +199,19 @@ public class KernelFragment extends Fragment implements View.OnClickListener{
 
     private void srgb()
     {
+        com.theradcolor.kernel.utils.kernel.sRGB sRGB = new sRGB();;
         AlertDialog.Builder alertDialog =  new AlertDialog.Builder(new ContextThemeWrapper(getContext(), R.style.Theme_AppCompat_DayNight_Dialog_Alert))
                 .setTitle("sRGB colors")
                 .setPositiveButton("On", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        RootUtils.runCommand("active=1\n" +
-                                "\n" +
-                                "echo $active > /sys/module/mdss_fb/parameters/srgb_enabled\n" +
-                                "\n" +
-                                "if [ $active = \"1\" ]\n" +
-                                "then echo \"2\" > /sys/class/graphics/fb0/msm_fb_srgb\n" +
-                                "else echo \"1\" > /sys/class/graphics/fb0/msm_fb_srgb\n" +
-                                "fi");
+                       sRGB.srgbON();
                     }
                 })
                 .setNegativeButton("Off", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        RootUtils.runCommand("active=0\n" +
-                                "\n" +
-                                "echo $active > /sys/module/mdss_fb/parameters/srgb_enabled\n" +
-                                "\n" +
-                                "if [ $active = \"1\" ]\n" +
-                                "then echo \"2\" > /sys/class/graphics/fb0/msm_fb_srgb\n" +
-                                "else echo \"1\" > /sys/class/graphics/fb0/msm_fb_srgb\n" +
-                                "fi");
+                        sRGB.srgbOFF();
                     }
                 });
         alertDialog.show();
