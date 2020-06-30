@@ -1,10 +1,12 @@
-package com.theradcolor.kernel;
+package com.theradcolor.kernel.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+
+import com.theradcolor.kernel.R;
 
 import static android.view.View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR;
 import static android.view.WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS;

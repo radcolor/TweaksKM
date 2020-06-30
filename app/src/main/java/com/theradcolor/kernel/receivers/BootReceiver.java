@@ -1,4 +1,4 @@
-package com.theradcolor.kernel;
+package com.theradcolor.kernel.receivers;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;

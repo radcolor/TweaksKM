@@ -23,9 +23,9 @@ import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.fragment.app.Fragment;
 
 import com.grarak.kerneladiutor.utils.root.RootUtils;
-import com.theradcolor.kernel.KcalActivity;
 import com.theradcolor.kernel.R;
-import com.theradcolor.kernel.SpectrumActivity;
+import com.theradcolor.kernel.activities.KcalActivity;
+import com.theradcolor.kernel.activities.SpectrumActivity;
 import com.theradcolor.kernel.utils.kernel.Battery;
 import com.theradcolor.kernel.utils.kernel.Network;
 import com.theradcolor.kernel.utils.kernel.sRGB;

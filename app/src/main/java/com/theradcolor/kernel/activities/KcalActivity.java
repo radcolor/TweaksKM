@@ -1,4 +1,4 @@
-package com.theradcolor.kernel;
+package com.theradcolor.kernel.activities;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,6 +12,7 @@ import android.widget.SeekBar;
 
 import com.grarak.kerneladiutor.utils.Utils;
 import com.grarak.kerneladiutor.utils.root.RootUtils;
+import com.theradcolor.kernel.R;
 
 public class KcalActivity extends AppCompatActivity implements View.OnClickListener{
 

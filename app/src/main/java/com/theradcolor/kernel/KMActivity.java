@@ -12,6 +12,7 @@ import com.grarak.kerneladiutor.utils.root.RootUtils;
 import com.theradcolor.kernel.fragments.AboutFragment;
 import com.theradcolor.kernel.fragments.KernelFragment;
 import com.theradcolor.kernel.fragments.MonitorFragment;
+import com.theradcolor.kernel.utils.checkRoot;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;

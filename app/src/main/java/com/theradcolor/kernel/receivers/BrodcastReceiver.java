@@ -1,9 +1,11 @@
-package com.theradcolor.kernel;
+package com.theradcolor.kernel.receivers;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
+
+import com.theradcolor.kernel.services.GamingService;
 
 import java.io.IOException;
 import java.io.OutputStreamWriter;
@@ -22,7 +24,7 @@ public class BrodcastReceiver extends BroadcastReceiver {
             optimize();
         }
         else if(action.equals("stop")){
-            context.stopService(new Intent(context,GamingService.class));
+            context.stopService(new Intent(context, GamingService.class));
         }
         Intent i = new Intent(Intent.ACTION_CLOSE_SYSTEM_DIALOGS);
         context.sendBroadcast(i);

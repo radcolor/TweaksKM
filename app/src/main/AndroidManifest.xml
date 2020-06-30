@@ -20,7 +20,7 @@
         tools:ignore="GoogleAppIndexingWarning">
         <activity
             android:theme="@style/kcal"
-            android:name=".KcalActivity"
+            android:name=".activities.KcalActivity"
             android:label="Display Color Calibration"
             android:parentActivityName=".KMActivity" />
         <activity
@@ -34,7 +34,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".FAQsActivity"
+            android:name=".activities.FAQsActivity"
             android:label="FAQs"
             android:parentActivityName=".KMActivity"
             android:theme="@style/faqs" />
@@ -43,17 +43,17 @@
             android:label="@string/app_name"
             android:theme="@style/rad" />
         <activity
-            android:name=".SpectrumActivity"
+            android:name=".activities.SpectrumActivity"
             android:label="@string/app_name"
             android:theme="@style/kcal" />
 
         <service
-            android:name=".GamingService"
+            android:name=".services.GamingService"
             android:exported="true" />
-        <receiver android:name=".BrodcastReceiver" />
+        <receiver android:name=".receivers.BrodcastReceiver" />
 
         <!-- Declaring broadcast receiver for BOOT_COMPLETED event. -->
-        <receiver android:name=".BootReceiver" android:enabled="true" android:exported="false">
+        <receiver android:name=".receivers.BootReceiver" android:enabled="true" android:exported="false">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED"/>
             </intent-filter>

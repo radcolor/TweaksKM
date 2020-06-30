@@ -1,4 +1,4 @@
-package com.theradcolor.kernel;
+package com.theradcolor.kernel.services;
 
 import android.app.ActivityManager;
 import android.app.Notification;
@@ -21,6 +21,8 @@ import android.widget.Toast;
 
 import androidx.core.app.NotificationCompat;
 
+
+import com.theradcolor.kernel.R;
 
 import java.io.IOException;
 import java.io.OutputStreamWriter;

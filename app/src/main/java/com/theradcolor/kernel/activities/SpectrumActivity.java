@@ -1,7 +1,9 @@
-package com.theradcolor.kernel;
+package com.theradcolor.kernel.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.theradcolor.kernel.R;
 
 public class SpectrumActivity extends AppCompatActivity {
 
