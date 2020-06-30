@@ -85,5 +85,8 @@
     <string name="txt_spec">Spectrum</string>
     <string name="head_spec">Spectrum Profiles</string>
     <string name="desc_spec">Profile based kernel management</string>
+    <string name="head_misc">Miscellaneous</string>
+    <string name="title_ffc">Force Fast Charge</string>
+    <string name="title_tcp">TCP Congestion Algorithm</string>
 
 </resources>
