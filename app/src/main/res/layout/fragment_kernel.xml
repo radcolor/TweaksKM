@@ -771,7 +771,7 @@
                 <LinearLayout
                     android:background="@drawable/ripple"
                     android:layout_marginTop="6dp"
-                    android:id="@+id/ll_hpg"
+                    android:id="@+id/ll_ffc"
                     android:padding="10dp"
                     android:clickable="true"
                     android:weightSum="12"
@@ -811,7 +811,6 @@
 
                         <TextView
                             android:id="@+id/txt_ffc"
-                            android:text="Enabled"
                             android:layout_marginTop="4dp"
                             android:textColor="@color/text_sec"
                             android:layout_width="match_parent"
@@ -838,7 +837,7 @@
                 <LinearLayout
                     android:background="@drawable/ripple"
                     android:layout_marginTop="6dp"
-                    android:id="@+id/ll_mcg"
+                    android:id="@+id/ll_tcp"
                     android:padding="10dp"
                     android:clickable="true"
                     android:weightSum="12"
@@ -877,8 +876,8 @@
                             android:layout_height="wrap_content"/>
 
                         <TextView
+                            android:id="@+id/txt_tcp"
                             android:layout_marginTop="4dp"
-                            android:text="westwood"
                             android:textColor="@color/text_sec"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"/>
