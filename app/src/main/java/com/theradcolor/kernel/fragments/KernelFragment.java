@@ -22,18 +22,20 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.fragment.app.Fragment;
 
+import com.grarak.kerneladiutor.utils.Utils;
 import com.grarak.kerneladiutor.utils.root.RootUtils;
 import com.theradcolor.kernel.R;
 import com.theradcolor.kernel.activities.KcalActivity;
 import com.theradcolor.kernel.activities.SpectrumActivity;
 import com.theradcolor.kernel.utils.kernel.Battery;
 import com.theradcolor.kernel.utils.kernel.Network;
+import com.theradcolor.kernel.utils.kernel.Sound;
 import com.theradcolor.kernel.utils.kernel.sRGB;
 
 
 public class KernelFragment extends Fragment implements View.OnClickListener{
 
-    Network mNetwork; Battery mBattery;
+    Network mNetwork; Battery mBattery; Sound mSound;
     View root;
     TextView vib,ffc,tcp;
     SeekBar seekBar;
@@ -106,6 +108,7 @@ public class KernelFragment extends Fragment implements View.OnClickListener{
 
         mBattery = new Battery();
         mNetwork = new Network();
+        mSound = new Sound();
 
         hpg = root.findViewById(R.id.ll_hpg);
         mcg = root.findViewById(R.id.ll_mcg);
@@ -241,11 +244,60 @@ public class KernelFragment extends Fragment implements View.OnClickListener{
         }
     }
 
+    SeekBar hp_lft_sb, hp_rgt_sb, mp_sb;
+    TextView hp_lft_txt, hp_rgt_txt, mp_txt;
+
     public void hpgDialog(View view) {        // create an alert builder
         AlertDialog.Builder builder =  new AlertDialog.Builder(new ContextThemeWrapper(getContext(), R.style.Theme_AppCompat_DayNight_Dialog_Alert));
         builder.setTitle(R.string.title_hp_gain);        // set the custom layout
-        final View customLayout = getLayoutInflater().inflate(R.layout.headgain_dialog, null);
-        builder.setView(customLayout);        // add a button
+        final View hpLayout = getLayoutInflater().inflate(R.layout.headgain_dialog, null);
+
+        hp_lft_sb = hpLayout.findViewById(R.id.hp_left);
+        hp_rgt_sb = hpLayout.findViewById(R.id.hp_right);
+        hp_lft_sb.setProgress(Utils.strToInt(mSound.getHeadphoneFlar("left")));
+        hp_rgt_sb.setProgress(Utils.strToInt(mSound.getHeadphoneFlar("right")));
+        hp_lft_txt = hpLayout.findViewById(R.id.hp_left_txt);
+        hp_rgt_txt = hpLayout.findViewById(R.id.hp_right_txt);
+        hp_lft_txt.setText(""+mSound.getHeadphoneFlar("left"));
+        hp_rgt_txt.setText(""+mSound.getHeadphoneFlar("right"));
+
+        hp_lft_sb.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                hp_lft_txt.setText(""+progress);
+                mSound.setHeadphoneFlar("left", ""+progress, getContext());
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+
+        hp_rgt_sb.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                hp_rgt_txt.setText(""+progress);
+                mSound.setHeadphoneFlar("right", ""+progress, getContext());
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+
+        builder.setView(hpLayout);        // add a button
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -259,8 +311,31 @@ public class KernelFragment extends Fragment implements View.OnClickListener{
     public void mcgDialog(View view) {        // create an alert builder
         AlertDialog.Builder builder =  new AlertDialog.Builder(new ContextThemeWrapper(getContext(), R.style.Theme_AppCompat_DayNight_Dialog_Alert));
         builder.setTitle(R.string.title_mp_gain);        // set the custom layout
-        final View customLayout = getLayoutInflater().inflate(R.layout.micgain_dialog, null);
-        builder.setView(customLayout);        // add a button
+        final View mpLayout = getLayoutInflater().inflate(R.layout.micgain_dialog, null);
+        mp_sb = mpLayout.findViewById(R.id.mp_gain);
+        mp_sb.setProgress(Utils.strToInt(mSound.getMicrophoneFlar()));
+
+        mp_sb.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                mp_txt.setText(""+progress);
+                mSound.setMicrophoneFlar(""+progress,getContext());
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+
+        mp_txt = mpLayout.findViewById(R.id.mp_txt);
+        mp_txt.setText(""+mSound.getMicrophoneFlar());
+        builder.setView(mpLayout);        // add a button
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {

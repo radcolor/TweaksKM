@@ -1,25 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/your_dialog_root_element"
+    android:id="@+id/mp_dialog"
+    android:padding="16dp"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:padding="16dp">
+    android:layout_height="wrap_content">
 
     <LinearLayout
+        android:weightSum="9"
         android:layout_marginTop="16dp"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <SeekBar
-            android:progressDrawable="@drawable/seek_bar"
-            android:thumb="@drawable/seek_thumb"
-            android:layout_marginLeft="8dp"
-            android:id="@+id/your_dialog_seekbar"
-            android:layout_width="fill_parent"
+        <RelativeLayout
+            android:layout_weight="8"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content">
-        </SeekBar>
+
+            <TextView
+                android:id="@+id/mp_txt"
+                android:textStyle="bold"
+                android:layout_centerInParent="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <SeekBar
+                android:id="@+id/mp_gain"
+                android:min="0"
+                android:max="20"
+                android:progressDrawable="@drawable/seek_bar"
+                android:thumb="@drawable/seek_thumb"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+            </SeekBar>
+
+        </RelativeLayout>
 
     </LinearLayout>
 
