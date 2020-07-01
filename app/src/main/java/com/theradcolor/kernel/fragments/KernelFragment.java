@@ -16,6 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -31,6 +32,8 @@ import com.theradcolor.kernel.utils.kernel.Battery;
 import com.theradcolor.kernel.utils.kernel.Network;
 import com.theradcolor.kernel.utils.kernel.Sound;
 import com.theradcolor.kernel.utils.kernel.sRGB;
+
+import java.util.List;
 
 
 public class KernelFragment extends Fragment implements View.OnClickListener{
@@ -247,6 +250,9 @@ public class KernelFragment extends Fragment implements View.OnClickListener{
                 }
                 refreshUI();
                 break;
+            case R.id.ll_tcp:
+                tcpDialog(getView());
+                break;
             case R.id.ll_hpg:
                 hpgDialog(getView());
                 break;
@@ -354,6 +360,21 @@ public class KernelFragment extends Fragment implements View.OnClickListener{
                 // send data from the AlertDialog to the Activity
             }
         });        // create and show the alert dialog
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    public void tcpDialog(View view) {        // create an alert builder
+        AlertDialog.Builder builder =  new AlertDialog.Builder(new ContextThemeWrapper(getContext(), R.style.Theme_AppCompat_DayNight_Dialog_Alert));
+        builder.setTitle("TCP congestion algorithm");
+        String[] tcps = mNetwork.getTcpAvailableCongestions().toArray(new String[0]);
+        builder.setItems(tcps, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                mNetwork.setTcpCongestion(tcps[which], getContext());
+                refreshUI();
+            }
+        });
         AlertDialog dialog = builder.create();
         dialog.show();
     }
