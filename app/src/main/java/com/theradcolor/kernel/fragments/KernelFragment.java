@@ -39,7 +39,7 @@ public class KernelFragment extends Fragment implements View.OnClickListener{
     View root;
     TextView vib,ffc,tcp;
     SeekBar seekBar;
-    LinearLayout sRGB, kCAL, spectrum, vibration, hpg, mcg;
+    LinearLayout sRGB, kCAL, spectrum, vibration, ll_ffc, ll_tcp, hpg, mcg;
     int progressChangedValue = 1;
     public static final int MIN_VIBRATION = 116;
     public static final int MAX_VIBRATION = 3596;
@@ -103,6 +103,8 @@ public class KernelFragment extends Fragment implements View.OnClickListener{
         kCAL = root.findViewById(R.id.ll_kcal);
         spectrum = root.findViewById(R.id.ll_spec);
         vibration = root.findViewById(R.id.ll_vib);
+        ll_ffc = root.findViewById(R.id.ll_ffc);
+        ll_tcp = root.findViewById(R.id.ll_tcp);
         vibSW = root.findViewById(R.id.vibsw);
         srgbSW = root.findViewById(R.id.srgbsw);
 
@@ -127,6 +129,8 @@ public class KernelFragment extends Fragment implements View.OnClickListener{
         sRGB.setOnClickListener(this);
         kCAL.setOnClickListener(this);
         vibration.setOnClickListener(this);
+        ll_ffc.setOnClickListener(this);
+        ll_tcp.setOnClickListener(this);
         ffc.setText(mBattery.FastChargeStatus());
         tcp.setText(mNetwork.getTcpCongestion());
     }
@@ -234,6 +238,14 @@ public class KernelFragment extends Fragment implements View.OnClickListener{
                 startActivity(new Intent(getContext(), SpectrumActivity.class));
                 break;
             case R.id.ll_vib:
+                break;
+            case R.id.ll_ffc:
+                if(mBattery.FastChargeStatus().equals("Enabled")){
+                    mBattery.ForceFastChargeEnable(false, getContext());
+                }else if(mBattery.FastChargeStatus().equals("Disabled")){
+                    mBattery.ForceFastChargeEnable(true, getContext());
+                }
+                refreshUI();
                 break;
             case R.id.ll_hpg:
                 hpgDialog(getView());
