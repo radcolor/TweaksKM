@@ -540,8 +540,8 @@ public class Utils {
 
         StringBuilder sb = new StringBuilder(64);
         if(!(days ==0)){
-            sb.append("D ");
             sb.append(days);
+            sb.append("D ");
         }
         if(!(hours ==0)){
             sb.append(hours);
