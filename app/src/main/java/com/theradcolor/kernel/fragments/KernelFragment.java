@@ -314,14 +314,7 @@ public class KernelFragment extends Fragment implements View.OnClickListener{
 
             }
         });
-
         builder.setView(hpLayout);        // add a button
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                // send data from the AlertDialog to the Activity
-            }
-        });        // create and show the alert dialog
         AlertDialog dialog = builder.create();
         dialog.show();
     }
@@ -354,12 +347,6 @@ public class KernelFragment extends Fragment implements View.OnClickListener{
         mp_txt = mpLayout.findViewById(R.id.mp_txt);
         mp_txt.setText(""+mSound.getMicrophoneFlar());
         builder.setView(mpLayout);        // add a button
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                // send data from the AlertDialog to the Activity
-            }
-        });        // create and show the alert dialog
         AlertDialog dialog = builder.create();
         dialog.show();
     }
@@ -367,8 +354,9 @@ public class KernelFragment extends Fragment implements View.OnClickListener{
     public void tcpDialog(View view) {        // create an alert builder
         AlertDialog.Builder builder =  new AlertDialog.Builder(new ContextThemeWrapper(getContext(), R.style.Theme_AppCompat_DayNight_Dialog_Alert));
         builder.setTitle("TCP congestion algorithm");
+        int selected_tcp=0;
         String[] tcps = mNetwork.getTcpAvailableCongestions().toArray(new String[0]);
-        builder.setItems(tcps, new DialogInterface.OnClickListener() {
+        builder.setSingleChoiceItems(tcps, selected_tcp, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 mNetwork.setTcpCongestion(tcps[which], getContext());
