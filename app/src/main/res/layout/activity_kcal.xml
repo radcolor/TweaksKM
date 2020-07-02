@@ -96,6 +96,7 @@
                         android:thumb="@drawable/seek_thumb"/>
 
                     <TextView
+                        android:id="@+id/r_txt"
                         android:text="256"
                         android:textStyle="bold"
                         android:textAlignment="center"
@@ -130,6 +131,7 @@
                         android:thumb="@drawable/seek_thumb"/>
 
                     <TextView
+                        android:id="@+id/g_txt"
                         android:text="256"
                         android:textStyle="bold"
                         android:textAlignment="center"
@@ -164,6 +166,7 @@
                         android:thumb="@drawable/seek_thumb"/>
 
                     <TextView
+                        android:id="@+id/b_txt"
                         android:text="256"
                         android:textStyle="bold"
                         android:textAlignment="center"
@@ -202,6 +205,7 @@
                             android:layout_height="wrap_content"/>
 
                         <TextView
+                            android:id="@+id/sat_txt"
                             android:text="255"
                             android:layout_alignParentEnd="true"
                             android:textStyle="bold"
@@ -263,6 +267,7 @@
                             android:layout_height="wrap_content"/>
 
                         <TextView
+                            android:id="@+id/val_txt"
                             android:text="255"
                             android:layout_alignParentEnd="true"
                             android:textStyle="bold"
@@ -324,6 +329,7 @@
                             android:layout_height="wrap_content"/>
 
                         <TextView
+                            android:id="@+id/cont_txt"
                             android:text="255"
                             android:layout_alignParentEnd="true"
                             android:textStyle="bold"
@@ -385,6 +391,7 @@
                             android:layout_height="wrap_content"/>
 
                         <TextView
+                            android:id="@+id/hue_txt"
                             android:text="255"
                             android:layout_alignParentEnd="true"
                             android:textStyle="bold"

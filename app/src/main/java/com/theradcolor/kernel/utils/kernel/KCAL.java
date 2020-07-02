@@ -1,13 +1,11 @@
 package com.theradcolor.kernel.utils.kernel;
 
 import android.content.Context;
-
 import com.grarak.kerneladiutor.utils.Utils;
 import com.grarak.kerneladiutor.utils.root.Control;
 
 import java.util.ArrayList;
 import java.util.List;
-
 
 public class KCAL {
 
@@ -24,73 +22,123 @@ public class KCAL {
     private static final String KCAL_CTRL = KCAL + "/kcal";
     private static final String KCAL_CTRL_CTRL = KCAL + "/kcal_ctrl";
     private static final String KCAL_CTRL_ENABLE = KCAL + "/kcal_enable";
+    private static final String KCAL_CTRL_MIN = KCAL + "/kcal_min";
+    private static final String KCAL_CTRL_INVERT = KCAL + "/kcal_invert";
+    private static final String KCAL_CTRL_SAT = KCAL + "/kcal_sat";
+    private static final String KCAL_CTRL_HUE = KCAL + "/kcal_hue";
+    private static final String KCAL_CTRL_VAL = KCAL + "/kcal_val";
+    private static final String KCAL_CTRL_CONT = KCAL + "/kcal_cont";
 
-    private final List<String> mKCAL_CTRL_MIN = new ArrayList<>();
-    private final List<String> mKCAL_CTRL_INVERT = new ArrayList<>();
-    private final List<String> mKCAL_CTRL_SAT = new ArrayList<>();
-    private final List<String> mKCAL_CTRL_HUE = new ArrayList<>();
-    private final List<String> mKCAL_CTRL_VAL = new ArrayList<>();
-    private final List<String> mKCAL_CTRL_CONT = new ArrayList<>();
+    private static final String DIAG0 = "/sys/devices/platform/DIAG0.0";
+    private static final String DIAG0_POWER = DIAG0 + "/power_rail";
+    private static final String DIAG0_POWER_CTRL = DIAG0 + "/power_rail_ctrl";
+
+    private static final String COLOR_CONTROL = "/sys/class/misc/colorcontrol";
+    private static final String COLOR_CONTROL_MUILTIPLIER = COLOR_CONTROL + "/multiplier";
+    private static final String COLOR_CONTROL_CTRL = COLOR_CONTROL + "/safety_enabled";
+
+    private static final String SAMOLED_COLOR = "/sys/class/misc/samoled_color";
+    private static final String SAMOLED_COLOR_RED = SAMOLED_COLOR + "/red_multiplier";
+    private static final String SAMOLED_COLOR_GREEN = SAMOLED_COLOR + "/green_multiplier";
+    private static final String SAMOLED_COLOR_BLUE = SAMOLED_COLOR + "/blue_multiplier";
+
+    private static final String FB0_RGB = "/sys/class/graphics/fb0/rgb";
+    private static final String FB_KCAL = "/sys/class/graphics/fb0/kcal";
+
+    private static final String HBM = "/sys/class/graphics/fb0/hbm";
+
+    private final List<String> mSRGB = new ArrayList<>();
+
+    private final List<String> mColors = new ArrayList<>();
+    private final List<String> mColorEnables = new ArrayList<>();
+    private final List<String> mNewKCAL = new ArrayList<>();
 
     {
-        mKCAL_CTRL_MIN.add("/sys/devices/platform/kcal_ctrl.0/kcal_min");
-        mKCAL_CTRL_MIN.add("/sys/module/msm_drm/parameters/kcal_min");
-        mKCAL_CTRL_INVERT.add("/sys/devices/platform/kcal_ctrl.0/kcal_invert");
-        mKCAL_CTRL_INVERT.add("/sys/module/msm_drm/parameters/kcal_invert");
-        mKCAL_CTRL_SAT.add("/sys/devices/platform/kcal_ctrl.0/kcal_sat");
-        mKCAL_CTRL_SAT.add("/sys/module/msm_drm/parameters/kcal_sat");
-        mKCAL_CTRL_HUE.add("/sys/devices/platform/kcal_ctrl.0/kcal_hue");
-        mKCAL_CTRL_HUE.add("/sys/module/msm_drm/parameters/kcal_hue");
-        mKCAL_CTRL_VAL.add("/sys/devices/platform/kcal_ctrl.0/kcal_val");
-        mKCAL_CTRL_VAL.add("/sys/module/msm_drm/parameters/kcal_val");
-        mKCAL_CTRL_CONT.add("/sys/devices/platform/kcal_ctrl.0/kcal_cont");
-        mKCAL_CTRL_CONT.add("/sys/module/msm_drm/parameters/kcal_cont");
+        mSRGB.add("/sys/class/graphics/fb0/SRGB");
+        mSRGB.add("/sys/class/graphics/fb0/srgb");
+
+        mColors.add(KCAL_CTRL);
+        mColors.add(DIAG0_POWER);
+        mColors.add(COLOR_CONTROL_MUILTIPLIER);
+        mColors.add(SAMOLED_COLOR);
+        mColors.add(FB0_RGB);
+        mColors.add(FB_KCAL);
+
+        mColorEnables.add(KCAL_CTRL_CTRL);
+        mColorEnables.add(KCAL_CTRL_ENABLE);
+        mColorEnables.add(DIAG0_POWER_CTRL);
+        mColorEnables.add(COLOR_CONTROL_CTRL);
+
+        mNewKCAL.add(KCAL_CTRL_ENABLE);
+        mNewKCAL.add(KCAL_CTRL_INVERT);
+        mNewKCAL.add(KCAL_CTRL_SAT);
+        mNewKCAL.add(KCAL_CTRL_HUE);
+        mNewKCAL.add(KCAL_CTRL_VAL);
+        mNewKCAL.add(KCAL_CTRL_CONT);
     }
 
-    private String KCAL_CTRL_MIN;
-    private String KCAL_CTRL_INVERT;
-    private String KCAL_CTRL_SAT;
-    private String KCAL_CTRL_HUE;
-    private String KCAL_CTRL_VAL;
-    private String KCAL_CTRL_CONT;
+    private String SRGB;
+
+    private String COLOR;
+    private String COLOR_ENABLE;
+
+    private boolean HBM_NEW;
 
     public KCAL() {
-        for (String file : mKCAL_CTRL_MIN) {
+        for (String file : mSRGB) {
             if (Utils.existFile(file)) {
-                KCAL_CTRL_MIN = file;
+                SRGB = file;
                 break;
             }
         }
-        for (String file : mKCAL_CTRL_INVERT) {
+
+        for (String file : mColors) {
             if (Utils.existFile(file)) {
-                KCAL_CTRL_INVERT = file;
+                COLOR = file;
                 break;
             }
         }
-        for (String file : mKCAL_CTRL_SAT) {
+
+        if (COLOR == null) return;
+        for (String file : mColorEnables) {
             if (Utils.existFile(file)) {
-                KCAL_CTRL_SAT = file;
+                COLOR_ENABLE = file;
                 break;
             }
         }
-        for (String file : mKCAL_CTRL_HUE) {
-            if (Utils.existFile(file)) {
-                KCAL_CTRL_HUE = file;
-                break;
-            }
+    }
+
+    public void enableSRGB(boolean enable, Context context) {
+        run(Control.write(enable ? "1" : "0", SRGB), SRGB, context);
+    }
+
+    public boolean isSRGBEnabled() {
+        String value = Utils.readFile(SRGB);
+        return value.equals("1") || value.contains("mode = 1");
+    }
+
+    public boolean hasSRGB() {
+        return SRGB != null;
+    }
+
+    public void enableScreenHBM(boolean enable, Context context) {
+        run(Control.write(enable ? HBM_NEW ? "2" : "1" : "0", HBM), HBM, context);
+    }
+
+    public boolean isScreenHBMEnabled() {
+        if (HBM_NEW) {
+            return Utils.readFile(HBM).contains("= 2");
         }
-        for (String file : mKCAL_CTRL_VAL) {
-            if (Utils.existFile(file)) {
-                KCAL_CTRL_VAL = file;
-                break;
-            }
+        return Utils.readFile(HBM).equals("1");
+    }
+
+    public boolean hasScreenHBM() {
+        boolean supported = Utils.existFile(HBM);
+        if (supported) {
+            HBM_NEW = Utils.readFile(HBM).contains("2-->HBM Enabled");
+            return true;
         }
-        for (String file : mKCAL_CTRL_CONT) {
-            if (Utils.existFile(file)) {
-                KCAL_CTRL_CONT = file;
-                break;
-            }
-        }
+        return false;
     }
 
     public void setScreenContrast(int value, Context context) {
@@ -169,8 +217,125 @@ public class KCAL {
         return Utils.existFile(KCAL_CTRL_MIN);
     }
 
-    public void setKCAL(int red, int green, int blue, Context context){
-        run(Control.write(red + " " + green + " " + blue, KCAL_CTRL), "KCAL" , context);
+    public void setColors(String values, Context context) {
+        if (hasColorEnable() && COLOR_CONTROL_CTRL.equals(COLOR_ENABLE)) {
+            run(Control.write("0", COLOR_CONTROL_CTRL), COLOR_CONTROL_CTRL, context);
+        }
+
+        switch (COLOR) {
+            case COLOR_CONTROL_MUILTIPLIER: {
+                String[] colors = values.split(" ");
+                String red = String.valueOf(Utils.strToLong(colors[0]) * 10000000L);
+                String green = String.valueOf(Utils.strToLong(colors[1]) * 10000000L);
+                String blue = String.valueOf(Utils.strToLong(colors[2]) * 10000000L);
+                run(Control.write(red + " " + green + " " + blue, COLOR_CONTROL_MUILTIPLIER),
+                        COLOR_CONTROL_MUILTIPLIER, context);
+                break;
+            }
+            case SAMOLED_COLOR: {
+                String[] colors = values.split(" ");
+                run(Control.write(String.valueOf(Utils.strToLong(colors[0]) * 10000000),
+                        SAMOLED_COLOR_RED), SAMOLED_COLOR_RED, context);
+                run(Control.write(String.valueOf(Utils.strToLong(colors[1]) * 10000000),
+                        SAMOLED_COLOR_RED), SAMOLED_COLOR_GREEN, context);
+                run(Control.write(String.valueOf(Utils.strToLong(colors[2]) * 10000000),
+                        SAMOLED_COLOR_RED), SAMOLED_COLOR_BLUE, context);
+                break;
+            }
+            default:
+                run(Control.write(values, COLOR), COLOR, context);
+                break;
+        }
+
+        if (hasColorEnable() && !COLOR_CONTROL_CTRL.equals(COLOR_ENABLE)) {
+            run(Control.write("1", COLOR_ENABLE), COLOR_ENABLE, context);
+        }
+    }
+
+    public List<String> getLimits() {
+        List<String> list = new ArrayList<>();
+        switch (COLOR) {
+            case COLOR_CONTROL_MUILTIPLIER:
+            case SAMOLED_COLOR:
+                for (int i = 60; i <= 400; i++) {
+                    list.add(String.valueOf(i));
+                }
+                break;
+            case FB0_RGB:
+                for (int i = 255; i <= 32768; i++) {
+                    list.add(String.valueOf(i));
+                }
+                break;
+            case FB_KCAL:
+                for (int i = 0; i < 256; i++) {
+                    list.add(String.valueOf(i));
+                }
+                break;
+            default:
+                int max = hasNewKCAL() ? 256 : 255;
+                for (int i = 0; i <= max; i++) {
+                    list.add(String.valueOf(i));
+                }
+                break;
+        }
+        return list;
+    }
+
+    private boolean hasNewKCAL() {
+        for (String file : mNewKCAL) {
+            if (Utils.existFile(file)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public List<String> getColors() {
+        List<String> list = new ArrayList<>();
+        switch (COLOR) {
+            case COLOR_CONTROL_MUILTIPLIER:
+                String[] colors = Utils.readFile(COLOR_CONTROL_MUILTIPLIER).split(" ");
+                for (String color : colors) {
+                    list.add(String.valueOf(Utils.strToLong(color) / 10000000L));
+                }
+                break;
+            case SAMOLED_COLOR:
+                if (Utils.existFile(SAMOLED_COLOR_RED)) {
+                    long color = Utils.strToLong(Utils.readFile(SAMOLED_COLOR_RED)) / 10000000L;
+                    list.add(String.valueOf(color));
+                }
+                if (Utils.existFile(SAMOLED_COLOR_GREEN)) {
+                    long color = Utils.strToLong(Utils.readFile(SAMOLED_COLOR_GREEN)) / 10000000L;
+                    list.add(String.valueOf(color));
+                }
+                if (Utils.existFile(SAMOLED_COLOR_BLUE)) {
+                    long color = Utils.strToLong(Utils.readFile(SAMOLED_COLOR_BLUE)) / 10000000L;
+                    list.add(String.valueOf(color));
+                }
+                break;
+            default:
+                String value = Utils.readFile(COLOR);
+                if (value != null) {
+                    for (String color : value.split(" ")) {
+                        list.add(String.valueOf(Utils.strToLong(color)));
+                    }
+                }
+                break;
+        }
+        return list;
+    }
+
+    private boolean hasColorEnable() {
+        return COLOR_ENABLE != null;
+    }
+
+    public boolean hasColors() {
+        return COLOR != null;
+    }
+
+    public boolean supported() {
+        return hasColors() || hasInvertScreen() || hasSaturationIntensity() || hasScreenHue()
+                || hasScreenValue() | hasScreenContrast() || hasScreenHBM() || hasSRGB();
     }
 
     private void run(String command, String id, Context context) {
