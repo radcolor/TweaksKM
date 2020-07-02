@@ -4,28 +4,26 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.ContextThemeWrapper;
 
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
+import android.widget.TextView;
 
-import com.grarak.kerneladiutor.utils.Utils;
 import com.grarak.kerneladiutor.utils.root.RootUtils;
 import com.theradcolor.kernel.R;
+import com.theradcolor.kernel.utils.kernel.KCAL;
 
-public class KcalActivity extends AppCompatActivity implements View.OnClickListener{
+import java.util.List;
 
+public class KcalActivity extends AppCompatActivity implements View.OnClickListener, SeekBar.OnSeekBarChangeListener {
+
+    KCAL mKCAL;
     private SeekBar red,green,blue,sat,val,con,hue;
+    private TextView rTXT,gTXT,bTXT,satTXT,valTXT,conTXT,hueTXT;
     private LinearLayout pre_kcal,reset_kcal;
-
-    String KCAL_ENABLE = "/sys/devices/platform/kcal_ctrl.0/kcal_enable";
-    String KCAL_CONT = "/sys/devices/platform/kcal_ctrl.0/kcal_cont";
-    String KCAL_HUE = "/sys/devices/platform/kcal_ctrl.0/kcal_hue";
-    String KCAL_MIN = "/sys/devices/platform/kcal_ctrl.0/kcal_min";
-    String KCAL_RGB = "/sys/devices/platform/kcal_ctrl.0/kcal";
-    String KCAL_SAT = "/sys/devices/platform/kcal_ctrl.0/kcal_sat";
-    String KCAL_VAL = "/sys/devices/platform/kcal_ctrl.0/kcal_val";
 
     int RED_DEFAULT = 256;
     int GREEN_DEFAULT = 256;
@@ -40,19 +38,61 @@ public class KcalActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_kcal);
-        red = findViewById(R.id.kcal_r);
-        green = findViewById(R.id.kcal_g);
-        blue = findViewById(R.id.kcal_b);
-        sat = findViewById(R.id.kcal_sat);
-        val = findViewById(R.id.kcal_val);
-        con = findViewById(R.id.kcal_cont);
-        hue = findViewById(R.id.kcal_hue);
 
+        InitViews();
+        InitUI();
+        refreshUI();
+    }
+
+    public void InitViews(){
+        mKCAL = new KCAL();
+        red = findViewById(R.id.kcal_r); red.setOnSeekBarChangeListener(this);
+        green = findViewById(R.id.kcal_g); green.setOnSeekBarChangeListener(this);
+        blue = findViewById(R.id.kcal_b); blue.setOnSeekBarChangeListener(this);
+        sat = findViewById(R.id.kcal_sat); sat.setOnSeekBarChangeListener(this);
+        val = findViewById(R.id.kcal_val); val.setOnSeekBarChangeListener(this);
+        con = findViewById(R.id.kcal_cont); con.setOnSeekBarChangeListener(this);
+        hue = findViewById(R.id.kcal_hue); hue.setOnSeekBarChangeListener(this);
+        rTXT = findViewById(R.id.r_txt);
+        gTXT = findViewById(R.id.g_txt);
+        bTXT = findViewById(R.id.b_txt);
+        satTXT = findViewById(R.id.sat_txt);
+        valTXT = findViewById(R.id.val_txt);
+        conTXT = findViewById(R.id.cont_txt);
+        hueTXT = findViewById(R.id.hue_txt);
         pre_kcal = findViewById(R.id.ll_color);
         pre_kcal.setOnClickListener(this);
         reset_kcal = findViewById(R.id.ll_color_reset);
         reset_kcal.setOnClickListener(this);
-        set_kcal();
+    }
+
+    public void InitUI(){
+        red.setMax(256);
+        green.setMax(256);
+        blue.setMax(256);
+        sat.setMax(158);
+        val.setMax(255);
+        con.setMax(255);
+        hue.setMax(1536);
+    }
+
+    @SuppressLint("SetTextI18n")
+    public void refreshUI(){
+        int saturation = mKCAL.getSaturationIntensity();
+        red.setProgress(Integer.parseInt(mKCAL.getColors().get(0)));
+        green.setProgress(Integer.parseInt(mKCAL.getColors().get(1)));
+        blue.setProgress(Integer.parseInt(mKCAL.getColors().get(2)));
+        sat.setProgress(saturation == 128 ? 30 : saturation - 225);
+        val.setProgress(mKCAL.getScreenValue() - 128);
+        con.setProgress(mKCAL.getScreenContrast() - 128);
+        hue.setProgress(mKCAL.getScreenHue());
+        rTXT.setText(""+mKCAL.getColors().get(0));
+        gTXT.setText(""+mKCAL.getColors().get(1));
+        bTXT.setText(""+mKCAL.getColors().get(2));
+        satTXT.setText(""+(saturation == 128 ? 30 : saturation - 225));
+        valTXT.setText(""+(mKCAL.getScreenValue() - 128));
+        conTXT.setText(""+(mKCAL.getScreenContrast() - 128));
+        hueTXT.setText(""+mKCAL.getScreenHue());
     }
 
     @Override
@@ -135,6 +175,12 @@ public class KcalActivity extends AppCompatActivity implements View.OnClickListe
                 });
                 AlertDialog dialog = builder.create();
                 dialog.show();
+                dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                    @Override
+                    public void onDismiss(DialogInterface dialog) {
+                        refreshUI();
+                    }
+                });
                 break;
             case R.id.ll_color_reset:
                 RootUtils.runCommand("echo " + RED_DEFAULT+ " " + GREEN_DEFAULT + " " + BLUE_DEFAULT+ " " + ">" + " /sys/devices/platform/kcal_ctrl.0/kcal");
@@ -143,25 +189,57 @@ public class KcalActivity extends AppCompatActivity implements View.OnClickListe
                 RootUtils.runCommand("echo " + MIN_DEFAULT + " >" +" /sys/devices/platform/kcal_ctrl.0/kcal_min");
                 RootUtils.runCommand("echo " + SATURATION_DEFAULT + " >" +" /sys/devices/platform/kcal_ctrl.0/kcal_sat");
                 RootUtils.runCommand("echo " + VALUE_DEFAULT + " >" +" /sys/devices/platform/kcal_ctrl.0/kcal_val");
+                refreshUI();
                 break;
         }
     }
 
-    public void set_kcal(){
+    int r,g,b, saturation, value, contrast, hue_i;
+    @Override
+    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+        switch (seekBar.getId()){
+            case R.id.kcal_r:
+                rTXT.setText(""+progress);
+                r = progress;
+                break;
+            case R.id.kcal_g:
+                gTXT.setText(""+progress);
+                g = progress;
+                break;
+            case R.id.kcal_b:
+                bTXT.setText(""+progress);
+                b = progress;
+                break;
+            case R.id.kcal_sat:
+                satTXT.setText(""+progress);
+               saturation = progress;
+                break;
+            case R.id.kcal_val:
+                valTXT.setText(""+progress);
+                value = progress;
+                break;
+            case R.id.kcal_cont:
+                conTXT.setText(""+progress);
+                contrast = progress;
+                break;
+            case R.id.kcal_hue:
+                hueTXT.setText(""+progress);
+                hue_i = progress;
+                break;
+        }
+    }
+
+    @Override
+    public void onStartTrackingTouch(SeekBar seekBar) {
 
     }
 
-    public int getScreenContrast() {
-        return Utils.strToInt(Utils.readFile(KCAL_CONT));
+    @Override
+    public void onStopTrackingTouch(SeekBar seekBar) {
+        mKCAL.setColors(r + " " + g + " " + b, this);
+        mKCAL.setSaturationIntensity(saturation,this);
+        mKCAL.setScreenValue(value, this);
+        mKCAL.setScreenContrast(contrast, this);
+        mKCAL.setScreenHue(hue_i, this);
     }
-    public int getScreenValue() {
-        return Utils.strToInt(Utils.readFile(KCAL_VAL));
-    }
-    public int getScreenHue() {
-        return Utils.strToInt(Utils.readFile(KCAL_HUE));
-    }
-    public int getSaturationIntensity() {
-        return Utils.strToInt(Utils.readFile(KCAL_SAT));
-    }
-
 }
