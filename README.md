@@ -5,6 +5,8 @@
 **Tweaks** is a simple [Linux](https://www.kernel.org) kernel manager app for Android™ devices running on Android L or newer. 
 Designed beautifully with Material design.
 
+**Note:** The contributors are requested to read CONTRIBUTING.md and all required documentation, and send pull requests over dev/staging branch!
+
 ## Working
 
 App needs the Android's root permission to attain [privileged control](https://en.wikipedia.org/wiki/Privilege_escalation) (known as [root access](https://en.wikipedia.org/wiki/Superuser)) over various Android subsystems. As Android uses the Linux kernel, rooting an Android device gives similar access to administrative (superuser) permissions as on Linux or any other Unix-like operating system.
@@ -12,6 +14,20 @@ App needs the Android's root permission to attain [privileged control](https://e
 ## ScreenShots
 
 ![ScreenShot 1](/assets/app_ss.png)
+
+## Reporting bug or feature request
+
+You can easily report a bug or request a feature by opening a [pull request](https://github.com/theradcolor/TweaksKM/compare) or [opening an issue](https://github.com/theradcolor/TweaksKM/issues/new/choose)
+
+### How to report a bug
+
+- Make sure of taking a logs in detail
+- Make sure no other similar bugs already reported
+
+### How to request a feature
+
+- A detail description of feature
+- Paths to sysFS interface, How to apply and use of it.
 
 ## Credits
 
@@ -23,7 +39,11 @@ Spectrum by [Joe Maples](https://github.com/frap129)
 
 Read [Contributing.md](https://github.com/theradcolor/tweaks/blob/master/CONTRIBUTING.md) to get the app running locally and ways to help us.
 
+
 ## License
+
+![](https://img.shields.io/badge/License-GPL--v3.0-green)
+
 
 This project is licensed under the [GNU GPL License v3](https://github.com/theradcolor/Tweaks/blob/master/LICENSE)
 The GNU General Public License is a free, copyleft license for software and other kinds of works.
