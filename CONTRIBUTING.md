@@ -63,7 +63,7 @@ git commit -m "Commit head message" -m "commit description"
 git push origin <BRANCH_NAME>
 ```
 
-Now go to your forked repo on github, and pull a request
+Now go to your forked repo on github, and pull a request on dev/staging branch!
 
 <p align="center"><img src="https://raw.githubusercontent.com/theradcolor/Tweaks/master/assets/cont_img_pr.png"></p>
 
@@ -80,6 +80,8 @@ Adding a reviewer and labels is a good practice!
 Contribute to the app by adding different languages strings on it!
 
 the string resource values can be found under `/app/src/main/res/values/strings.xml`
+
+Here is our [Crowdin](https://crowdin.com/project/tweakskm) Page!
 
 Further documentations can be found on [Android developers site](https://developer.android.com/training/basics/supporting-devices/languages).
 
