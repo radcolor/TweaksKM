@@ -88,5 +88,6 @@
     <string name="head_misc">Miscellaneous</string>
     <string name="title_ffc">Force Fast Charge</string>
     <string name="title_tcp">TCP Congestion Algorithm</string>
+    <string name="kcal_con">Contrast</string>
 
 </resources>
