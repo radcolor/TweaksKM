@@ -73,7 +73,9 @@ public class KMActivity extends AppCompatActivity {
             }
         });
 
-        if (checkRoot.isDeviceRooted() && System.getProperty("os.version").contains("rad")) {
+        if (checkRoot.isDeviceRooted()
+                && System.getProperty("os.version").contains("rad")
+                && System.getProperty("os.version").contains("fake")) {
             Log.d("MainActivity", "Kernel and Root Check Passed");
             RootUtils.getSU();
         } else if (checkRoot.isDeviceRooted()) {
