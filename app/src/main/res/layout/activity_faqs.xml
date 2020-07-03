@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FAQsActivity"
+    tools:context=".activities.FAQsActivity"
     android:orientation="vertical">
 
     <LinearLayout
@@ -12,7 +12,7 @@
         android:scrollbars="vertical"
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <LinearLayout
             android:orientation="vertical"
@@ -22,13 +22,13 @@
             <TextView
                 android:textColor="@android:color/black"
                 android:textStyle="bold"
-                android:text="Q. What is Kernel?"
+                android:text="@string/faq_q1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
             <TextView
                 android:layout_marginTop="6dp"
-                android:text="A. The kernel is a computer program that is the core of a computer's operating system, with complete control over everything in the system. The kernel facilitates interactions between hardware and software components. On most systems, it is one of the first programs loaded on start-up. therfore kernel plays an important role of device performance and battery backup."
+                android:text="@string/faq_a1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
@@ -43,13 +43,13 @@
             <TextView
                 android:textColor="@android:color/black"
                 android:textStyle="bold"
-                android:text="Q. What is RAD Kernel?"
+                android:text="@string/faq_q2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
             <TextView
                 android:layout_marginTop="6dp"
-                android:text="A. It's a kernel for whyred(Redmi Note 5/AI) devices with tons of tweaks optimizations for every use whether gaming/bb/performance/daily use. this app itself has serveral tweaks to help user to get most out of their deivece."
+                android:text="@string/faq_a2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
@@ -64,13 +64,14 @@
             <TextView
                 android:textColor="@android:color/black"
                 android:textStyle="bold"
-                android:text="Q. What HMP/EAS what should i use?"
+                android:text="@string/faq_q3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
             <TextView
                 android:layout_marginTop="6dp"
-                android:text="A. Energy Aware Scheduling (EAS) is an enhancement to Linux power management, placing CPU power control directly under the Linux scheduler.  When enabled, EAS will use the task load and a CPU ‘Energy Model’ to select the most efficient CPU to run on, taking advantage of power/performance of Arm big.LITTLE and Arm DynamIQ based systems. Whereas HMP(Heterogeneous Multi-Processing) was used in past by Manufacturer. Whyreds stock is HMP"
+                android:text="@string/faq_a3"
+                android:autoLink="web"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
@@ -85,13 +86,14 @@
             <TextView
                 android:textColor="@android:color/black"
                 android:textStyle="bold"
-                android:text="Q. What should i use rad HMP/EAS?"
+                android:text="@string/faq_q4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
             <TextView
                 android:layout_marginTop="6dp"
-                android:text="A. Well Rad Kernel comes with both HMP and EAS, you can try both!"
+                android:text="@string/faq_a4"
+                android:autoLink="web"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
@@ -106,13 +108,14 @@
             <TextView
                 android:textColor="@android:color/black"
                 android:textStyle="bold"
-                android:text="Q. What is Gaming Mode?"
+                android:text="@string/faq_q5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
             <TextView
                 android:layout_marginTop="6dp"
-                android:text="A. An inbuilt gaming mode service in this help to play games with some better enhancement."
+                android:text="@string/faq_a5"
+                android:autoLink="web"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
@@ -127,77 +130,14 @@
             <TextView
                 android:textColor="@android:color/black"
                 android:textStyle="bold"
-                android:text="Q. is this app harmful and steal data? "
+                android:text="@string/faq_q6"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
             <TextView
                 android:layout_marginTop="6dp"
-                android:text="A. Hell no, it will never collect any personal data of any user. still if any one has doubt they can check my git for app sources."
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_marginTop="16dp"
-            android:orientation="vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:textColor="@android:color/black"
-                android:textStyle="bold"
-                android:text="Q. some features and things not working? "
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
-            <TextView
-                android:layout_marginTop="6dp"
-                android:text="A. Well it's the initial release of the app so there may be a bug, please feel free to give suggestions and report bugs on telegram."
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_marginTop="16dp"
-            android:orientation="vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:textColor="@android:color/black"
-                android:textStyle="bold"
-                android:text="Q. What features are coming? "
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
-            <TextView
-                android:layout_marginTop="6dp"
-                android:text="A. Custom calibration, KLapse, CPU/GPU usage/temperature and fps on screen."
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_marginBottom="16dp"
-            android:layout_marginTop="16dp"
-            android:orientation="vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:textColor="@android:color/black"
-                android:textStyle="bold"
-                android:text="Q. i like this kernel and app, how can i thanks/donate?"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
-            <TextView
-                android:layout_marginTop="6dp"
-                android:text="A. Tag @theradcolor on the telegram group or can mail in theradcolor@gmail.com"
+                android:text="@string/faq_a6"
+                android:autoLink="web"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 

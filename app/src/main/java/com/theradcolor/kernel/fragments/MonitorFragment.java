@@ -215,17 +215,17 @@ public class MonitorFragment extends Fragment{
 
         @SuppressLint("SetTextI18n")
         private void updateUI(Integer... i) {
-            cpu0.setText(i[0]+getString(R.string.mhz));
-            cpu1.setText(i[0]+getString(R.string.mhz));
-            cpu2.setText(i[0]+getString(R.string.mhz));
-            cpu3.setText(i[0]+getString(R.string.mhz));
-            cpu4.setText(i[1]+getString(R.string.mhz));
-            cpu5.setText(i[1]+getString(R.string.mhz));
-            cpu6.setText(i[1]+getString(R.string.mhz));
-            cpu7.setText(i[1]+getString(R.string.mhz));
+            cpu0.setText(i[0]+getResources().getString(R.string.mhz));
+            cpu1.setText(i[0]+getResources().getString(R.string.mhz));
+            cpu2.setText(i[0]+getResources().getString(R.string.mhz));
+            cpu3.setText(i[0]+getResources().getString(R.string.mhz));
+            cpu4.setText(i[1]+getResources().getString(R.string.mhz));
+            cpu5.setText(i[1]+getResources().getString(R.string.mhz));
+            cpu6.setText(i[1]+getResources().getString(R.string.mhz));
+            cpu7.setText(i[1]+getResources().getString(R.string.mhz));
             gpu_usage_per.setText(i[2]+getString(R.string.percent));
-            gpu_crr_freq.setText(i[3]+getString(R.string.mhz));
-            gpu_max_freq.setText(i[4]+getString(R.string.mhz));
+            gpu_crr_freq.setText(i[3]+getResources().getString(R.string.mhz));
+            gpu_max_freq.setText(i[4]+getResources().getString(R.string.mhz));
             tot_mem.setText(i[5] + " MB");
             used_mem.setText(i[6] + " MB");
             avl_mem.setText(i[7] + " MB " +i[8]+ "% approx");
