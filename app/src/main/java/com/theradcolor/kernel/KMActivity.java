@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.grarak.kerneladiutor.utils.Device;
 import com.grarak.kerneladiutor.utils.root.RootUtils;
 import com.theradcolor.kernel.fragments.AboutFragment;
 import com.theradcolor.kernel.fragments.KernelFragment;
@@ -74,8 +75,9 @@ public class KMActivity extends AppCompatActivity {
         });
 
         if (checkRoot.isDeviceRooted()
-                && System.getProperty("os.version").contains("rad")
-                && System.getProperty("os.version").contains("fake")) {
+                && Device.getKernelVersion(false).contains("rad")
+                && Device.getKernelVersion(false).contains("fakerad"))
+        {
             Log.d("MainActivity", "Kernel and Root Check Passed");
             RootUtils.getSU();
         } else if (checkRoot.isDeviceRooted()) {
