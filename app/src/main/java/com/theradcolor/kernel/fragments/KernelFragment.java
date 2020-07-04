@@ -1,5 +1,6 @@
 package com.theradcolor.kernel.fragments;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -14,9 +15,7 @@ import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
-import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -24,32 +23,28 @@ import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.switchmaterial.SwitchMaterial;
+import com.grarak.kerneladiutor.utils.Prefs;
 import com.grarak.kerneladiutor.utils.Utils;
-import com.grarak.kerneladiutor.utils.root.RootUtils;
 import com.theradcolor.kernel.R;
 import com.theradcolor.kernel.activities.KcalActivity;
 import com.theradcolor.kernel.activities.SpectrumActivity;
 import com.theradcolor.kernel.utils.kernel.Battery;
 import com.theradcolor.kernel.utils.kernel.Network;
 import com.theradcolor.kernel.utils.kernel.Sound;
+import com.theradcolor.kernel.utils.kernel.Vibration;
 import com.theradcolor.kernel.utils.kernel.sRGB;
 
-import java.util.List;
-
-
+@SuppressLint("SetTextI18n")
 public class KernelFragment extends Fragment implements View.OnClickListener{
 
-    Network mNetwork; Battery mBattery; Sound mSound;
+    Network mNetwork; Battery mBattery; Sound mSound; Vibration mVibration;
     View root;
     TextView vib,ffc,tcp;
     SeekBar seekBar;
     LinearLayout sRGB, kCAL, spectrum, vibration, ll_ffc, ll_tcp, hpg, mcg;
     int progressChangedValue = 1;
-    public static final int MIN_VIBRATION = 116;
-    public static final int MAX_VIBRATION = 3596;
-    int  vibrationValue;
     SharedPreferences.Editor editor;
-    SwitchMaterial vibSW, srgbSW;
+    SwitchMaterial vibSW, srgbSW, hpgSW, mpgSW, ffcSW, tcpSW;
     SharedPreferences preferences;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -65,36 +60,21 @@ public class KernelFragment extends Fragment implements View.OnClickListener{
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 progressChangedValue = progress;
-                vib.setText(progress + getString(R.string.percent));
-                Vibrator v = (Vibrator) getContext().getSystemService(Context.VIBRATOR_SERVICE);
-                vibrationValue = (int) (progress / 100.0 * (MAX_VIBRATION - MIN_VIBRATION) + MIN_VIBRATION);
+                vib.setText(progress + getResources().getString(R.string.percent));
             }
-
             @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
+            public void onStartTrackingTouch(SeekBar seekBar) { }
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                     v.vibrate(VibrationEffect.createOneShot(100, VibrationEffect.DEFAULT_AMPLITUDE));
                 }
-                RootUtils.runCommand("echo " +vibrationValue+ " > /sys/devices/virtual/timed_output/vibrator/vtg_level");
-                v.cancel();
-                editor = preferences.edit();
-                editor.putInt("vibration",progressChangedValue);
-                editor.apply();
+                mVibration.setVibrationValue(progressChangedValue, getContext());
+                Prefs.saveInt("vibration_value", progressChangedValue, getContext());
                 v.vibrate(50);
             }
         });
-        setsw();
-        if(setvib()==-1){
-            seekBar.setEnabled(false);
-            vib.setText(" ");
-            vibSW.setEnabled(false);
-        }else{
-            seekBar.setProgress(setvib());
-        }
+        setSW();
         return root;
     }
 
@@ -111,10 +91,15 @@ public class KernelFragment extends Fragment implements View.OnClickListener{
         ll_tcp = root.findViewById(R.id.ll_tcp);
         vibSW = root.findViewById(R.id.vibsw);
         srgbSW = root.findViewById(R.id.srgbsw);
+        hpgSW = root.findViewById(R.id.hgsw);
+        mpgSW = root.findViewById(R.id.mgsw);
+        ffcSW = root.findViewById(R.id.ffcsw);
+        tcpSW = root.findViewById(R.id.tcpsw);
 
         mBattery = new Battery();
         mNetwork = new Network();
         mSound = new Sound();
+        mVibration = new Vibration();
 
         hpg = root.findViewById(R.id.ll_hpg);
         mcg = root.findViewById(R.id.ll_mcg);
@@ -127,23 +112,26 @@ public class KernelFragment extends Fragment implements View.OnClickListener{
         spectrum.setOnClickListener(this);
         vibSW.setOnCheckedChangeListener(myCheckboxListener);
         srgbSW.setOnCheckedChangeListener(myCheckboxListener);
-        preferences = getActivity().getSharedPreferences("preferences",Context.MODE_PRIVATE);
-        vib.setText(preferences.getInt("vibration",1)+getString(R.string.percent));
-        seekBar.setProgress(preferences.getInt("vibration",1));
+        hpgSW.setOnCheckedChangeListener(myCheckboxListener);
+        mpgSW.setOnCheckedChangeListener(myCheckboxListener);
+        ffcSW.setOnCheckedChangeListener(myCheckboxListener);
+        tcpSW.setOnCheckedChangeListener(myCheckboxListener);
+        vib.setText(mVibration.getVibrationValue()+getResources().getString(R.string.percent));
+        seekBar.setProgress(mVibration.getVibrationValue());
         sRGB.setOnClickListener(this);
         kCAL.setOnClickListener(this);
         vibration.setOnClickListener(this);
         ll_ffc.setOnClickListener(this);
         ll_tcp.setOnClickListener(this);
-        ffc.setText(mBattery.FastChargeStatus());
-        tcp.setText(mNetwork.getTcpCongestion());
+        ffc.setText(Battery.FastChargeStatus());
+        tcp.setText(Network.getTcpCongestion());
     }
 
     public void refreshUI(){
-        vib.setText(preferences.getInt("vibration",1)+getString(R.string.percent));
-        seekBar.setProgress(preferences.getInt("vibration",1));
-        ffc.setText(mBattery.FastChargeStatus());
-        tcp.setText(mNetwork.getTcpCongestion());
+        vib.setText(mVibration.getVibrationValue()+getResources().getString(R.string.percent));
+        seekBar.setProgress(mVibration.getVibrationValue());
+        ffc.setText(Battery.FastChargeStatus());
+        tcp.setText(Network.getTcpCongestion());
     }
 
     @Override
@@ -152,22 +140,24 @@ public class KernelFragment extends Fragment implements View.OnClickListener{
         refreshUI();
     }
 
-    private int setvib(){
-        String vib = RootUtils.runCommand("cat /sys/devices/virtual/timed_output/vibrator/vtg_level");
-        if(vib==null){
-            return -1;
-        }
-        int hapticval = Integer.parseInt(vib);
-        int x = (int) ((hapticval * 100.0 - 100.0 * MIN_VIBRATION) /  (MAX_VIBRATION - MIN_VIBRATION));
-        return x;
-    }
-
-    private void setsw(){
-        if(preferences.getBoolean("vibsw",false)){
+    private void setSW(){
+        if(Prefs.getBoolean("vibration", false, getContext())){
             vibSW.setChecked(true);
         }
-        if(preferences.getBoolean("srgbsw",false)){
+        if(Prefs.getBoolean("sRGB", false, getContext())){
             srgbSW.setChecked(true);
+        }
+        if(Prefs.getBoolean("hpGain", false, getContext())){
+            hpgSW.setChecked(true);
+        }
+        if(Prefs.getBoolean("mpGain", false, getContext())){
+            mpgSW.setChecked(true);
+        }
+        if(Prefs.getBoolean("ffc", false, getContext())){
+            ffcSW.setChecked(true);
+        }
+        if(Prefs.getBoolean("tcp", false, getContext())){
+            tcpSW.setChecked(true);
         }
     }
 
@@ -176,53 +166,50 @@ public class KernelFragment extends Fragment implements View.OnClickListener{
         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
             switch (buttonView.getId()){
                 case R.id.vibsw:
-                    if(vibSW.isChecked()){
-                        editor = preferences.edit();
-                        editor.putBoolean("vibsw",true);
-                        editor.putInt("vibval",getVibration());
-                        editor.apply();
-                    }else{
-                        editor = preferences.edit();
-                        editor.putBoolean("vibsw",false);
-                        editor.apply();
-                    }
+                    if(vibSW.isChecked()){ Prefs.saveBoolean("vibration", true, getContext()); }
+                    else{ Prefs.saveBoolean("vibration", false, getContext()); }
                     break;
                 case R.id.srgbsw:
-                    if(srgbSW.isChecked()){
-                        editor = preferences.edit();
-                        editor.putBoolean("srgbsw",true);
-                        editor.apply();
-                    }else{
-                        editor = preferences.edit();
-                        editor.putBoolean("srgbsw",false);
-                        editor.apply();
-                    }
+                    if(srgbSW.isChecked()){ Prefs.saveBoolean("sRGB", true, getContext()); }
+                    else{ Prefs.saveBoolean("sRGB", false, getContext()); }
+                    break;
+                case R.id.hgsw:
+                    if(hpgSW.isChecked()){ Prefs.saveBoolean("hpGain", true, getContext()); }
+                    else{ Prefs.saveBoolean("hpGain", false, getContext()); }
+                    break;
+                case R.id.mgsw:
+                    if(mpgSW.isChecked()){ Prefs.saveBoolean("mpGain", true, getContext()); }
+                    else{ Prefs.saveBoolean("mpGain", false, getContext()); }
+                    break;
+                case R.id.ffcsw:
+                    if(ffcSW.isChecked()){ Prefs.saveBoolean("ffc", true, getContext());}
+                    else{ Prefs.saveBoolean("ffc", false, getContext()); }
+                    break;
+                case R.id.tcpsw:
+                    if(tcpSW.isChecked()){ Prefs.saveBoolean("tcp", true, getContext());}
+                    else{ Prefs.saveBoolean("tcp", false, getContext()); }
                     break;
             }
         }
     };
 
-    private int getVibration() {
-      String vib = RootUtils.runCommand("cat /sys/devices/virtual/timed_output/vibrator/vtg_level");
-      int vibval = Integer.parseInt(vib);
-      return vibval;
-    }
-
     private void srgb()
     {
-        com.theradcolor.kernel.utils.kernel.sRGB sRGB = new sRGB();;
+        com.theradcolor.kernel.utils.kernel.sRGB sRGB = new sRGB();
         AlertDialog.Builder alertDialog =  new AlertDialog.Builder(new ContextThemeWrapper(getContext(), R.style.CustomDialogTheme))
                 .setTitle("sRGB colors")
                 .setPositiveButton("On", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                        sRGB.srgbON();
+                       Prefs.saveBoolean("srgb_value", true, getContext());
                     }
                 })
                 .setNegativeButton("Off", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         sRGB.srgbOFF();
+                        Prefs.saveBoolean("srgb_value", false, getContext());
                     }
                 });
         alertDialog.show();
@@ -244,10 +231,12 @@ public class KernelFragment extends Fragment implements View.OnClickListener{
             case R.id.ll_vib:
                 break;
             case R.id.ll_ffc:
-                if(mBattery.FastChargeStatus().equals("Enabled")){
+                if(Battery.FastChargeStatus().equals("Enabled")){
                     mBattery.ForceFastChargeEnable(false, getContext());
-                }else if(mBattery.FastChargeStatus().equals("Disabled")){
+                    Prefs.saveBoolean("ffc_value", false, getContext());
+                }else if(Battery.FastChargeStatus().equals("Disabled")){
                     mBattery.ForceFastChargeEnable(true, getContext());
+                    Prefs.saveBoolean("ffc_value", true, getContext());
                 }
                 refreshUI();
                 break;
@@ -285,6 +274,7 @@ public class KernelFragment extends Fragment implements View.OnClickListener{
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 hp_lft_txt.setText(""+progress);
                 mSound.setHeadphoneFlar("left", ""+progress, getContext());
+                Prefs.saveInt("hp_left_value", progress, getContext());
             }
 
             @Override
@@ -303,6 +293,7 @@ public class KernelFragment extends Fragment implements View.OnClickListener{
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 hp_rgt_txt.setText(""+progress);
                 mSound.setHeadphoneFlar("right", ""+progress, getContext());
+                Prefs.saveInt("hp_right_value", progress, getContext());
             }
 
             @Override
@@ -332,6 +323,7 @@ public class KernelFragment extends Fragment implements View.OnClickListener{
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 mp_txt.setText(""+progress);
                 mSound.setMicrophoneFlar(""+progress,getContext());
+                Prefs.saveInt("mp_value", progress, getContext());
             }
 
             @Override
@@ -356,11 +348,12 @@ public class KernelFragment extends Fragment implements View.OnClickListener{
         AlertDialog.Builder builder =  new AlertDialog.Builder(new ContextThemeWrapper(getContext(), R.style.CustomDialogTheme));
         builder.setTitle("TCP congestion algorithm");
         int selected_tcp=0;
-        String[] tcps = mNetwork.getTcpAvailableCongestions().toArray(new String[0]);
+        String[] tcps = Network.getTcpAvailableCongestions().toArray(new String[0]);
         builder.setSingleChoiceItems(tcps, selected_tcp, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 mNetwork.setTcpCongestion(tcps[which], getContext());
+                Prefs.saveString("tcp_congestion_algorithm", tcps[which], getContext());
                 refreshUI();
             }
         });

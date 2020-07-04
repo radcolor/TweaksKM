@@ -36,7 +36,7 @@ public class Battery {
         }
     }
 
-    public String FastChargeStatus() {
+    public static String FastChargeStatus() {
         int ffc = Utils.strToInt(Utils.readFile(FAST_CHARGE));
         if(ffc==0){ return "Disabled"; }
         else if(ffc==1){ return "Enabled"; }

@@ -13,7 +13,7 @@ public class Network {
 
     private static final String TCP_AVAILABLE_CONGESTIONS = "/proc/sys/net/ipv4/tcp_available_congestion_control";
 
-    public String getTcpCongestion() {
+    public static String getTcpCongestion() {
         return getTcpAvailableCongestions().get(0);
     }
 
@@ -21,7 +21,7 @@ public class Network {
         run("sysctl -w net.ipv4.tcp_congestion_control=" + tcpCongestion, TCP_AVAILABLE_CONGESTIONS, context);
     }
 
-    public List<String> getTcpAvailableCongestions() {
+    public static List<String> getTcpAvailableCongestions() {
         return new ArrayList<>(Arrays.asList(Utils.readFile(TCP_AVAILABLE_CONGESTIONS).split(" ")));
     }
 
