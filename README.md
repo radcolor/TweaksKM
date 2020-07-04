@@ -7,6 +7,22 @@ Designed beautifully with Material design.
 
 **Note:** The contributors are requested to read CONTRIBUTING.md and all required documentation, and send pull requests over dev/staging branch!
 
+## Setup
+
+### Requirements
+- JDK 8
+- Latest Android SDK and platform tools
+- Minimum SDK 21 or newer
+- AndroidX
+
+### Building
+
+```
+$ git clone https://github.com/theradcolor/TweaksKM.git
+$ cd TweaksKM
+$ ./gradlew assembleDebug
+```
+
 ## Working
 
 App needs the Android's root permission to attain [privileged control](https://en.wikipedia.org/wiki/Privilege_escalation) (known as [root access](https://en.wikipedia.org/wiki/Superuser)) over various Android subsystems. As Android uses the Linux kernel, rooting an Android device gives similar access to administrative (superuser) permissions as on Linux or any other Unix-like operating system.
@@ -29,11 +45,14 @@ You can easily report a bug or request a feature by opening a [pull request](htt
 - A detail description of feature
 - Paths to sysFS interface, How to apply and use of it.
 
-## Credits
+## Opensource licenses
 
-RootUtils/Tools from Kernel Adiutor by [Wille Ye](https://github.com/Grarak)
+RootUtils/Tools from Kernel Adiutor by [Wille Ye](https://github.com/Grarak) - [GPLv3](https://www.gnu.org/licenses/gpl-3.0)
 
-Spectrum by [Joe Maples](https://github.com/frap129)
+libsu by [John Wu](https://github.com/topjohnwu) - [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0)
+
+hellochart-android by [Leszek Wach](https://github.com/lecho) - [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0)
+
 
 ## Contributing
 
