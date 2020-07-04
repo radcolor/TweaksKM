@@ -6,7 +6,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.BatteryManager;
 import android.os.Bundle;
@@ -51,28 +50,21 @@ public class MonitorFragment extends Fragment{
     TextView gpu_usage_per, gpu_crr_freq, gpu_max_freq, gpu_model;
     TextView used_mem, avl_mem, tot_mem, bat_status, bat_temp, bat_lvl;
     TextView ent_lvl, wireguard_ver, uptime, deepsleeptime;
-    SharedPreferences preferences;
 
     @SuppressLint("SetTextI18n")
     public View onCreateView(@NonNull final LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
         root = inflater.inflate(R.layout.fragment_monitor, container, false);
-
-        preferences = getActivity().getPreferences(Context.MODE_PRIVATE);
-
         InitView();
         InitUI();
-
         monitorTask myTask = new monitorTask();
         myTask.execute();
         Log.d(TAG," "+Thread.currentThread().getName());
-
         return root;
     }
 
     private void InitView(){
-
         cpu = new CPU();
         gpu = new GPU();
         entropy = new Entropy();
@@ -114,7 +106,6 @@ public class MonitorFragment extends Fragment{
         wireguard_ver = root.findViewById(R.id.wg_ver);
         uptime = root.findViewById(R.id.up_time);
         deepsleeptime = root.findViewById(R.id.deep_slp);
-
     }
 
     @SuppressLint("SetTextI18n")
@@ -174,7 +165,7 @@ public class MonitorFragment extends Fragment{
             Log.d(TAG, "AsyncTask start");
             while (!Thread.currentThread().isInterrupted()){
                 try {
-                    Thread.sleep(600);
+                    Thread.sleep(500);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -250,13 +241,9 @@ public class MonitorFragment extends Fragment{
         SliceValue used = new SliceValue(lvl, getResources().getColor(R.color.green_light));
         values.add(used);
         mData = new PieChartData(values);
-        //mData.setHasCenterCircle(true);
-        //mData.setCenterCircleScale(.5f);
         chart.setPieChartData(mData);
-        //prepareDataAnimation(mData);
         chart.setValueSelectionEnabled(true);
         chart.setValueTouchEnabled(true);
-        //chart.startDataAnimation();
     }
 
     private void generateMemData(PieChartView chart, PieChartData mData, int free_mem, int used_mem) {
@@ -266,20 +253,10 @@ public class MonitorFragment extends Fragment{
         SliceValue used = new SliceValue(used_mem, getResources().getColor(R.color.green_light));
         values.add(used);
         mData = new PieChartData(values);
-        //mData.setHasCenterCircle(true);
-        //mData.setCenterCircleScale(.5f);
         chart.setPieChartData(mData);
-        //prepareDataAnimation(mData);
         chart.setValueSelectionEnabled(true);
         chart.setValueTouchEnabled(true);
-        //chart.startDataAnimation();
         chart.setOnValueTouchListener(new ValueTouchListener());
-    }
-
-    private void prepareDataAnimation(PieChartData data) {
-        for (SliceValue value : data.getValues()) {
-            //value.setTarget((float) Math.random() * 30 + 15);
-        }
     }
 
     private class ValueTouchListener implements PieChartOnValueSelectListener {
@@ -292,11 +269,8 @@ public class MonitorFragment extends Fragment{
                 Toast.makeText(getActivity(), "Used Memory", Toast.LENGTH_SHORT).show();
             }
         }
-
         @Override
-        public void onValueDeselected() {
-            // TODO Auto-generated method stub
-        }
+        public void onValueDeselected() {}
 
     }
 
