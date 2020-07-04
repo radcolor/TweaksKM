@@ -23,6 +23,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.grarak.kerneladiutor.utils.Utils;
 import com.grarak.kerneladiutor.utils.root.RootUtils;
 import com.theradcolor.kernel.R;
@@ -48,7 +49,7 @@ public class KernelFragment extends Fragment implements View.OnClickListener{
     public static final int MAX_VIBRATION = 3596;
     int  vibrationValue;
     SharedPreferences.Editor editor;
-    Switch vibSW, srgbSW;
+    SwitchMaterial vibSW, srgbSW;
     SharedPreferences preferences;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
