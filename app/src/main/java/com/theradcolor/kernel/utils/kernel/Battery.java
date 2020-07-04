@@ -1,8 +1,6 @@
 package com.theradcolor.kernel.utils.kernel;
 
 import android.content.Context;
-import androidx.annotation.NonNull;
-
 import com.grarak.kerneladiutor.utils.Utils;
 import com.grarak.kerneladiutor.utils.root.Control;
 
@@ -43,11 +41,11 @@ public class Battery {
         return null;
     }
 
-    private void run(String command, String id, Context context) {
+    private static void run(String command, String id, Context context) {
         Control.runSetting(command, "BATTERY", id, context);
     }
 
-    public void ForceFastChargeEnable(boolean enable, Context context) {
+    public static void ForceFastChargeEnable(boolean enable, Context context) {
         run(Control.write(enable ? "1" : "0", FAST_CHARGE), FAST_CHARGE, context);
     }
 

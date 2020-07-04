@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.VibrationEffect;
@@ -43,9 +42,7 @@ public class KernelFragment extends Fragment implements View.OnClickListener{
     SeekBar seekBar;
     LinearLayout sRGB, kCAL, spectrum, vibration, ll_ffc, ll_tcp, hpg, mcg;
     int progressChangedValue = 1;
-    SharedPreferences.Editor editor;
     SwitchMaterial vibSW, srgbSW, hpgSW, mpgSW, ffcSW, tcpSW;
-    SharedPreferences preferences;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -201,14 +198,14 @@ public class KernelFragment extends Fragment implements View.OnClickListener{
                 .setPositiveButton("On", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                       sRGB.srgbON();
+                       com.theradcolor.kernel.utils.kernel.sRGB.srgbON();
                        Prefs.saveBoolean("srgb_value", true, getContext());
                     }
                 })
                 .setNegativeButton("Off", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        sRGB.srgbOFF();
+                        com.theradcolor.kernel.utils.kernel.sRGB.srgbOFF();
                         Prefs.saveBoolean("srgb_value", false, getContext());
                     }
                 });
@@ -232,10 +229,10 @@ public class KernelFragment extends Fragment implements View.OnClickListener{
                 break;
             case R.id.ll_ffc:
                 if(Battery.FastChargeStatus().equals("Enabled")){
-                    mBattery.ForceFastChargeEnable(false, getContext());
+                    Battery.ForceFastChargeEnable(false, getContext());
                     Prefs.saveBoolean("ffc_value", false, getContext());
                 }else if(Battery.FastChargeStatus().equals("Disabled")){
-                    mBattery.ForceFastChargeEnable(true, getContext());
+                    Battery.ForceFastChargeEnable(true, getContext());
                     Prefs.saveBoolean("ffc_value", true, getContext());
                 }
                 refreshUI();
@@ -255,65 +252,53 @@ public class KernelFragment extends Fragment implements View.OnClickListener{
     SeekBar hp_lft_sb, hp_rgt_sb, mp_sb;
     TextView hp_lft_txt, hp_rgt_txt, mp_txt;
 
-    public void hpgDialog(View view) {        // create an alert builder
+    public void hpgDialog(View view) {
         AlertDialog.Builder builder =  new AlertDialog.Builder(new ContextThemeWrapper(getContext(), R.style.CustomDialogTheme));
-        builder.setTitle(R.string.title_hp_gain);        // set the custom layout
+        builder.setTitle(R.string.title_hp_gain);
         final View hpLayout = getLayoutInflater().inflate(R.layout.headgain_dialog, null);
 
         hp_lft_sb = hpLayout.findViewById(R.id.hp_left);
         hp_rgt_sb = hpLayout.findViewById(R.id.hp_right);
-        hp_lft_sb.setProgress(Utils.strToInt(mSound.getHeadphoneFlar("left")));
-        hp_rgt_sb.setProgress(Utils.strToInt(mSound.getHeadphoneFlar("right")));
+        hp_lft_sb.setProgress(Utils.strToInt(Sound.getHeadphoneFlar("left")));
+        hp_rgt_sb.setProgress(Utils.strToInt(Sound.getHeadphoneFlar("right")));
         hp_lft_txt = hpLayout.findViewById(R.id.hp_left_txt);
         hp_rgt_txt = hpLayout.findViewById(R.id.hp_right_txt);
-        hp_lft_txt.setText(""+mSound.getHeadphoneFlar("left"));
-        hp_rgt_txt.setText(""+mSound.getHeadphoneFlar("right"));
+        hp_lft_txt.setText(""+ Sound.getHeadphoneFlar("left"));
+        hp_rgt_txt.setText(""+ Sound.getHeadphoneFlar("right"));
 
         hp_lft_sb.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 hp_lft_txt.setText(""+progress);
-                mSound.setHeadphoneFlar("left", ""+progress, getContext());
+                Sound.setHeadphoneFlar("left", ""+progress, getContext());
                 Prefs.saveInt("hp_left_value", progress, getContext());
             }
-
             @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
+            public void onStartTrackingTouch(SeekBar seekBar) { }
             @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
-            }
+            public void onStopTrackingTouch(SeekBar seekBar) { }
         });
 
         hp_rgt_sb.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 hp_rgt_txt.setText(""+progress);
-                mSound.setHeadphoneFlar("right", ""+progress, getContext());
+                Sound.setHeadphoneFlar("right", ""+progress, getContext());
                 Prefs.saveInt("hp_right_value", progress, getContext());
             }
-
             @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
+            public void onStartTrackingTouch(SeekBar seekBar) { }
             @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
-            }
+            public void onStopTrackingTouch(SeekBar seekBar) { }
         });
-        builder.setView(hpLayout);        // add a button
+        builder.setView(hpLayout);
         AlertDialog dialog = builder.create();
         dialog.show();
     }
 
-    public void mcgDialog(View view) {        // create an alert builder
+    public void mcgDialog(View view) {
         AlertDialog.Builder builder =  new AlertDialog.Builder(new ContextThemeWrapper(getContext(), R.style.CustomDialogTheme));
-        builder.setTitle(R.string.title_mp_gain);        // set the custom layout
+        builder.setTitle(R.string.title_mp_gain);
         final View mpLayout = getLayoutInflater().inflate(R.layout.micgain_dialog, null);
         mp_sb = mpLayout.findViewById(R.id.mp_gain);
         mp_sb.setProgress(Utils.strToInt(mSound.getMicrophoneFlar()));
@@ -322,38 +307,32 @@ public class KernelFragment extends Fragment implements View.OnClickListener{
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 mp_txt.setText(""+progress);
-                mSound.setMicrophoneFlar(""+progress,getContext());
+                Sound.setMicrophoneFlar(""+progress,getContext());
                 Prefs.saveInt("mp_value", progress, getContext());
             }
-
             @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
+            public void onStartTrackingTouch(SeekBar seekBar) { }
             @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
-            }
+            public void onStopTrackingTouch(SeekBar seekBar) { }
         });
 
         mp_txt = mpLayout.findViewById(R.id.mp_txt);
         mp_txt.setText(""+mSound.getMicrophoneFlar());
-        builder.setView(mpLayout);        // add a button
+        builder.setView(mpLayout);
         AlertDialog dialog = builder.create();
         dialog.show();
     }
 
-    public void tcpDialog(View view) {        // create an alert builder
+    public void tcpDialog(View view) {
         AlertDialog.Builder builder =  new AlertDialog.Builder(new ContextThemeWrapper(getContext(), R.style.CustomDialogTheme));
         builder.setTitle("TCP congestion algorithm");
         int selected_tcp=0;
-        String[] tcps = Network.getTcpAvailableCongestions().toArray(new String[0]);
-        builder.setSingleChoiceItems(tcps, selected_tcp, new DialogInterface.OnClickListener() {
+        String[] TCPs = Network.getTcpAvailableCongestions().toArray(new String[0]);
+        builder.setSingleChoiceItems(TCPs, selected_tcp, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                mNetwork.setTcpCongestion(tcps[which], getContext());
-                Prefs.saveString("tcp_congestion_algorithm", tcps[which], getContext());
+                Network.setTcpCongestion(TCPs[which], getContext());
+                Prefs.saveString("tcp_congestion_algorithm", TCPs[which], getContext());
                 refreshUI();
             }
         });

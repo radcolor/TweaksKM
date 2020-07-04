@@ -1,10 +1,8 @@
 package com.theradcolor.kernel.utils.kernel;
 
 import android.content.Context;
-
 import com.grarak.kerneladiutor.utils.Utils;
 import com.grarak.kerneladiutor.utils.root.Control;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,7 +35,7 @@ public class Sound {
         return mFlarLimits;
     }
 
-    public String getHeadphoneFlar(String channel) {
+    public static String getHeadphoneFlar(String channel) {
         String[] values = Utils.readFile(HEADPHONE_FLAR).split(" ");
         int gainLeft = Utils.strToInt(values[0]),
                 gainRight = Utils.strToInt(values[1]);
@@ -59,11 +57,11 @@ public class Sound {
         return "";
     }
 
-    public void setHeadphoneFlarAll(String value, Context context) {
+    public  void setHeadphoneFlarAll(String value, Context context) {
         SoundRun(value + " " + value, HEADPHONE_FLAR, HEADPHONE_FLAR, context);
     }
 
-    public void setHeadphoneFlar(String channel, String value, Context context) {
+    public static void setHeadphoneFlar(String channel, String value, Context context) {
         switch (channel) {
             case "left":
                 String currentGainRight = getHeadphoneFlar("right");
@@ -77,11 +75,11 @@ public class Sound {
     }
 
 
-    public void setMicrophoneFlar(String value, Context context) {
+    public static void setMicrophoneFlar(String value, Context context) {
         run(Control.write(value, MICROPHONE_FLAR), MICROPHONE_FLAR, context);
     }
 
-    private void SoundRun(String value, String path, String id, Context context) {
+    private static void SoundRun(String value, String path, String id, Context context) {
         int checksum = value.contains(" ") ?
                 getChecksum(Utils.strToInt(value.split(" ")[0]),
                         Utils.strToInt(value.split(" ")[1])) :
@@ -90,11 +88,11 @@ public class Sound {
         run(Control.write(value, path), id + "nochecksum", context);
     }
 
-    private int getChecksum(int arg0, int arg1) {
+    private static int getChecksum(int arg0, int arg1) {
         return (Integer.MAX_VALUE ^ (arg0 & 0xff) + (arg1 & 0xff));
     }
 
-    private void run(String command, String id, Context context) {
+    private static void run(String command, String id, Context context) {
         Control.runSetting(command, "SOUND", id, context);
     }
 

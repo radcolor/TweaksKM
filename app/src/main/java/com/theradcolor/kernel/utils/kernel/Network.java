@@ -17,7 +17,7 @@ public class Network {
         return getTcpAvailableCongestions().get(0);
     }
 
-    public void setTcpCongestion(String tcpCongestion, Context context) {
+    public static void setTcpCongestion(String tcpCongestion, Context context) {
         run("sysctl -w net.ipv4.tcp_congestion_control=" + tcpCongestion, TCP_AVAILABLE_CONGESTIONS, context);
     }
 
@@ -25,7 +25,7 @@ public class Network {
         return new ArrayList<>(Arrays.asList(Utils.readFile(TCP_AVAILABLE_CONGESTIONS).split(" ")));
     }
 
-    private void run(String command, String id, Context context) {
+    private static void run(String command, String id, Context context) {
         Control.runSetting(command, "NETWORK", id, context);
     }
 

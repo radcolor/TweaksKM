@@ -4,7 +4,7 @@ import com.grarak.kerneladiutor.utils.root.RootUtils;
 
 public class sRGB {
 
-    public void srgbON(){
+    public static void srgbON(){
         RootUtils.runCommand("active=1\n" +
                 "\n" +
                 "echo $active > /sys/module/mdss_fb/parameters/srgb_enabled\n" +
@@ -15,7 +15,7 @@ public class sRGB {
                 "fi");
     }
 
-    public void srgbOFF(){
+    public static void srgbOFF(){
         RootUtils.runCommand("active=0\n" +
                 "\n" +
                 "echo $active > /sys/module/mdss_fb/parameters/srgb_enabled\n" +
