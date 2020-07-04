@@ -49,4 +49,10 @@
         <item name="android:colorForeground">@color/colorAccent</item>
     </style>
 
+    <style name="CustomDialogTheme" parent="Theme.AppCompat.Dialog.Alert">
+        <item name="android:background">@color/grey_light</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textColorPrimary">@android:color/white</item>
+    </style>
+
 </resources>

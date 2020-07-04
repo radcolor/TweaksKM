@@ -210,7 +210,7 @@ public class KernelFragment extends Fragment implements View.OnClickListener{
     private void srgb()
     {
         com.theradcolor.kernel.utils.kernel.sRGB sRGB = new sRGB();;
-        AlertDialog.Builder alertDialog =  new AlertDialog.Builder(new ContextThemeWrapper(getContext(), R.style.Theme_AppCompat_DayNight_Dialog_Alert))
+        AlertDialog.Builder alertDialog =  new AlertDialog.Builder(new ContextThemeWrapper(getContext(), R.style.CustomDialogTheme))
                 .setTitle("sRGB colors")
                 .setPositiveButton("On", new DialogInterface.OnClickListener() {
                     @Override
@@ -266,7 +266,7 @@ public class KernelFragment extends Fragment implements View.OnClickListener{
     TextView hp_lft_txt, hp_rgt_txt, mp_txt;
 
     public void hpgDialog(View view) {        // create an alert builder
-        AlertDialog.Builder builder =  new AlertDialog.Builder(new ContextThemeWrapper(getContext(), R.style.Theme_AppCompat_DayNight_Dialog_Alert));
+        AlertDialog.Builder builder =  new AlertDialog.Builder(new ContextThemeWrapper(getContext(), R.style.CustomDialogTheme));
         builder.setTitle(R.string.title_hp_gain);        // set the custom layout
         final View hpLayout = getLayoutInflater().inflate(R.layout.headgain_dialog, null);
 
@@ -320,7 +320,7 @@ public class KernelFragment extends Fragment implements View.OnClickListener{
     }
 
     public void mcgDialog(View view) {        // create an alert builder
-        AlertDialog.Builder builder =  new AlertDialog.Builder(new ContextThemeWrapper(getContext(), R.style.Theme_AppCompat_DayNight_Dialog_Alert));
+        AlertDialog.Builder builder =  new AlertDialog.Builder(new ContextThemeWrapper(getContext(), R.style.CustomDialogTheme));
         builder.setTitle(R.string.title_mp_gain);        // set the custom layout
         final View mpLayout = getLayoutInflater().inflate(R.layout.micgain_dialog, null);
         mp_sb = mpLayout.findViewById(R.id.mp_gain);
@@ -352,7 +352,7 @@ public class KernelFragment extends Fragment implements View.OnClickListener{
     }
 
     public void tcpDialog(View view) {        // create an alert builder
-        AlertDialog.Builder builder =  new AlertDialog.Builder(new ContextThemeWrapper(getContext(), R.style.Theme_AppCompat_DayNight_Dialog_Alert));
+        AlertDialog.Builder builder =  new AlertDialog.Builder(new ContextThemeWrapper(getContext(), R.style.CustomDialogTheme));
         builder.setTitle("TCP congestion algorithm");
         int selected_tcp=0;
         String[] tcps = mNetwork.getTcpAvailableCongestions().toArray(new String[0]);

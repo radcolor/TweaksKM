@@ -95,7 +95,7 @@ public class KMActivity extends AppCompatActivity {
     Boolean state = true;
 
     private boolean dialog() {
-        new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.Theme_AppCompat_DayNight_Dialog_Alert))
+        new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.CustomDialogTheme))
                 .setTitle("Unsupported kernel/device!")
                 .setCancelable(false)
                 //.setSingleChoiceItems(list, 1, null)
