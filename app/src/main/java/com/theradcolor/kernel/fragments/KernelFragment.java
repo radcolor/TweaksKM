@@ -15,6 +15,7 @@ import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -51,6 +52,7 @@ public class KernelFragment extends Fragment implements View.OnClickListener{
 
         InitView();
         InitUI();
+        setSW();
 
         final Vibrator v = (Vibrator) getContext().getSystemService(Context.VIBRATOR_SERVICE);
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -71,7 +73,6 @@ public class KernelFragment extends Fragment implements View.OnClickListener{
                 v.vibrate(50);
             }
         });
-        setSW();
         return root;
     }
 
@@ -107,12 +108,6 @@ public class KernelFragment extends Fragment implements View.OnClickListener{
     public void InitUI(){
         seekBar.setPadding(16,16,16,16);
         spectrum.setOnClickListener(this);
-        vibSW.setOnCheckedChangeListener(myCheckboxListener);
-        srgbSW.setOnCheckedChangeListener(myCheckboxListener);
-        hpgSW.setOnCheckedChangeListener(myCheckboxListener);
-        mpgSW.setOnCheckedChangeListener(myCheckboxListener);
-        ffcSW.setOnCheckedChangeListener(myCheckboxListener);
-        tcpSW.setOnCheckedChangeListener(myCheckboxListener);
         vib.setText(mVibration.getVibrationValue()+getResources().getString(R.string.percent));
         seekBar.setProgress(mVibration.getVibrationValue());
         sRGB.setOnClickListener(this);
@@ -156,6 +151,16 @@ public class KernelFragment extends Fragment implements View.OnClickListener{
         if(Prefs.getBoolean("tcp", false, getContext())){
             tcpSW.setChecked(true);
         }
+        registerSWListener();
+    }
+
+    private void registerSWListener(){
+        vibSW.setOnCheckedChangeListener(myCheckboxListener);
+        srgbSW.setOnCheckedChangeListener(myCheckboxListener);
+        hpgSW.setOnCheckedChangeListener(myCheckboxListener);
+        mpgSW.setOnCheckedChangeListener(myCheckboxListener);
+        ffcSW.setOnCheckedChangeListener(myCheckboxListener);
+        tcpSW.setOnCheckedChangeListener(myCheckboxListener);
     }
 
     private CompoundButton.OnCheckedChangeListener myCheckboxListener = new CompoundButton.OnCheckedChangeListener() {
@@ -163,27 +168,27 @@ public class KernelFragment extends Fragment implements View.OnClickListener{
         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
             switch (buttonView.getId()){
                 case R.id.vibsw:
-                    if(vibSW.isChecked()){ Prefs.saveBoolean("vibration", true, getContext()); }
+                    if(vibSW.isChecked()){ Prefs.saveBoolean("vibration", true, getContext()); msg(getString(R.string.boot_txt)); }
                     else{ Prefs.saveBoolean("vibration", false, getContext()); }
                     break;
                 case R.id.srgbsw:
-                    if(srgbSW.isChecked()){ Prefs.saveBoolean("sRGB", true, getContext()); }
+                    if(srgbSW.isChecked()){ Prefs.saveBoolean("sRGB", true, getContext()); msg(getString(R.string.boot_txt)); }
                     else{ Prefs.saveBoolean("sRGB", false, getContext()); }
                     break;
                 case R.id.hgsw:
-                    if(hpgSW.isChecked()){ Prefs.saveBoolean("hpGain", true, getContext()); }
+                    if(hpgSW.isChecked()){ Prefs.saveBoolean("hpGain", true, getContext()); msg(getString(R.string.boot_txt)); }
                     else{ Prefs.saveBoolean("hpGain", false, getContext()); }
                     break;
                 case R.id.mgsw:
-                    if(mpgSW.isChecked()){ Prefs.saveBoolean("mpGain", true, getContext()); }
+                    if(mpgSW.isChecked()){ Prefs.saveBoolean("mpGain", true, getContext()); msg(getString(R.string.boot_txt)); }
                     else{ Prefs.saveBoolean("mpGain", false, getContext()); }
                     break;
                 case R.id.ffcsw:
-                    if(ffcSW.isChecked()){ Prefs.saveBoolean("ffc", true, getContext());}
+                    if(ffcSW.isChecked()){ Prefs.saveBoolean("ffc", true, getContext()); msg(getString(R.string.boot_txt)); }
                     else{ Prefs.saveBoolean("ffc", false, getContext()); }
                     break;
                 case R.id.tcpsw:
-                    if(tcpSW.isChecked()){ Prefs.saveBoolean("tcp", true, getContext());}
+                    if(tcpSW.isChecked()){ Prefs.saveBoolean("tcp", true, getContext()); msg(getString(R.string.boot_txt)); }
                     else{ Prefs.saveBoolean("tcp", false, getContext()); }
                     break;
             }
@@ -338,6 +343,10 @@ public class KernelFragment extends Fragment implements View.OnClickListener{
         });
         AlertDialog dialog = builder.create();
         dialog.show();
+    }
+
+    private void msg(String message){
+        Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
     }
 
 }

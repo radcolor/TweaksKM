@@ -102,5 +102,6 @@
     <string name="faq_a5">A. Project strings can be found on Crowdin - https://crowdin.com/project/tweakskm</string>
     <string name="faq_q6">Q. Some stuffs and things are missing in app!</string>
     <string name="faq_a6">A. We are currently in alpha stage.</string>
+    <string name="boot_txt">Great! will set on boot</string>
 
 </resources>
