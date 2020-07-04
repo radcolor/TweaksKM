@@ -76,7 +76,7 @@ public class KMActivity extends AppCompatActivity {
 
         if (checkRoot.isDeviceRooted()
                 && Device.getKernelVersion(false).contains("rad")
-                && Device.getKernelVersion(false).contains("fakerad"))
+                || Device.getKernelVersion(false).contains("fakerad"))
         {
             Log.d("MainActivity", "Kernel and Root Check Passed");
             RootUtils.getSU();
