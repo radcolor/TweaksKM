@@ -175,6 +175,12 @@ public class KcalActivity extends AppCompatActivity implements View.OnClickListe
                 });
                 AlertDialog dialog = builder.create();
                 dialog.show();
+                dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                    @Override
+                    public void onDismiss(DialogInterface dialog) {
+                        refreshUI();
+                    }
+                });
                 break;
             case R.id.ll_color_reset:
                 RootUtils.runCommand("echo " + RED_DEFAULT+ " " + GREEN_DEFAULT + " " + BLUE_DEFAULT+ " " + ">" + " /sys/devices/platform/kcal_ctrl.0/kcal");
@@ -187,7 +193,8 @@ public class KcalActivity extends AppCompatActivity implements View.OnClickListe
                 break;
         }
     }
-    int r,g,b;
+
+    int r,g,b, saturation, value, contrast, hue_i;
     @Override
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
         switch (seekBar.getId()){
@@ -205,19 +212,19 @@ public class KcalActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.kcal_sat:
                 satTXT.setText(""+progress);
-                mKCAL.setSaturationIntensity(progress,this);
+               saturation = progress;
                 break;
             case R.id.kcal_val:
                 valTXT.setText(""+progress);
-                mKCAL.setScreenValue(progress, this);
+                value = progress;
                 break;
             case R.id.kcal_cont:
                 conTXT.setText(""+progress);
-                mKCAL.setScreenContrast(progress, this);
+                contrast = progress;
                 break;
             case R.id.kcal_hue:
                 hueTXT.setText(""+progress);
-                mKCAL.setScreenHue(progress, this);
+                hue_i = progress;
                 break;
         }
     }
@@ -230,5 +237,9 @@ public class KcalActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onStopTrackingTouch(SeekBar seekBar) {
         mKCAL.setColors(r + " " + g + " " + b, this);
+        mKCAL.setSaturationIntensity(saturation,this);
+        mKCAL.setScreenValue(value, this);
+        mKCAL.setScreenContrast(contrast, this);
+        mKCAL.setScreenHue(hue_i, this);
     }
 }

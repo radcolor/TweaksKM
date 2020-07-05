@@ -148,9 +148,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
 
-                        <Switch
+                        <com.google.android.material.switchmaterial.SwitchMaterial
                             android:id="@+id/vibsw"
-                            android:theme="@style/SelectionSwitch"
+                            android:theme="@style/sw"
                             android:layout_centerInParent="true"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
@@ -290,9 +290,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
 
-                        <Switch
+                        <com.google.android.material.switchmaterial.SwitchMaterial
                             android:id="@+id/srgbsw"
-                            android:theme="@style/SelectionSwitch"
+                            android:theme="@style/sw"
                             android:layout_centerInParent="true"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
@@ -485,9 +485,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
 
-                        <Switch
+                        <com.google.android.material.switchmaterial.SwitchMaterial
                             android:id="@+id/hgsw"
-                            android:theme="@style/SelectionSwitch"
+                            android:theme="@style/sw"
                             android:layout_centerInParent="true"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
@@ -551,9 +551,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
 
-                        <Switch
+                        <com.google.android.material.switchmaterial.SwitchMaterial
                             android:id="@+id/mgsw"
-                            android:theme="@style/SelectionSwitch"
+                            android:theme="@style/sw"
                             android:layout_centerInParent="true"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
@@ -823,9 +823,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
 
-                        <Switch
-                            android:id="@+id/hgsw"
-                            android:theme="@style/SelectionSwitch"
+                        <com.google.android.material.switchmaterial.SwitchMaterial
+                            android:id="@+id/ffcsw"
+                            android:theme="@style/sw"
                             android:layout_centerInParent="true"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
@@ -889,9 +889,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
 
-                        <Switch
-                            android:id="@+id/mgsw"
-                            android:theme="@style/SelectionSwitch"
+                        <com.google.android.material.switchmaterial.SwitchMaterial
+                            android:id="@+id/tcpsw"
+                            android:theme="@style/sw"
                             android:layout_centerInParent="true"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>

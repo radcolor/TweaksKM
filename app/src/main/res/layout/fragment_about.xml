@@ -100,7 +100,7 @@
                 android:layout_height="wrap_content">
 
                 <LinearLayout
-                    android:id="@+id/faqs"
+                    android:id="@+id/ll_faqs"
                     android:padding="10dp"
                     android:clickable="true"
                     android:focusable="true"
@@ -157,7 +157,7 @@
                 android:layout_height="wrap_content">
 
                 <LinearLayout
-                    android:id="@+id/license"
+                    android:id="@+id/ll_osl"
                     android:padding="10dp"
                     android:layout_marginTop="8dp"
                     android:clickable="true"

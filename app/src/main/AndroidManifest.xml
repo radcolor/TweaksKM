@@ -18,11 +18,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".activities.OSLActivity"
+            android:label="Open Source Licenses"
+            android:theme="@style/faqs">
+        </activity>
         <activity
-            android:theme="@style/kcal"
             android:name=".activities.KcalActivity"
             android:label="Display Color Calibration"
-            android:parentActivityName=".KMActivity" />
+            android:parentActivityName=".KMActivity"
+            android:theme="@style/kcal" />
         <activity
             android:name=".SplashActivity"
             android:screenOrientation="portrait"
@@ -36,7 +40,6 @@
         <activity
             android:name=".activities.FAQsActivity"
             android:label="FAQs"
-            android:parentActivityName=".KMActivity"
             android:theme="@style/faqs" />
         <activity
             android:name=".KMActivity"
@@ -47,18 +50,19 @@
             android:label="@string/app_name"
             android:theme="@style/kcal" />
 
-        <service
-            android:name=".services.GamingService"
-            android:exported="true" />
-        <receiver android:name=".receivers.BrodcastReceiver" />
+        <service android:name=".services.GamingService" />
+        <service android:name=".services.onBootService" />
 
         <!-- Declaring broadcast receiver for BOOT_COMPLETED event. -->
-        <receiver android:name=".receivers.BootReceiver" android:enabled="true" android:exported="false">
+        <receiver android:name=".receivers.BroadcastReceiver" />
+        <receiver
+            android:name=".receivers.onBootReceiver"
+            android:enabled="true"
+            android:exported="false">
             <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
-
     </application>
 
 </manifest>

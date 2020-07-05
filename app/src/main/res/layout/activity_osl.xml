@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.FAQsActivity"
+    tools:context=".activities.OSLActivity"
     android:orientation="vertical">
 
     <LinearLayout
@@ -16,128 +16,167 @@
 
         <LinearLayout
             android:orientation="vertical"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <TextView
                 android:textColor="@android:color/black"
                 android:textStyle="bold"
-                android:text="@string/faq_q1"
+                android:text="libsu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
             <TextView
-                android:layout_marginTop="6dp"
-                android:text="@string/faq_a1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_marginTop="16dp"
-            android:orientation="vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:textColor="@android:color/black"
-                android:textStyle="bold"
-                android:text="@string/faq_q2"
+                android:layout_marginTop="2dp"
+                android:text="By: John Wu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
             <TextView
-                android:layout_marginTop="6dp"
-                android:text="@string/faq_a2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_marginTop="16dp"
-            android:orientation="vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:textColor="@android:color/black"
-                android:textStyle="bold"
-                android:text="@string/faq_q3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
-            <TextView
-                android:layout_marginTop="6dp"
-                android:text="@string/faq_a3"
+                android:layout_marginTop="2dp"
                 android:autoLink="web"
+                android:text="https://www.apache.org/licenses/LICENSE-2.0"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
         </LinearLayout>
 
         <LinearLayout
-            android:layout_marginTop="16dp"
             android:orientation="vertical"
-            android:layout_width="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <TextView
                 android:textColor="@android:color/black"
+                android:text="RootUtils/Tools:"
                 android:textStyle="bold"
-                android:text="@string/faq_q4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
             <TextView
-                android:layout_marginTop="6dp"
-                android:text="@string/faq_a4"
+                android:layout_marginTop="2dp"
+                android:text="By: Wille Ye"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:layout_marginTop="2dp"
                 android:autoLink="web"
+                android:text="https://www.gnu.org/licenses/gpl-3.0.html"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:textColor="@android:color/black"
+                android:text="hellochart-android"
+                android:textStyle="bold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:layout_marginTop="2dp"
+                android:text="By: Leszek Wach"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:layout_marginTop="2dp"
+                android:autoLink="web"
+                android:text="https://www.apache.org/licenses/LICENSE-2.0"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
         </LinearLayout>
 
         <LinearLayout
-            android:layout_marginTop="16dp"
             android:orientation="vertical"
-            android:layout_width="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <TextView
                 android:textColor="@android:color/black"
+                android:text="Icons"
                 android:textStyle="bold"
-                android:text="@string/faq_q5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
             <TextView
-                android:layout_marginTop="6dp"
-                android:text="@string/faq_a5"
+                android:layout_marginTop="2dp"
+                android:text="By: Freepik"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:layout_marginTop="2dp"
                 android:autoLink="web"
+                android:text="https://www.flaticon.com/"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
         </LinearLayout>
 
         <LinearLayout
-            android:layout_marginTop="16dp"
             android:orientation="vertical"
-            android:layout_width="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <TextView
                 android:textColor="@android:color/black"
+                android:text="Google Material Components"
                 android:textStyle="bold"
-                android:text="@string/faq_q6"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
             <TextView
-                android:layout_marginTop="6dp"
-                android:text="@string/faq_a6"
+                android:layout_marginTop="2dp"
+                android:text="By: Google"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:layout_marginTop="2dp"
                 android:autoLink="web"
+                android:text="https://www.apache.org/licenses/LICENSE-2.0"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:textColor="@android:color/black"
+                android:text=" Android Extension Library"
+                android:textStyle="bold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:layout_marginTop="2dp"
+                android:text="By: Google"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:layout_marginTop="2dp"
+                android:autoLink="web"
+                android:text="https://www.apache.org/licenses/LICENSE-2.0"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 

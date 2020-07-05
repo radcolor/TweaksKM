@@ -39,14 +39,21 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="SelectionSwitch" parent="Theme.AppCompat.Light">
-        <item name="colorControlActivated">@color/colorAccent</item>
-        <item name="colorSwitchThumbNormal">@color/colorAccent</item>
+    <style name="checkStyle" parent="Widget.AppCompat.CompoundButton.CheckBox">
         <item name="android:colorForeground">@color/colorAccent</item>
     </style>
 
-    <style name="checkStyle" parent="Widget.AppCompat.CompoundButton.CheckBox">
+    <style name="sw" parent="Widget.AppCompat.CompoundButton.Switch">
+        <item name="colorOnPrimarySurface">@color/grey_light</item>
+        <item name="colorOnSurface">@color/grey_light</item>
+        <item name="colorSwitchThumbNormal">@android:color/secondary_text_dark_nodisable</item>
         <item name="android:colorForeground">@color/colorAccent</item>
+    </style>
+
+    <style name="CustomDialogTheme" parent="Theme.AppCompat.Dialog.Alert">
+        <item name="android:background">@color/grey_light</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textColorPrimary">@android:color/white</item>
     </style>
 
 </resources>

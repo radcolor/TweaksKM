@@ -1,6 +1,5 @@
 package com.theradcolor.kernel.receivers;
 
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
@@ -10,7 +9,7 @@ import com.theradcolor.kernel.services.GamingService;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 
-public class BrodcastReceiver extends BroadcastReceiver {
+public class BroadcastReceiver extends android.content.BroadcastReceiver {
 
     Context mcontext;
 
