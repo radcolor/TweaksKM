@@ -11,7 +11,7 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <LinearLayout
             android:clickable="true"
@@ -70,6 +70,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
+            android:layout_marginBottom="12dp"
             android:layout_height="0.1dp"
             android:background="@color/grey_light"/>
 
@@ -77,14 +78,13 @@
             android:clickable="true"
             android:focusable="true"
             android:background="@drawable/ripple"
-            android:layout_marginTop="16dp"
             android:scrollbars="vertical"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <LinearLayout
-                android:layout_marginTop="2dp"
+                android:layout_marginTop="4dp"
                 android:layout_marginBottom="2dp"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
@@ -291,6 +291,7 @@
 
         <LinearLayout
             android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
             android:layout_width="match_parent"
             android:layout_height="0.1dp"
             android:background="@color/grey_light"/>
@@ -299,14 +300,13 @@
             android:clickable="true"
             android:focusable="true"
             android:background="@drawable/ripple"
-            android:layout_marginTop="16dp"
             android:scrollbars="vertical"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <LinearLayout
-                android:layout_marginTop="2dp"
+                android:layout_marginTop="4dp"
                 android:layout_marginBottom="2dp"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
@@ -314,7 +314,7 @@
 
                 <TextView
                     android:layout_marginTop="4dp"
-                    android:layout_marginLeft="12dp"
+                    android:layout_marginStart="12dp"
                     android:text="@string/title_gpu"
                     android:textColor="@color/green_light"
                     android:textStyle="bold"
@@ -415,6 +415,7 @@
 
         <LinearLayout
             android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
             android:layout_width="match_parent"
             android:layout_height="0.1dp"
             android:background="@color/grey_light"/>
@@ -423,7 +424,6 @@
             android:clickable="true"
             android:focusable="true"
             android:background="@drawable/ripple"
-            android:layout_marginTop="16dp"
             android:scrollbars="vertical"
             android:orientation="vertical"
             android:layout_width="match_parent"
@@ -438,7 +438,7 @@
 
                 <TextView
                     android:layout_marginTop="4dp"
-                    android:layout_marginLeft="12dp"
+                    android:layout_marginStart="12dp"
                     android:text="@string/title_mem"
                     android:textColor="@color/green_light"
                     android:textStyle="bold"
@@ -446,7 +446,10 @@
                     android:layout_height="wrap_content"/>
 
                 <LinearLayout
-                    android:padding="12dp"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="4dp"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
                     android:weightSum="4"
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
@@ -479,7 +482,7 @@
 
                            <TextView
                                android:id="@+id/mem_used"
-                               android:layout_marginLeft="8dp"
+                               android:layout_marginStart="8dp"
                                android:textColor="@color/text_sec"
                                android:layout_width="wrap_content"
                                android:layout_height="wrap_content"/>
@@ -500,7 +503,7 @@
 
                            <TextView
                                android:id="@+id/mem_tot"
-                               android:layout_marginLeft="8dp"
+                               android:layout_marginStart="8dp"
                                android:textColor="@color/text_sec"
                                android:layout_width="wrap_content"
                                android:layout_height="wrap_content"/>
@@ -521,7 +524,7 @@
 
                            <TextView
                                android:id="@+id/mem_free"
-                               android:layout_marginLeft="8dp"
+                               android:layout_marginStart="8dp"
                                android:textColor="@color/text_sec"
                                android:layout_width="wrap_content"
                                android:layout_height="wrap_content"/>
@@ -538,6 +541,7 @@
 
         <LinearLayout
             android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
             android:layout_width="match_parent"
             android:layout_height="0.1dp"
             android:background="@color/grey_light"/>
@@ -546,7 +550,6 @@
             android:clickable="true"
             android:focusable="true"
             android:background="@drawable/ripple"
-            android:layout_marginTop="16dp"
             android:scrollbars="vertical"
             android:orientation="vertical"
             android:layout_width="match_parent"
@@ -561,7 +564,7 @@
 
                 <TextView
                     android:layout_marginTop="4dp"
-                    android:layout_marginLeft="12dp"
+                    android:layout_marginStart="12dp"
                     android:text="@string/title_batt"
                     android:textColor="@color/green_light"
                     android:textStyle="bold"
@@ -569,7 +572,10 @@
                     android:layout_height="wrap_content"/>
 
                 <LinearLayout
-                    android:padding="12dp"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="4dp"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
                     android:weightSum="4"
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
@@ -664,6 +670,7 @@
 
         <LinearLayout
             android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
             android:layout_width="match_parent"
             android:layout_height="0.1dp"
             android:background="@color/grey_light"/>
@@ -672,14 +679,13 @@
             android:clickable="true"
             android:focusable="true"
             android:background="@drawable/ripple"
-            android:layout_marginTop="16dp"
             android:scrollbars="vertical"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <LinearLayout
-                android:layout_marginTop="2dp"
+                android:layout_marginTop="4dp"
                 android:layout_marginBottom="2dp"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
@@ -687,7 +693,7 @@
 
                 <TextView
                     android:layout_marginTop="4dp"
-                    android:layout_marginLeft="12dp"
+                    android:layout_marginStart="12dp"
                     android:text="@string/title_sys"
                     android:textColor="@color/green_light"
                     android:textStyle="bold"
