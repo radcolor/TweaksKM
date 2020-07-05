@@ -7,7 +7,7 @@ Designed beautifully with Material design.
 
 **Note:** The contributors are requested to read CONTRIBUTING.md and all required documentation, and send pull requests over dev/staging branch!
 
-## Setup
+### Setup
 
 ### Requirements
 - JDK 8
@@ -20,7 +20,7 @@ Designed beautifully with Material design.
 ```
 $ git clone https://github.com/theradcolor/TweaksKM.git
 $ cd TweaksKM
-$ ./gradlew assembleDebug
+$ bash gradlew assembleDebug
 ```
 
 ## Working
@@ -64,9 +64,8 @@ Read [Contributing.md](https://github.com/theradcolor/tweaks/blob/master/CONTRIB
 ![](https://img.shields.io/badge/License-GPL--v3.0-green)
 
 
-This project is licensed under the [GNU GPL License v3](https://github.com/theradcolor/Tweaks/blob/master/LICENSE)
+TweaksKM is licensed under the under version 3 of the [GNU GPL License](https://github.com/theradcolor/Tweaks/blob/master/LICENSE).
 The GNU General Public License is a free, copyleft license for software and other kinds of works.
-
 When we speak of free software, we are referring to freedom, not price. Our General Public Licenses are designed to make sure that you have the freedom to distribute copies of free software (and charge for them if you wish), that you receive source code or can get it if you want it, that you can change the software or use pieces of it in new free programs, and that you know you can do these things.
 
 Copyright (c) 2020 Shashank Baghel. All rights reserved.
