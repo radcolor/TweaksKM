@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,6 +26,7 @@ import com.grarak.kerneladiutor.utils.Device;
 import com.grarak.kerneladiutor.utils.Utils;
 import com.grarak.kerneladiutor.utils.root.RootUtils;
 import com.theradcolor.kernel.R;
+import com.theradcolor.kernel.activities.gpuActivity;
 import com.theradcolor.kernel.utils.kernel.Battery;
 import com.theradcolor.kernel.utils.kernel.CPU;
 import com.theradcolor.kernel.utils.kernel.Entropy;
@@ -39,10 +41,11 @@ import lecho.lib.hellocharts.model.PieChartData;
 import lecho.lib.hellocharts.model.SliceValue;
 import lecho.lib.hellocharts.view.PieChartView;
 
-public class MonitorFragment extends Fragment{
+public class MonitorFragment extends Fragment implements View.OnClickListener{
 
     private static final String TAG = "MonitorFragment";
     View root;
+    LinearLayout ll_gpu;
     int mBatteryTemp, mBatteryLvl;
     CPU cpu; GPU gpu; Entropy entropy; WireGuard wireGuard;
     TextView kernel_name, kernel_name_full;
@@ -72,8 +75,10 @@ public class MonitorFragment extends Fragment{
 
         kernel_name = root.findViewById(R.id.kernel_name);
         kernel_name_full = root.findViewById(R.id.kernel_name_full);
-
         oem_name = root.findViewById(R.id.oem_name);
+
+        ll_gpu = root.findViewById(R.id.ll_gpu);
+        ll_gpu.setOnClickListener(this);
 
         little_max = root.findViewById(R.id.little_max);
         big_max = root.findViewById(R.id.big_max);
@@ -126,6 +131,16 @@ public class MonitorFragment extends Fragment{
         long deepSleepTime = systemTime-awakeTime;
         uptime.setText(Utils.getDurationBreakdown(systemTime));
         deepsleeptime.setText(Utils.getDurationBreakdown(deepSleepTime));
+    }
+
+    @Override
+    public void onClick(View v) {
+        int id = v.getId();
+        switch (id){
+            case R.id.ll_gpu:
+                startActivity(new Intent(getContext(), gpuActivity.class));
+                break;
+        }
     }
 
     @SuppressLint("StaticFieldLeak")
