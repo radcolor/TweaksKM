@@ -66,9 +66,11 @@ public class onBootService extends Service{
             Vibration.getInstance().setVibrationValue(vibration, getApplicationContext());
         }
         int hp_left = Prefs.getInt("hp_left_value", 0, getApplicationContext());
-        int hp_right = Prefs.getInt("hp_right_value", 0, getApplicationContext());
-        if (Prefs.getBoolean("hpGain", true, getApplicationContext()) || hp_left != 0 || hp_right !=0) {
+        if (Prefs.getBoolean("hpGain", true, getApplicationContext()) || !(hp_left == 0)) {
             Sound.setHeadphoneFlar("left", ""+hp_left , getApplicationContext());
+        }
+        int hp_right = Prefs.getInt("hp_right_value", 0, getApplicationContext());
+        if (Prefs.getBoolean("hpGain", true, getApplicationContext()) || !(hp_right == 0)) {
             Sound.setHeadphoneFlar("right", ""+hp_right, getApplicationContext());
         }
         int mp_gain = Prefs.getInt("mp_value", 2, getApplicationContext());
@@ -76,7 +78,7 @@ public class onBootService extends Service{
             Sound.setMicrophoneFlar(""+mp_gain, getApplicationContext());
         }
         boolean ffc = Prefs.getBoolean("ffc_value", true, getApplicationContext());
-        if (Prefs.getBoolean("ffc", true, getApplicationContext()) || !ffc){
+        if (Prefs.getBoolean("ffc", true, getApplicationContext()) && !ffc){
             Battery.ForceFastChargeEnable(false, getApplicationContext());
         }
         String tcp = Prefs.getString("tcp_congestion_algorithm", "westwood", getApplicationContext());

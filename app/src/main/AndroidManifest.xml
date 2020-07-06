@@ -53,8 +53,8 @@
         <service android:name=".services.GamingService" />
         <service android:name=".services.onBootService" />
 
-        <!-- Declaring broadcast receiver for BOOT_COMPLETED event. -->
         <receiver android:name=".receivers.BroadcastReceiver" />
+        <!-- Declaring broadcast receiver for BOOT_COMPLETED event. -->
         <receiver
             android:name=".receivers.onBootReceiver"
             android:enabled="true"
