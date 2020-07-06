@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SplashActivity"
+    tools:context=".activities.SpectrumActivity"
     android:background="@android:color/black">
 
     <TextView
         android:id="@+id/spec_head"
         android:textSize="20sp"
         android:layout_marginTop="6dp"
-        android:padding="6dp"
+        android:padding="8dp"
         android:textColor="@color/green_light"
         android:text="@string/tit_spectrum"
         android:textAlignment="center"
