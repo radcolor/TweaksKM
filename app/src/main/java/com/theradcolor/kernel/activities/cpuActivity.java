@@ -3,10 +3,8 @@ package com.theradcolor.kernel.activities;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import com.theradcolor.kernel.R;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import lecho.lib.hellocharts.gesture.ContainerScrollType;
 import lecho.lib.hellocharts.model.Line;
 import lecho.lib.hellocharts.model.LineChartData;
@@ -14,21 +12,26 @@ import lecho.lib.hellocharts.model.PointValue;
 import lecho.lib.hellocharts.model.Viewport;
 import lecho.lib.hellocharts.view.LineChartView;
 
-public class gpuActivity extends AppCompatActivity {
+public class cpuActivity extends AppCompatActivity {
 
-    LineChartView mChart;
+    LineChartView mChart, nChart;
     List<PointValue> pointValues = new ArrayList<>();
-    int maxNumberOfPoints = 16;
+    int maxNumberOfPoints = 8;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_gpu);
-        mChart = (LineChartView) findViewById(R.id.gpu_chart);
+        setContentView(R.layout.activity_cpu);
+        mChart = (LineChartView) findViewById(R.id.cpu0_chart);
+        nChart = (LineChartView) findViewById(R.id.cpu1_chart);
 
         mChart.setInteractive(true);
         mChart.setZoomEnabled(false);
         mChart.setContainerScrollEnabled(false, ContainerScrollType.HORIZONTAL);
+
+        nChart.setInteractive(true);
+        nChart.setZoomEnabled(false);
+        nChart.setContainerScrollEnabled(false, ContainerScrollType.HORIZONTAL);
 
         List<Line> lines = new ArrayList<>();
         Line line = new Line();
@@ -43,6 +46,7 @@ public class gpuActivity extends AppCompatActivity {
         data.setAxisYLeft(null);
         data.setBaseValue(Float.NEGATIVE_INFINITY);
         mChart.setLineChartData(data);
+        nChart.setLineChartData(data);
 
         drawGraph();
     }
@@ -57,6 +61,7 @@ public class gpuActivity extends AppCompatActivity {
                     pointValues.add(new PointValue(i, yValue));
                     data.getLines().get(0).setValues(new ArrayList<>(pointValues));
                     mChart.setLineChartData(data);
+                    nChart.setLineChartData(data);
                     setViewport();
                     try {
                         Thread.sleep(500);
@@ -72,8 +77,10 @@ public class gpuActivity extends AppCompatActivity {
         int size = pointValues.size();
         if (size > maxNumberOfPoints) {
             final Viewport viewport = new Viewport(mChart.getMaximumViewport());
-            viewport.left = size - 16;
+            viewport.left = size - 8;
             mChart.setCurrentViewport(viewport);
+            nChart.setCurrentViewport(viewport);
         }
     }
+
 }

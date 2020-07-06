@@ -24,7 +24,7 @@
         <item name="android:windowLightNavigationBar">false</item>
     </style>
 
-    <style name="kcal" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="activityNoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/gray</item>
         <item name="colorPrimaryDark">@color/gray</item>

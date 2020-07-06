@@ -75,6 +75,7 @@
             android:background="@color/grey_light"/>
 
         <LinearLayout
+            android:id="@+id/ll_cpu"
             android:clickable="true"
             android:focusable="true"
             android:background="@drawable/ripple"

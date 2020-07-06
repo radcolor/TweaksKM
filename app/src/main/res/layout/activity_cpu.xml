@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.cpuActivity"
+    android:scrollbars="none"
+    android:orientation="vertical"
+    android:background="@android:color/black">
+
+    <TextView
+        android:id="@+id/gpu_head"
+        android:textSize="20sp"
+        android:padding="8dp"
+        android:textColor="@color/green_light"
+        android:text="@string/title_cpu"
+        android:textAlignment="center"
+        android:textStyle="bold"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <ScrollView
+        android:id="@+id/gpu_scroll_view"
+        android:layout_below="@+id/gpu_head"
+        android:layout_marginTop="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:weightSum="2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <lecho.lib.hellocharts.view.LineChartView
+                    android:id="@+id/cpu0_chart"
+                    android:layout_weight="1"
+                    android:padding="4dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"/>
+
+                <View
+                    android:layout_marginTop="12dp"
+                    android:layout_marginBottom="12dp"
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/green_light"/>
+
+                <lecho.lib.hellocharts.view.LineChartView
+                    android:id="@+id/cpu1_chart"
+                    android:layout_weight="1"
+                    android:padding="4dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"/>
+
+            </LinearLayout>
+
+            <View
+                android:layout_gravity="bottom"
+                android:background="@drawable/view_gradient"
+                android:layout_width="match_parent"
+                android:layout_height="24dp"/>
+
+        </FrameLayout>
+
+    </ScrollView>
+
+
+</RelativeLayout>

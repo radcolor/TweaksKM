@@ -19,8 +19,11 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
+            android:name=".activities.cpuActivity"
+            android:theme="@style/activityNoActionBar" />
+        <activity
             android:name=".activities.gpuActivity"
-            android:theme="@style/kcal" />
+            android:theme="@style/activityNoActionBar" />
         <activity
             android:name=".activities.OSLActivity"
             android:label="Open Source Licenses"
@@ -29,7 +32,7 @@
             android:name=".activities.KcalActivity"
             android:label="Display Color Calibration"
             android:parentActivityName=".KMActivity"
-            android:theme="@style/kcal" />
+            android:theme="@style/activityNoActionBar" />
         <activity
             android:name=".SplashActivity"
             android:screenOrientation="portrait"
@@ -51,7 +54,7 @@
         <activity
             android:name=".activities.SpectrumActivity"
             android:label="@string/app_name"
-            android:theme="@style/kcal" />
+            android:theme="@style/activityNoActionBar" />
 
         <service android:name=".services.GamingService" />
         <service android:name=".services.onBootService" />

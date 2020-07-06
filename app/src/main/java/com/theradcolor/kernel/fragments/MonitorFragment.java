@@ -26,6 +26,7 @@ import com.grarak.kerneladiutor.utils.Device;
 import com.grarak.kerneladiutor.utils.Utils;
 import com.grarak.kerneladiutor.utils.root.RootUtils;
 import com.theradcolor.kernel.R;
+import com.theradcolor.kernel.activities.cpuActivity;
 import com.theradcolor.kernel.activities.gpuActivity;
 import com.theradcolor.kernel.utils.kernel.Battery;
 import com.theradcolor.kernel.utils.kernel.CPU;
@@ -45,7 +46,7 @@ public class MonitorFragment extends Fragment implements View.OnClickListener{
 
     private static final String TAG = "MonitorFragment";
     View root;
-    LinearLayout ll_gpu;
+    LinearLayout ll_gpu, ll_cpu;
     int mBatteryTemp, mBatteryLvl;
     CPU cpu; GPU gpu; Entropy entropy; WireGuard wireGuard;
     TextView kernel_name, kernel_name_full;
@@ -79,6 +80,8 @@ public class MonitorFragment extends Fragment implements View.OnClickListener{
 
         ll_gpu = root.findViewById(R.id.ll_gpu);
         ll_gpu.setOnClickListener(this);
+        ll_cpu = root.findViewById(R.id.ll_cpu);
+        ll_cpu.setOnClickListener(this);
 
         little_max = root.findViewById(R.id.little_max);
         big_max = root.findViewById(R.id.big_max);
@@ -139,6 +142,9 @@ public class MonitorFragment extends Fragment implements View.OnClickListener{
         switch (id){
             case R.id.ll_gpu:
                 startActivity(new Intent(getContext(), gpuActivity.class));
+                break;
+            case R.id.ll_cpu:
+                startActivity(new Intent(getContext(), cpuActivity.class));
                 break;
         }
     }
