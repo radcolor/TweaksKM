@@ -37,7 +37,7 @@
                 android:layout_height="wrap_content">
 
                 <lecho.lib.hellocharts.view.LineChartView
-                    android:id="@+id/cpu0_chart"
+                    android:id="@+id/bigCpu"
                     android:layout_weight="1"
                     android:padding="4dp"
                     android:layout_marginTop="8dp"
@@ -53,7 +53,7 @@
                     android:background="@color/green_light"/>
 
                 <lecho.lib.hellocharts.view.LineChartView
-                    android:id="@+id/cpu1_chart"
+                    android:id="@+id/littleCpu"
                     android:layout_weight="1"
                     android:padding="4dp"
                     android:layout_marginTop="8dp"

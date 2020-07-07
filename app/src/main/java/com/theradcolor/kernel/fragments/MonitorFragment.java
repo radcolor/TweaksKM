@@ -168,9 +168,6 @@ public class MonitorFragment extends Fragment implements View.OnClickListener{
         String gpu_usage_str;
         int gpu_usage, gpu_clk, gpu_max_clk;
 
-        private float[] mCPUUsages;
-        private boolean[] mCPUStates;
-
         @Override
         protected void onPreExecute() {
             cpu = new CPU();
@@ -255,33 +252,9 @@ public class MonitorFragment extends Fragment implements View.OnClickListener{
             bat_lvl.setText(+mBatteryLvl+"%");
             generateMemData(memChart, data, i[7], i[6]);
             generateBatData(batChart, data, mBatteryLvl, 100-mBatteryLvl);
-            /*try {
-                refreshUsages(mCPUUsages, mCPUUsageBig, mCPUFreq.getBigCpuRange(), mCPUStates);
-                float[] f = CPU.getCpuUsage();
-                Log.d(TAG, ""+f[0]);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }*/
         }
     }
 
-    private void refreshUsages(float[] usages, List<Integer> cores, boolean[] coreStates) {
-        String graph = "null";
-        if (graph != null) {
-            float average = 0;
-            int size = 0;
-            for (int core : cores) {
-                if (core + 1 < usages.length) {
-                    if (coreStates[core]) {
-                        average += usages[core + 1];
-                    }
-                    size++;
-                }
-            }
-            average /= size;
-            graph = Math.round(average) + "%";
-        }
-    }
 
     private void generateBatData(PieChartView chart, PieChartData mData, int lvl, int used_lvl) {
         List<SliceValue> values = new ArrayList<SliceValue>();
