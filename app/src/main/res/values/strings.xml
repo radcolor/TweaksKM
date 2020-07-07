@@ -107,5 +107,10 @@
     <string name="txt_gpu_pwr_lvl">Default GPU power level</string>
     <string name="txt_gpu_max_freq">GPU maximum frequency</string>
     <string name="txt_gpu_gov">GPU governer</string>
+    <string name="txt_cpu_gov">CPU governor</string>
+    <string name="txt_cpu_min_freq">CPU minimum frequency</string>
+    <string name="txt_cpu_max_freq">CPU maximum frequency</string>
+    <string name="txt_big_clus">BIG CLUSTER</string>
+    <string name="txt_lit_clus">LITTLE CLUSTER</string>
 
 </resources>

@@ -1,8 +1,13 @@
 package com.theradcolor.kernel.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.annotation.SuppressLint;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
+import android.widget.TextView;
 
 import com.theradcolor.kernel.R;
 import com.theradcolor.kernel.utils.kernel.cpu.CPU;
@@ -16,6 +21,7 @@ import lecho.lib.hellocharts.model.PointValue;
 import lecho.lib.hellocharts.model.Viewport;
 import lecho.lib.hellocharts.view.LineChartView;
 
+@SuppressLint("SetTextI18n")
 public class cpuActivity extends AppCompatActivity {
 
     LineChartView mChart, nChart;
@@ -23,6 +29,8 @@ public class cpuActivity extends AppCompatActivity {
     List<PointValue> littleValues = new ArrayList<>();
     int maxNumberOfPoints = 8;
 
+    TextView bigUsage, littleUsage;
+    TextView bigGov, bigMinFreq, bigMaxFreq, litGov, litMinFreq, litMaxFreq;
     CPU cpu;
     float[] mCPUUsages;
     boolean[] mCPUStates;
@@ -36,6 +44,14 @@ public class cpuActivity extends AppCompatActivity {
         nChart = (LineChartView) findViewById(R.id.littleCpu);
 
         cpu = new CPU();
+        bigUsage = findViewById(R.id.big_cpu_usage);
+        littleUsage = findViewById(R.id.little_cpu_usage);
+        bigGov = findViewById(R.id.tv_cpu_big_gov);
+        bigMinFreq = findViewById(R.id.tv_cpu_big_min_freq);
+        bigMaxFreq = findViewById(R.id.tv_cpu_big_max_freq);
+        litGov = findViewById(R.id.tv_cpu_lit_gov);
+        litMinFreq = findViewById(R.id.tv_cpu_lit_min_freq);
+        litMaxFreq = findViewById(R.id.tv_cpu_lit_max_freq);
 
         mChart.setInteractive(true);
         mChart.setZoomEnabled(false);
@@ -59,9 +75,29 @@ public class cpuActivity extends AppCompatActivity {
         data.setBaseValue(Float.NEGATIVE_INFINITY);
         mChart.setLineChartData(data);
         nChart.setLineChartData(data);
-
+        uiInit();
         bigGraph();
         littleGraph();
+    }
+
+    public void uiInit() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                bigGov.setText(cpu.getGovernor(cpu.getBigCpu(), true));
+                bigMinFreq.setText(cpu.getMinFreq( true) / 1000 +getResources().getString(R.string.mhz));
+                bigMaxFreq.setText(cpu.getMaxFreq(true) / 1000 +getResources().getString(R.string.mhz));
+
+                litGov.setText(cpu.getGovernor(cpu.getLITTLECpu(), true));
+                litMinFreq.setText(cpu.getMinFreq(cpu.getLITTLECpu(), true) / 1000 +getResources().getString(R.string.mhz));
+                litMaxFreq.setText(cpu.getMaxFreq(cpu.getLITTLECpu(), true) / 1000 +getResources().getString(R.string.mhz));
+            }
+        }).start();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
     }
 
     private void bigGraph() {
@@ -87,6 +123,8 @@ public class cpuActivity extends AppCompatActivity {
                     bigValues.add(new PointValue(i, refreshUsages(mCPUUsages, cpu.getBigCpuRange(), mCPUStates)));
 
                     Log.d("CPU B", ""+refreshUsages(mCPUUsages, cpu.getBigCpuRange(), mCPUStates));
+                    bigUsage.setText((int)refreshUsages(mCPUUsages, cpu.getBigCpuRange(), mCPUStates)
+                            +getResources().getString(R.string.percent));
 
                     bigData.getLines().get(0).setValues(new ArrayList<>(bigValues));
 
@@ -119,6 +157,8 @@ public class cpuActivity extends AppCompatActivity {
                     littleValues.add(new PointValue(i, refreshUsages(mCPUUsages, cpu.getLITTLECpuRange(), mCPUStates)));
 
                     Log.d("CPU L", ""+refreshUsages(mCPUUsages, cpu.getLITTLECpuRange(), mCPUStates));
+                    littleUsage.setText((int)refreshUsages(mCPUUsages, cpu.getLITTLECpuRange(), mCPUStates)
+                            +getResources().getString(R.string.percent));
 
                     littleData.getLines().get(0).setValues(new ArrayList<>(littleValues));
 
