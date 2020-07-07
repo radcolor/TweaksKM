@@ -29,10 +29,10 @@ import com.theradcolor.kernel.R;
 import com.theradcolor.kernel.activities.cpuActivity;
 import com.theradcolor.kernel.activities.gpuActivity;
 import com.theradcolor.kernel.utils.kernel.Battery;
-import com.theradcolor.kernel.utils.kernel.CPU;
 import com.theradcolor.kernel.utils.kernel.Entropy;
 import com.theradcolor.kernel.utils.kernel.GPU;
 import com.theradcolor.kernel.utils.kernel.WireGuard;
+import com.theradcolor.kernel.utils.kernel.cpu.CPU;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -122,9 +122,9 @@ public class MonitorFragment extends Fragment implements View.OnClickListener{
         kernel_name.setText(RootUtils.runCommand("uname -a"));
         kernel_name_full.setText(Html.fromHtml(kernelString));
         oem_name.setText(Device.getVendor() + " " + Device.getModel());
-        little_max.setText(getString(R.string.title_little_max)+ " "+cpu.getMaxFreq(0)/1000 + "Mhz");
-        big_max.setText(getString(R.string.title_big_max)+ " "+cpu.getMaxFreq(4)/1000 + "MHz");
-        cpu_gov.setText(getString(R.string.cpu_gov)+ " "+cpu.getGovernor(0));
+        little_max.setText(getString(R.string.title_little_max)+ " "+cpu.getMaxFreq(0, true)/1000 + "Mhz");
+        big_max.setText(getString(R.string.title_big_max)+ " "+cpu.getMaxFreq(4, true)/1000 + "MHz");
+        cpu_gov.setText(getString(R.string.cpu_gov)+ " "+cpu.getGovernor(0, true));
         board.setText(getString(R.string.dev_board) + " " + Device.getHardware() + " " + Device.getBoard());
         String gpuString = "<font color=#FFFFFF> <b> GPU model: </b> </font>" + RootUtils.runAndGetError("dumpsys SurfaceFlinger | grep GLES");
         gpu_model.setText(Html.fromHtml(gpuString));
@@ -167,6 +167,9 @@ public class MonitorFragment extends Fragment implements View.OnClickListener{
         int ent_avl, ent_tot;
         String gpu_usage_str;
         int gpu_usage, gpu_clk, gpu_max_clk;
+
+        private float[] mCPUUsages;
+        private boolean[] mCPUStates;
 
         @Override
         protected void onPreExecute() {
@@ -252,6 +255,31 @@ public class MonitorFragment extends Fragment implements View.OnClickListener{
             bat_lvl.setText(+mBatteryLvl+"%");
             generateMemData(memChart, data, i[7], i[6]);
             generateBatData(batChart, data, mBatteryLvl, 100-mBatteryLvl);
+            /*try {
+                refreshUsages(mCPUUsages, mCPUUsageBig, mCPUFreq.getBigCpuRange(), mCPUStates);
+                float[] f = CPU.getCpuUsage();
+                Log.d(TAG, ""+f[0]);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }*/
+        }
+    }
+
+    private void refreshUsages(float[] usages, List<Integer> cores, boolean[] coreStates) {
+        String graph = "null";
+        if (graph != null) {
+            float average = 0;
+            int size = 0;
+            for (int core : cores) {
+                if (core + 1 < usages.length) {
+                    if (coreStates[core]) {
+                        average += usages[core + 1];
+                    }
+                    size++;
+                }
+            }
+            average /= size;
+            graph = Math.round(average) + "%";
         }
     }
 
