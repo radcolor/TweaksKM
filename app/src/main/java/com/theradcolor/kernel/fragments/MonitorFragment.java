@@ -45,6 +45,8 @@ import lecho.lib.hellocharts.view.PieChartView;
 public class MonitorFragment extends Fragment implements View.OnClickListener{
 
     private static final String TAG = "MonitorFragment";
+    private PieChartView memChart, batChart;
+    private PieChartData data;
     View root;
     LinearLayout ll_gpu, ll_cpu;
     int mBatteryTemp, mBatteryLvl;
@@ -97,6 +99,9 @@ public class MonitorFragment extends Fragment implements View.OnClickListener{
         cpu6 = root.findViewById(R.id.cpu6);
         cpu7 = root.findViewById(R.id.cpu7);
 
+        memChart = root.findViewById(R.id.memchart);
+        batChart = root.findViewById(R.id.batChart);
+
         gpu_crr_freq = root.findViewById(R.id.gpu_curr_freq);
         gpu_max_freq = root.findViewById(R.id.gpu_max_freq);
         gpu_usage_per = root.findViewById(R.id.gpu_usage);
@@ -134,6 +139,18 @@ public class MonitorFragment extends Fragment implements View.OnClickListener{
         long deepSleepTime = systemTime-awakeTime;
         uptime.setText(Utils.getDurationBreakdown(systemTime));
         deepsleeptime.setText(Utils.getDurationBreakdown(deepSleepTime));
+        SampleData(memChart, data);
+        SampleData(batChart, data);
+    }
+
+    private void SampleData(PieChartView chart, PieChartData mData){
+        List<SliceValue> values = new ArrayList<SliceValue>();
+        values.add(new SliceValue(50, R.color.colorAccent));
+        values.add(new SliceValue(50, R.color.colorAccent));
+        mData = new PieChartData(values);
+        chart.setPieChartData(mData);
+        chart.setValueSelectionEnabled(true);
+        chart.setValueTouchEnabled(true);
     }
 
     @Override
@@ -254,7 +271,6 @@ public class MonitorFragment extends Fragment implements View.OnClickListener{
             generateBatData(batChart, data, mBatteryLvl, 100-mBatteryLvl);
         }
     }
-
 
     private void generateBatData(PieChartView chart, PieChartData mData, int lvl, int used_lvl) {
         List<SliceValue> values = new ArrayList<SliceValue>();
