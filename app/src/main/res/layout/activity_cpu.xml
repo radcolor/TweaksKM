@@ -22,7 +22,6 @@
     <ScrollView
         android:id="@+id/gpu_scroll_view"
         android:layout_below="@+id/gpu_head"
-        android:layout_marginTop="8dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -31,6 +30,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+            <!--
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -128,9 +128,10 @@
                 </LinearLayout>
 
             </LinearLayout>
+            -->
 
             <TextView
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginStart="12dp"
                 android:text="@string/txt_big_clus"
                 android:textColor="@color/green_light"
@@ -141,7 +142,7 @@
             <LinearLayout
                 android:background="@drawable/ripple"
                 android:layout_marginTop="8dp"
-                android:id="@+id/ll_gpu_gov"
+                android:id="@+id/ll_cpu_big_gov"
                 android:padding="10dp"
                 android:clickable="true"
                 android:weightSum="12"
@@ -191,7 +192,7 @@
             <LinearLayout
                 android:background="@drawable/ripple"
                 android:layout_marginTop="8dp"
-                android:id="@+id/ll_gpu_min"
+                android:id="@+id/ll_cpu_big_min"
                 android:padding="10dp"
                 android:clickable="true"
                 android:weightSum="12"
@@ -241,7 +242,7 @@
             <LinearLayout
                 android:background="@drawable/ripple"
                 android:layout_marginTop="8dp"
-                android:id="@+id/ll_gpu_max"
+                android:id="@+id/ll_cpu_big_max"
                 android:padding="10dp"
                 android:clickable="true"
                 android:weightSum="12"
@@ -300,7 +301,7 @@
             <LinearLayout
                 android:background="@drawable/ripple"
                 android:layout_marginTop="8dp"
-                android:id="@+id/ll_gpu_gov"
+                android:id="@+id/ll_cpu_lit_gov"
                 android:padding="10dp"
                 android:clickable="true"
                 android:weightSum="12"
@@ -350,7 +351,7 @@
             <LinearLayout
                 android:background="@drawable/ripple"
                 android:layout_marginTop="8dp"
-                android:id="@+id/ll_gpu_min"
+                android:id="@+id/ll_cpu_lit_min"
                 android:padding="10dp"
                 android:clickable="true"
                 android:weightSum="12"
@@ -400,7 +401,7 @@
             <LinearLayout
                 android:background="@drawable/ripple"
                 android:layout_marginTop="8dp"
-                android:id="@+id/ll_gpu_max"
+                android:id="@+id/ll_cpu_lit_max"
                 android:padding="10dp"
                 android:clickable="true"
                 android:weightSum="12"

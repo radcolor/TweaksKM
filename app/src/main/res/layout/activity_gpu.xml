@@ -22,7 +22,6 @@
     <ScrollView
         android:id="@+id/gpu_scroll_view"
         android:layout_below="@+id/gpu_head"
-        android:layout_marginTop="8dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -31,6 +30,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+            <!---
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -49,6 +49,7 @@
                     android:layout_height="24dp"/>
 
             </FrameLayout>
+
 
             <LinearLayout
                 android:weightSum="2"
@@ -102,10 +103,11 @@
                 </LinearLayout>
 
             </LinearLayout>
+            -->
 
             <LinearLayout
                 android:background="@drawable/ripple"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="8dp"
                 android:id="@+id/ll_gpu_gov"
                 android:padding="10dp"
                 android:clickable="true"
