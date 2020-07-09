@@ -1,4 +1,5 @@
 # Tweaks
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/dea52c42969e4deda29859c1567f68da)](https://app.codacy.com/manual/theradcolor/TweaksKM?utm_source=github.com&utm_medium=referral&utm_content=theradcolor/TweaksKM&utm_campaign=Badge_Grade_Dashboard)
 [![forthebadge](https://forthebadge.com/images/badges/made-with-java.svg)](https://www.java.com/)
 [![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](https://www.github.com/theradcolor)
 
