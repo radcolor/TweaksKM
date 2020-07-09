@@ -210,8 +210,8 @@ public class MonitorFragment extends Fragment implements View.OnClickListener{
                 freq_big = cpu.getCurFreq(4)/1000;
                 freq_little = cpu.getCurFreq(0)/1000;
                 gpu_clk = gpu.getCurFreq()/1000000;
-                gpu_max_clk = gpu.getMaxFreq()/1000000;
-                gpu_usage_str = gpu.getGpuBusy();
+                gpu_max_clk = GPU.getMaxFreq()/1000000;
+                gpu_usage_str = GPU.getBusyPer();
                 gpu_usage_str = gpu_usage_str.replaceAll("[^0-9]","");
                 gpu_usage = Integer.parseInt(gpu_usage_str);
                 activityManager.getMemoryInfo(mi);
