@@ -1,18 +1,28 @@
 package com.theradcolor.kernel.activities;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.view.ContextThemeWrapper;
 
 import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.grarak.kerneladiutor.utils.Prefs;
 import com.theradcolor.kernel.R;
+import com.theradcolor.kernel.utils.kernel.GPU;
 import com.theradcolor.kernel.utils.kernel.cpu.CPU;
 
+import java.util.List;
+
 @SuppressLint("SetTextI18n")
-public class cpuActivity extends AppCompatActivity {
+public class cpuActivity extends AppCompatActivity implements View.OnClickListener {
 
     CPU cpu;
+    LinearLayout cpu_lit_gov, cpu_lit_min, cpu_lit_max, cpu_big_gov, cpu_big_min, cpu_big_max;
     TextView bigGov, bigMinFreq, bigMaxFreq, litGov, litMinFreq, litMaxFreq;
 
     @Override
@@ -27,6 +37,20 @@ public class cpuActivity extends AppCompatActivity {
         litGov = findViewById(R.id.tv_cpu_lit_gov);
         litMinFreq = findViewById(R.id.tv_cpu_lit_min_freq);
         litMaxFreq = findViewById(R.id.tv_cpu_lit_max_freq);
+
+        cpu_lit_gov = findViewById(R.id.ll_cpu_lit_gov);
+        cpu_lit_min = findViewById(R.id.ll_cpu_lit_min);
+        cpu_lit_max = findViewById(R.id.ll_cpu_lit_max);
+        cpu_big_gov = findViewById(R.id.ll_cpu_big_gov);
+        cpu_big_min = findViewById(R.id.ll_cpu_big_min);
+        cpu_big_max = findViewById(R.id.ll_cpu_big_max);
+
+        cpu_lit_gov.setOnClickListener(this);
+        cpu_lit_min.setOnClickListener(this);
+        cpu_lit_max.setOnClickListener(this);
+        cpu_big_gov.setOnClickListener(this);
+        cpu_big_min.setOnClickListener(this);
+        cpu_big_max.setOnClickListener(this);
 
         refreshUI();
 
@@ -157,5 +181,88 @@ public class cpuActivity extends AppCompatActivity {
     }
 
 }*/
+
+    @Override
+    public void onClick(View v) {
+        int id = v.getId();
+        switch (id){
+            case R.id.ll_cpu_lit_gov:
+                govDialog("little");
+                break;
+            case R.id.ll_cpu_lit_min:
+                minDialog("little");
+                break;
+
+        }
+
+    }
+
+    private void govDialog(String bigLittle){
+
+        final List<Integer> bigCores = cpu.getBigCpuRange();
+        final List<Integer> LITTLECores = cpu.getLITTLECpuRange();
+
+        AlertDialog.Builder builder =  new AlertDialog.Builder(new ContextThemeWrapper(cpuActivity.this, R.style.CustomDialogTheme));
+        builder.setTitle("CPU governor");
+        String[] GOVs = CPU.getInstance().getGovernors().toArray(new String[0]);
+
+        builder.setItems(GOVs, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if(bigLittle.equals("little")){
+                    CPU.getInstance().setGovernor(GOVs[which], LITTLECores.get(0), LITTLECores.get(LITTLECores.size() - 1)
+                            , cpuActivity.this);
+                    Prefs.saveString("cpu_lit_governor", GOVs[which], cpuActivity.this);
+                }else if(bigLittle.equals("big")){
+                    CPU.getInstance().setGovernor(GOVs[which], bigCores.get(0), bigCores.get(bigCores.size() - 1)
+                            , cpuActivity.this);
+                    Prefs.saveString("cpu_big_governor", GOVs[which], cpuActivity.this);
+                }
+                refreshUI();
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    String[] cpu_min;
+
+    private void minDialog(String bigLittle){
+
+        final List<Integer> bigCores = cpu.getBigCpuRange();
+        final List<Integer> LITTLECores = cpu.getLITTLECpuRange();
+
+        AlertDialog.Builder builder =  new AlertDialog.Builder(new ContextThemeWrapper(cpuActivity.this, R.style.CustomDialogTheme));
+        builder.setTitle("CPU minimum freq");
+
+        if (bigLittle.equals("little")){
+            cpu_min = cpu.getAdjustedFreq(cpu.getLITTLECpu(), this).toArray(new String[0]);
+        }else if (bigLittle.equals("big")){
+            cpu_min = cpu.getAdjustedFreq(cpu.getBigCpu(), this).toArray(new String[0]);
+        }
+
+        builder.setItems(cpu_min, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                refreshUI();
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    private void maxDialog(){
+        AlertDialog.Builder builder =  new AlertDialog.Builder(new ContextThemeWrapper(cpuActivity.this, R.style.CustomDialogTheme));
+        builder.setTitle("CPU maximum freq");
+        String[] gpu_max = GPU.getAdjustedFreqs(this).toArray(new String[0]);
+        builder.setItems(gpu_max, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                refreshUI();
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
 
 }

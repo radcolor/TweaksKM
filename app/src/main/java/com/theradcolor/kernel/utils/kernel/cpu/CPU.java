@@ -35,7 +35,6 @@ public class CPU {
         return sInstance;
     }
 
-
     private static final String CPU_PRESENT = "/sys/devices/system/cpu/present";
     private static final String CUR_FREQ = "/sys/devices/system/cpu/cpu%d/cpufreq/scaling_cur_freq";
     private static final String AVAILABLE_FREQS = "/sys/devices/system/cpu/cpu%d/cpufreq/scaling_available_frequencies";
@@ -46,7 +45,7 @@ public class CPU {
     private static final String CPU_MAX_FREQ = "/sys/devices/system/cpu/cpu%d/cpufreq/scaling_max_freq";
     private static final String CPU_MAX_FREQ_KT = "/sys/devices/system/cpu/cpu%d/cpufreq/scaling_max_freq_kt";
     private static final String HARD_CPU_MAX_FREQ = "/sys/kernel/cpufreq_hardlimit/scaling_max_freq";
-    private static final String CPU_MIN_FREQ = "/sys/devices/system/cpu/cpu%d/cpufreq/scaling_min_freq";
+    private static final String CPU_MIN_FREQ = "/sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq";
     private static final String HARD_CPU_MIN_FREQ = "/sys/kernel/cpufreq_hardlimit/scaling_min_freq";
     private static final String CPU_MAX_SCREEN_OFF_FREQ = "/sys/devices/system/cpu/cpu%d/cpufreq/screen_off_max_freq";
     public static final String CPU_ONLINE = "/sys/devices/system/cpu/cpu%d/online";
@@ -378,6 +377,10 @@ public class CPU {
         if (Utils.existFile(HARD_CPU_MIN_FREQ)) {
             run(Control.write(String.valueOf(freq), HARD_CPU_MIN_FREQ), HARD_CPU_MIN_FREQ, context);
         }
+    }
+
+    public void setMinLitFreq(String freq, Context context){
+        run(Control.write(freq, CPU_MIN_FREQ), "CPU", context);
     }
 
     public int getMinFreq(boolean forceRead) {
