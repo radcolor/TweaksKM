@@ -1,5 +1,5 @@
 # Tweaks
-[![forthebadge](https://forthebadge.com/images/badges/made-with-java.svg)](https://www.java.com/)
+[![forthebadge](https://forthebadge.com/images/badges/built-for-android.svg)](https://www.android.com)
 [![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](https://www.github.com/theradcolor)
 
 **Tweaks** is a simple [Linux](https://www.kernel.org) kernel manager app for Android™ devices running on Android L or newer. 
