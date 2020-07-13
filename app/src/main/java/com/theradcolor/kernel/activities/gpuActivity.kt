@@ -9,16 +9,17 @@ import com.grarak.kerneladiutor.utils.Prefs
 import com.theradcolor.kernel.R
 import com.theradcolor.kernel.utils.kernel.GPU
 import kotlinx.android.synthetic.main.activity_gpu.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import lecho.lib.hellocharts.model.Line
 import lecho.lib.hellocharts.model.LineChartData
 import lecho.lib.hellocharts.model.PointValue
 import lecho.lib.hellocharts.model.Viewport
+import java.lang.Runnable
 
 class gpuActivity : AppCompatActivity(){
+
+    private val job = Job()
+    private val gpuScope = CoroutineScope(Dispatchers.Default + job)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,9 +41,7 @@ class gpuActivity : AppCompatActivity(){
         ll_gpu_min.setOnClickListener { minDialog() }
         ll_gpu_max.setOnClickListener { maxDialog() }
         ll_gpu_pwr_lvl.setOnClickListener { pwrDialog() }
-        CoroutineScope(Dispatchers.Default).launch {
-            readData()
-        }
+        gpuScope.launch {  readData() }
     }
 
     private var pointValues: MutableList<PointValue> = ArrayList()
@@ -85,6 +84,11 @@ class gpuActivity : AppCompatActivity(){
     override fun onResume() {
         super.onResume()
         refreshUI()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        job.cancel()
     }
 
     private fun govDialog() {

@@ -11,10 +11,7 @@ import com.theradcolor.kernel.R
 import com.theradcolor.kernel.utils.kernel.GPU
 import com.theradcolor.kernel.utils.kernel.cpu.CPU
 import kotlinx.android.synthetic.main.activity_cpu.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import lecho.lib.hellocharts.gesture.ContainerScrollType
 import lecho.lib.hellocharts.model.Line
 import lecho.lib.hellocharts.model.LineChartData
@@ -26,6 +23,9 @@ import kotlin.math.roundToInt
 class cpuActivity : AppCompatActivity() {
 
     lateinit var cpu: CPU
+    private val job = Job()
+    private val bigScope = CoroutineScope(Dispatchers.Default + job)
+    private val littleScope = CoroutineScope(Dispatchers.Default + job)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,8 +35,8 @@ class cpuActivity : AppCompatActivity() {
         refreshUI()
         ll_cpu_lit_gov.setOnClickListener {  govDialog("little") }
         ll_cpu_lit_min.setOnClickListener {  minDialog("little") }
-        CoroutineScope(Dispatchers.Default).launch{ readBigData() }
-        CoroutineScope(Dispatchers.Default).launch { readLittleData() }
+        bigScope.launch { readBigData() }
+        littleScope.launch { readLittleData() }
     }
 
     private fun refreshUI() {
@@ -50,6 +50,11 @@ class cpuActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        job.cancel()
     }
 
     private lateinit var mCPUUsages:FloatArray
@@ -82,12 +87,10 @@ class cpuActivity : AppCompatActivity() {
                 mCPUFreq[c] = cpu.getCurFreq(c)
             }
 
-            Log.d("CPU B", "" + refreshUsages(mCPUUsages, cpu.bigCpuRange, mCPUStates) + Thread.currentThread().name)
             big_cpu_usage.text = (refreshUsages(mCPUUsages, cpu.bigCpuRange, mCPUStates).toString().plus(resources.getString(R.string.percent)))
 
             val bigData = bigCpu.lineChartData
             bigValues.add(PointValue(i.toFloat(), refreshUsages(mCPUUsages, cpu.bigCpuRange, mCPUStates)))
-            Log.d("CPU B", "" + refreshUsages(mCPUUsages, cpu.bigCpuRange, mCPUStates))
             bigData.lines[0].values = ArrayList(bigValues)
             bigCpu.lineChartData = bigData
             bigViewPort()
