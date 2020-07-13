@@ -45,6 +45,7 @@ import lecho.lib.hellocharts.view.PieChartView;
 public class MonitorFragment extends Fragment implements View.OnClickListener{
 
     private static final String TAG = "MonitorFragment";
+    private monitorTask monTask;
     private PieChartView memChart, batChart;
     private PieChartData data;
     View root;
@@ -64,8 +65,8 @@ public class MonitorFragment extends Fragment implements View.OnClickListener{
         root = inflater.inflate(R.layout.fragment_monitor, container, false);
         InitView();
         InitUI();
-        monitorTask myTask = new monitorTask();
-        myTask.execute();
+        monTask = new monitorTask();
+        monTask.execute();
         Log.d(TAG," "+Thread.currentThread().getName());
         return root;
     }
@@ -159,6 +160,7 @@ public class MonitorFragment extends Fragment implements View.OnClickListener{
         switch (id){
             case R.id.ll_gpu:
                 startActivity(new Intent(getContext(), gpuActivity.class));
+                monTask.cancel(true);
                 break;
             case R.id.ll_cpu:
                 startActivity(new Intent(getContext(), cpuActivity.class));
@@ -334,5 +336,11 @@ public class MonitorFragment extends Fragment implements View.OnClickListener{
             requireActivity().unregisterReceiver(mBatteryReceiver);
         } catch (IllegalArgumentException ignored) {
         }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        monTask.cancel(true);
     }
 }
