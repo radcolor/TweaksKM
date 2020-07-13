@@ -30,7 +30,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <!--
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -128,10 +127,9 @@
                 </LinearLayout>
 
             </LinearLayout>
-            -->
 
             <TextView
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginStart="12dp"
                 android:text="@string/txt_big_clus"
                 android:textColor="@color/green_light"

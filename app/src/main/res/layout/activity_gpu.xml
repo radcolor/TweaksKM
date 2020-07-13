@@ -106,7 +106,7 @@
 
             <LinearLayout
                 android:background="@drawable/ripple"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="16dp"
                 android:id="@+id/ll_gpu_gov"
                 android:padding="10dp"
                 android:clickable="true"
