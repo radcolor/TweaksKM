@@ -30,7 +30,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <!---
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -103,7 +102,7 @@
                 </LinearLayout>
 
             </LinearLayout>
-            -->
+
 
             <LinearLayout
                 android:background="@drawable/ripple"

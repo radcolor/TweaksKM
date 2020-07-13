@@ -2,59 +2,76 @@ package com.theradcolor.kernel.activities
 
 import android.os.Bundle
 import android.widget.EditText
-import kotlinx.android.synthetic.main.activity_gpu.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.view.ContextThemeWrapper
 import com.grarak.kerneladiutor.utils.Prefs
 import com.theradcolor.kernel.R
 import com.theradcolor.kernel.utils.kernel.GPU
+import kotlinx.android.synthetic.main.activity_gpu.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import lecho.lib.hellocharts.model.Line
+import lecho.lib.hellocharts.model.LineChartData
+import lecho.lib.hellocharts.model.PointValue
+import lecho.lib.hellocharts.model.Viewport
 
 class gpuActivity : AppCompatActivity(){
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_gpu)
+        val lines:MutableList<Line> = ArrayList()
+        val line = Line()
+        line.setHasLines(true)
+        line.setHasPoints(false)
+        line.color = resources.getColor(R.color.colorAccent)
+        line.isFilled = true
+        lines.add(line)
+        val data = LineChartData(lines)
+        data.axisXBottom = null
+        data.axisYLeft = null
+        data.baseValue = java.lang.Float.NEGATIVE_INFINITY
+        gpu_chart.lineChartData = data
         refreshUI()
         ll_gpu_gov.setOnClickListener { govDialog() }
         ll_gpu_min.setOnClickListener { minDialog() }
         ll_gpu_max.setOnClickListener { maxDialog() }
         ll_gpu_pwr_lvl.setOnClickListener { pwrDialog() }
-    }
-
-    /*private void drawGraph() {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                for (int i = 0; i < 999; ++i) {
-                    String gpuUsage = GPU.getGpuBusy().replaceAll("[-+.^:,%]","");
-                    usage.setText(""+GPU.getGpuBusy());
-                    curr_freq.setText(GPU.getCurFreq()/1000000+getResources().getString(R.string.mhz));
-                    LineChartData data = mChart.getLineChartData();
-                    pointValues.add(new PointValue(i, Utils.strToFloat(gpuUsage)));
-                    data.getLines().get(0).setValues(new ArrayList<>(pointValues));
-                    mChart.setLineChartData(data);
-                    setViewport();
-                    try {
-                        Thread.sleep(500);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        }).start();
-    }
-
-    private void setViewport() {
-        int size = pointValues.size();
-        if (size > maxNumberOfPoints) {
-            final Viewport viewport = new Viewport(mChart.getMaximumViewport());
-            viewport.left = size - 16;
-            mChart.setCurrentViewport(viewport);
+        CoroutineScope(Dispatchers.Default).launch {
+            readData()
         }
-    }*/
+    }
 
-    fun refreshUI() {
+    private var pointValues: MutableList<PointValue> = ArrayList()
+    private var maxNumberOfPoints = 16
+
+    private suspend fun readData(){
+        for (i in 0..998)
+        {
+            delay(500)
+            gpu_usage.text = GPU.getBusyPer()
+            curr_freq.text = GPU.getCurFreq().div(1000000).toString().plus(resources.getString(R.string.mhz))
+            val data = gpu_chart.lineChartData
+            pointValues.add(PointValue(i.toFloat(), GPU.getBusy().toFloat()))
+            data.lines[0].values = ArrayList(pointValues)
+            gpu_chart.lineChartData = data
+            setViewport()
+        }
+    }
+
+    private suspend fun setViewport() {
+        val size = pointValues.size
+        if (size > maxNumberOfPoints) {
+            val viewport = Viewport(gpu_chart.maximumViewport)
+            viewport.left = (size - 16).toFloat()
+            gpu_chart.currentViewport = viewport
+        }
+    }
+
+    private fun refreshUI() {
         Thread(Runnable {
             tv_gpu_gov!!.text = GPU.getGovernor()
             val minFreq = GPU.getMinFreq().div(GPU.getMinFreqOffset())

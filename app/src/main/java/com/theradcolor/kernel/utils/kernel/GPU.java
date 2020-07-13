@@ -117,8 +117,8 @@ public class GPU {
         mTunables.add(TUNABLES_OMAP);
     }
 
-    private String BUSY;
-    private String CUR_FREQ;
+    private static String BUSY;
+    private static String CUR_FREQ;
     private int CUR_FREQ_OFFSET;
     private static List<Integer> AVAILABLE_FREQS;
     private static String MAX_FREQ;
@@ -348,7 +348,7 @@ public class GPU {
         return CUR_FREQ_OFFSET;
     }
 
-    public int getCurFreq() {
+    public static int getCurFreq() {
         return Utils.strToInt(Utils.readFile(CUR_FREQ));
     }
 
@@ -364,7 +364,7 @@ public class GPU {
         return Utils.readFile(KGSL3D0_DEVFREQ_GPUBUSY_PER);
     }
 
-    public int getBusy() {
+    public static int getBusy() {
         String value = Utils.readFile(BUSY);
         float arg1 = Utils.strToFloat(value.split(" ")[0]);
         float arg2 = Utils.strToFloat(value.split(" ")[1]);

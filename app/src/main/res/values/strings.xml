@@ -8,7 +8,7 @@
     <string name="kernel_prefix">Kernel:</string>
     <string name="title_little_max">Little max:</string>
     <string name="title_big_max">Big max:</string>
-    <string name="cpu_gov">CPU governor:</string>
+    <string name="cpu_gov">CPU gov:</string>
     <string name="dev_board">Board:</string>
     <string name="love"><![CDATA[</> with ❤️ by rad]]></string>
     <string name="percent">%</string>
