@@ -160,7 +160,6 @@ public class MonitorFragment extends Fragment implements View.OnClickListener{
         switch (id){
             case R.id.ll_gpu:
                 startActivity(new Intent(getContext(), gpuActivity.class));
-                monTask.cancel(true);
                 break;
             case R.id.ll_cpu:
                 startActivity(new Intent(getContext(), cpuActivity.class));
@@ -326,7 +325,6 @@ public class MonitorFragment extends Fragment implements View.OnClickListener{
     public void onResume() {
         super.onResume();
         requireActivity().registerReceiver(mBatteryReceiver, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
-        InitView();
     }
 
     @Override

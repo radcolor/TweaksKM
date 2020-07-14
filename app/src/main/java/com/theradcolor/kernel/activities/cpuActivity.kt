@@ -2,7 +2,6 @@ package com.theradcolor.kernel.activities
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.view.ContextThemeWrapper
@@ -24,6 +23,7 @@ class cpuActivity : AppCompatActivity() {
 
     lateinit var cpu: CPU
     private val job = Job()
+    private val uiScope = CoroutineScope(Dispatchers.Default + job)
     private val bigScope = CoroutineScope(Dispatchers.Default + job)
     private val littleScope = CoroutineScope(Dispatchers.Default + job)
 
@@ -32,20 +32,22 @@ class cpuActivity : AppCompatActivity() {
         setContentView(R.layout.activity_cpu)
         cpu = CPU()
         initGraph()
-        refreshUI()
         ll_cpu_lit_gov.setOnClickListener {  govDialog("little") }
         ll_cpu_lit_min.setOnClickListener {  minDialog("little") }
+        uiScope.launch { refreshUI() }
         bigScope.launch { readBigData() }
         littleScope.launch { readLittleData() }
     }
 
-    private fun refreshUI() {
-        tv_cpu_big_gov.text = cpu.getGovernor(4, true)
-        tv_cpu_big_min_freq.text = cpu.getMinFreq(4, true).div(1000).toString().plus(resources.getString(R.string.mhz))
-        tv_cpu_big_max_freq.text = cpu.getMaxFreq(4,true).div(1000).toString().plus(resources.getString(R.string.mhz))
-        tv_cpu_lit_gov.text = cpu.getGovernor(0, true)
-        tv_cpu_lit_min_freq.text = cpu.getMinFreq(0, true).div(1000).toString().plus(resources.getString(R.string.mhz))
-        tv_cpu_lit_max_freq.text = cpu.getMaxFreq(0, true).div(1000).toString().plus(resources.getString(R.string.mhz))
+    private suspend fun refreshUI() {
+        while (true){
+            tv_cpu_big_gov.text = cpu.getGovernor(4, true)
+            tv_cpu_big_min_freq.text = cpu.getMinFreq(4, true).div(1000).toString().plus(resources.getString(R.string.mhz))
+            tv_cpu_big_max_freq.text = cpu.getMaxFreq(4,true).div(1000).toString().plus(resources.getString(R.string.mhz))
+            tv_cpu_lit_gov.text = cpu.getGovernor(0, true)
+            tv_cpu_lit_min_freq.text = cpu.getMinFreq(0, true).div(1000).toString().plus(resources.getString(R.string.mhz))
+            tv_cpu_lit_max_freq.text = cpu.getMaxFreq(0, true).div(1000).toString().plus(resources.getString(R.string.mhz))
+        }
     }
 
     override fun onResume() {
@@ -55,6 +57,7 @@ class cpuActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         job.cancel()
+        finish()
     }
 
     private lateinit var mCPUUsages:FloatArray
@@ -226,7 +229,7 @@ class cpuActivity : AppCompatActivity() {
         } else if (bigLittle == "big") {
             cpu_min = cpu!!.getAdjustedFreq(cpu.bigCpu, this).toTypedArray()
         }
-        builder.setItems(cpu_min) {dialog, which -> refreshUI() }
+        builder.setItems(cpu_min) {dialog, which ->  }
         val dialog = builder.create()
         dialog.show()
     }
@@ -235,7 +238,7 @@ class cpuActivity : AppCompatActivity() {
         val builder = AlertDialog.Builder(ContextThemeWrapper(this@cpuActivity, R.style.CustomDialogTheme))
         builder.setTitle("CPU maximum freq")
         val gpu_max = GPU.getAdjustedFreqs(this).toTypedArray()
-        builder.setItems(gpu_max) { dialog, which -> refreshUI() }
+        builder.setItems(gpu_max) { dialog, which ->  }
         val dialog = builder.create()
         dialog.show()
     }
