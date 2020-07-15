@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.view.ContextThemeWrapper
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.analytics.FirebaseAnalytics
 import com.grarak.kerneladiutor.utils.Device
 import com.grarak.kerneladiutor.utils.root.RootUtils
 import com.theradcolor.kernel.fragments.AboutFragment
@@ -20,8 +21,10 @@ import com.theradcolor.kernel.utils.checkRoot
 import com.topjohnwu.superuser.Shell
 import java.io.IOException
 
+
 class KMActivity : AppCompatActivity() {
 
+    private var mFirebaseAnalytics: FirebaseAnalytics? = null
     private var editor: Editor? = null
     private var preferences: SharedPreferences? = null
     private val fragment1: Fragment = MonitorFragment()
@@ -35,6 +38,9 @@ class KMActivity : AppCompatActivity() {
         setContentView(R.layout.activity_km)
         supportActionBar!!.displayOptions = ActionBar.DISPLAY_SHOW_CUSTOM
         supportActionBar!!.setCustomView(R.layout.actionbar)
+
+        // Obtain the FirebaseAnalytics instance.
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
         preferences = getPreferences(Context.MODE_PRIVATE)
         val navigation = findViewById<BottomNavigationView>(R.id.nav_view)
