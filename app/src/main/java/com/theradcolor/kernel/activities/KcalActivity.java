@@ -237,9 +237,9 @@ public class KcalActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onStopTrackingTouch(SeekBar seekBar) {
         mKCAL.setColors(r + " " + g + " " + b, this);
-        mKCAL.setSaturationIntensity(saturation,this);
-        mKCAL.setScreenValue(value, this);
-        mKCAL.setScreenContrast(contrast, this);
+        mKCAL.setSaturationIntensity(saturation + 225,this);
+        mKCAL.setScreenValue(value + 128, this);
+        mKCAL.setScreenContrast(contrast + 128, this);
         mKCAL.setScreenHue(hue_i, this);
     }
 }
