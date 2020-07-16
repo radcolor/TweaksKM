@@ -45,7 +45,7 @@ public class CPU {
     private static final String CPU_MAX_FREQ = "/sys/devices/system/cpu/cpu%d/cpufreq/scaling_max_freq";
     private static final String CPU_MAX_FREQ_KT = "/sys/devices/system/cpu/cpu%d/cpufreq/scaling_max_freq_kt";
     private static final String HARD_CPU_MAX_FREQ = "/sys/kernel/cpufreq_hardlimit/scaling_max_freq";
-    private static final String CPU_MIN_FREQ = "/sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq";
+    private static final String CPU_MIN_FREQ = "/sys/devices/system/cpu/cpu%d/cpufreq/scaling_min_freq";
     private static final String HARD_CPU_MIN_FREQ = "/sys/kernel/cpufreq_hardlimit/scaling_min_freq";
     private static final String CPU_MAX_SCREEN_OFF_FREQ = "/sys/devices/system/cpu/cpu%d/cpufreq/screen_off_max_freq";
     public static final String CPU_ONLINE = "/sys/devices/system/cpu/cpu%d/online";
@@ -420,6 +420,18 @@ public class CPU {
         if (Utils.existFile(HARD_CPU_MAX_FREQ)) {
             run(Control.write(String.valueOf(freq), HARD_CPU_MAX_FREQ), HARD_CPU_MAX_FREQ, context);
         }
+    }
+
+    public void setMinFreq(int freq, int cpu, Context context){
+        run(Control.chmod("644", Utils.strFormat(CPU_MIN_FREQ, cpu)), null, null);
+        run(Control.write(String.valueOf(freq), String.format(CPU_MIN_FREQ, cpu)), "CPU", context);
+        run(Control.chmod("444", Utils.strFormat(CPU_MIN_FREQ, cpu)), null, null);
+    }
+
+    public void setMaxFreq(int freq, int cpu, Context context){
+        run(Control.chmod("644", Utils.strFormat(CPU_MAX_FREQ, cpu)), null, null);
+        run(Control.write(String.valueOf(freq), String.format(CPU_MAX_FREQ, cpu)), "CPU", context);
+        run(Control.chmod("444", Utils.strFormat(CPU_MAX_FREQ, cpu)), null, null);
     }
 
     public int getMaxFreq(boolean forceRead) {
