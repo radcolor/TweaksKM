@@ -2,6 +2,7 @@
 [![forthebadge](https://forthebadge.com/images/badges/built-for-android.svg)](https://www.android.com)
 [![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](https://www.github.com/theradcolor)
 
+
 **Tweaks** is a simple [Linux](https://www.kernel.org) kernel manager app for Android™ devices running on Android L or newer. 
 Designed beautifully with Material design.
 
@@ -61,10 +62,11 @@ Read [Contributing.md](https://github.com/theradcolor/tweaks/blob/master/CONTRIB
 
 ## License
 
-![](https://img.shields.io/badge/License-GPL--v3.0-green)
+[![GPL](https://img.shields.io/badge/License-GPL--v3.0-green?style=for-the-badge)](https://github.com/theradcolor/Tweaks/blob/master/LICENSE)
 
 
 TweaksKM is licensed under the under version 3 of the [GNU GPL License](https://github.com/theradcolor/Tweaks/blob/master/LICENSE).
+
 The GNU General Public License is a free, copyleft license for software and other kinds of works.
 When we speak of free software, we are referring to freedom, not price. Our General Public Licenses are designed to make sure that you have the freedom to distribute copies of free software (and charge for them if you wish), that you receive source code or can get it if you want it, that you can change the software or use pieces of it in new free programs, and that you know you can do these things.
 
