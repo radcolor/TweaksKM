@@ -61,9 +61,10 @@ class KMActivity : AppCompatActivity() {
             }
             false
         })
-        if (checkRoot.isDeviceRooted()
-                && Device.getKernelVersion(false).contains("rad")
-                || Device.getKernelVersion(false).contains("fakerad")) {
+        val dName = Device.getDeviceName()
+        if (checkRoot.isDeviceRooted() && dName == "whyred" || dName == "mido"
+                || dName == "lavender" || dName == "X00T" || dName == "X00TD"
+                || dName == "s2") {
             Log.d("MainActivity", "Kernel and Root Check Passed")
             RootUtils.getSU()
         } else if (checkRoot.isDeviceRooted()) {
