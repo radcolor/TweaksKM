@@ -53,26 +53,9 @@ public class KernelFragment extends Fragment implements View.OnClickListener{
         InitView();
         InitUI();
         setSW();
+        if(mVibration.supported()) { InitVibration(); }
+        else { LinearLayout vib = root.findViewById(R.id.ll_vibration); vib.setVisibility(View.GONE); }
 
-        final Vibrator v = (Vibrator) getContext().getSystemService(Context.VIBRATOR_SERVICE);
-        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                progressChangedValue = progress;
-                vib.setText(progress + getResources().getString(R.string.percent));
-            }
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) { }
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    v.vibrate(VibrationEffect.createOneShot(100, VibrationEffect.DEFAULT_AMPLITUDE));
-                }
-                mVibration.setVibrationValue(progressChangedValue, getContext());
-                Prefs.saveInt("vibration_value", progressChangedValue, getContext());
-                v.vibrate(50);
-            }
-        });
         return root;
     }
 
@@ -106,10 +89,7 @@ public class KernelFragment extends Fragment implements View.OnClickListener{
     }
 
     public void InitUI(){
-        seekBar.setPadding(16,16,16,16);
         spectrum.setOnClickListener(this);
-        vib.setText(mVibration.getVibrationValue()+getResources().getString(R.string.percent));
-        seekBar.setProgress(mVibration.getVibrationValue());
         sRGB.setOnClickListener(this);
         kCAL.setOnClickListener(this);
         vibration.setOnClickListener(this);
@@ -120,10 +100,32 @@ public class KernelFragment extends Fragment implements View.OnClickListener{
     }
 
     public void refreshUI(){
-        vib.setText(mVibration.getVibrationValue()+getResources().getString(R.string.percent));
-        seekBar.setProgress(mVibration.getVibrationValue());
         ffc.setText(Battery.FastChargeStatus());
         tcp.setText(Network.getTcpCongestion());
+    }
+
+    private void InitVibration(){
+        vib.setText(mVibration.getVibrationValue()+getResources().getString(R.string.percent));
+        seekBar.setProgress(mVibration.getVibrationValue());
+        final Vibrator v = (Vibrator) getContext().getSystemService(Context.VIBRATOR_SERVICE);
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                progressChangedValue = progress;
+                vib.setText(progress + getResources().getString(R.string.percent));
+            }
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) { }
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    v.vibrate(VibrationEffect.createOneShot(100, VibrationEffect.DEFAULT_AMPLITUDE));
+                }
+                mVibration.setVibrationValue(progressChangedValue, getContext());
+                Prefs.saveInt("vibration_value", progressChangedValue, getContext());
+                v.vibrate(50);
+            }
+        });
     }
 
     @Override

@@ -10,9 +10,10 @@
         android:scrollbars="vertical"
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <LinearLayout
+            android:id="@+id/ll_vibration"
             android:layout_marginTop="16dp"
             android:scrollbars="vertical"
             android:orientation="vertical"
@@ -161,16 +162,16 @@
 
             </LinearLayout>
 
-        </LinearLayout>
+            <LinearLayout
+                android:layout_marginTop="6dp"
+                android:layout_marginBottom="6dp"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:background="@color/grey_light"/>
 
-        <LinearLayout
-            android:layout_marginTop="6dp"
-            android:layout_marginBottom="6dp"
-            android:layout_marginStart="12dp"
-            android:layout_marginEnd="12dp"
-            android:layout_width="match_parent"
-            android:layout_height="0.1dp"
-            android:background="@color/grey_light"/>
+        </LinearLayout>
 
         <LinearLayout
             android:scrollbars="vertical"
