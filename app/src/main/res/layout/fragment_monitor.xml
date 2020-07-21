@@ -764,6 +764,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/ll_wg"
                         android:layout_marginTop="8dp"
                         android:orientation="horizontal"
                         android:layout_width="match_parent"

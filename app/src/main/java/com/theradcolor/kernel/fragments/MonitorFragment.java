@@ -38,6 +38,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import lecho.lib.hellocharts.listener.PieChartOnValueSelectListener;
+import lecho.lib.hellocharts.model.Line;
 import lecho.lib.hellocharts.model.PieChartData;
 import lecho.lib.hellocharts.model.SliceValue;
 import lecho.lib.hellocharts.view.PieChartView;
@@ -51,7 +52,7 @@ public class MonitorFragment extends Fragment implements View.OnClickListener{
     View root;
     LinearLayout ll_gpu, ll_cpu;
     int mBatteryTemp, mBatteryLvl;
-    CPU cpu; GPU gpu; Entropy entropy; WireGuard wireGuard;
+    CPU cpu; GPU gpu; Entropy entropy;
     TextView kernel_name, kernel_name_full;
     TextView cpu0,cpu1,cpu2,cpu3,cpu4,cpu5,cpu6,cpu7, little_max, big_max, board, cpu_gov, oem_name;
     TextView gpu_usage_per, gpu_crr_freq, gpu_max_freq, gpu_model;
@@ -75,7 +76,6 @@ public class MonitorFragment extends Fragment implements View.OnClickListener{
         cpu = new CPU();
         gpu = new GPU();
         entropy = new Entropy();
-        wireGuard = new WireGuard();
 
         kernel_name = root.findViewById(R.id.kernel_name);
         kernel_name_full = root.findViewById(R.id.kernel_name_full);
@@ -134,7 +134,10 @@ public class MonitorFragment extends Fragment implements View.OnClickListener{
         board.setText(getString(R.string.dev_board) + " " + Device.getHardware() + " " + Device.getBoard());
         String gpuString = "<font color=#FFFFFF> <b> GPU model: </b> </font>" + RootUtils.runAndGetError("dumpsys SurfaceFlinger | grep GLES");
         gpu_model.setText(Html.fromHtml(gpuString));
-        wireguard_ver.setText("v"+wireGuard.getWireguard());
+        if(!WireGuard.hasWireGuard()) {
+            LinearLayout wg = root.findViewById(R.id.ll_wg);
+            wg.setVisibility(View.GONE);
+        }else { wireguard_ver.setText("v"+WireGuard.getWireGuard()); }
         long systemTime = SystemClock.elapsedRealtime();
         long awakeTime = SystemClock.uptimeMillis();
         long deepSleepTime = systemTime-awakeTime;
