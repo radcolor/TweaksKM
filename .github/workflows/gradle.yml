@@ -1,0 +1,48 @@
+# This workflow will build a Java project with Gradle
+# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-gradle
+
+name: Java CI with Gradle
+
+on:
+  push:
+    branches: [ master, workflows ]
+  pull_request:
+    branches: [ master, workflows ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      -
+        uses: actions/checkout@v2
+      -
+        name: "Fetching Materials"
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+      -
+        env:
+          API: "${{ secrets.TG_BOT_API }}"
+        name: Construction
+        run: |
+           curl -s -X POST "https://api.telegram.org/bot${API}/sendMessage" -d chat_id="-1001383928762" \
+              -d "disable_web_page_preview=true" \
+              -d "parse_mode=markdown" \
+              -d text="Building with HEAD as [$(echo $GITHUB_SHA | cut -c1-8)](https://github.com/theradcolor/TweaksKM/commit/${GITHUB_SHA})"
+           ./gradlew assembleDebug
+
+           if [ -f app/build/outputs/apk/debug/app-debug.apk ]; then
+              cp app/build/outputs/apk/debug/app-debug.apk app/build/outputs/apk/debug/CI-TweaksKM-debug.apk
+              cd app/build/outputs/apk/debug
+              curl --progress-bar -F document=@"CI-TweaksKM-debug.apk" "https://api.telegram.org/bot${API}/sendDocument" \
+                -F chat_id="-1001383928762"  \
+                -F "disable_web_page_preview=true" \
+                -F "parse_mode=Markdown" \
+                -F caption="CI build completed successfully!"
+              rm -rf app/build/outputs/apk
+            else
+                curl -s -X POST "https://api.telegram.org/bot${API}/sendMessage" -d chat_id="-1001383928762" \
+                     -d "disable_web_page_preview=true" \
+                     -d "parse_mode=markdown" \
+                     -d text="Build error, exiting now!"
+           fi
