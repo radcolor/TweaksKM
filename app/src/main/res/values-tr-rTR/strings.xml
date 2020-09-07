@@ -10,7 +10,7 @@
     <string name="title_big_max">Big max:</string>
     <string name="cpu_gov">İşlemci düzenleyici:</string>
     <string name="dev_board">Devre kartı:</string>
-    <string name="love"><![CDATA[rad tarafından sevgiyle kodlandı.]]></string>
+    <string name="love"><![CDATA[rad tarafından sevgiyle kodlandı]]></string>
     <string name="percent">%</string>
     <string name="title_hp_gain">Kulaklık Yükseltmesi</string>
     <string name="title_mp_gain">Mikrofon Yükseltmesi</string>
@@ -47,7 +47,7 @@
     <string name="pm_desc">Üst düzey performans için ayarlı</string>
     <string name="title_spec_game">OYUN</string>
     <string name="txt_gm">Oyun Modunu Aç/Kapat</string>
-    <string name="gm_desc">Daha İyi Oyun Performansı Ayarları</string>
+    <string name="gm_desc">Daha İyi Oyun Performansı için</string>
     <string name="txt_auto_sync">Otomatik senkronizasyon özelliğini devre dışı bırak</string>
     <string name="auto_sync_desc">Ağ trafiğini arttırabilir</string>
     <string name="txt_rt_mon">Gerçek Zamanlı FPS/CPU İzleme</string>
@@ -82,6 +82,6 @@
     <string name="head_spec">Spektrum Profilleri</string>
     <string name="desc_spec">Profil bazlı kernel yönetimi</string>
     <string name="head_misc">Çeşitli</string>
-    <string name="title_ffc">Force Fast Charge</string>
+    <string name="title_ffc">Hızlı Şarja Zorla</string>
     <string name="title_tcp">TCP Konjesyon Algoritması</string>
 </resources>
