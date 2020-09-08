@@ -11,6 +11,11 @@ import com.theradcolor.kernel.utils.kernel.cpu.CPU
 import kotlinx.android.synthetic.main.activity_cpu.*
 import kotlinx.coroutines.*
 import kotlin.math.roundToInt
+import lecho.lib.hellocharts.gesture.ContainerScrollType
+import lecho.lib.hellocharts.model.Line
+import lecho.lib.hellocharts.model.LineChartData
+import lecho.lib.hellocharts.model.PointValue
+import lecho.lib.hellocharts.model.Viewport
 
 @SuppressLint("SetTextI18n")
 class cpuActivity : AppCompatActivity() {
@@ -25,7 +30,7 @@ class cpuActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cpu)
         cpu = CPU()
-        //initGraph()
+        initGraph()
         ll_cpu_lit_gov.setOnClickListener {  govDialog("little") }
         ll_cpu_lit_min.setOnClickListener {  minDialog("little") }
         ll_cpu_lit_max.setOnClickListener { maxDialog("little") }
@@ -33,8 +38,8 @@ class cpuActivity : AppCompatActivity() {
         ll_cpu_big_min.setOnClickListener {  minDialog("big") }
         ll_cpu_big_max.setOnClickListener { maxDialog("big") }
         uiScope.launch { refreshUI() }
-        //bigScope.launch { readBigData() }
-        //littleScope.launch { readLittleData() }
+        bigScope.launch { readBigData() }
+        littleScope.launch { readLittleData() }
     }
 
     private suspend fun refreshUI() {
@@ -67,7 +72,7 @@ class cpuActivity : AppCompatActivity() {
         job.cancel()
     }
 
-    /*
+
     private lateinit var mCPUUsages:FloatArray
     private lateinit var mCPUStates:BooleanArray
     private lateinit var mCPUFreq:IntArray
@@ -204,7 +209,7 @@ class cpuActivity : AppCompatActivity() {
         graph = average.roundToInt().toFloat()
         return graph
     }
-    */
+
 
     private fun govDialog(bigLittle: String) {
         val bigCores = cpu.bigCpuRange
