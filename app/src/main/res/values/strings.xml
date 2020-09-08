@@ -112,5 +112,6 @@
     <string name="txt_cpu_max_freq">CPU maximum frequency</string>
     <string name="txt_big_clus">BIG CLUSTER</string>
     <string name="txt_lit_clus">LITTLE CLUSTER</string>
+    <string name="spec_not_supp">Spectrum not supported</string>
 
 </resources>
