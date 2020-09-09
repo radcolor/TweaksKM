@@ -116,4 +116,7 @@
     <string name="spec_not_supp">Spectrum not supported</string>
     <string name="tit_updater">Updater</string>
 
+    <string name="updater_info_text">From here you can download and update your linux kernel, downloaded kernel will be stores in /sdcard/tweakskm/kernels/ as a zip. you have to flash via device recovery as manual flasher is still here not implemented yet!</string>
+    <string name="check_upt_txt">Check for updates</string>
+
 </resources>
