@@ -19,6 +19,9 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
+            android:name=".activities.UpdaterActivity"
+            android:theme="@style/activityNoActionBar"/>
+        <activity
             android:name=".activities.cpuActivity"
             android:theme="@style/activityNoActionBar" />
         <activity
@@ -39,6 +42,7 @@
             android:theme="@style/Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

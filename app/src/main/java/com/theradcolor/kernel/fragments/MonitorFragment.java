@@ -26,6 +26,7 @@ import com.grarak.kerneladiutor.utils.Device;
 import com.grarak.kerneladiutor.utils.Utils;
 import com.grarak.kerneladiutor.utils.root.RootUtils;
 import com.theradcolor.kernel.R;
+import com.theradcolor.kernel.activities.UpdaterActivity;
 import com.theradcolor.kernel.activities.cpuActivity;
 import com.theradcolor.kernel.activities.gpuActivity;
 import com.theradcolor.kernel.utils.kernel.Battery;
@@ -50,7 +51,7 @@ public class MonitorFragment extends Fragment implements View.OnClickListener{
     private PieChartView memChart, batChart;
     private PieChartData data;
     View root;
-    LinearLayout ll_gpu, ll_cpu;
+    LinearLayout ll_upt, ll_gpu, ll_cpu;
     int mBatteryTemp, mBatteryLvl;
     CPU cpu; GPU gpu; Entropy entropy;
     TextView kernel_name, kernel_name_full;
@@ -81,6 +82,8 @@ public class MonitorFragment extends Fragment implements View.OnClickListener{
         kernel_name_full = root.findViewById(R.id.kernel_name_full);
         oem_name = root.findViewById(R.id.oem_name);
 
+        ll_upt = root.findViewById(R.id.ll_updater);
+        ll_upt.setOnClickListener(this);
         ll_gpu = root.findViewById(R.id.ll_gpu);
         ll_gpu.setOnClickListener(this);
         ll_cpu = root.findViewById(R.id.ll_cpu);
@@ -161,6 +164,9 @@ public class MonitorFragment extends Fragment implements View.OnClickListener{
     public void onClick(View v) {
         int id = v.getId();
         switch (id){
+            case R.id.ll_updater:
+                startActivity(new Intent(getContext(), UpdaterActivity.class));
+                break;
             case R.id.ll_gpu:
                 startActivity(new Intent(getContext(), gpuActivity.class));
                 break;
