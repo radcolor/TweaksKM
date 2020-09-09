@@ -165,7 +165,8 @@ public class MonitorFragment extends Fragment implements View.OnClickListener{
         int id = v.getId();
         switch (id){
             case R.id.ll_updater:
-                startActivity(new Intent(getContext(), UpdaterActivity.class));
+                if (Device.getKernelVersion(false).contains("rad"))
+                { startActivity(new Intent(getContext(), UpdaterActivity.class)); }
                 break;
             case R.id.ll_gpu:
                 startActivity(new Intent(getContext(), gpuActivity.class));
