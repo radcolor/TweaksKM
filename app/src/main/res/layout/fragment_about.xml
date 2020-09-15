@@ -69,14 +69,14 @@
 
                     <ImageView
                         android:id="@+id/tg_link"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
                         android:src="@drawable/ic_telegram_white_24dp" />
 
                     <ImageView
                         android:id="@+id/gh_link"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
                         android:layout_marginStart="20dp"
                         android:layout_toEndOf="@+id/tg_link"
                         android:src="@drawable/ic_github_white_24dp" />
