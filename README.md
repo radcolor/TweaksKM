@@ -1,9 +1,9 @@
-# Tweaks
+# TweaksKM
 [![forthebadge](https://forthebadge.com/images/badges/built-for-android.svg)](https://www.android.com)
 [![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](https://www.github.com/theradcolor)
 
 
-**Tweaks** is a simple [Linux](https://www.kernel.org) kernel manager app for Android™ devices running on Android L or newer. 
+**TweaksKM** is a simple [Linux](https://www.kernel.org) kernel manager app for Android™ devices running on Android L or newer. 
 Designed beautifully with Material design.
 
 **Note:** The contributors are requested to read CONTRIBUTING.md and all required documentation, and send pull requests over dev/staging branch!
@@ -11,10 +11,10 @@ Designed beautifully with Material design.
 ### Setup
 
 ### Requirements
-- JDK 8
-- Latest Android SDK and platform tools
+- Android SDK and platform tools
 - Minimum SDK 21 or newer
-- AndroidX
+- AndroidX and libraries
+- Java Development Kit version 8
 
 ### Building
 
@@ -57,15 +57,15 @@ hellochart-android by [Leszek Wach](https://github.com/lecho) - [Apache 2.0](htt
 
 ## Contributing
 
-Read [Contributing.md](https://github.com/theradcolor/tweaks/blob/master/CONTRIBUTING.md) to get the app running locally and ways to help us.
+Read [Contributing.md](https://github.com/theradcolor/TweaksKM/blob/master/CONTRIBUTING.md) to get the app running locally and ways to help us.
 
 
 ## License
 
-[![GPL](https://img.shields.io/badge/License-GPL--v3.0-green?style=for-the-badge)](https://github.com/theradcolor/Tweaks/blob/master/LICENSE)
+[![GPL](https://img.shields.io/badge/License-GPL--v3.0-green?style=for-the-badge)](https://github.com/theradcolor/TweaksKM/blob/master/LICENSE)
 
 
-TweaksKM is licensed under the under version 3 of the [GNU GPL License](https://github.com/theradcolor/Tweaks/blob/master/LICENSE).
+TweaksKM is licensed under the under version 3 of the [GNU GPL License](https://github.com/theradcolor/TweaksKM/blob/master/LICENSE).
 
 The GNU General Public License is a free, copyleft license for software and other kinds of works.
 When we speak of free software, we are referring to freedom, not price. Our General Public Licenses are designed to make sure that you have the freedom to distribute copies of free software (and charge for them if you wish), that you receive source code or can get it if you want it, that you can change the software or use pieces of it in new free programs, and that you know you can do these things.

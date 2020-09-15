@@ -1,6 +1,6 @@
-# Contributing to project
+# Contributing to the project!
 
-Hey! We are delighted to see your interest in helping and contributing us on Tweaks app.
+Hey! We are delighted to see your interest in helping and contributing us on TweaksKM app.
 
 Let's get started with setting up the development enviornment for work and app to run. Please read all the steps below carefully.
 
@@ -8,19 +8,19 @@ Let's get started with setting up the development enviornment for work and app t
 
 ### Step 1: Setting up Git
 
-First you need to install [Git](https://git-scm.com/). after that you need to fork our repository located at https://github.com/theradcolor/tweaks.
+First you need to install [Git](https://git-scm.com/). after that you need to fork our repository located at https://github.com/theradcolor/TweaksKM.
 
 <p align="center"><img src="https://raw.githubusercontent.com/theradcolor/Tweaks/master/assets/cont_img_frk.png"></p>
 
 After forking the repository, clone the forked repo to the system using
 
 ```
-git clone https://github.com/<YOUR_GITHUB_USERNAME>/tweaks.git
+git clone https://github.com/<YOUR_GITHUB_USERNAME>/TweaksKM.git
 ```
 Change directory to the newly downloaded forked copy.
 
 ```
-cd tweaks
+cd TweaksKM
 ```
 ### Step 2: Configuring Android Studio and SDKs
 
@@ -53,17 +53,23 @@ After you satisfied with your changes, you can do pull request to the repo.
 Add, commit and push your changes by doing:
 
 ```
-# Adds all the modified files
+# Add all the modified files
 git add .
 
 # Commit the changes
 git commit -m "Commit head message" -m "commit description"
 
+# Update origin remote url to your forked repo
+git remote origin set-url https://github.com/<YOUR_GITHUB_USERNAME>/TweaksKM.git
+
+# Verify if url updated correctly
+git remote -v
+
 # Push to origin to create a PR
 git push origin <BRANCH_NAME>
 ```
 
-Now go to your forked repo on github, and pull a request on dev/staging branch!
+Now go to your forked repo on github, and pull a request on dev/staging or master branch!
 
 <p align="center"><img src="https://raw.githubusercontent.com/theradcolor/Tweaks/master/assets/cont_img_pr.png"></p>
 
