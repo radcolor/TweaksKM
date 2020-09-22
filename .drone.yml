@@ -1,0 +1,16 @@
+kind: pipeline
+name: TWEAKSKM
+
+clone:
+  depth: 1
+  
+steps:
+- name: assembleDebug
+  image: archlinux:latest
+  environment:
+      TG_BOT_API:
+        from_secret: TG_BOT_API
+  commands:
+    - "export TG_BOT_API"
+    - pacman -Sy git gradle zip unzip wget curl jdk8-openjdk jre8-openjdk glibc --noconfirm
+    - bash dronebuild

@@ -1,0 +1,42 @@
+#!/bin/bash
+
+ANDROID_SDK_VERSION=6609375
+ANDROID_HOME="/opt/android-sdk"
+mkdir -p ${ANDROID_HOME}/cmdline-tools
+wget -q https://dl.google.com/android/repository/commandlinetools-linux-${ANDROID_SDK_VERSION}_latest.zip
+unzip *tools*linux*.zip -d ${ANDROID_HOME}/cmdline-tools
+rm *tools*linux*.zip
+cp license_accepter.sh /opt/
+chmod +x /opt/license_accepter.sh && /opt/license_accepter.sh ${ANDROID_HOME}
+
+DATE="`date +%d%m%Y-%H%M%S`"
+
+HEAD_COMMIT="$(git rev-parse HEAD)"
+GITHUB_URL="https://github.com/theradcolor/TweaksKM/commit/"
+DRONE_URL="https://cloud.drone.io/theradcolor/TweaksKM/"
+
+echo "sdk.dir=${ANDROID_HOME}" > local.properties
+
+curl -s -X POST "https://api.telegram.org/bot${TG_BOT_API}/sendMessage" -d chat_id="-1001365210159" \
+    -d "disable_web_page_preview=true" \
+    -d "parse_mode=markdown" \
+    -d text="⚒️ [Building](${DRONE_URL}${DRONE_BUILD_NUMBER}) with HEAD as [$(echo $HEAD_COMMIT | cut -c1-8)](${GITHUB_URL}${HEAD_COMMIT}) ⚒️"
+
+./gradlew assembleDebug
+
+if [ -f app/build/outputs/apk/debug/app-debug.apk ]; then
+    cp app/build/outputs/apk/debug/app-debug.apk app/build/outputs/apk/debug/TweaksKM-debug-${DATE}.apk
+    cd app/build/outputs/apk/debug
+    APK=$(echo TweaksKM-debug-*.apk)
+    curl --progress-bar -F document=@"${APK}" "https://api.telegram.org/bot${TG_BOT_API}/sendDocument" \
+    -F chat_id="-1001365210159"  \
+    -F "disable_web_page_preview=true" \
+    -F "parse_mode=html" \
+    -F caption="⭕️ <b>CI build completed successfully!</b>"
+    rm -rf app/build/outputs/apk
+else
+    curl -s -X POST "https://api.telegram.org/bot${TG_BOT_API}/sendMessage" -d chat_id="-1001365210159" \
+        -d "disable_web_page_preview=true" \
+        -d "parse_mode=html" \
+        -d text="❌ <b>Build error, exiting now!</b>"
+fi
