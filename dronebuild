@@ -19,8 +19,8 @@ echo "sdk.dir=${ANDROID_HOME}" > local.properties
 
 curl -s -X POST "https://api.telegram.org/bot${TG_BOT_API}/sendMessage" -d chat_id="-1001365210159" \
     -d "disable_web_page_preview=true" \
-    -d "parse_mode=markdown" \
-    -d text="⚒️ [Building](${DRONE_URL}${DRONE_BUILD_NUMBER}) with HEAD as [$(echo $HEAD_COMMIT | cut -c1-8)](${GITHUB_URL}${HEAD_COMMIT}) ⚒️"
+    -d "parse_mode=markdownV2" \
+    -d text="⚒️ [**Building**](${DRONE_URL}${DRONE_BUILD_NUMBER}) with HEAD as [$(echo $HEAD_COMMIT | cut -c1-8)](${GITHUB_URL}${HEAD_COMMIT}) ⚒️"
 
 ./gradlew assembleDebug
 
