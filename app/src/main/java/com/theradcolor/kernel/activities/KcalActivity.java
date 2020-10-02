@@ -8,19 +8,21 @@ import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import com.google.android.material.switchmaterial.SwitchMaterial;
+import com.grarak.kerneladiutor.utils.Prefs;
 import com.grarak.kerneladiutor.utils.root.RootUtils;
 import com.theradcolor.kernel.R;
 import com.theradcolor.kernel.utils.kernel.KCAL;
 
-import java.util.List;
-
-public class KcalActivity extends AppCompatActivity implements View.OnClickListener, SeekBar.OnSeekBarChangeListener {
+public class KcalActivity extends AppCompatActivity implements View.OnClickListener, SeekBar.OnSeekBarChangeListener, SwitchMaterial.OnCheckedChangeListener {
 
     KCAL mKCAL;
+    private SwitchMaterial sob_kcal;
     private SeekBar red,green,blue,sat,val,con,hue;
     private TextView rTXT,gTXT,bTXT,satTXT,valTXT,conTXT,hueTXT;
     private LinearLayout pre_kcal,reset_kcal;
@@ -63,6 +65,9 @@ public class KcalActivity extends AppCompatActivity implements View.OnClickListe
         pre_kcal = findViewById(R.id.ll_color);
         pre_kcal.setOnClickListener(this);
         reset_kcal = findViewById(R.id.ll_color_reset);
+        sob_kcal = findViewById(R.id.sob_kcal);
+        sob_kcal.setOnClickListener(this);
+        sob_kcal.setOnCheckedChangeListener(this);
         reset_kcal.setOnClickListener(this);
     }
 
@@ -93,6 +98,8 @@ public class KcalActivity extends AppCompatActivity implements View.OnClickListe
         valTXT.setText(""+(mKCAL.getScreenValue() - 128));
         conTXT.setText(""+(mKCAL.getScreenContrast() - 128));
         hueTXT.setText(""+mKCAL.getScreenHue());
+        if(Prefs.getBoolean("sob_sw", false, this))
+        { sob_kcal.setChecked(true); }
     }
 
     @Override
@@ -191,6 +198,16 @@ public class KcalActivity extends AppCompatActivity implements View.OnClickListe
                 RootUtils.runCommand("echo " + VALUE_DEFAULT + " >" +" /sys/devices/platform/kcal_ctrl.0/kcal_val");
                 refreshUI();
                 break;
+            case R.id.sob_kcal:
+                Prefs.saveInt("kcal_r", Integer.parseInt(mKCAL.getColors().get(0)), this);
+                Prefs.saveInt("kcal_g", Integer.parseInt(mKCAL.getColors().get(1)), this);
+                Prefs.saveInt("kcal_b", Integer.parseInt(mKCAL.getColors().get(2)), this);
+                int saturation = mKCAL.getSaturationIntensity();
+                Prefs.saveInt("kcal_sat", saturation == 128 ? 30 : saturation - 225, this);
+                Prefs.saveInt("kcal_val", mKCAL.getScreenValue() - 128, this);
+                Prefs.saveInt("kcal_con", mKCAL.getScreenContrast() - 128, this);
+                Prefs.saveInt("kcal_hue", mKCAL.getScreenHue(), this);
+                break;
         }
     }
 
@@ -241,5 +258,18 @@ public class KcalActivity extends AppCompatActivity implements View.OnClickListe
         mKCAL.setScreenValue(value + 128, this);
         mKCAL.setScreenContrast(contrast + 128, this);
         mKCAL.setScreenHue(hue_i, this);
+        sob_kcal.setChecked(false);
+        Prefs.saveBoolean("sob_sw", false, this);
+    }
+
+    @Override
+    public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+        if (compoundButton.getId() == R.id.sob_kcal) {
+            if (sob_kcal.isChecked()) {
+                Prefs.saveBoolean("sob_sw", true, this);
+            } else {
+                Prefs.saveBoolean("sob_sw", false, this);
+            }
+        }
     }
 }

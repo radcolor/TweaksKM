@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.grarak.kerneladiutor.utils.Prefs;
 import com.theradcolor.kernel.R;
 import com.theradcolor.kernel.utils.kernel.Battery;
+import com.theradcolor.kernel.utils.kernel.KCAL;
 import com.theradcolor.kernel.utils.kernel.Network;
 import com.theradcolor.kernel.utils.kernel.Sound;
 import com.theradcolor.kernel.utils.kernel.Vibration;
@@ -84,6 +85,23 @@ public class onBootService extends Service{
         String tcp = Prefs.getString("tcp_congestion_algorithm", "westwood", getApplicationContext());
         if (Prefs.getBoolean("tcp", true, getApplicationContext()) || !tcp.equals("westwood")){
             Network.setTcpCongestion(tcp, getApplicationContext());
+        }
+        if (Prefs.getBoolean("sob_sw", false, getApplicationContext())){
+            KCAL.getInstance().setColors(Prefs.getInt("kcal_r", 256, getApplicationContext()) + " " +
+                            Prefs.getInt("kcal_g", 256, getApplicationContext()) + " " +
+                            Prefs.getInt("kcal_b", 256, getApplicationContext()), getApplicationContext());
+            KCAL.getInstance().setSaturationIntensity(
+                    Prefs.getInt("kcal_sat", 30+225, getApplicationContext()),
+                    getApplicationContext());
+            KCAL.getInstance().setScreenValue(
+                    Prefs.getInt("kcal_val", 127+128, getApplicationContext()),
+                    getApplicationContext());
+            KCAL.getInstance().setScreenContrast(
+                    Prefs.getInt("kcal_con", 127+128, getApplicationContext()),
+                    getApplicationContext());
+            KCAL.getInstance().setScreenHue(
+                    Prefs.getInt("kcal_hue", 0, getApplicationContext()),
+                    getApplicationContext());
         }
         stopForeground(true);
     }

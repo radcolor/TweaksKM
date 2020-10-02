@@ -53,13 +53,13 @@
         android:layout_height="match_parent">
 
         <LinearLayout
-            android:layout_marginTop="16dp"
             android:scrollbars="vertical"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <LinearLayout
+                android:layout_marginTop="8dp"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -559,7 +559,27 @@
 
             <LinearLayout
                 android:layout_marginTop="6dp"
-                android:layout_marginBottom="36dp"
+                android:layout_marginBottom="6dp"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:background="@color/grey_light"/>
+
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/sob_kcal"
+                android:theme="@style/sw"
+                android:padding="16dp"
+                android:textStyle="bold"
+                android:textColor="@android:color/white"
+                android:text="SET ON BOOT"
+                android:textSize="15sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <LinearLayout
+                android:layout_marginTop="6dp"
+                android:layout_marginBottom="24dp"
                 android:layout_marginStart="12dp"
                 android:layout_marginEnd="12dp"
                 android:layout_width="match_parent"
