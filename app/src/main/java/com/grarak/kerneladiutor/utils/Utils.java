@@ -555,6 +555,10 @@ public class Utils {
             sb.append(seconds);
             sb.append("S ");
         }
+        if(days ==0 && hours ==0 && minutes ==0 && seconds ==0)
+        {
+            sb.append("0s");
+        }
         return(sb.toString());
     }
 
