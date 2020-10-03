@@ -91,13 +91,13 @@ public class onBootService extends Service{
                             Prefs.getInt("kcal_g", 256, getApplicationContext()) + " " +
                             Prefs.getInt("kcal_b", 256, getApplicationContext()), getApplicationContext());
             KCAL.getInstance().setSaturationIntensity(
-                    Prefs.getInt("kcal_sat", 30+225, getApplicationContext()),
+                    Prefs.getInt("kcal_sat" + 225, 30+225, getApplicationContext()),
                     getApplicationContext());
             KCAL.getInstance().setScreenValue(
-                    Prefs.getInt("kcal_val", 127+128, getApplicationContext()),
+                    Prefs.getInt("kcal_val" + 128, 127+128, getApplicationContext()),
                     getApplicationContext());
             KCAL.getInstance().setScreenContrast(
-                    Prefs.getInt("kcal_con", 127+128, getApplicationContext()),
+                    Prefs.getInt("kcal_con" + 128 , 127+128, getApplicationContext()),
                     getApplicationContext());
             KCAL.getInstance().setScreenHue(
                     Prefs.getInt("kcal_hue", 0, getApplicationContext()),
