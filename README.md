@@ -1,8 +1,11 @@
-<h1 align="center">TweaksKM</h1>
+<p align="center">
+  <a href=""><img width="200" height="200" src="https://github.com/theradcolor/TweaksKM/blob/master/app/src/main/res/drawable-xxxhdpi/linux.png"></a>
+</p>
+<p align="center" style="font-size:18px"><b>TweaksKM</b></p>
 
-[![forthebadge](https://forthebadge.com/images/badges/built-for-android.svg)](https://www.android.com)
-[![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](https://www.github.com/theradcolor)
-
+<p align="center">
+  <a href="https://www.android.com"><img src="https://forthebadge.com/images/badges/built-for-android.svg"></a> <a href="https://www.github.com/theradcolor"><img src="https://forthebadge.com/images/badges/built-with-love.svg"/></a>
+</p>
 
 **TweaksKM** is a simple [Linux](https://www.kernel.org) kernel manager app for Android™ devices running on Android L or newer. 
 Designed beautifully with Material design guidelines.
@@ -30,7 +33,9 @@ App needs the Android's root permission to attain [privileged control](https://e
 
 <p align="center" style="font-size:18px"><b>Running screenshots</b></p>
 
-![ScreenShot 1](/assets/app_ss.png)
+<p align="center">
+<a href=""><img src="https://github.com/theradcolor/TweaksKM/blob/master/assets/app_ss.png"/></a>
+</p>
 
 <p align="center" style="font-size:18px"><b>Reporting bug or feature request</b></p>
 
@@ -61,8 +66,9 @@ Read [Contributing.md](https://github.com/theradcolor/TweaksKM/blob/master/CONTR
 
 <p align="center" style="font-size:18px"><b>License</b></p>
 
-[![GPL](https://img.shields.io/badge/License-GPL--v3.0-green?style=for-the-badge)](https://github.com/theradcolor/TweaksKM/blob/master/LICENSE)
-
+<p align="center">
+  <a href="https://github.com/theradcolor/TweaksKM/blob/master/LICENSE"><img src="https://img.shields.io/badge/License-GPL--v3.0-green?style=for-the-badge"></a>
+</p>
 
 TweaksKM is licensed under the under version 3 of the [GNU GPL License](https://github.com/theradcolor/TweaksKM/blob/master/LICENSE).
 
