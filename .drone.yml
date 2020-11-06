@@ -8,9 +8,12 @@ steps:
 - name: assembleDebug
   image: archlinux:latest
   environment:
-      TG_BOT_API:
+    GITHUB_TOKEN:
+        from_secret: GITHUB_TOKEN
+    TG_BOT_API:
         from_secret: TG_BOT_API
   commands:
     - "export TG_BOT_API"
+    - "export GITHUB_TOKEN"
     - pacman -Sy git gradle zip unzip wget curl jdk8-openjdk jre8-openjdk glibc --noconfirm
     - bash dronebuild

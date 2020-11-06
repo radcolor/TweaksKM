@@ -22,12 +22,16 @@ curl -s -X POST "https://api.telegram.org/bot${TG_BOT_API}/sendMessage" -d chat_
     -d "parse_mode=markdownV2" \
     -d text="⚒️ [*Building*](${DRONE_URL}${DRONE_BUILD_NUMBER}) with HEAD as [*$(echo $HEAD_COMMIT | cut -c1-8)*](${GITHUB_URL}${HEAD_COMMIT}) ⚒️"
 
-./gradlew assembleDebug
+git clone https://theradcolor:${GITHUB_TOKEN}@github.com/theradcolor/app-keystores -b master
+mv app-keystores/theradcolor.jks .
+mv app-keystores/theradcolor_keystore.properties keystore.properties
 
-if [ -f app/build/outputs/apk/debug/app-debug.apk ]; then
-    cp app/build/outputs/apk/debug/app-debug.apk app/build/outputs/apk/debug/TweaksKM-debug-${DATE}.apk
-    cd app/build/outputs/apk/debug
-    APK=$(echo TweaksKM-debug-*.apk)
+./gradlew assembleRelease
+
+if [ -f app/build/outputs/apk/release/app-release.apk ]; then
+    cp app/build/outputs/apk/release/app-release.apk app/build/outputs/apk/release/TweaksKM-${DATE}.apk
+    cd app/build/outputs/apk/release/
+    APK=$(echo TweaksKM-*.apk)
     curl --progress-bar -F document=@"${APK}" "https://api.telegram.org/bot${TG_BOT_API}/sendDocument" \
     -F chat_id="-1001365210159"  \
     -F "disable_web_page_preview=true" \
