@@ -61,18 +61,9 @@ class KMActivity : AppCompatActivity() {
             }
             false
         })
-        val dName = Device.getDeviceName()
-        if (checkRoot.isDeviceRooted() && dName == "whyred" || dName == "mido"
-                || dName == "lavender" || dName == "X00T" || dName == "X00TD"
-                || dName == "s2") {
-            Log.d("MainActivity", "Kernel and Root Check Passed")
+        if (checkRoot.isDeviceRooted()) {
+            Log.d("MainActivity", "Root Check Passed!")
             RootUtils.getSU()
-        } else if (checkRoot.isDeviceRooted()) {
-            Log.d("MainActivity", "Rooted and unsupported kernel")
-            RootUtils.getSU()
-            if (preferences!!.getBoolean("Show dialog", true)) {
-                dialog()
-            }
         } else {
             Log.d("MainActivity", "Root access and kernel verification failed")
             finish()
