@@ -26,7 +26,13 @@ git clone https://theradcolor:${GITHUB_TOKEN}@github.com/theradcolor/app-keystor
 mv app-keystores/theradcolor.jks .
 mv app-keystores/theradcolor_keystore.properties keystore.properties
 
-./gradlew assembleRelease
+export JOBS="$((`grep -c '^processor' /proc/cpuinfo`))"
+
+echo "org.gradle.daemon=true" >> local.properties
+echo "org.gradle.parallel=true" >> local.properties
+echo "org.gradle.workers.max=${JOBS}" >> local.properties
+
+./gradlew assembleRelease --parallel --max-workers=${JOBS}
 
 if [ -f app/build/outputs/apk/release/app-release.apk ]; then
     cp app/build/outputs/apk/release/app-release.apk app/build/outputs/apk/release/TweaksKM-${DATE}.apk
