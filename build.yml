@@ -6,7 +6,7 @@ clone:
   
 steps:
 - name: assembleDebug
-  image: archlinux:latest
+  image: alvrme/alpine-android-base:latest
   environment:
     GITHUB_TOKEN:
         from_secret: GITHUB_TOKEN
@@ -15,5 +15,5 @@ steps:
   commands:
     - "export TG_BOT_API"
     - "export GITHUB_TOKEN"
-    - pacman -Sy git gradle zip unzip wget curl jdk8-openjdk jre8-openjdk glibc --noconfirm
+    - apk add bash curl git
     - bash dronebuild
