@@ -32,11 +32,12 @@ if [ -f app/build/outputs/apk/release/app-release.apk ]; then
     cp app/build/outputs/apk/release/app-release.apk app/build/outputs/apk/release/TweaksKM-${DATE}.apk
     cd app/build/outputs/apk/release/
     APK=$(echo TweaksKM-*.apk)
+    SHA256=$(sha256sum ${APK} | cut -d' ' -f1)
     curl --progress-bar -F document=@"${APK}" "https://api.telegram.org/bot${TG_BOT_API}/sendDocument" \
     -F chat_id="-1001365210159"  \
     -F "disable_web_page_preview=true" \
     -F "parse_mode=html" \
-    -F caption="⭕️ <b>CI build completed successfully!</b>"
+    -F caption="⭕️ <b>CI build completed successfully</b> | <b>SHA256 checksum</b> • <code>${SHA256}</code>"
     rm -rf app/build/outputs/apk
 else
     curl -s -X POST "https://api.telegram.org/bot${TG_BOT_API}/sendMessage" -d chat_id="-1001365210159" \
