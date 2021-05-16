@@ -12,11 +12,7 @@ class SpectrumActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_spectrum)
 
-        if (Device.getKernelVersion(false).contains("rad"))
-        { spec_supp_txt.visibility = View.INVISIBLE
-            spec_scroll_vw.visibility = View.VISIBLE
-        } else { spec_supp_txt.visibility = View.VISIBLE
-            spec_scroll_vw.visibility = View.INVISIBLE
-        }
+        spec_supp_txt.visibility = View.VISIBLE
+        spec_scroll_vw.visibility = View.INVISIBLE
     }
 }
